@@ -33,6 +33,59 @@
 			-o-font-smoothing: antialiased;
 		}
 	</style>
+	<style>
+		/* Fix 1: Headline overflow — scale down from 7rem so no word clips at any desktop width */
+		.header-content .heading-style-h1 {
+			font-size: clamp(3.5rem, 5.2vw, 5.5rem);
+			white-space: normal;
+			word-break: break-word;
+		}
+
+		/* Fix 2: Dark radial halo behind the text block so tagline stays legible over screenshots */
+		.header-content {
+			background: radial-gradient(ellipse 100% 85% at 50% 50%, rgba(0, 0, 0, 0.55) 0%, transparent 75%);
+		}
+
+		/* Fix 4: Keep only 2 screenshots — hide the noisier extra cards */
+		.header-image-wrapper.is-image-2,
+		.header-image-wrapper.is-image-3,
+		.header-image-wrapper.is-image-4,
+		.header-image-wrapper.is-image-6 {
+			display: none;
+		}
+
+		/* Make remaining 2 screenshots feel like supporting background, not foreground */
+		.header-image-wrapper.is-image-1 {
+			opacity: 0.8;
+			width: 28vw;
+			max-width: 380px;
+		}
+
+		.header-image-wrapper.is-image-5 {
+			opacity: 0.72;
+			width: 26vw;
+			max-width: 360px;
+		}
+
+		/* Fix 5: Specialty / stack line below the heading */
+		.hero-stack-line {
+			color: rgba(255, 255, 255, 0.48);
+			font-size: 0.8rem;
+			font-weight: 400;
+			letter-spacing: 2.5px;
+			text-transform: uppercase;
+			margin-top: 0.75rem;
+			margin-bottom: 0;
+			opacity: 0;
+			animation: heroStackFadeIn 0.7s ease 0.45s forwards;
+		}
+
+		@keyframes heroStackFadeIn {
+			to {
+				opacity: 1;
+			}
+		}
+	</style>
 </head>
 
 <body class="body">
@@ -186,7 +239,7 @@
 					class="navbar-logo-link w-nav-brand w--current"><img
 						src="images/bc29e4ca38b1fbc3d718d13b683bfc3e_sibt-e-ali-20baqar.png" loading="lazy" width="Auto"
 						height="40" alt="" class="navbar-logo" /></a>
-				<div class="navbar-wrapper"><a data-w-id="22384c17-123f-8d71-8e56-33428ac23afe" href="/contact"
+				<div class="navbar-wrapper"><a data-w-id="22384c17-123f-8d71-8e56-33428ac23afe" href="/contact.html"
 						class="button is-alternate is-navbar w-inline-block">
 						<div>Get in touch</div>
 						<div class="button-arrow w-embed"><svg xmlns="http://www.w3.org/2000/svg"
@@ -303,15 +356,16 @@
 											class="heading-style-h1 text-allcaps">hey, i&#x27;m a <span
 												class="mid-grey-span">Software engineer</span></h1>
 									</div>
+									<p class="hero-stack-line">Full-Stack &middot; React &middot; Node.js &middot; TypeScript &middot; AWS</p>
 									<p data-w-id="831fd5ea-27b8-7437-5716-582c4e073ac0" style="opacity:0"
 										class="text-size-large weight-normal z-index-2">Transforming ideas into scalable
 										software with clean code and best practices.</p>
 									<div class="margin-top margin-medium">
 										<div data-w-id="831fd5ea-27b8-7437-5716-582c4e073ac3" style="opacity:0"
 											class="button-group is-center z-index-2"><a
-												data-w-id="1d6a95ff-0ebb-f50f-dcce-50cc3c0a5fa4" href="#"
+												data-w-id="1d6a95ff-0ebb-f50f-dcce-50cc3c0a5fa4" href="/projects.html"
 												class="button is-alternate w-inline-block">
-												<div>Discover</div>
+												<div>View my work</div>
 												<div class="button-arrow w-embed"><svg
 														xmlns="http://www.w3.org/2000/svg"
 														xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
@@ -322,9 +376,9 @@
 															d="M128 26a102 102 0 1 0 102 102A102.2 102.2 0 0 0 128 26Zm0 192a90 90 0 1 1 90-90a90.1 90.1 0 0 1-90 90Zm34-118v48a6 6 0 0 1-12 0v-33.5l-45.8 45.7a5.9 5.9 0 0 1-8.4-8.4l45.7-45.8H108a6 6 0 0 1 0-12h48a6 6 0 0 1 6 6Z">
 														</path>
 													</svg></div>
-											</a><a data-w-id="d173955d-f2c7-fc59-be42-fe2b584fe214" href="#"
+											</a><a data-w-id="d173955d-f2c7-fc59-be42-fe2b584fe214" href="/contact.html"
 												class="button-secondary is-alternate w-inline-block">
-												<div>Learn more</div>
+												<div>Get in touch</div>
 												<div class="button-arrow w-embed"><svg
 														xmlns="http://www.w3.org/2000/svg"
 														xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
@@ -364,7 +418,7 @@
 										through thoughtful architecture and clean code practices.</p>
 									<div class="margin-top margin-medium">
 										<div class="button-group"><a data-w-id="e62bd4bf-43a0-49c7-131f-f7e7b3fd420c"
-												href="/about" class="button is-alternate w-inline-block">
+												href="/about.html" class="button is-alternate w-inline-block">
 												<div>Read more</div>
 												<div class="button-arrow w-embed"><svg
 														xmlns="http://www.w3.org/2000/svg"
@@ -601,7 +655,7 @@
 								</div>
 								<div class="margin-top margin-xsmall">
 									<div class="button-group is-center"><a
-											data-w-id="e89a97af-eb10-138c-5414-077209999239" href="/projects"
+											data-w-id="e89a97af-eb10-138c-5414-077209999239" href="/projects.html"
 											class="button is-alternate w-inline-block">
 											<div>View all</div>
 											<div class="button-arrow w-embed"><svg xmlns="http://www.w3.org/2000/svg"
@@ -620,7 +674,7 @@
 				</div>
 			</section>
 			<section data-w-id="c7a48850-583e-560b-556b-43b7a35cd7f8" class="section-banner-cta">
-				<div class="section-padding-large"><a href="/contact" class="banner-cta-component w-inline-block">
+				<div class="section-padding-large"><a href="/contact.html" class="banner-cta-component w-inline-block">
 						<h2 class="cta-heading-top">READY TO SCALE YOUR PLATFORM?</h2>
 						<h2 class="cta-heading-bottom">LET&#x27;S BUILD SOMETHING THAT DELIVERS RESULTS</h2>
 					</a></div>
@@ -656,10 +710,10 @@
 									<div class="w-layout-grid footer-menu-wrapper">
 										<div id="w-node-_5d53571d-05a3-3001-8aed-4eb278bd7ac9-78bd7aaf"
 											class="footer-link-list"><a href="/" aria-current="page"
-												class="footer-link w--current">Home</a><a href="/about"
-												class="footer-link">About</a><a href="/projects"
-												class="footer-link">Projects</a><a href="/projects"
-												class="footer-link">Project CMS</a><a href="/contact"
+												class="footer-link w--current">Home</a><a href="/about.html"
+												class="footer-link">About</a><a href="/projects.html"
+												class="footer-link">Projects</a><a href="/projects.html"
+												class="footer-link">Project CMS</a><a href="/contact.html"
 												class="footer-link">Contact</a></div>
 										<div id="w-node-_5d53571d-05a3-3001-8aed-4eb278bd7ad2-78bd7aaf"
 											class="footer-link-list"><a href="https://github.com/sibteali786"
@@ -676,7 +730,7 @@
 							<div class="padding-vertical padding-medium">
 								<div class="footer-bottom">
 									<div class="footer-credit-text">© 2025 Sibteali Baqar- <a
-											href="/utility-pages/licenses"><span
+											href="/utility-pages/licenses.html"><span
 												class="text-span-6">Licensing</span></a></div>
 									<div class="footer-credit-text">Designed by <a href="https://www.influxdigital.com/"
 											target="_blank" class="link-3"><span class="influx">Influx
@@ -821,7 +875,7 @@
 					<div class="padding-vertical padding-medium">
 						<div class="footer-bottom">
 							<div class="footer-credit-text">© 2025 Sibteali Baqar- <a
-									href="/utility-pages/licenses"><span class="text-span-6">Licensing</span></a></div>
+									href="/utility-pages/licenses.html"><span class="text-span-6">Licensing</span></a></div>
 							<div class="footer-credit-text">Designed by <a href="https://www.influxdigital.com/"
 									target="_blank" class="link-3"><span class="influx">Influx Digital</span></a> -
 								Powered by <a href="https://webflow.com/" target="_blank"><span
