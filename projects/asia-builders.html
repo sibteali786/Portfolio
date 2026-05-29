@@ -289,6 +289,63 @@
 				</div>
 			</header>
 
+			<!-- By the Numbers -->
+			<section class="section-about-project background-black">
+				<div class="padding-global">
+					<div class="container-large">
+						<div class="section-padding-large padding-bottom-0">
+							<div class="w-layout-grid about-project-component">
+								<div id="w-node-asia-numbers-left" class="about-project-content-left">
+									<h2 class="heading-style-h2 text-allcaps">By the Numbers</h2>
+								</div>
+								<div id="w-node-asia-numbers-right" class="about-project-content-right">
+									<div class="erp-table-wrapper">
+										<table class="erp-table" aria-label="Project metrics">
+											<thead>
+												<tr>
+													<th>Metric</th>
+													<th>Value</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>Database tables</td>
+													<td>13 production tables</td>
+												</tr>
+												<tr>
+													<td>REST endpoints</td>
+													<td>50+</td>
+												</tr>
+												<tr>
+													<td>Feature modules</td>
+													<td>10</td>
+												</tr>
+												<tr>
+													<td>React components</td>
+													<td>60+</td>
+												</tr>
+												<tr>
+													<td>React Query hooks</td>
+													<td>16 custom hooks</td>
+												</tr>
+												<tr>
+													<td>Report types</td>
+													<td>6 (PDF + Excel output for each)</td>
+												</tr>
+												<tr>
+													<td>User roles</td>
+													<td>3 — OWNER, ACCOUNTANT, REVIEWER</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
 			<!-- The problem -->
 			<section class="section-about-project background-black">
 				<div class="padding-global">
@@ -389,29 +446,48 @@
 										</li>
 										<li>
 											<strong>Transaction management</strong> — INCOME / EXPENSE / DUE with
-											auto-calculated balances; every transaction linked to vendor, category, date;
-											receipt upload (PDF/image) attached directly; physical file reference (Fax
-											No.) preserved; full edit history.
+											auto-generated reference codes (e.g. <code>EXP-NIS-0001</code>,
+											<code>INC-0003</code>) on every entry; auto-calculated balances; receipt
+											upload (PDF/image) attached directly; physical file reference (Fax No.)
+											preserved.
+										</li>
+										<li>
+											<strong>Due settlement flow</strong> — full DUE → PARTIALLY_SETTLED →
+											SETTLED lifecycle backed by a <code>transaction_settlements</code> join
+											table linking each payment to the specific dues it covers. A settlement
+											modal previews open balances and records batch payments in one step.
 										</li>
 										<li>
 											<strong>Vendor management</strong> — complete vendor profiles (CNIC, phone,
-											bank); tracks contracted vs paid vs outstanding across all projects;
-											Contractor/Supplier/Service classification; settlement flow DUE →
-											PARTIALLY_SETTLED → SETTLED
-											<span class="erp-in-progress-badge">in progress</span>.
-											<em>Search "Nisar Contractor" → PKR 1,400,000 contracted, PKR 780,000 paid,
-											PKR 620,000 outstanding across 2 projects.</em>
+											bank); tracks contracted vs paid vs outstanding across all projects; vendor
+											types are DB-backed (no hardcoded enum) with a full CRUD API;
+											<code>isContractor</code> flag drives agreement values, progress bars, and
+											PAID-only enforcement. <em>Search "Nisar Contractor" → PKR 1,400,000
+											contracted, PKR 780,000 paid, PKR 620,000 outstanding across 2
+											projects.</em>
 										</li>
 										<li>
 											<strong>Document management</strong> — receipts in Cloudflare R2; on-demand
 											signed URLs (secure, time-limited); auto-organized by project + vendor; if
-											DB save fails the R2 file is auto-deleted (no orphans). <em>Payment to Nisar
-											on 4th Dec → receipt opens in 5 seconds.</em>
+											DB save fails the R2 file is auto-deleted (no orphans). <em>Payment to
+											Nisar on 4th Dec → receipt opens in 5 seconds.</em>
 										</li>
 										<li>
-											<strong>Financial reports</strong> — P&amp;L per project or overall; expense
-											breakdown by category; vendor payment statements with CNIC; date-range
-											filtering; export to PDF/Excel.
+											<strong>Reports hub — 6 types</strong> — P&amp;L, Expense Breakdown,
+											Vendor Payment, Project Comparison, Government Audit, and Investment
+											Portfolio; every report exports to both PDF and Excel. Date-range and
+											project filters apply across all types.
+										</li>
+										<li>
+											<strong>Investments module</strong> — portfolio tracking, valuation history
+											timeline, and ROI calculation per holding. <em>Dashboard total is a
+											placeholder pending integration — individual investment records are fully
+											functional.</em>
+										</li>
+										<li>
+											<strong>Profile &amp; settings</strong> — name, phone, and avatar managed
+											per user; avatar stored in Cloudflare R2 with a compensating rollback on
+											DB failure; vendor types configurable by OWNER without a code deploy.
 										</li>
 									</ul>
 								</div>
@@ -534,14 +610,14 @@
 									</div>
 
 									<div style="margin-top: 3rem;">
-										<p class="erp-section-label">In progress — not yet shipped</p>
+										<p class="erp-section-label">Deferred / not yet shipped</p>
 										<ul class="erp-feature-list">
-											<li>DUE → PARTIALLY_SETTLED → SETTLED vendor settlement flow</li>
-											<li>VendorType module bug fix</li>
-											<li>SSL / Certbot on asiabuilderz.com</li>
-											<li>Investments module (placeholder)</li>
-											<li>R2 orphan-cleanup background job</li>
-											<li>Subdomain architecture</li>
+											<li>SSL cert — domain live at asiabuilderz.com, Certbot configuration pending</li>
+											<li>Subdomain architecture — <code>api.asiabuilderz.com</code> planned</li>
+											<li>R2 orphan-cleanup — future background cron job</li>
+											<li>Investments dashboard data — returns placeholder <code>totalInvestment: 0</code>; individual investment records fully functional</li>
+											<li>Mobile app — separate scope, not started</li>
+											<li>Multi-currency — deferred; PKR baseline only</li>
 										</ul>
 									</div>
 								</div>
