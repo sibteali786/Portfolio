@@ -1,6 +1,25 @@
 [
   {
     "date": "2026-05-30",
+    "macrostructure": "Catalogue",
+    "theme": "custom",
+    "theme_axes": "dark / italic-serif / warm-amber",
+    "enrichment": "real screenshots in figure elements (no fake chrome)",
+    "brief": "Sibt-e-Ali portfolio — Asia Builders ERP case study, stack-tier shipped grid + arch blocks",
+    "scope": "projects/asia-builders.html",
+    "note": "sister-page to whats-next-please.html — same component vocabulary by user request"
+  },
+  {
+    "date": "2026-05-30",
+    "macrostructure": "Catalogue",
+    "theme": "custom",
+    "theme_axes": "dark / italic-serif / warm-amber",
+    "enrichment": "real screenshots in figure elements (no fake chrome)",
+    "brief": "Sibt-e-Ali portfolio — WhatsNextPlease case study, arch decisions + log entries",
+    "scope": "projects/whats-next-please.html"
+  },
+  {
+    "date": "2026-05-30",
     "macrostructure": "Letter",
     "theme": "custom",
     "theme_axes": "dark / italic-serif / warm-amber",

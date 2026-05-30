@@ -1,686 +1,1420 @@
-<!doctype html>
-<!-- Handled by Exflow.site -->
-<html
-  data-wf-page="68fcf76dce908baaeca052a1"
-  data-wf-site="68fcf76ace908baaeca05096"
-  data-wf-status="1"
-  lang="en"
-  data-wf-collection="68fcf76dce908baaeca0528e"
-  data-wf-item-slug="whats-next-please"
->
-  <head>
-    <meta charset="utf-8" />
-    <title>Syed&#x27;s Portfolio</title>
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <meta content="Webflow" name="generator" />
-    <link
-      href="../css/syeds-portfolio-a02089.webflow.shared.159f0f492.css"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <link href="https://fonts.googleapis.com" rel="preconnect" />
-    <link href="https://fonts.gstatic.com" rel="preconnect" />
-    <script
-      src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"
-      type="text/javascript"
-    ></script>
-    <script type="text/javascript">
-      WebFont.load({
-        google: {
-          families: [
-            "Inter:300,400,500,600,700",
-            "Manrope:300,400,500,600,700",
-            "Space Grotesk:500,600,700",
-          ],
-        },
-      });
-    </script>
-    <script type="text/javascript">
-      !(function (o, c) {
-        var n = c.documentElement,
-          t = " w-mod-";
-        ((n.className += t + "js"),
-          ("ontouchstart" in o ||
-            (o.DocumentTouch && c instanceof DocumentTouch)) &&
-            (n.className += t + "touch"));
-      })(window, document);
-    </script>
-    <link
-      href="../images/favicon.png"
-      rel="shortcut icon"
-      type="image/x-icon"
-    />
-    <link href="../images/app-icon.png" rel="apple-touch-icon" />
-    <style>
-      * {
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        -o-font-smoothing: antialiased;
+<!DOCTYPE html>
+<!-- Hallmark · macrostructure: Catalogue · tone: technical-austere
+     theme: custom (dark / italic-serif / warm-amber) · design-system: design.md
+     pre-emit critique: P5 H4 E5 S5 R5 V4 -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="WhatsNextPlease — a task management platform case study by Sibt-e-Ali Baqar. Six role-based dashboards, SSE real-time notifications, BFF proxy auth, and AWS CDK deployment.">
+  <title>WhatsNextPlease — Case Study · Sibt-e-Ali Baqar</title>
+
+  <link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../images/favicon-96x96.png" sizes="96x96" type="image/png">
+  <link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="../index.css">
+
+  <style>
+    /* ── case study page — whats-next-please ───────────────────────────
+       Macrostructure: Catalogue
+       Each section is a named entry in a sequential technical document.
+       Sections alternate between full-width prose and constrained two-
+       column layouts. Terminal blocks and log entries are the signature
+       visual elements — monospace keys, amber highlights, dark surfaces.
+    ─────────────────────────────────────────────────────────────────── */
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        transition-duration: 0ms !important;
+        animation-duration: 0ms !important;
+      }
+    }
+
+    /* ── hero ──────────────────────────────────────────────────────── */
+    .cs-hero {
+      position: relative;
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      overflow: hidden;
+    }
+
+    .cs-hero__bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      opacity: 0.18;
+      filter: grayscale(30%);
+    }
+
+    .cs-hero__gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        var(--color-paper) 30%,
+        oklch(8% 0.005 240 / 0.6) 70%,
+        oklch(8% 0.005 240 / 0.2) 100%
+      );
+    }
+
+    .cs-hero__content {
+      position: relative;
+      z-index: 1;
+      padding-block: var(--space-3xl) var(--space-2xl);
+    }
+
+    .cs-back {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-ink-3);
+      text-decoration: none;
+      margin-bottom: var(--space-2xl);
+      transition: color var(--dur-short) var(--ease-out);
+      letter-spacing: 0.02em;
+    }
+    .cs-back:hover { color: var(--color-ink-2); }
+    .cs-back:focus-visible {
+      outline: 2px solid var(--color-focus);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    .cs-hero__label {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-sm);
+    }
+
+    .cs-hero__title {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: var(--text-display);
+      font-weight: 400;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      color: var(--color-ink);
+      margin-bottom: var(--space-lg);
+      overflow-wrap: anywhere;
+      min-width: 0;
+    }
+
+    .cs-hero__impact {
+      font-family: var(--font-body);
+      font-size: var(--text-md);
+      color: var(--color-ink-2);
+      line-height: 1.55;
+      max-width: 56ch;
+      margin-bottom: var(--space-2xl);
+    }
+
+    .cs-hero__meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-lg) var(--space-2xl);
+      padding-top: var(--space-lg);
+      border-top: var(--rule-hairline);
+    }
+
+    .cs-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3xs);
+    }
+
+    .cs-meta-item__key {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-ink-3);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .cs-meta-item__val {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--color-ink-2);
+    }
+
+    .cs-meta-item__link {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-accent);
+      text-decoration: none;
+      transition: color var(--dur-short) var(--ease-out);
+    }
+    .cs-meta-item__link:hover { color: var(--color-ink); }
+    .cs-meta-item__link:focus-visible {
+      outline: 2px solid var(--color-focus);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    /* ── screenshots strip ─────────────────────────────────────────── */
+    .cs-screenshots {
+      padding-block: var(--space-2xl);
+      border-top: var(--rule-hairline);
+      overflow: hidden;
+    }
+
+    .cs-screenshots__grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr) minmax(0, 1fr);
+      gap: var(--space-sm);
+      align-items: start;
+    }
+
+    .cs-screenshots__figure {
+      margin: 0;
+      border: 1px solid var(--color-rule);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+    }
+
+    .cs-screenshots__img {
+      width: 100%;
+      height: auto;
+      display: block;
+      opacity: 0.85;
+      transition: opacity var(--dur-mid) var(--ease-out);
+    }
+    .cs-screenshots__figure:hover .cs-screenshots__img { opacity: 1; }
+
+    /* ── content sections ──────────────────────────────────────────── */
+    .cs-s {
+      padding-block: var(--space-3xl);
+      border-top: var(--rule-hairline);
+    }
+
+    .cs-s__kicker {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-accent-dim);
+      letter-spacing: 0.06em;
+      margin-bottom: var(--space-sm);
+    }
+
+    .cs-s__heading {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: var(--text-display-s);
+      font-weight: 400;
+      line-height: 1.0;
+      letter-spacing: -0.015em;
+      color: var(--color-ink);
+      margin-bottom: var(--space-xl);
+      overflow-wrap: anywhere;
+      min-width: 0;
+    }
+
+    .cs-s__body {
+      max-width: 68ch;
+    }
+
+    .cs-s__body p {
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      color: var(--color-ink-2);
+      line-height: 1.7;
+    }
+    .cs-s__body p + p { margin-top: var(--space-md); }
+
+    .cs-s__intro {
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      color: var(--color-ink-3);
+      margin-bottom: var(--space-xl);
+      font-style: italic;
+    }
+
+    /* two-col layout variant */
+    .cs-s--split .cs-s__inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+      gap: var(--space-3xl);
+      align-items: start;
+    }
+
+    .cs-s--split .cs-s__left { min-width: 0; }
+    .cs-s--split .cs-s__right { min-width: 0; }
+
+    /* ── requirements list ─────────────────────────────────────────── */
+    .req-list {
+      list-style: none;
+      counter-reset: req;
+    }
+
+    .req-item {
+      display: grid;
+      grid-template-columns: var(--space-xl) 1fr;
+      gap: var(--space-md);
+      padding-block: var(--space-lg);
+      border-top: 1px solid var(--color-rule);
+      counter-increment: req;
+      align-items: start;
+    }
+
+    .req-item::before {
+      content: "0" counter(req);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-ink-3);
+      padding-top: 3px;
+    }
+
+    .req-item__q {
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      color: var(--color-ink);
+      font-weight: 500;
+      margin-bottom: var(--space-xs);
+      line-height: 1.4;
+    }
+
+    .req-item__a {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--color-ink-2);
+      line-height: 1.6;
+    }
+
+    .req-item__a code {
+      font-family: var(--font-mono);
+      font-size: 0.88em;
+      color: var(--color-accent);
+      background: var(--color-paper-2);
+      padding: 0.1em 0.35em;
+      border-radius: 2px;
+    }
+
+    /* ── architecture decision blocks ──────────────────────────────── */
+    .arch-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .arch-block {
+      background: var(--color-paper-2);
+      border: 1px solid var(--color-rule);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+    }
+
+    .arch-block__header {
+      display: flex;
+      gap: var(--space-md);
+      align-items: baseline;
+      padding: var(--space-sm) var(--space-lg);
+      border-bottom: 1px solid var(--color-rule);
+      background: var(--color-paper-3);
+    }
+
+    .arch-block__num {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-accent);
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+
+    .arch-block__name {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-ink-2);
+      overflow-wrap: anywhere;
+    }
+
+    .arch-rows {
+      padding: var(--space-md) var(--space-lg);
+    }
+
+    .arch-row {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: var(--space-sm) var(--space-lg);
+      padding-block: var(--space-xs);
+    }
+
+    .arch-row + .arch-row {
+      border-top: 1px solid var(--color-rule);
+    }
+
+    .arch-row__key {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding-top: 3px;
+      white-space: nowrap;
+    }
+
+    .arch-row__key--decision { color: var(--color-terminal); }
+    .arch-row__key--why      { color: var(--color-ink-3); }
+    .arch-row__key--rejected { color: oklch(62% 0.18 22); } /* muted red */
+
+    .arch-row__val {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-ink);
+      line-height: 1.55;
+      overflow-wrap: anywhere;
+    }
+
+    .arch-row__val code {
+      color: var(--color-accent);
+      background: var(--color-paper);
+      padding: 0.1em 0.3em;
+      border-radius: 2px;
+      font-size: 0.9em;
+    }
+
+    .arch-row__val.is-why {
+      color: var(--color-ink-2);
+    }
+
+    .arch-row__val.is-rejected {
+      color: var(--color-ink-3);
+      text-decoration-color: oklch(62% 0.18 22 / 0.4);
+    }
+
+    /* ── problems / log entries ─────────────────────────────────────── */
+    .log-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .log-entry {
+      padding-block: var(--space-xl);
+      border-top: 1px solid var(--color-rule);
+    }
+
+    .log-entry__title {
+      font-family: var(--font-mono);
+      font-size: var(--text-base);
+      color: var(--color-ink);
+      margin-bottom: var(--space-md);
+      overflow-wrap: anywhere;
+    }
+
+    .log-entry__title::before {
+      content: "$ ";
+      color: var(--color-accent);
+    }
+
+    .log-rows {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .log-row {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: var(--space-sm);
+      align-items: start;
+    }
+
+    .log-row__key {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding-top: 3px;
+    }
+    .log-row__key--symptom  { color: oklch(70% 0.17 42); } /* muted amber-orange */
+    .log-row__key--cause    { color: var(--color-ink-3); }
+    .log-row__key--fix      { color: var(--color-terminal); }
+
+    .log-row__val {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--color-ink-2);
+      line-height: 1.6;
+    }
+
+    .log-row__val code {
+      font-family: var(--font-mono);
+      font-size: 0.88em;
+      color: var(--color-accent);
+      background: var(--color-paper-2);
+      padding: 0.1em 0.35em;
+      border-radius: 2px;
+    }
+
+    /* ── what shipped — grouped feature grid ───────────────────────── */
+    .shipped-groups {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2xl);
+    }
+
+    .shipped-group__heading {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-accent-dim);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-md);
+      padding-bottom: var(--space-xs);
+      border-bottom: 1px solid var(--color-rule);
+    }
+
+    .shipped-list {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: var(--space-md) var(--space-2xl);
+    }
+
+    .shipped-item {
+      padding-block: var(--space-sm);
+      border-top: 1px solid var(--color-rule);
+    }
+
+    .shipped-item__name {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      color: var(--color-ink);
+      margin-bottom: var(--space-3xs);
+      line-height: 1.3;
+    }
+
+    .shipped-item__desc {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--color-ink-3);
+      line-height: 1.55;
+    }
+
+    .shipped-item__desc code {
+      font-family: var(--font-mono);
+      font-size: 0.88em;
+      color: var(--color-accent-dim);
+    }
+
+    /* ── retrospective ─────────────────────────────────────────────── */
+    .retro__body {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: var(--text-lg);
+      font-weight: 400;
+      color: var(--color-ink-2);
+      line-height: 1.5;
+      max-width: 58ch;
+    }
+
+    .retro__body + .retro__body {
+      margin-top: var(--space-lg);
+    }
+
+    /* ── CTA ───────────────────────────────────────────────────────── */
+    .cs-cta {
+      padding-block: var(--space-3xl);
+      border-top: var(--rule-hairline);
+    }
+
+    .cs-cta__statement {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: var(--text-display-s);
+      font-weight: 400;
+      line-height: 1.0;
+      letter-spacing: -0.015em;
+      color: var(--color-ink);
+      margin-bottom: var(--space-xl);
+      overflow-wrap: anywhere;
+      min-width: 0;
+    }
+
+    .cs-cta__links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+      align-items: center;
+    }
+
+    .cs-cta__link {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-ink-2);
+      text-decoration: none;
+      border: 1px solid var(--color-rule);
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--radius-card);
+      transition:
+        color var(--dur-short) var(--ease-out),
+        border-color var(--dur-short) var(--ease-out),
+        background-color var(--dur-short) var(--ease-out);
+    }
+    .cs-cta__link:hover {
+      color: var(--color-ink);
+      border-color: var(--color-ink-2);
+    }
+    .cs-cta__link:focus-visible {
+      outline: 2px solid var(--color-focus);
+      outline-offset: 3px;
+    }
+    .cs-cta__link.is-primary {
+      background: var(--color-accent);
+      color: var(--color-accent-ink);
+      border-color: var(--color-accent);
+      font-weight: 500;
+    }
+    .cs-cta__link.is-primary:hover {
+      background: var(--color-ink);
+      border-color: var(--color-ink);
+      color: var(--color-paper);
+    }
+
+    /* ── footer (extended from index.css) ─────────────────────────── */
+    .site-footer {
+      border-top: var(--rule-hairline);
+      padding-block: var(--space-xl);
+    }
+
+    .footer__line {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-ink-3);
+      margin-bottom: var(--space-sm);
+    }
+
+    .footer__nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+      align-items: center;
+    }
+
+    .footer__nav a {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-ink-3);
+      text-decoration: none;
+      transition: color var(--dur-short) var(--ease-out);
+    }
+    .footer__nav a:hover { color: var(--color-ink-2); }
+    .footer__nav a:focus-visible {
+      outline: 2px solid var(--color-focus);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    .footer__copy {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-ink-3);
+      margin-left: auto;
+    }
+
+    /* ── responsive ────────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .cs-s--split .cs-s__inner {
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--space-xl);
       }
 
-      /* Task 7: Space Grotesk display + Inter body */
-      .heading-style-h1,
-      .heading-style-h2,
-      .heading-style-h3,
-      .heading-style-h4,
-      .heading-style-h5,
-      .heading-style-h6,
-      .stat-number,
-      .cta-heading-top,
-      .cta-heading-bottom {
-        font-family: "Space Grotesk", "Manrope", sans-serif;
-        letter-spacing: -0.01em;
+      .cs-screenshots__grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--space-sm);
       }
-      body,
-      .text-size-medium,
-      .text-size-large,
-      .text-size-regular,
-      .text-size-small {
-        font-family: "Inter", "Manrope", sans-serif;
+
+      .cs-screenshots__figure:nth-child(n+2) {
+        display: none;
       }
-    </style>
-  </head>
-  <body class="body">
-    <div class="page-wrapper">
-      <div
-        data-animation="default"
-        class="navbar-component w-nav"
-        data-easing2="ease"
-        fs-scrolldisable-element="smart-nav"
-        data-easing="ease"
-        data-collapse="all"
-        data-w-id="d199289f-e495-5c49-2cd9-60a87f86a023"
-        role="banner"
-        data-duration="0"
+
+      .shipped-list {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .arch-row {
+        grid-template-columns: 70px 1fr;
+      }
+
+      .log-row {
+        grid-template-columns: 90px 1fr;
+      }
+
+      .req-item {
+        grid-template-columns: var(--space-lg) 1fr;
+      }
+    }
+
+    @media (max-width: 414px) {
+      .cs-hero__meta {
+        gap: var(--space-md) var(--space-lg);
+      }
+
+      .arch-row {
+        grid-template-columns: 1fr;
+        gap: var(--space-3xs);
+      }
+
+      .arch-row__key {
+        padding-top: 0;
+      }
+
+      .log-row {
+        grid-template-columns: 1fr;
+        gap: var(--space-3xs);
+      }
+    }
+
+    @media (max-width: 375px) {
+      .cs-cta__links {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ── nav ──────────────────────────────────────────────────────── -->
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a class="nav-name" href="/">Sibt-e-Ali</a>
+      <div class="nav-right">
+        <a class="nav-email" href="mailto:sibteali786@gmail.com">sibteali786@gmail.com</a>
+        <button
+          class="nav-toggle"
+          aria-expanded="false"
+          aria-controls="nav-menu"
+          aria-label="Toggle navigation menu"
+        >Menu</button>
+      </div>
+    </nav>
+    <nav class="nav-menu" id="nav-menu" hidden aria-label="Site pages">
+      <a href="/about.html">About</a>
+      <a href="/projects.html" aria-current="page">Projects</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- ── hero ─────────────────────────────────────────────────── -->
+    <section class="cs-hero" aria-labelledby="cs-title">
+      <img
+        class="cs-hero__bg"
+        src="../images/whatsnextplease.png"
+        srcset="
+          ../images/whatsnextplease-p-800.png   800w,
+          ../images/whatsnextplease-p-1080.png 1080w,
+          ../images/whatsnextplease-p-1600.png 1600w,
+          ../images/whatsnextplease.png        2600w
+        "
+        sizes="100vw"
+        alt=""
+        aria-hidden="true"
+        fetchpriority="high"
       >
-        <div class="navbar-container">
-          <a href="/" class="navbar-logo-link w-nav-brand"
-            ><img
-              src="../images/bc29e4ca38b1fbc3d718d13b683bfc3e_sibt-e-ali-20baqar.png"
-              loading="lazy"
-              width="Auto"
-              height="40"
-              alt=""
-              class="navbar-logo"
-          /></a>
-          <div class="navbar-wrapper">
+      <div class="cs-hero__gradient" aria-hidden="true"></div>
+
+      <div class="container cs-hero__content">
+        <a class="cs-back" href="/projects.html">&#8592; Projects</a>
+
+        <p class="cs-hero__label" aria-hidden="true">Case Study</p>
+
+        <h1 class="cs-hero__title" id="cs-title">
+          What&#8217;s Next<br>Please
+        </h1>
+
+        <p class="cs-hero__impact">
+          Supervisors and agents went from coordinating work across disconnected
+          tools to a single platform where every task has an owner, a status, a
+          time log, a comment thread, a file trail, and real-time
+          notifications&#8202;&#8212;&#8202;whether the tab is open or not.
+        </p>
+
+        <div class="cs-hero__meta">
+          <div class="cs-meta-item">
+            <span class="cs-meta-item__key">Client</span>
+            <span class="cs-meta-item__val">Hill Country Coders</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cs-meta-item__key">Role</span>
+            <span class="cs-meta-item__val">Lead Engineer</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cs-meta-item__key">Date</span>
+            <span class="cs-meta-item__val">June 2024</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cs-meta-item__key">Live</span>
             <a
-              data-w-id="22384c17-123f-8d71-8e56-33428ac23afe"
-              href="/contact"
-              class="button is-alternate is-navbar w-inline-block"
-              ><div>Get in touch</div>
-              <div class="button-arrow w-embed">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink"
-                  aria-hidden="true"
-                  role="img"
-                  class="iconify iconify--ph"
-                  width="100%"
-                  height="100%"
-                  preserveAspectRatio="xMidYMid meet"
-                  viewBox="0 0 256 256"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M128 26a102 102 0 1 0 102 102A102.2 102.2 0 0 0 128 26Zm0 192a90 90 0 1 1 90-90a90.1 90.1 0 0 1-90 90Zm34-118v48a6 6 0 0 1-12 0v-33.5l-45.8 45.7a5.9 5.9 0 0 1-8.4-8.4l45.7-45.8H108a6 6 0 0 1 0-12h48a6 6 0 0 1 6 6Z"
-                  ></path>
-                </svg></div
-            ></a>
-            <nav role="navigation" class="navbar-menu w-nav-menu">
-              <div class="navbar-menu-wrapper">
-                <div class="navbar-links-wrapper">
-                  <a href="/" class="navbar-link w-nav-link">Home</a
-                  ><a href="/about.html" class="navbar-link w-nav-link">About</a
-                  ><a href="/projects.html.html" class="navbar-link w-nav-link"
-                    >Projects</a
-                  ><a href="/contact.html" class="navbar-link w-nav-link">Contact</a>
-                </div>
-                <div class="navbar-bottom">
-                  <div class="w-layout-grid navbar-social-list">
-                    <a
-                      href="https://github.com/sibteali786"
-                      target="_blank"
-                      class="navbar-social-link w-inline-block"
-                      ><div class="icon-xsmall w-embed">
-                        <svg
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            fill="currentColor"
-                            d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"
-                          />
-                        </svg></div></a
-                    ><a
-                      href="https://medium.com/@sibteali786"
-                      target="_blank"
-                      class="navbar-social-link w-inline-block"
-                      ><div class="icon-xsmall w-embed">
-                        <svg
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            fill="currentColor"
-                            d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"
-                          />
-                        </svg></div></a
-                    ><a
-                      href="https://x.com/SibtealiN"
-                      target="_blank"
-                      class="navbar-social-link w-inline-block"
-                      ><div class="icon-xsmall w-embed">
-                        <svg
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M17.1761 4H19.9362L13.9061 10.7774L21 20H15.4456L11.0951 14.4066L6.11723 20H3.35544L9.80517 12.7508L3 4H8.69545L12.6279 9.11262L17.1761 4ZM16.2073 18.3754H17.7368L7.86441 5.53928H6.2232L16.2073 18.3754Z"
-                            fill="currentColor"
-                          />
-                        </svg></div></a
-                    ><a
-                      href="https://www.linkedin.com/in/syed-sibteali-baqar/"
-                      target="_blank"
-                      class="navbar-social-link w-inline-block"
-                      ><div class="icon-xsmall w-embed">
-                        <svg
-                          width="100%"
-                          height="100%"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            fill-rule="evenodd"
-                            clip-rule="evenodd"
-                            d="M4.5 3C3.67157 3 3 3.67157 3 4.5V19.5C3 20.3284 3.67157 21 4.5 21H19.5C20.3284 21 21 20.3284 21 19.5V4.5C21 3.67157 20.3284 3 19.5 3H4.5ZM8.52076 7.00272C8.52639 7.95897 7.81061 8.54819 6.96123 8.54397C6.16107 8.53975 5.46357 7.90272 5.46779 7.00413C5.47201 6.15897 6.13998 5.47975 7.00764 5.49944C7.88795 5.51913 8.52639 6.1646 8.52076 7.00272ZM12.2797 9.76176H9.75971H9.7583V18.3216H12.4217V18.1219C12.4217 17.742 12.4214 17.362 12.4211 16.9819V16.9818V16.9816V16.9815V16.9812C12.4203 15.9674 12.4194 14.9532 12.4246 13.9397C12.426 13.6936 12.4372 13.4377 12.5005 13.2028C12.7381 12.3253 13.5271 11.7586 14.4074 11.8979C14.9727 11.9864 15.3467 12.3141 15.5042 12.8471C15.6013 13.1803 15.6449 13.5389 15.6491 13.8863C15.6605 14.9339 15.6589 15.9815 15.6573 17.0292V17.0294C15.6567 17.3992 15.6561 17.769 15.6561 18.1388V18.3202H18.328V18.1149C18.328 17.6629 18.3278 17.211 18.3275 16.7591V16.759V16.7588C18.327 15.6293 18.3264 14.5001 18.3294 13.3702C18.3308 12.8597 18.276 12.3563 18.1508 11.8627C17.9638 11.1286 17.5771 10.5211 16.9485 10.0824C16.5027 9.77019 16.0133 9.5691 15.4663 9.5466C15.404 9.54401 15.3412 9.54062 15.2781 9.53721L15.2781 9.53721L15.2781 9.53721C14.9984 9.52209 14.7141 9.50673 14.4467 9.56066C13.6817 9.71394 13.0096 10.0641 12.5019 10.6814C12.4429 10.7522 12.3852 10.8241 12.2991 10.9314L12.2991 10.9315L12.2797 10.9557V9.76176ZM5.68164 18.3244H8.33242V9.76733H5.68164V18.3244Z"
-                            fill="CurrentColor"
-                          />
-                        </svg></div
-                    ></a>
-                  </div>
-                </div>
-              </div>
-            </nav>
-            <div class="navbar-menu-button w-nav-button">
-              <div class="menu-icon">
-                <div class="menu-icon-wrapper">
-                  <div class="menu-icon-line-top"></div>
-                  <div class="menu-icon-line-middle">
-                    <div class="menu-icon-line-middle-top"></div>
-                    <div class="menu-icon-line-middle-base"></div>
-                  </div>
-                  <div class="menu-icon-line-bottom"></div>
-                </div>
-              </div>
-            </div>
+              class="cs-meta-item__link"
+              href="https://app.whatsnextplease.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >app.whatsnextplease.com &#8599;</a>
           </div>
         </div>
       </div>
-      <div class="main-wrapper">
-        <header class="section-portfolio-header">
-          <div class="padding-global">
-            <div class="container-large">
-              <div class="portfolio-header">
-                <div class="section-padding-large max-width-full">
-                  <div class="w-layout-grid portfolio-header-content-wrapper">
-                    <div
-                      id="w-node-a88256af-7997-c642-0ddc-1058084d3516-eca052a1"
-                      class="portfolio-header-content-left"
-                    >
-                      <div class="margin-bottom margin-small">
-                        <h1
-                          data-w-id="a88256af-7997-c642-0ddc-1058084d3518"
-                          style="opacity: 0"
-                          class="heading-style-h2 text-allcaps"
-                        >
-                          What&#x27;s Next Please
-                        </h1>
-                      </div>
-                      <div
-                        data-w-id="a88256af-7997-c642-0ddc-1058084d351a"
-                        style="opacity: 0"
-                        class="text-size-medium"
-                      >
-                        WhatsNextPlease is a task management application built
-                        with Next.js that helps teams track and organize work.
-                        Features include task assignment, skill matching,
-                        priority levels, task categorization, file management,
-                        user mentions, and email notifications.
-                      </div>
-                      <div
-                        data-w-id="a88256af-7997-c642-0ddc-1058084d351c"
-                        style="opacity: 0"
-                        class="portfolio-header-tags-list"
-                      >
-                        <div class="portfolio-tag-item">
-                          <div>Web Development</div>
-                        </div>
-                        <div class="portfolio-tag-item">
-                          <div>Task Management</div>
-                        </div>
-                        <div class="portfolio-tag-item">
-                          <div>Team Collaboration</div>
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      id="w-node-a88256af-7997-c642-0ddc-1058084d3526-eca052a1"
-                      data-w-id="a88256af-7997-c642-0ddc-1058084d3526"
-                      style="opacity: 0"
-                      class="w-layout-grid portfolio-header-content-list"
-                    >
-                      <div
-                        id="w-node-a88256af-7997-c642-0ddc-1058084d3527-eca052a1"
-                        class="portfolio-header-item"
-                      >
-                        <div class="margin-bottom margin-tiny">
-                          <h6>Client</h6>
-                        </div>
-                        <div>Hill Country Coders</div>
-                      </div>
-                      <div
-                        id="w-node-a88256af-7997-c642-0ddc-1058084d352d-eca052a1"
-                        class="portfolio-header-item"
-                      >
-                        <div class="margin-bottom margin-tiny">
-                          <h6>Date</h6>
-                        </div>
-                        <div>June 3, 2024</div>
-                      </div>
-                      <div
-                        id="w-node-a88256af-7997-c642-0ddc-1058084d3533-eca052a1"
-                        class="portfolio-header-item"
-                      >
-                        <div class="margin-bottom margin-tiny">
-                          <h6>Role</h6>
-                        </div>
-                        <div>Full Stack Developer</div>
-                      </div>
-                      <div
-                        id="w-node-a88256af-7997-c642-0ddc-1058084d3539-eca052a1"
-                        class="portfolio-header-item"
-                      >
-                        <div class="margin-bottom margin-tiny">
-                          <h6>Website</h6>
-                        </div>
-                        <a
-                          href="https://app.whatsnextplease.com"
-                          class="text-link text-colour-white"
-                          target="_blank"
-                          >whatsnetplease</a
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            data-w-id="a88256af-7997-c642-0ddc-1058084d353f"
-            style="opacity: 0"
-            class="portfolio-header-background-image-wrapper"
-          >
-            <div class="portfolio-header-background-image-overlay"></div>
+    </section>
+
+    <!-- ── screenshots ──────────────────────────────────────────── -->
+    <section class="cs-screenshots" aria-label="Application screenshots">
+      <div class="container">
+        <div class="cs-screenshots__grid">
+          <figure class="cs-screenshots__figure">
             <img
-              src="../images/task-20supervisor-20dashboard.png"
-              loading="lazy"
-              alt=""
-              sizes="100vw"
+              class="cs-screenshots__img"
+              src="../images/task-20supervisor-20dashboard-20_-20tasks_all.png"
               srcset="
-                ../images/task-20supervisor-20dashboard-p-500.png   500w,
-                ../images/task-20supervisor-20dashboard-p-800.png   800w,
-                ../images/task-20supervisor-20dashboard-p-1080.png 1080w,
-                ../images/task-20supervisor-20dashboard.png        1440w
+                ../images/task-20supervisor-20dashboard-20_-20tasks_all-p-500.png   500w,
+                ../images/task-20supervisor-20dashboard-20_-20tasks_all-p-800.png   800w,
+                ../images/task-20supervisor-20dashboard-20_-20tasks_all-p-1080.png 1080w,
+                ../images/task-20supervisor-20dashboard-20_-20tasks_all.png        1440w
               "
-              class="portfolio-header-background-image"
-            />
-          </div>
-        </header>
-        <section class="section-about-project background-black">
-          <div class="padding-global">
-            <div class="container-large">
-              <div class="section-padding-large padding-bottom-0">
-                <div class="w-layout-grid about-project-component">
-                  <div
-                    id="w-node-_056cf0ad-be6d-2031-ab77-36ff76b7bc11-eca052a1"
-                    class="about-project-content-left"
-                  >
-                    <h2
-                      data-w-id="056cf0ad-be6d-2031-ab77-36ff76b7bc12"
-                      style="opacity: 0"
-                      class="heading-style-h2 text-allcaps"
-                    >
-                      Task Management Platform for Collaborative Teams
-                    </h2>
-                  </div>
-                  <div
-                    id="w-node-_056cf0ad-be6d-2031-ab77-36ff76b7bc14-eca052a1"
-                    class="about-project-content-right"
-                  >
-                    <p
-                      data-w-id="056cf0ad-be6d-2031-ab77-36ff76b7bc15"
-                      style="opacity: 0"
-                      class="text-size-medium text-colour-grey"
-                    >
-                      WhatsNextPlease is a comprehensive task management
-                      solution built with Next.js and TypeScript. The platform
-                      features a monolithic architecture with both Next.js API
-                      routes and a separate backend service. Key functionality
-                      includes skill-based task assignment, priority management,
-                      file uploads to S3, real-time notifications, and user
-                      mentions. The project implements AWS CDK for deployment,
-                      Prisma for database interactions, and integrates email
-                      verification using SES. Notable technical challenges
-                      included maintaining backwards compatibility while
-                      migrating routes from Next.js to a standalone backend.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section class="section-project-showcase background-black">
-          <div class="padding-global">
-            <div class="container-large">
-              <div class="section-padding-large">
-                <div class="margin-bottom margin-xxlarge">
-                  <div class="max-width-large">
-                    <div class="margin-bottom margin-small">
-                      <h2
-                        data-w-id="4f693294-cad1-9363-5740-820ebbf8012e"
-                        style="opacity: 0"
-                        class="heading-style-h2 text-allcaps"
-                      >
-                        Portfolio <span class="dark-grey-span">Showcase</span>
-                      </h2>
-                    </div>
-                    <p
-                      data-w-id="4f693294-cad1-9363-5740-820ebbf80130"
-                      style="opacity: 0"
-                      class="text-size-medium"
-                    >
-                      Discover the stunning work of our talented creatives
-                    </p>
-                  </div>
-                </div>
-                <div
-                  data-w-id="4f693294-cad1-9363-5740-820ebbf80132"
-                  style="opacity: 0"
-                  class="gallery-component"
-                >
-                  <div
-                    data-delay="4000"
-                    data-animation="slide"
-                    class="gallery-slider w-slider"
-                    data-autoplay="false"
-                    data-easing="ease"
-                    data-hide-arrows="false"
-                    data-disable-swipe="false"
-                    data-autoplay-limit="0"
-                    data-nav-spacing="3"
-                    data-duration="500"
-                    data-infinite="false"
-                  >
-                    <div class="gallery-mask w-slider-mask">
-                      <div
-                        data-w-id="4f693294-cad1-9363-5740-820ebbf80135"
-                        class="gallery-slide w-slide"
-                      >
-                        <div class="gallery-image-wrapper">
-                          <img
-                            src="../images/task-20supervisor-20dashboard-20_-20tasks_all.png"
-                            loading="lazy"
-                            alt=""
-                            sizes="100vw"
-                            srcset="
-                              ../images/task-20supervisor-20dashboard-20_-20tasks_all-p-500.png   500w,
-                              ../images/task-20supervisor-20dashboard-20_-20tasks_all-p-800.png   800w,
-                              ../images/task-20supervisor-20dashboard-20_-20tasks_all-p-1080.png 1080w,
-                              ../images/task-20supervisor-20dashboard-20_-20tasks_all.png        1440w
-                            "
-                            class="gallery-image"
-                          />
-                        </div>
-                      </div>
-                      <div
-                        data-w-id="4f693294-cad1-9363-5740-820ebbf80138"
-                        class="gallery-slide w-slide"
-                      >
-                        <div class="gallery-image-wrapper">
-                          <img
-                            src="../images/client-20dashboard-20_-20tasks_view-20details.png"
-                            loading="lazy"
-                            alt=""
-                            sizes="100vw"
-                            srcset="
-                              ../images/client-20dashboard-20_-20tasks_view-20details-p-500.png   500w,
-                              ../images/client-20dashboard-20_-20tasks_view-20details-p-800.png   800w,
-                              ../images/client-20dashboard-20_-20tasks_view-20details-p-1080.png 1080w,
-                              ../images/client-20dashboard-20_-20tasks_view-20details.png        1440w
-                            "
-                            class="gallery-image"
-                          />
-                        </div>
-                      </div>
-                      <div
-                        data-w-id="4f693294-cad1-9363-5740-820ebbf8013b"
-                        class="gallery-slide w-slide"
-                      >
-                        <div class="gallery-image-wrapper">
-                          <img
-                            src="../images/users-20open-20task-204b.1.png"
-                            loading="lazy"
-                            alt=""
-                            sizes="100vw"
-                            srcset="
-                              ../images/users-20open-20task-204b.1-p-500.png   500w,
-                              ../images/users-20open-20task-204b.1-p-800.png   800w,
-                              ../images/users-20open-20task-204b.1-p-1080.png 1080w,
-                              ../images/users-20open-20task-204b.1.png        1440w
-                            "
-                            class="gallery-image"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div class="gallery-arrow is-left w-slider-arrow-left">
-                      <div class="gallery-arrow-icon w-embed">
-                        <svg
-                          width="100%"
-                          height="100%"
-                          viewBox="0 0 16 16"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M3.31066 8.75001L9.03033 14.4697L7.96967 15.5303L0.439339 8.00001L7.96967 0.469676L9.03033 1.53034L3.31066 7.25001L15.5 7.25L15.5 8.75L3.31066 8.75001Z"
-                            fill="currentColor"
-                          />
-                        </svg>
-                      </div>
-                    </div>
-                    <div class="gallery-arrow w-slider-arrow-right">
-                      <div class="gallery-arrow-icon w-embed">
-                        <svg
-                          width="100%"
-                          height="100%"
-                          viewBox="0 0 16 16"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M12.6893 7.25L6.96967 1.53033L8.03033 0.469666L15.5607 8L8.03033 15.5303L6.96967 14.4697L12.6893 8.75H0.5V7.25H12.6893Z"
-                            fill="currentColor"
-                          />
-                        </svg>
-                      </div>
-                    </div>
-                    <div
-                      class="gallery-slider-navigation w-slider-nav w-round"
-                    ></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section
-          data-w-id="c7a48850-583e-560b-556b-43b7a35cd7f8"
-          class="section-banner-cta"
-        >
-          <div class="section-padding-large">
-            <a href="#" class="banner-cta-component w-inline-block"
-              ><h2 class="cta-heading-top">READY TO SCALE YOUR PLATFORM?</h2>
-              <h2 class="cta-heading-bottom">
-                LET’S BUILD SOMETHING THAT DELIVERS RESULTS
-              </h2></a
+              sizes="(max-width: 768px) 100vw, 60vw"
+              alt="Task supervisor dashboard showing all tasks with status, priority, and assignee columns"
+              loading="lazy"
             >
-          </div>
-        </section>
-        <footer
-          data-w-id="5d53571d-05a3-3001-8aed-4eb278bd7aaf"
-          class="footer-component"
-        >
-          <div class="padding-global">
-            <div class="container-large">
-              <div class="padding-top padding-xxlarge">
-                <div class="padding-bottom padding-large">
-                  <div class="w-layout-grid footer-top-wrapper">
-                    <div class="footer-left-wrapper">
-                      <div class="margin-bottom margin-medium">
-                        <a href="/" class="footer-logo-link w-nav-brand"
-                          ><img
-                            src="../images/bc29e4ca38b1fbc3d718d13b683bfc3e_sibt-e-ali-20baqar.png"
-                            loading="lazy"
-                            alt=""
-                            height="40"
-                            class="footer-logo"
-                        /></a>
-                      </div>
-                      <div class="footer-details-wrapper">
-                        <div class="margin-bottom margin-tiny">
-                          <div
-                            class="text-size-regular weight-semibold text-colour-grey"
-                          >
-                            Address:
-                          </div>
-                        </div>
-                        <div class="margin-bottom margin-small">
-                          <div class="text-size-small">
-                            Street 4, F-15/2, Islamabad
-                          </div>
-                        </div>
-                        <div class="margin-bottom margin-tiny">
-                          <div
-                            class="text-size-regular weight-semibold text-colour-grey"
-                          >
-                            Contact:
-                          </div>
-                        </div>
-                        <div class="text-size-small">
-                          <a href="#" class="link-2">Email me now on </a
-                          ><a href="mailto:info@profilex.com" class="link"
-                            >sibteali786@gmail.com</a
-                          >
-                        </div>
-                      </div>
-                    </div>
-                    <div class="w-layout-grid footer-menu-wrapper">
-                      <div
-                        id="w-node-_5d53571d-05a3-3001-8aed-4eb278bd7ac9-78bd7aaf"
-                        class="footer-link-list"
-                      >
-                        <a href="/" class="footer-link">Home</a
-                        ><a href="/about.html" class="footer-link">About</a
-                        ><a href="/projects.html.html" class="footer-link"
-                          >Projects</a
-                        ><a href="/contact.html" class="footer-link">Contact</a>
-                      </div>
-                      <div
-                        id="w-node-_5d53571d-05a3-3001-8aed-4eb278bd7ad2-78bd7aaf"
-                        class="footer-link-list"
-                      >
-                        <a
-                          href="https://github.com/sibteali786"
-                          target="_blank"
-                          class="footer-link"
-                          >Github</a
-                        ><a
-                          href="https://www.instagram.com/"
-                          target="_blank"
-                          class="footer-link"
-                          >Instagram</a
-                        ><a
-                          href="https://x.com/SibtealiN"
-                          target="_blank"
-                          class="footer-link"
-                          >X / Twitter</a
-                        ><a
-                          href="https://www.linkedin.com/in/syed-sibteali-baqar/"
-                          target="_blank"
-                          class="footer-link"
-                          >LinkedIn</a
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="line-divider"></div>
-                <div class="padding-vertical padding-medium">
-                  <div class="footer-bottom">
-                    <div class="footer-credit-text">
-                      © 2025 Sibteali Baqar-
-                      <a href="/utility-pages/licenses"
-                        ><span class="text-span-6">Licensing</span></a
-                      >
-                    </div>
-                    <div class="footer-credit-text">
-                      Designed by
-                      <a
-                        href="https://www.influxdigital.com/"
-                        target="_blank"
-                        class="link-3"
-                        ><span class="influx">Influx Digital</span></a
-                      >
-                      - Powered by
-                      <a href="https://webflow.com/" target="_blank"
-                        ><span class="webflow">Webflow</span></a
-                      >
-                    </div>
-                  </div>
-                </div>
+          </figure>
+          <figure class="cs-screenshots__figure">
+            <img
+              class="cs-screenshots__img"
+              src="../images/client-20dashboard-20_-20tasks_view-20details.png"
+              srcset="
+                ../images/client-20dashboard-20_-20tasks_view-20details-p-500.png   500w,
+                ../images/client-20dashboard-20_-20tasks_view-20details-p-800.png   800w,
+                ../images/client-20dashboard-20_-20tasks_view-20details-p-1080.png 1080w,
+                ../images/client-20dashboard-20_-20tasks_view-20details.png        1440w
+              "
+              sizes="(max-width: 768px) 100vw, 30vw"
+              alt="Client dashboard task detail view"
+              loading="lazy"
+            >
+          </figure>
+          <figure class="cs-screenshots__figure">
+            <img
+              class="cs-screenshots__img"
+              src="../images/users-20open-20task-204b.1.png"
+              srcset="
+                ../images/users-20open-20task-204b.1-p-500.png   500w,
+                ../images/users-20open-20task-204b.1-p-800.png   800w,
+                ../images/users-20open-20task-204b.1-p-1080.png 1080w,
+                ../images/users-20open-20task-204b.1.png        1440w
+              "
+              sizes="(max-width: 768px) 100vw, 30vw"
+              alt="Agent task open view with comment thread and file attachments"
+              loading="lazy"
+            >
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── the problem ──────────────────────────────────────────── -->
+    <section class="cs-s" aria-labelledby="s-problem">
+      <div class="container">
+        <p class="cs-s__kicker">The Problem</p>
+        <h2 class="cs-s__heading" id="s-problem">
+          No one knew<br>who owned what.
+        </h2>
+        <div class="cs-s__body">
+          <p>
+            A single organization was running task delegation, client requests,
+            and agent assignments through a combination of informal tools &#8212;
+            no unified system for tracking who owns what, no visibility into task
+            status across roles, and no audit trail for time spent or work
+            completed.
+          </p>
+          <p>
+            Supervisors had no structured way to match tasks to agents by skill.
+            Clients had no self-service portal to submit or track requests. There
+            was no notification layer to alert anyone when state changed. The
+            result: coordination overhead, missed deadlines, and no data to
+            review performance.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── requirements ─────────────────────────────────────────── -->
+    <section class="cs-s" aria-labelledby="s-reqs">
+      <div class="container">
+        <p class="cs-s__kicker">Requirements I Gathered</p>
+        <h2 class="cs-s__heading" id="s-reqs">
+          Ask the right<br>questions first.
+        </h2>
+        <p class="cs-s__intro">
+          Before architecture was decided, these questions shaped the design:
+        </p>
+
+        <ol class="req-list" aria-label="Requirements questions">
+
+          <li class="req-item">
+            <div>
+              <p class="req-item__q">Who are the actors and what can each do?</p>
+              <p class="req-item__a">
+                Surfaced 6 distinct roles: Super User, Task Supervisor, Task Agent,
+                Client, District/Territory Manager, Account Executive &#8212; each
+                needing a separate dashboard and permission set.
+              </p>
+            </div>
+          </li>
+
+          <li class="req-item">
+            <div>
+              <p class="req-item__q">Who creates tasks, and who resolves them?</p>
+              <p class="req-item__a">
+                Tasks can originate from both internal users and clients. This
+                distinction had to be captured in the schema:
+                <code>creatorType</code>, <code>createdByUserId</code>
+                vs <code>createdByClientId</code>.
+              </p>
+            </div>
+          </li>
+
+          <li class="req-item">
+            <div>
+              <p class="req-item__q">How do we identify tasks externally?</p>
+              <p class="req-item__a">
+                Clients and agents need a human-readable reference, not a UUID.
+                Led to a serial number system with per-category prefixes &#8212;
+                e.g. <code>WD-00042</code>.
+              </p>
+            </div>
+          </li>
+
+          <li class="req-item">
+            <div>
+              <p class="req-item__q">What does &#8220;real-time&#8221; mean here?</p>
+              <p class="req-item__a">
+                Notifications needed to update the UI without polling.
+                <code>EventSource</code> incompatibility with
+                <code>httpOnly</code> cookies had to be resolved &#8212;
+                which drove the single-use SSE token design.
+              </p>
+            </div>
+          </li>
+
+          <li class="req-item">
+            <div>
+              <p class="req-item__q">What&#8217;s the auth migration path?</p>
+              <p class="req-item__a">
+                Existing users on legacy JWT needed transparent migration to
+                Keycloak&#x2F;Cognito without forced re-registration.
+              </p>
+            </div>
+          </li>
+
+          <li class="req-item">
+            <div>
+              <p class="req-item__q">What are the scale expectations?</p>
+              <p class="req-item__a">
+                Single-organization internal tool, not multi-tenant at the data
+                layer. Not discussed explicitly &#8212; noted as a future constraint
+                if the product scope expands.
+              </p>
+            </div>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+    <!-- ── architecture decisions ───────────────────────────────── -->
+    <section class="cs-s" aria-labelledby="s-arch">
+      <div class="container">
+        <p class="cs-s__kicker">Architecture Decisions</p>
+        <h2 class="cs-s__heading" id="s-arch">
+          Five calls that<br>shaped the system.
+        </h2>
+
+        <div class="arch-list" role="list">
+
+          <!-- 01 -->
+          <article class="arch-block" role="listitem" aria-label="Architecture decision 1: Monorepo with incremental backend extraction">
+            <div class="arch-block__header">
+              <span class="arch-block__num">arch-01</span>
+              <span class="arch-block__name">monorepo-with-incremental-backend-extraction</span>
+            </div>
+            <div class="arch-rows">
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--decision">Decision</span>
+                <span class="arch-row__val">
+                  Keep Next.js routes running alongside a standalone Express backend;
+                  migrate module by module rather than big-bang rewrite.
+                </span>
+              </div>
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--why">Why</span>
+                <span class="arch-row__val is-why">
+                  Reduced risk &#8212; old routes stay functional while new ones are
+                  built properly in Express; team ships features during migration.
+                </span>
+              </div>
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--rejected">Rejected</span>
+                <span class="arch-row__val is-rejected">
+                  Full rewrite upfront &#8212; too risky with active users and no
+                  feature freeze.
+                </span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 02 -->
+          <article class="arch-block" role="listitem" aria-label="Architecture decision 2: BFF proxy pattern">
+            <div class="arch-block__header">
+              <span class="arch-block__num">arch-02</span>
+              <span class="arch-block__name">bff-proxy-pattern-for-frontend-backend-communication</span>
+            </div>
+            <div class="arch-rows">
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--decision">Decision</span>
+                <span class="arch-row__val">
+                  All frontend API calls route through a Next.js proxy route
+                  (<code>/api/proxy/[...path]</code>) that reads the
+                  <code>httpOnly</code> cookie server-side and forwards requests
+                  with an <code>Authorization</code> header.
+                </span>
+              </div>
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--why">Why</span>
+                <span class="arch-row__val is-why">
+                  Keeps the token out of client-side JS while allowing the Express
+                  backend to remain stateless and token-based.
+                </span>
+              </div>
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--rejected">Rejected</span>
+                <span class="arch-row__val is-rejected">
+                  Direct client-to-backend calls with <code>localStorage</code>
+                  tokens &#8212; exposes tokens to XSS.
+                  <code>getServerSideProps</code> per-route pattern &#8212; too
+                  much boilerplate per module.
+                </span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 03 -->
+          <article class="arch-block" role="listitem" aria-label="Architecture decision 3: Single-use SSE token">
+            <div class="arch-block__header">
+              <span class="arch-block__num">arch-03</span>
+              <span class="arch-block__name">single-use-sse-token-instead-of-proxying-the-stream</span>
+            </div>
+            <div class="arch-rows">
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--decision">Decision</span>
+                <span class="arch-row__val">
+                  A <code>sseTokenService</code> issues a short-lived (60s,
+                  single-use) token fetched via the proxy; the
+                  <code>EventSource</code> connects directly to the Express backend
+                  using that token.
+                </span>
+              </div>
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--why">Why</span>
+                <span class="arch-row__val is-why">
+                  <code>EventSource</code> API does not support custom headers &#8212;
+                  <code>httpOnly</code> cookies are invisible to it, and proxying a
+                  long-lived stream through Next.js risks Vercel timeout limits.
+                </span>
+              </div>
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--rejected">Rejected</span>
+                <span class="arch-row__val is-rejected">
+                  Proxying SSE through Next.js &#8212; functionally broken on Vercel
+                  due to streaming timeouts. Using <code>localStorage</code> for the
+                  main token &#8212; security downgrade.
+                </span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 04 -->
+          <article class="arch-block" role="listitem" aria-label="Architecture decision 4: IDP sync at controller layer">
+            <div class="arch-block__header">
+              <span class="arch-block__num">arch-04</span>
+              <span class="arch-block__name">idp-sync-at-the-controller-layer-only</span>
+            </div>
+            <div class="arch-rows">
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--decision">Decision</span>
+                <span class="arch-row__val">
+                  Keycloak&#x2F;Cognito user creation happens in the auth controller,
+                  not the service layer.
+                </span>
+              </div>
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--why">Why</span>
+                <span class="arch-row__val is-why">
+                  The controller is the only layer that holds the plaintext password
+                  before it&#8217;s hashed; the service layer never sees it.
+                </span>
+              </div>
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--rejected">Rejected</span>
+                <span class="arch-row__val is-rejected">
+                  IDP sync inside the service &#8212; would require passing plaintext
+                  password deeper into the stack, violating separation of concerns.
+                </span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 05 -->
+          <article class="arch-block" role="listitem" aria-label="Architecture decision 5: Dual CDK stacks">
+            <div class="arch-block__header">
+              <span class="arch-block__num">arch-05</span>
+              <span class="arch-block__name">dual-cdk-stacks-for-different-deployment-lifecycles</span>
+            </div>
+            <div class="arch-rows">
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--decision">Decision</span>
+                <span class="arch-row__val">
+                  One CDK stack for ECS&#x2F;Fargate backend deployment; a separate
+                  stack in <code>apps/web/cdk</code> for S3 + CloudFront image
+                  serving.
+                </span>
+              </div>
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--why">Why</span>
+                <span class="arch-row__val is-why">
+                  Different lifecycles &#8212; image infrastructure changes rarely;
+                  backend deploys on every push. Separating them avoids unnecessary
+                  CloudFront invalidations on code deploys.
+                </span>
+              </div>
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--rejected">Rejected</span>
+                <span class="arch-row__val is-rejected">
+                  Single CDK stack &#8212; tight coupling between infra that has no
+                  reason to change together.
+                </span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── problems hit ──────────────────────────────────────────── -->
+    <section class="cs-s" aria-labelledby="s-bugs">
+      <div class="container">
+        <p class="cs-s__kicker">Problems Hit</p>
+        <h2 class="cs-s__heading" id="s-bugs">
+          Five bugs worth<br>writing down.
+        </h2>
+
+        <div class="log-list">
+
+          <div class="log-entry">
+            <p class="log-entry__title">cognito-admin-api-called-with-sub-instead-of-username</p>
+            <div class="log-rows">
+              <div class="log-row">
+                <span class="log-row__key log-row__key--symptom">Symptom</span>
+                <span class="log-row__val">Profile updates silently failed in production; Cognito returned user-not-found errors.</span>
+              </div>
+              <div class="log-row">
+                <span class="log-row__key log-row__key--cause">Root cause</span>
+                <span class="log-row__val">The Cognito Admin API requires the login username string, not the <code>sub</code> UUID &#8212; but the code was passing <code>sub</code>.</span>
+              </div>
+              <div class="log-row">
+                <span class="log-row__key log-row__key--fix">Fix</span>
+                <span class="log-row__val">Updated the Cognito service to pass the username string; added targeted logging at the IDP call site to catch this class of error earlier.</span>
               </div>
             </div>
           </div>
-        </footer>
+
+          <div class="log-entry">
+            <p class="log-entry__title">cursor-in-useCallback-deps-causing-infinite-fetch-loop</p>
+            <div class="log-rows">
+              <div class="log-row">
+                <span class="log-row__key log-row__key--symptom">Symptom</span>
+                <span class="log-row__val">Paginated data fetch triggered on every render, hammering the backend.</span>
+              </div>
+              <div class="log-row">
+                <span class="log-row__key log-row__key--cause">Root cause</span>
+                <span class="log-row__val"><code>cursor</code> was included in the <code>useCallback</code> deps array; each fetch updated <code>cursor</code>, which re-triggered the callback.</span>
+              </div>
+              <div class="log-row">
+                <span class="log-row__key log-row__key--fix">Fix</span>
+                <span class="log-row__val">Removed <code>cursor</code> from the dependency array; fetch is now triggered explicitly, not reactively off cursor state.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="log-entry">
+            <p class="log-entry__title">DELETE-requests-silently-dropped-request-body</p>
+            <div class="log-rows">
+              <div class="log-row">
+                <span class="log-row__key log-row__key--symptom">Symptom</span>
+                <span class="log-row__val">Bulk delete operations arrived at the backend with no payload.</span>
+              </div>
+              <div class="log-row">
+                <span class="log-row__key log-row__key--cause">Root cause</span>
+                <span class="log-row__val">The proxy middleware excluded <code>DELETE</code> from body-forwarding logic, assuming REST convention (DELETE has no body).</span>
+              </div>
+              <div class="log-row">
+                <span class="log-row__key log-row__key--fix">Fix</span>
+                <span class="log-row__val">Updated proxy to forward body on DELETE as well; documented as a non-standard but valid HTTP pattern.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="log-entry">
+            <p class="log-entry__title">FormData-being-JSON.stringify-d-in-the-API-client</p>
+            <div class="log-rows">
+              <div class="log-row">
+                <span class="log-row__key log-row__key--symptom">Symptom</span>
+                <span class="log-row__val">File uploads failed; multipart boundary was not set correctly.</span>
+              </div>
+              <div class="log-row">
+                <span class="log-row__key log-row__key--cause">Root cause</span>
+                <span class="log-row__val">The <code>apiClient</code> serialized all bodies with <code>JSON.stringify</code>; <code>FormData</code> requires the browser to set the <code>Content-Type</code> with the correct boundary automatically.</span>
+              </div>
+              <div class="log-row">
+                <span class="log-row__key log-row__key--fix">Fix</span>
+                <span class="log-row__val">Added <code>FormData</code> instance detection to skip serialization and omit the <code>Content-Type</code> header on those requests.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="log-entry">
+            <p class="log-entry__title">pnpm-dlx-prisma-version-mismatch-in-Docker-CI</p>
+            <div class="log-rows">
+              <div class="log-row">
+                <span class="log-row__key log-row__key--symptom">Symptom</span>
+                <span class="log-row__val">Migrations ran with a different Prisma CLI version than what was installed in the project, causing subtle schema drift.</span>
+              </div>
+              <div class="log-row">
+                <span class="log-row__key log-row__key--cause">Root cause</span>
+                <span class="log-row__val"><code>pnpm dlx</code> bypasses the lockfile and fetches the latest CLI version.</span>
+              </div>
+              <div class="log-row">
+                <span class="log-row__key log-row__key--fix">Fix</span>
+                <span class="log-row__val">Switched all migration commands to use the locally installed <code>pnpm prisma</code> binary.</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
+    </section>
+
+    <!-- ── what shipped ──────────────────────────────────────────── -->
+    <section class="cs-s" aria-labelledby="s-shipped">
+      <div class="container">
+        <p class="cs-s__kicker">What Shipped</p>
+        <h2 class="cs-s__heading" id="s-shipped">
+          The full scope<br>of what went live.
+        </h2>
+
+        <div class="shipped-groups">
+
+          <!-- Auth & Access -->
+          <div class="shipped-group">
+            <p class="shipped-group__heading">Auth &amp; Access</p>
+            <ul class="shipped-list" aria-label="Auth and access features">
+              <li class="shipped-item">
+                <p class="shipped-item__name">6 role-based dashboards</p>
+                <p class="shipped-item__desc">Super User, Task Supervisor, Task Agent, Client, District Manager, Account Executive &#8212; distinct permission sets and UI layouts per role.</p>
+              </li>
+              <li class="shipped-item">
+                <p class="shipped-item__name">Hybrid IDP auth</p>
+                <p class="shipped-item__desc">Legacy JWT, Keycloak (dev), and Cognito (staging&#x2F;prod) with transparent auto-migration on login.</p>
+              </li>
+              <li class="shipped-item">
+                <p class="shipped-item__name">BFF proxy route</p>
+                <p class="shipped-item__desc"><code>/api/proxy/[...path]</code> handling GET&#x2F;POST&#x2F;PUT&#x2F;PATCH&#x2F;DELETE with auth forwarding. Token never touches client JS.</p>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Task Management -->
+          <div class="shipped-group">
+            <p class="shipped-group__heading">Task Management</p>
+            <ul class="shipped-list" aria-label="Task management features">
+              <li class="shipped-item">
+                <p class="shipped-item__name">Status workflow</p>
+                <p class="shipped-item__desc">NEW &#8594; IN_PROGRESS &#8594; REVIEW &#8594; COMPLETED&#x2F;BLOCKED&#x2F;OVERDUE with priority levels and skill tagging.</p>
+              </li>
+              <li class="shipped-item">
+                <p class="shipped-item__name">Serial number system</p>
+                <p class="shipped-item__desc">Per-category prefix sequences (e.g. <code>WD-00042</code>), atomic DB increments, format validation, and backfill migration for existing tasks.</p>
+              </li>
+              <li class="shipped-item">
+                <p class="shipped-item__name">Work logging</p>
+                <p class="shipped-item__desc">Time entries in Jira format (<code>1w 2d 3h 30m</code>), transactional aggregation into <code>totalTimeSpent</code> and <code>latestTimeRemaining</code>, progress bar, soft delete audit trail.</p>
+              </li>
+              <li class="shipped-item">
+                <p class="shipped-item__name">Batch operations</p>
+                <p class="shipped-item__desc">Multi-select tasks, batch status&#x2F;priority&#x2F;assignee&#x2F;category&#x2F;due date update, batch delete, and CSV export.</p>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Views & Filtering -->
+          <div class="shipped-group">
+            <p class="shipped-group__heading">Views &amp; Filtering</p>
+            <ul class="shipped-list" aria-label="View and filtering features">
+              <li class="shipped-item">
+                <p class="shipped-item__name">Three task views</p>
+                <p class="shipped-item__desc">Kanban (dnd-kit with per-column infinite scroll), Gantt (frappe-gantt with synchronized sidebar), and tabular list &#8212; switchable via query param.</p>
+              </li>
+              <li class="shipped-item">
+                <p class="shipped-item__name">Advanced filter builder</p>
+                <p class="shipped-item__desc">Dynamic condition builder with per-field operator validation (eq, contains, in, between, isNull, etc.), AND&#x2F;OR logic, and saved filter system (<code>TaskViewFilter</code>).</p>
+              </li>
+              <li class="shipped-item">
+                <p class="shipped-item__name">Global fuzzy search</p>
+                <p class="shipped-item__desc">Fuse.js across navigation items and tasks from the top bar, cursor-based pagination, scroll-to-load-more.</p>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Real-time & Notifications -->
+          <div class="shipped-group">
+            <p class="shipped-group__heading">Real-time &amp; Notifications</p>
+            <ul class="shipped-list" aria-label="Real-time and notification features">
+              <li class="shipped-item">
+                <p class="shipped-item__name">SSE notification system</p>
+                <p class="shipped-item__desc">Multi-tab support, tab-specific connection IDs, ping&#x2F;keepalive, reconnect logic, and a connection status indicator component.</p>
+              </li>
+              <li class="shipped-item">
+                <p class="shipped-item__name">Push notifications</p>
+                <p class="shipped-item__desc">Web Push API with VAPID, persistent subscription storage, and <code>sw.js</code> service worker &#8212; delivers notifications when the tab is inactive or closed.</p>
+              </li>
+              <li class="shipped-item">
+                <p class="shipped-item__name">Overdue task scheduler</p>
+                <p class="shipped-item__desc">Node.js worker thread (<code>overdueTasksWorker.ts</code>) on a daily cron; transitions past-due tasks and notifies assignee and all Task Supervisors via SSE + push.</p>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Content & Files -->
+          <div class="shipped-group">
+            <p class="shipped-group__heading">Content &amp; Files</p>
+            <ul class="shipped-list" aria-label="Content and file features">
+              <li class="shipped-item">
+                <p class="shipped-item__name">Rich text editor</p>
+                <p class="shipped-item__desc">TipTap with full formatting, syntax-highlighted code blocks, <code>@mention</code> support with user search, link auto-extraction, and file attachments per comment.</p>
+              </li>
+              <li class="shipped-item">
+                <p class="shipped-item__name">Task comments system</p>
+                <p class="shipped-item__desc">Threaded replies, edit&#x2F;delete permissions, author-type polymorphism (USER&#x2F;CLIENT), and mention notifications via SSE.</p>
+              </li>
+              <li class="shipped-item">
+                <p class="shipped-item__name">File handling</p>
+                <p class="shipped-item__desc">Presigned S3 upload&#x2F;download via AWS SDK, CloudFront serving, per-context ownership (task, profile, comment), 5 MB validation, file preview modal with zoom and PDF support.</p>
+              </li>
+              <li class="shipped-item">
+                <p class="shipped-item__name">In-app real-time chat</p>
+                <p class="shipped-item__desc">Embedded via iframe, JWT-signed init token, cross-origin <code>postMessage</code> for auth refresh and notification sync, floating chat button with unread badge.</p>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Infrastructure -->
+          <div class="shipped-group">
+            <p class="shipped-group__heading">Infrastructure</p>
+            <ul class="shipped-list" aria-label="Infrastructure features">
+              <li class="shipped-item">
+                <p class="shipped-item__name">Dual CDK stacks</p>
+                <p class="shipped-item__desc">ECS&#x2F;Fargate for backend, S3 + CloudFront for image serving &#8212; independent deployment lifecycles.</p>
+              </li>
+              <li class="shipped-item">
+                <p class="shipped-item__name">CI&#x2F;CD pipelines</p>
+                <p class="shipped-item__desc">GitHub Actions for staging and production; Vercel for frontend. Separate staging and production environments.</p>
+              </li>
+              <li class="shipped-item">
+                <p class="shipped-item__name">Shared packages</p>
+                <p class="shipped-item__desc"><code>@wnp/types</code> (Zod schemas + TS types), <code>@wnp/logger</code>, <code>typescript-config</code> &#8212; single source of truth across the monorepo.</p>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── retrospective ────────────────────────────────────────── -->
+    <section class="cs-s" aria-labelledby="s-retro">
+      <div class="container">
+        <p class="cs-s__kicker">What I&#8217;d Do Differently</p>
+        <h2 class="cs-s__heading" id="s-retro">
+          Two decisions<br>I&#8217;d revisit.
+        </h2>
+
+        <div>
+          <p class="retro__body">
+            The two Prisma schemas (<code style="font-family: var(--font-mono); font-size: 0.75em; color: var(--color-accent-dim);">apps/web/prisma</code>
+            and <code style="font-family: var(--font-mono); font-size: 0.75em; color: var(--color-accent-dim);">apps/backend/prisma</code>)
+            being maintained separately &#8212; kept in sync manually with a note in
+            the README &#8212; is the highest-risk part of this codebase. A single
+            schema drift can cause silent type mismatches that only surface at
+            runtime. The right call would have been a shared
+            <code style="font-family: var(--font-mono); font-size: 0.75em; color: var(--color-accent-dim);">packages/database</code>
+            workspace from the start.
+          </p>
+          <p class="retro__body">
+            The chat integration via iframe and <code style="font-family: var(--font-mono); font-size: 0.75em; color: var(--color-accent-dim);">postMessage</code>
+            is the most fragile coupling in the system &#8212; any change to the
+            external chat service&#8217;s origin, auth contract, or message
+            protocol silently breaks the integration with no type safety. A
+            versioned message schema shared between both apps, or building the
+            chat on the same backend with WebSocket support, would have
+            eliminated the cross-origin dependency entirely.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA ──────────────────────────────────────────────────── -->
+    <section class="cs-cta" aria-labelledby="s-cta">
+      <div class="container">
+        <h2 class="cs-cta__statement" id="s-cta">
+          Have a system<br>worth building?
+        </h2>
+        <div class="cs-cta__links">
+          <a class="cs-cta__link is-primary" href="/contact.html">Get in touch</a>
+          <a class="cs-cta__link" href="/projects.html">See all projects</a>
+          <a class="cs-cta__link" href="/projects/asia-builders.html">Asia Builders ERP &#8594;</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── footer ───────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer__line">Building production software from Islamabad.</p>
+      <nav class="footer__nav" aria-label="Footer links">
+        <a href="mailto:sibteali786@gmail.com">Email</a>
+        <a href="https://github.com/sibteali786" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/syed-sibteali-baqar/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <span class="footer__copy">&#169; 2025</span>
+      </nav>
     </div>
-    <script
-      src="../js/jquery.js?site=68fcf76ace908baaeca05096"
-      type="text/javascript"
-    ></script>
-    <script
-      src="../js/webflow.schunk.36b8fb49256177c8.js"
-      type="text/javascript"
-    ></script>
-    <script
-      src="../js/webflow.schunk.09a00a21d2c0230a.js"
-      type="text/javascript"
-    ></script>
-    <script src="../js/webflow-script-3.js" type="text/javascript"></script>
-  </body>
+  </footer>
+
+  <script src="../nav.js"></script>
+
+</body>
 </html>
