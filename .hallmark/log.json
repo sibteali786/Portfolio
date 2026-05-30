@@ -1,6 +1,24 @@
 [
   {
     "date": "2026-05-30",
+    "macrostructure": "Letter",
+    "theme": "custom",
+    "theme_axes": "dark / italic-serif / warm-amber",
+    "enrichment": "none (typography only)",
+    "brief": "Sibt-e-Ali portfolio — contact.html, email hero + channels",
+    "scope": "contact.html"
+  },
+  {
+    "date": "2026-05-30",
+    "macrostructure": "Workbench",
+    "theme": "custom",
+    "theme_axes": "dark / italic-serif / warm-amber",
+    "enrichment": "real screenshots in figure elements (Tier-A, no fake chrome)",
+    "brief": "Sibt-e-Ali portfolio — projects.html, featured + supporting project index",
+    "scope": "projects.html"
+  },
+  {
+    "date": "2026-05-30",
     "macrostructure": "Long Document",
     "theme": "custom",
     "theme_axes": "dark / italic-serif / warm-amber",
