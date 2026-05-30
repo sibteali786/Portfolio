@@ -1,0 +1,21 @@
+[
+  {
+    "date": "2026-05-30",
+    "macrostructure": "Long Document",
+    "theme": "custom",
+    "theme_axes": "dark / italic-serif / warm-amber",
+    "enrichment": "none (typography only)",
+    "brief": "Sibt-e-Ali portfolio — about.html, experience timeline + education",
+    "scope": "about.html"
+  },
+  {
+    "date": "2026-05-30",
+    "macrostructure": "Split-Editorial",
+    "theme": "custom",
+    "theme_axes": "dark / italic-serif / warm-amber",
+    "vibe": "dark engineering, amber precision, terminal voice",
+    "enrichment": "terminal block (Tier-A CSS/HTML)",
+    "brief": "Sibt-e-Ali portfolio — full rebuild from Webflow, design.md system",
+    "scope": "index.html"
+  }
+]

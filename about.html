@@ -1,554 +1,208 @@
-<!DOCTYPE html><!-- Handled by Exflow.site -->
-<html data-wf-page="68fcf76dce908baaeca052a0" data-wf-site="68fcf76ace908baaeca05096" data-wf-status="1" lang="en">
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<meta charset="utf-8" />
-	<title>About</title>
-	<meta content="width=device-width, initial-scale=1" name="viewport" />
-	<meta content="Webflow" name="generator" />
-	<link href="css/syeds-portfolio-a02089.webflow.shared.159f0f492.css" rel="stylesheet" type="text/css" />
-	<link href="https://fonts.googleapis.com" rel="preconnect" />
-	<link href="https://fonts.gstatic.com" rel="preconnect" />
-	<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
-	<script
-		type="text/javascript">WebFont.load({ google: { families: ["Inter:300,400,500,600,700", "Manrope:300,400,500,600,700", "Space Grotesk:500,600,700"] } });</script>
-	<script
-		type="text/javascript">!function (o, c) { var n = c.documentElement, t = " w-mod-"; n.className += t + "js", ("ontouchstart" in o || o.DocumentTouch && c instanceof DocumentTouch) && (n.className += t + "touch") }(window, document);</script>
-	<link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-	<link href="images/apple-touch-icon.png" rel="apple-touch-icon" />
-	<style>
-		* {
-			-webkit-font-smoothing: antialiased;
-			-moz-osx-font-smoothing: grayscale;
-			-o-font-smoothing: antialiased;
-		}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="About Syed Sibt-e-Ali Baqar — Lead engineer based in Islamabad with experience in production systems, multi-tenant platforms, and mobile development.">
+  <title>About — Syed Sibt-e-Ali Baqar</title>
 
-		/* Task 5: asymmetric about hero — text left, images right */
-		@media (min-width: 992px) {
-			.about-header-component {
-				display: flex;
-				flex-direction: row;
-				align-items: center;
-				gap: 3rem;
-			}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-			.about-header-component .margin-bottom.margin-xxlarge {
-				flex: 0 0 50%;
-				margin-bottom: 0 !important;
-			}
-
-			.about-header-image-group {
-				flex: 1 1 auto;
-			}
-		}
-
-		.about-header-content-wrapper {
-			text-align: left;
-		}
-
-		.about-header-content-wrapper .button-group {
-			justify-content: flex-start;
-		}
-	
-		/* Task 7: Space Grotesk display + Inter body */
-		.heading-style-h1,
-		.heading-style-h2,
-		.heading-style-h3,
-		.heading-style-h4,
-		.heading-style-h5,
-		.heading-style-h6,
-		.stat-number,
-		.cta-heading-top,
-		.cta-heading-bottom {
-			font-family: 'Space Grotesk', 'Manrope', sans-serif;
-			letter-spacing: -0.01em;
-		}
-
-		body, .text-size-medium, .text-size-large,
-		.text-size-regular, .text-size-small {
-			font-family: 'Inter', 'Manrope', sans-serif;
-		}
-</style>
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="about.css">
 </head>
+<body>
 
-<body class="body">
-	<div class="page-wrapper navbar-on-page">
-		<div class="global-styles w-embed">
-			<style>
-				/* Focus state style for keyboard navigation for the focusable elements */
-				*[tabindex]:focus-visible,
-				input[type="file"]:focus-visible {
-					outline: 0.125rem solid #4d65ff;
-					outline-offset: 0.125rem;
-				}
+  <a class="skip-link" href="#main">Skip to content</a>
 
-				/* Get rid of top margin on first element in any rich text element */
-				.w-richtext> :not(div):first-child,
-				.w-richtext>div:first-child> :first-child {
-					margin-top: 0 !important;
-				}
+  <!-- ── nav ──────────────────────────────────────────────────────── -->
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Site navigation">
+      <a class="nav-name" href="/">Sibt-e-Ali</a>
+      <a class="nav-email" href="mailto:sibteali786@gmail.com">sibteali786@gmail.com</a>
+    </nav>
+  </header>
 
-				/* Get rid of bottom margin on last element in any rich text element */
-				.w-richtext>:last-child,
-				.w-richtext ol li:last-child,
-				.w-richtext ul li:last-child {
-					margin-bottom: 0 !important;
-				}
+  <main id="main">
 
-				/* Prevent all click and hover interaction with an element */
-				.pointer-events-off {
-					pointer-events: none;
-				}
+    <!-- ── about header ─────────────────────────────────────────── -->
+    <section class="aph" aria-labelledby="about-name">
+      <div class="container">
 
-				/* Enables all click and hover interaction with an element */
-				.pointer-events-on {
-					pointer-events: auto;
-				}
+        <div class="aph__left">
+          <p class="aph__label">About</p>
+          <h1 class="aph__name" id="about-name">Syed Sibt-e-Ali<br>Baqar</h1>
+          <p class="aph__role">$ lead engineer &#183; hill country coders &#183; islamabad</p>
+        </div>
 
-				/* Make sure containers never lose their center alignment */
-				.container-medium,
-				.container-small,
-				.container-large {
-					margin-right: auto !important;
-					margin-left: auto !important;
-				}
+        <div class="aph__bio">
+          <p class="aph__body">
+            Computer Engineering graduate from NUST, Islamabad (3.15&nbsp;GPA, 2023).
+            Three years building production systems &#8212; a blockchain social platform,
+            mobile apps for a US startup, and a full ERP for a construction company.
+          </p>
+          <p class="aph__body">
+            Tools are a means to an end. The end is software that stays running under load,
+            gives the right people the right access, and makes the spreadsheet unnecessary.
+            Not attached to frameworks; attached to outcomes.
+          </p>
+        </div>
 
-				/* These classes are never overwritten */
-				.hide {
-					display: none !important;
-				}
+      </div>
+    </section>
 
-				@media screen and (max-width: 991px) {
+    <!-- ── experience ───────────────────────────────────────────── -->
+    <section class="experience" aria-labelledby="exp-heading">
+      <div class="container">
 
-					.hide,
-					.hide-tablet {
-						display: none !important;
-					}
-				}
+        <h2 class="section-label" id="exp-heading">Experience</h2>
 
-				@media screen and (max-width: 767px) {
-					.hide-mobile-landscape {
-						display: none !important;
-					}
-				}
+        <ol class="exp-list" reversed>
 
-				@media screen and (max-width: 479px) {
-					.hide-mobile {
-						display: none !important;
-					}
-				}
+          <!-- Lead Engineer — Hill Country Coders -->
+          <li class="exp-item">
+            <div class="exp__meta">
+              <span class="exp__period">Sep 2024<br>Present</span>
+              <span class="exp__company">Hill Country Coders</span>
+            </div>
+            <div class="exp__content">
+              <h3 class="exp__role">Lead Engineer</h3>
+              <ul class="exp__outcomes">
+                <li>Architected and shipped <strong>WhatsNextPlease</strong> &#8212; a multi-tenant task management platform covering internal teams, external projects, and clients.</li>
+                <li>Replaced Excel-based task tracking with a semi-automated workflow: <span class="exp__metric">~10&#8211;12% company-wide efficiency gain</span> in under six months.</li>
+                <li>Introduced CI/CD pipelines, testing frameworks, and consistent development patterns: <span class="exp__metric">~30% team efficiency gain</span>.</li>
+                <li>Built a low-cost real-time chat application (Node.js, WebSockets, React) for internal communication across tools.</li>
+                <li>Improved DevOps practices via AWS-based deployments, CI/CD, and AWS CDK &#8212; raising codebase security, reliability, and resilience.</li>
+              </ul>
+            </div>
+          </li>
 
-				.margin-0 {
-					margin: 0rem !important;
-				}
+          <!-- Software Engineer — Ensemble UI -->
+          <li class="exp-item">
+            <div class="exp__meta">
+              <span class="exp__period">Apr 2023<br>Sep 2024</span>
+              <span class="exp__company">Ensemble UI</span>
+            </div>
+            <div class="exp__content">
+              <h3 class="exp__role">Software Engineer</h3>
+              <ul class="exp__outcomes">
+                <li>Spearheaded development and launch of <strong>three mobile applications for Swoop Inc</strong> in four months: <span class="exp__metric">5&#215; cost reduction</span> and <span class="exp__metric">40% faster delivery</span>.</li>
+                <li>Rebuilt Ensemble UI documentation with searchable examples &#8212; <span class="exp__metric">50% reduction</span> in customer and developer queries, ~10% team productivity boost.</li>
+                <li>Developed key widgets for Ensemble-React that enabled Atlas Health to adopt it for their V2 MVP.</li>
+                <li>Created reusable scripts and components for Atlas Navigator UI (~5% team productivity lift).</li>
+                <li>Delivered animations and design enhancements on the Ensemble marketing website: <span class="exp__metric">~30% increase</span> in user traffic and client acquisition.</li>
+              </ul>
+            </div>
+          </li>
 
-				.padding-0 {
-					padding: 0rem !important;
-				}
+          <!-- Associate Software Engineer — HxLabs -->
+          <li class="exp-item">
+            <div class="exp__meta">
+              <span class="exp__period">Jun 2022<br>May 2023</span>
+              <span class="exp__company">HxLabs</span>
+            </div>
+            <div class="exp__content">
+              <h3 class="exp__role">Associate Software Engineer</h3>
+              <ul class="exp__outcomes">
+                <li>Played a pivotal role in the alpha-testing rollout of a blockchain-based social media web app; incorporated user feedback into 5+ feature enhancements.</li>
+                <li>Built real-time notifications, post creation, and reply features with React and GraphQL: <span class="exp__metric">~5% user engagement boost</span>.</li>
+                <li>Created a standardized design system adopted across the codebase: <span class="exp__metric">~30% team productivity increase</span>.</li>
+              </ul>
+            </div>
+          </li>
 
-				.margin-top {
-					margin-right: 0rem !important;
-					margin-bottom: 0rem !important;
-					margin-left: 0rem !important;
-				}
+          <!-- Technical Lead — Gul-e-Shaor -->
+          <li class="exp-item">
+            <div class="exp__meta">
+              <span class="exp__period">Aug 2021<br>Feb 2023</span>
+              <span class="exp__company">Gul-e-Shaor</span>
+            </div>
+            <div class="exp__content">
+              <h3 class="exp__role">Technical Lead</h3>
+              <ul class="exp__outcomes">
+                <li>Led the team to <span class="exp__metric">Top 10 Startups</span> at iCreate-21 (PIEAS) and <span class="exp__metric">Runner-Up</span> at FICS-2022 (NUST).</li>
+                <li>Secured incubation at the National Incubation Centre Peshawar (2022).</li>
+              </ul>
+            </div>
+          </li>
 
-				.padding-top {
-					padding-right: 0rem !important;
-					padding-bottom: 0rem !important;
-					padding-left: 0rem !important;
-				}
+        </ol>
+      </div>
+    </section>
 
-				.margin-right {
-					margin-top: 0rem !important;
-					margin-bottom: 0rem !important;
-					margin-left: 0rem !important;
-				}
+    <!-- ── education + recognition ──────────────────────────────── -->
+    <section class="edu-section" aria-labelledby="edu-heading">
+      <div class="container">
+        <div class="edu-grid">
 
-				.padding-right {
-					padding-top: 0rem !important;
-					padding-bottom: 0rem !important;
-					padding-left: 0rem !important;
-				}
+          <!-- Education -->
+          <div class="edu-block">
+            <h2 class="section-label" id="edu-heading">Education</h2>
+            <p class="edu__degree">Bachelor of<br>Computer Engineering</p>
+            <p class="edu__school">NUST &#183; Islamabad &#183; 2023 &#183; 3.15&nbsp;GPA</p>
+            <p class="edu__body">
+              National University of Sciences and Technology.
+              Coursework spanning data structures, algorithms, operating systems,
+              computer networks, and embedded systems.
+            </p>
+            <p class="edu__body">
+              Awarded Merit Certificates for winning iCreate-21 (PIEAS)
+              and FICS &#8212; Finding Innovative &amp; Creative Solutions (NUST).
+            </p>
+          </div>
 
-				.margin-bottom {
-					margin-top: 0rem !important;
-					margin-right: 0rem !important;
-					margin-left: 0rem !important;
-				}
+          <!-- Recognition -->
+          <div class="edu-block">
+            <h2 class="section-label">Recognition</h2>
+            <ul class="award-list">
+              <li class="award-item">
+                <p class="award__title">Top 10 Startups</p>
+                <p class="award__detail">iCreate-21 &#183; PIEAS &#183; 2021<br>Certificate of Participation and Top 10 placement with Gul-e-Shaor</p>
+              </li>
+              <li class="award-item">
+                <p class="award__title">Runner-Up</p>
+                <p class="award__detail">FICS-2022 &#183; NUST &#183; 2022<br>Finding Innovative &amp; Creative Solutions &#8212; national university competition</p>
+              </li>
+              <li class="award-item">
+                <p class="award__title">NIC Incubation</p>
+                <p class="award__detail">National Incubation Centre Peshawar &#183; 2022<br>Gul-e-Shaor selected for incubation following competition wins</p>
+              </li>
+            </ul>
+          </div>
 
-				.padding-bottom {
-					padding-top: 0rem !important;
-					padding-right: 0rem !important;
-					padding-left: 0rem !important;
-				}
+        </div>
+      </div>
+    </section>
 
-				.margin-left {
-					margin-top: 0rem !important;
-					margin-right: 0rem !important;
-					margin-bottom: 0rem !important;
-				}
+    <!-- ── contact close ─────────────────────────────────────────── -->
+    <section class="contact-section" aria-labelledby="contact-heading">
+      <div class="container">
+        <div class="contact__inner">
+          <h2 class="contact__statement" id="contact-heading">
+            If you have a problem<br>worth solving &#8212;<br>let&#8217;s talk.
+          </h2>
+          <a class="contact__email" href="mailto:sibteali786@gmail.com">sibteali786@gmail.com</a>
+        </div>
+      </div>
+    </section>
 
-				.padding-left {
-					padding-top: 0rem !important;
-					padding-right: 0rem !important;
-					padding-bottom: 0rem !important;
-				}
+  </main>
 
-				.margin-horizontal {
-					margin-top: 0rem !important;
-					margin-bottom: 0rem !important;
-				}
+  <!-- ── footer ───────────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer__line">Building production software from Islamabad.</p>
+      <nav class="footer__nav" aria-label="Footer links">
+        <a href="mailto:sibteali786@gmail.com">Email</a>
+        <a href="https://github.com/sibteali786" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/syed-sibteali-baqar/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <span class="footer__copy">&#169; 2025</span>
+      </nav>
+    </div>
+  </footer>
 
-				.padding-horizontal {
-					padding-top: 0rem !important;
-					padding-bottom: 0rem !important;
-				}
-
-				.margin-vertical {
-					margin-right: 0rem !important;
-					margin-left: 0rem !important;
-				}
-
-				.padding-vertical {
-					padding-right: 0rem !important;
-					padding-left: 0rem !important;
-				}
-			</style>
-		</div>
-		<div data-animation="default" class="navbar-component w-nav" data-easing2="ease"
-			fs-scrolldisable-element="smart-nav" data-easing="ease" data-collapse="all"
-			data-w-id="d199289f-e495-5c49-2cd9-60a87f86a023" role="banner" data-duration="0">
-			<div class="navbar-container"><a href="/" class="navbar-logo-link w-nav-brand"><img
-						src="images/bc29e4ca38b1fbc3d718d13b683bfc3e_sibt-e-ali-20baqar.png" loading="lazy" width="Auto"
-						height="40" alt="" class="navbar-logo" /></a>
-				<div class="navbar-wrapper"><a data-w-id="22384c17-123f-8d71-8e56-33428ac23afe" href="/contact"
-						class="button is-alternate is-navbar w-inline-block">
-						<div>Get in touch</div>
-						<div class="button-arrow w-embed"><svg xmlns="http://www.w3.org/2000/svg"
-								xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
-								class="iconify iconify--ph" width="100%" height="100%"
-								preserveAspectRatio="xMidYMid meet" viewBox="0 0 256 256">
-								<path fill="currentColor"
-									d="M128 26a102 102 0 1 0 102 102A102.2 102.2 0 0 0 128 26Zm0 192a90 90 0 1 1 90-90a90.1 90.1 0 0 1-90 90Zm34-118v48a6 6 0 0 1-12 0v-33.5l-45.8 45.7a5.9 5.9 0 0 1-8.4-8.4l45.7-45.8H108a6 6 0 0 1 0-12h48a6 6 0 0 1 6 6Z">
-								</path>
-							</svg></div>
-					</a>
-					<nav role="navigation" class="navbar-menu w-nav-menu">
-						<div class="navbar-menu-wrapper">
-							<div class="navbar-links-wrapper"><a href="/index.html"
-									class="navbar-link w-nav-link">Home</a><a href="/about.html" aria-current="page"
-									class="navbar-link w-nav-link w--current">About</a><a href="/projects.html"
-									class="navbar-link w-nav-link">Projects</a><a href="/contact.html"
-									class="navbar-link w-nav-link">Contact</a></div>
-							<div class="navbar-bottom">
-								<div class="w-layout-grid navbar-social-list"><a href="https://github.com/sibteali786"
-										target="_blank" class="navbar-social-link w-inline-block"><div class="icon-xsmall w-embed"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg></div></a><a
-										href="https://medium.com/@sibteali786" target="_blank"
-										class="navbar-social-link w-inline-block"><div class="icon-xsmall w-embed"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg></div></a><a
-										href="https://x.com/SibtealiN" target="_blank"
-										class="navbar-social-link w-inline-block">
-										<div class="icon-xsmall w-embed"><svg width="24" height="24" viewBox="0 0 24 24"
-												fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path
-													d="M17.1761 4H19.9362L13.9061 10.7774L21 20H15.4456L11.0951 14.4066L6.11723 20H3.35544L9.80517 12.7508L3 4H8.69545L12.6279 9.11262L17.1761 4ZM16.2073 18.3754H17.7368L7.86441 5.53928H6.2232L16.2073 18.3754Z"
-													fill="currentColor" />
-											</svg></div>
-									</a><a href="https://www.linkedin.com/in/syed-sibteali-baqar/" target="_blank"
-										class="navbar-social-link w-inline-block">
-										<div class="icon-xsmall w-embed"><svg width="100%" height="100%"
-												viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path fill-rule="evenodd" clip-rule="evenodd"
-													d="M4.5 3C3.67157 3 3 3.67157 3 4.5V19.5C3 20.3284 3.67157 21 4.5 21H19.5C20.3284 21 21 20.3284 21 19.5V4.5C21 3.67157 20.3284 3 19.5 3H4.5ZM8.52076 7.00272C8.52639 7.95897 7.81061 8.54819 6.96123 8.54397C6.16107 8.53975 5.46357 7.90272 5.46779 7.00413C5.47201 6.15897 6.13998 5.47975 7.00764 5.49944C7.88795 5.51913 8.52639 6.1646 8.52076 7.00272ZM12.2797 9.76176H9.75971H9.7583V18.3216H12.4217V18.1219C12.4217 17.742 12.4214 17.362 12.4211 16.9819V16.9818V16.9816V16.9815V16.9812C12.4203 15.9674 12.4194 14.9532 12.4246 13.9397C12.426 13.6936 12.4372 13.4377 12.5005 13.2028C12.7381 12.3253 13.5271 11.7586 14.4074 11.8979C14.9727 11.9864 15.3467 12.3141 15.5042 12.8471C15.6013 13.1803 15.6449 13.5389 15.6491 13.8863C15.6605 14.9339 15.6589 15.9815 15.6573 17.0292V17.0294C15.6567 17.3992 15.6561 17.769 15.6561 18.1388V18.3202H18.328V18.1149C18.328 17.6629 18.3278 17.211 18.3275 16.7591V16.759V16.7588C18.327 15.6293 18.3264 14.5001 18.3294 13.3702C18.3308 12.8597 18.276 12.3563 18.1508 11.8627C17.9638 11.1286 17.5771 10.5211 16.9485 10.0824C16.5027 9.77019 16.0133 9.5691 15.4663 9.5466C15.404 9.54401 15.3412 9.54062 15.2781 9.53721L15.2781 9.53721L15.2781 9.53721C14.9984 9.52209 14.7141 9.50673 14.4467 9.56066C13.6817 9.71394 13.0096 10.0641 12.5019 10.6814C12.4429 10.7522 12.3852 10.8241 12.2991 10.9314L12.2991 10.9315L12.2797 10.9557V9.76176ZM5.68164 18.3244H8.33242V9.76733H5.68164V18.3244Z"
-													fill="CurrentColor" />
-											</svg></div>
-									</a></div>
-							</div>
-						</div>
-					</nav>
-					<div class="navbar-menu-button w-nav-button">
-						<div class="menu-icon">
-							<div class="menu-icon-wrapper">
-								<div class="menu-icon-line-top"></div>
-								<div class="menu-icon-line-middle">
-									<div class="menu-icon-line-middle-top"></div>
-									<div class="menu-icon-line-middle-base"></div>
-								</div>
-								<div class="menu-icon-line-bottom"></div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="main-wrapper max-width-full">
-			<header data-w-id="e5b25780-d9a9-a524-9f70-298f27919712" class="section-about-header background-black">
-				<div class="padding-global">
-					<div class="container-large">
-						<div class="section-padding-large">
-							<div class="about-header-component">
-								<div class="margin-bottom margin-xxlarge">
-									<div class="about-header-content-wrapper">
-										<div class="margin-bottom margin-small">
-											<h1 data-w-id="e5b25780-d9a9-a524-9f70-298f2791971a" style="opacity:0"
-												class="heading-style-h1 text-allcaps">Building <span
-													class="mid-grey-span">systems that scale</span>, from pakistan to
-												the world</h1>
-										</div>
-										<p data-w-id="e5b25780-d9a9-a524-9f70-298f2791971c" style="opacity:0"
-											class="text-size-medium max-width-medium">Lead engineer
-											building multi-tenant platforms and real-time systems with React, Node.js,
-											and AWS. Proven track record: 12% efficiency gains in 6 months, 5x cost
-											reductions, and 40% faster delivery. Open-source contributor. Based in
-											Islamabad, working globally.</p>
-										<div class="margin-top margin-medium">
-											<div data-w-id="e5b25780-d9a9-a524-9f70-298f2791971f" style="opacity:0"
-												class="button-group"><a
-													data-w-id="c43bcd29-a5f4-33fb-79d4-f32010e56e7e" href="/projects.html"
-													class="button is-alternate w-inline-block">
-													<div>View my work</div>
-													<div class="button-arrow w-embed"><svg
-															xmlns="http://www.w3.org/2000/svg"
-															xmlns:xlink="http://www.w3.org/1999/xlink"
-															aria-hidden="true" role="img" class="iconify iconify--ph"
-															width="100%" height="100%"
-															preserveAspectRatio="xMidYMid meet" viewBox="0 0 256 256">
-															<path fill="currentColor"
-																d="M128 26a102 102 0 1 0 102 102A102.2 102.2 0 0 0 128 26Zm0 192a90 90 0 1 1 90-90a90.1 90.1 0 0 1-90 90Zm34-118v48a6 6 0 0 1-12 0v-33.5l-45.8 45.7a5.9 5.9 0 0 1-8.4-8.4l45.7-45.8H108a6 6 0 0 1 0-12h48a6 6 0 0 1 6 6Z">
-															</path>
-														</svg></div>
-												</a><a data-w-id="79a4d926-c220-0fd5-2429-4d4c3d393f5e" href="/contact.html"
-													class="button-secondary is-alternate w-inline-block">
-													<div>Get in touch</div>
-													<div class="button-arrow w-embed"><svg
-															xmlns="http://www.w3.org/2000/svg"
-															xmlns:xlink="http://www.w3.org/1999/xlink"
-															aria-hidden="true" role="img" class="iconify iconify--ph"
-															width="100%" height="100%"
-															preserveAspectRatio="xMidYMid meet" viewBox="0 0 256 256">
-															<path fill="currentColor"
-																d="M128 26a102 102 0 1 0 102 102A102.2 102.2 0 0 0 128 26Zm0 192a90 90 0 1 1 90-90a90.1 90.1 0 0 1-90 90Zm34-118v48a6 6 0 0 1-12 0v-33.5l-45.8 45.7a5.9 5.9 0 0 1-8.4-8.4l45.7-45.8H108a6 6 0 0 1 0-12h48a6 6 0 0 1 6 6Z">
-															</path>
-														</svg></div>
-												</a></div>
-										</div>
-									</div>
-								</div>
-								<div class="about-header-image-group">
-									<div class="about-header-image-wrapper-2"><img class="about-header-image-2"
-											src="images/screenshot-202026-01-31-20at-201.46.46-e2-80-afpm.png" alt=""
-											style="opacity:0" sizes="(max-width: 3608px) 100vw, 3608px"
-											data-w-id="e5b25780-d9a9-a524-9f70-298f27919726" loading="eager"
-											srcset="images/screenshot-202026-01-31-20at-201.46.46-e2-80-afpm-p-500.png 500w, images/screenshot-202026-01-31-20at-201.46.46-e2-80-afpm-p-800.png 800w, images/screenshot-202026-01-31-20at-201.46.46-e2-80-afpm-p-1080.png 1080w, images/screenshot-202026-01-31-20at-201.46.46-e2-80-afpm-p-1600.png 1600w, images/screenshot-202026-01-31-20at-201.46.46-e2-80-afpm-p-2000.png 2000w, images/screenshot-202026-01-31-20at-201.46.46-e2-80-afpm-p-2600.png 2600w, images/screenshot-202026-01-31-20at-201.46.46-e2-80-afpm-p-3200.png 3200w, images/screenshot-202026-01-31-20at-201.46.46-e2-80-afpm.png 3608w" />
-									</div>
-									<div class="about-header-image-wrapper-1"><img class="about-header-image-1"
-											src="images/whatsnextplease.png" alt="" style="opacity:0"
-											sizes="(max-width: 3840px) 100vw, 3840px"
-											data-w-id="e5b25780-d9a9-a524-9f70-298f27919728" loading="eager"
-											srcset="images/whatsnextplease-p-500.png 500w, images/whatsnextplease-p-800.png 800w, images/whatsnextplease-p-1080.png 1080w, images/whatsnextplease-p-1600.png 1600w, images/whatsnextplease-p-2000.png 2000w, images/whatsnextplease-p-2600.png 2600w, images/whatsnextplease-p-3200.png 3200w, images/whatsnextplease.png 3840w" />
-									</div>
-									<div class="about-header-image-wrapper-3"><img class="about-header-image-3"
-											src="images/screenshot-202026-01-31-20at-207.18.42-e2-80-afpm.png" alt=""
-											style="opacity:0" sizes="(max-width: 1870px) 100vw, 1870px"
-											data-w-id="e5b25780-d9a9-a524-9f70-298f2791972a" loading="eager"
-											srcset="images/screenshot-202026-01-31-20at-207.18.42-e2-80-afpm-p-500.png 500w, images/screenshot-202026-01-31-20at-207.18.42-e2-80-afpm-p-800.png 800w, images/screenshot-202026-01-31-20at-207.18.42-e2-80-afpm-p-1080.png 1080w, images/screenshot-202026-01-31-20at-207.18.42-e2-80-afpm-p-1600.png 1600w, images/screenshot-202026-01-31-20at-207.18.42-e2-80-afpm.png 1870w" />
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</header>
-			<section class="section-about background-black">
-				<div class="padding-global">
-					<div class="container-large">
-						<div class="section-padding-large">
-							<div class="w-layout-grid about-component">
-								<div class="about-content">
-									<div class="margin-bottom margin-small">
-										<h2 data-w-id="a36b875f-8e5c-d0ab-646f-20d8d278705c" style="opacity:0"
-											class="heading-style-h2 text-allcaps">turning <span
-												class="mid-grey-span">Technical complexity</span> INTO BUSINESS RESULTS
-										</h2>
-									</div>
-									<p data-w-id="a36b875f-8e5c-d0ab-646f-20d8d278705e" style="opacity:0"
-										class="text-size-medium text-colour-grey">Great software isn’t just about
-										clean code—it’s about empowering teams to work smarter. I’ve helped
-										organizations achieve 12% efficiency gains, cut costs by 5x, and ship products
-										40% faster by building platforms that eliminate friction and amplify human
-										potential.</p>
-									<div blocks-name="layout27_item-list" class="w-layout-grid stat-list">
-										<div blocks-name="layout27_text-wrapper" blocks-slot-children="ST232"
-											data-w-id="e562de8e-2f64-cb69-3f8a-ae47d01f2538" style="opacity:0"
-											class="stats-item">
-											<div blocks-name="heading-style-h2-2"
-												class="heading-style-h3 weight-medium">30<span
-													class="text-span-8">%</span></div>
-											<div blocks-name="block" class="text-size-regular">Increased team
-												productivity through standardized design systems, reusable components,
-												and developer-first tooling.</div>
-										</div>
-										<div blocks-name="layout27_text-wrapper-2" blocks-slot-children="ST232"
-											data-w-id="e562de8e-2f64-cb69-3f8a-ae47d01f253e" style="opacity:0"
-											class="stats-item">
-											<div blocks-name="heading-style-h2-2"
-												class="heading-style-h3 weight-medium">50<span
-													class="text-span-8">%</span></div>
-											<div blocks-name="block-2" class="text-size-regular">Reduced customer
-												support queries by enhancing documentation with searchable examples and
-												intuitive navigation.</div>
-										</div>
-									</div>
-								</div>
-								<div class="about-image-wrapper"><img class="about-image"
-										src="images/super-20user-20dashboard.png" alt="" style="opacity:0"
-										sizes="(max-width: 1441px) 100vw, 1441px"
-										data-w-id="a36b875f-8e5c-d0ab-646f-20d8d2787061" loading="lazy"
-										srcset="images/super-20user-20dashboard-p-500.png 500w, images/super-20user-20dashboard-p-800.png 800w, images/super-20user-20dashboard-p-1080.png 1080w, images/super-20user-20dashboard.png 1441w" />
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-			<section class="section-stats background-black">
-				<div class="padding-global">
-					<div class="container-large">
-						<div class="section-padding-large">
-							<div class="stats-component">
-								<div class="margin-bottom margin-xxlarge">
-									<div class="w-layout-grid stats-content">
-										<div id="w-node-_01fe231a-c26f-5431-a9d2-eb07c475ec63-eca052a0"
-											class="stats-content-left">
-											<h2 data-w-id="01fe231a-c26f-5431-a9d2-eb07c475ec64" style="opacity:0"
-												class="heading-style-h2 text-allcaps"><span class="dark-grey-span">MY
-													EXPERTISE SPANS FULL-STACK</span>  From DEVELOPMENT, CLOUD
-												ARCHITECTURE, to DEVOPS AUTOMATION</h2>
-										</div>
-										<div id="w-node-_01fe231a-c26f-5431-a9d2-eb07c475ec66-eca052a0"
-											class="stats-content-right">
-											<p data-w-id="01fe231a-c26f-5431-a9d2-eb07c475ec67" style="opacity:0"
-												class="text-size-medium text-colour-grey">Based in Islamabad, I partner
-												with startups and established companies worldwide to build platforms
-												that scale. Whether working across US time zones or collaborating with
-												European teams, I bring technical expertise and reliable execution to
-												every project—no matter where you’re located.</p>
-										</div>
-									</div>
-								</div>
-								<div data-w-id="01fe231a-c26f-5431-a9d2-eb07c475ec69" style="opacity:0"
-									class="w-layout-grid stats-list">
-									<div id="w-node-_01fe231a-c26f-5431-a9d2-eb07c475ec6a-eca052a0" class="stat-item">
-										<div class="margin-bottom margin-xxsmall">
-											<div class="stat-number">30<span class="text-span-7">%</span></div>
-										</div>
-										<h3 class="heading-style-h6 weight-medium">Introduced modern engineering
-											standards including automated testing, code reviews, and architectural
-											patterns that elevated team capabilities and code quality.</h3>
-									</div>
-									<div class="stat-item">
-										<div class="margin-bottom margin-xxsmall">
-											<div class="stat-number">50<span class="text-span-7">%</span></div>
-										</div>
-										<h3 class="heading-style-h6 weight-medium">Reduced customer and developer
-											queries for Ensemble UI  through comprehensive documentation with searchable
-											examples, API references, and interactive guides.</h3>
-									</div>
-									<div class="stat-image-wrapper"><img src="images/swoop.png" loading="lazy"
-											width="Auto" sizes="(max-width: 1876px) 100vw, 1876px" alt=""
-											srcset="images/swoop-p-500.png 500w, images/swoop-p-800.png 800w, images/swoop-p-1080.png 1080w, images/swoop-p-1600.png 1600w, images/swoop.png 1876w"
-											class="stat-image" /></div>
-									<div class="stat-image-wrapper"><img
-											src="images/screenshot-202026-01-31-20at-201.46.46-e2-80-afpm.png"
-											loading="lazy" sizes="(max-width: 3608px) 100vw, 3608px"
-											srcset="images/screenshot-202026-01-31-20at-201.46.46-e2-80-afpm-p-500.png 500w, images/screenshot-202026-01-31-20at-201.46.46-e2-80-afpm-p-800.png 800w, images/screenshot-202026-01-31-20at-201.46.46-e2-80-afpm-p-1080.png 1080w, images/screenshot-202026-01-31-20at-201.46.46-e2-80-afpm-p-1600.png 1600w, images/screenshot-202026-01-31-20at-201.46.46-e2-80-afpm-p-2000.png 2000w, images/screenshot-202026-01-31-20at-201.46.46-e2-80-afpm-p-2600.png 2600w, images/screenshot-202026-01-31-20at-201.46.46-e2-80-afpm-p-3200.png 3200w, images/screenshot-202026-01-31-20at-201.46.46-e2-80-afpm.png 3608w"
-											alt="" class="stat-image" /></div>
-									<div id="w-node-_01fe231a-c26f-5431-a9d2-eb07c475ec78-eca052a0" class="stat-item">
-										<div class="margin-bottom margin-xxsmall">
-											<div class="stat-number">5<span class="text-span-7">×</span></div>
-										</div>
-										<h3 class="heading-style-h6 weight-medium">Lower mobile-app development cost for
-											Swoop Inc by building dynamic, reusable component systems.</h3>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-			<section data-w-id="c7a48850-583e-560b-556b-43b7a35cd7f8" class="section-banner-cta">
-				<div class="section-padding-large"><a href="/contact" class="banner-cta-component w-inline-block">
-						<h2 class="cta-heading-top">READY TO SCALE YOUR PLATFORM?</h2>
-						<h2 class="cta-heading-bottom">LET’S BUILD SOMETHING THAT DELIVERS RESULTS</h2>
-					</a></div>
-			</section>
-			<footer data-w-id="5d53571d-05a3-3001-8aed-4eb278bd7aaf" class="footer-component">
-				<div class="padding-global">
-					<div class="container-large">
-						<div class="padding-top padding-xxlarge">
-							<div class="padding-bottom padding-large">
-								<div class="w-layout-grid footer-top-wrapper">
-									<div class="footer-left-wrapper">
-										<div class="margin-bottom margin-medium"><a href="/"
-												class="footer-logo-link w-nav-brand"><img
-													src="images/bc29e4ca38b1fbc3d718d13b683bfc3e_sibt-e-ali-20baqar.png"
-													loading="lazy" alt="" height="40" class="footer-logo" /></a></div>
-										<div class="footer-details-wrapper">
-											<div class="margin-bottom margin-tiny">
-												<div class="text-size-regular weight-semibold text-colour-grey">Address:
-												</div>
-											</div>
-											<div class="margin-bottom margin-small">
-												<div class="text-size-small">Street 4, F-15/2, Islamabad</div>
-											</div>
-											<div class="margin-bottom margin-tiny">
-												<div class="text-size-regular weight-semibold text-colour-grey">Contact:
-												</div>
-											</div>
-											<div class="text-size-small"><a href="#" class="link-2">Email me now on
-												</a><a href="mailto:info@profilex.com"
-													class="link">sibteali786@gmail.com</a></div>
-										</div>
-									</div>
-									<div class="w-layout-grid footer-menu-wrapper">
-										<div id="w-node-_5d53571d-05a3-3001-8aed-4eb278bd7ac9-78bd7aaf"
-											class="footer-link-list"><a href="/index.html"
-												class="footer-link">Home</a><a href="/about.html" aria-current="page"
-												class="footer-link w--current">About</a><a href="/projects.html"
-												class="footer-link">Projects</a><a href="/contact.html"
-												class="footer-link">Contact</a></div>
-										<div id="w-node-_5d53571d-05a3-3001-8aed-4eb278bd7ad2-78bd7aaf"
-											class="footer-link-list"><a href="https://github.com/sibteali786"
-												target="_blank" class="footer-link">Github</a><a
-												href="https://www.instagram.com/" target="_blank"
-												class="footer-link">Instagram</a><a href="https://x.com/SibtealiN"
-												target="_blank" class="footer-link">X / Twitter</a><a
-												href="https://www.linkedin.com/in/syed-sibteali-baqar/" target="_blank"
-												class="footer-link">LinkedIn</a></div>
-									</div>
-								</div>
-							</div>
-							<div class="line-divider"></div>
-							<div class="padding-vertical padding-medium">
-								<div class="footer-bottom">
-									<div class="footer-credit-text">© 2025 Sibteali Baqar- <a
-											href="/utility-pages/licenses"><span
-												class="text-span-6">Licensing</span></a></div>
-									<div class="footer-credit-text">Designed by <a href="https://www.influxdigital.com/"
-											target="_blank" class="link-3"><span class="influx">Influx
-												Digital</span></a> - Powered by <a href="https://webflow.com/"
-											target="_blank"><span class="webflow">Webflow</span></a></div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</footer>
-		</div>
-	</div>
-	<script src="js/jquery.js?site=68fcf76ace908baaeca05096" type="text/javascript"></script>
-	<script src="js/webflow.schunk.36b8fb49256177c8.js" type="text/javascript"></script>
-	<script src="js/webflow.schunk.09a00a21d2c0230a.js" type="text/javascript"></script>
-	<script src="js/webflow-script-2.js" type="text/javascript"></script>
 </body>
-
 </html>

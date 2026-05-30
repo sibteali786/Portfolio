@@ -1,0 +1,67 @@
+/* Hallmark · macrostructure: Split-Editorial · genre: technical-atmospheric
+ * theme: custom (vibe: "dark engineering, amber precision, terminal voice"
+ *   · paper oklch(8% 0.005 240) · accent oklch(72% 0.15 75) warm-amber)
+ * tone: technical-austere · design-system: design.md · designed-as-app
+ * pre-emit critique: P5 H4 E5 S4 R5 V4
+ */
+
+:root {
+  /* ── colour ─────────────────────────────────────────────────────── */
+  --color-paper:       oklch(8%  0.005 240);   /* near-black, slight cool undertone */
+  --color-paper-2:     oklch(13% 0.007  75);   /* dark warm surface — terminal, cards */
+  --color-paper-3:     oklch(18% 0.008  75);   /* hover surface lift */
+  --color-ink:         oklch(95% 0.010  75);   /* warm off-white body text */
+  --color-ink-2:       oklch(60% 0.020  75);   /* muted prose, secondary labels */
+  --color-ink-3:       oklch(38% 0.015  75);   /* very muted — metadata, timestamps */
+  --color-rule:        oklch(22% 0.010  75);   /* hairline dividers */
+  --color-accent:      oklch(72% 0.150  75);   /* warm amber — cursor, active stat, CTA */
+  --color-accent-dim:  oklch(52% 0.120  75);   /* muted accent — stat top-rule, roles */
+  --color-accent-ink:  oklch(12% 0.010  75);   /* near-black — text on accent bg */
+  --color-focus:       oklch(72% 0.150  75);   /* focus ring — same as accent */
+  --color-terminal:    oklch(55% 0.180 145);   /* terminal cursor green */
+
+  /* ── typography ─────────────────────────────────────────────────── */
+  --font-display: "DM Serif Display", ui-serif, Georgia, serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, "Cascadia Code", monospace;
+  --font-body:    "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+
+  /* ── type scale (major-third 1.25) ──────────────────────────────── */
+  --text-xs:        0.64rem;    /* ~10px */
+  --text-sm:        0.80rem;    /* ~13px */
+  --text-base:      1.00rem;    /* 16px  */
+  --text-md:        1.25rem;    /* 20px  */
+  --text-lg:        1.5625rem;  /* 25px  */
+  --text-xl:        1.9531rem;  /* 31px  */
+  --text-2xl:       2.4414rem;  /* 39px  */
+  --text-3xl:       3.0518rem;  /* 49px  */
+  --text-4xl:       3.8147rem;  /* 61px  */
+  --text-display-s: clamp(2.25rem, 4vw + 0.75rem, 3.75rem);
+  --text-display:   clamp(2.75rem, 5vw + 1rem,    5.25rem);
+  --text-stat:      clamp(3.5rem,  7vw + 0.5rem,  6.5rem);
+
+  /* ── spacing (4-pt scale) ────────────────────────────────────────── */
+  --space-3xs: 0.25rem;   /*  4px */
+  --space-2xs: 0.5rem;    /*  8px */
+  --space-xs:  0.75rem;   /* 12px */
+  --space-sm:  1rem;      /* 16px */
+  --space-md:  1.5rem;    /* 24px */
+  --space-lg:  2rem;      /* 32px */
+  --space-xl:  3rem;      /* 48px */
+  --space-2xl: 4.5rem;    /* 72px */
+  --space-3xl: 7rem;      /* 112px */
+
+  /* ── motion ─────────────────────────────────────────────────────── */
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:     cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-in-out: cubic-bezier(0.37, 0, 0.63, 1);
+  --dur-short:   200ms;
+  --dur-mid:     340ms;
+
+  /* ── shape ───────────────────────────────────────────────────────── */
+  --radius-card:  4px;
+  --radius-pill:  999px;
+  --radius-input: 3px;
+
+  /* ── rules ───────────────────────────────────────────────────────── */
+  --rule-hairline: 1px solid var(--color-rule);
+}
