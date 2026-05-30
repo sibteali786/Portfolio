@@ -19,9 +19,17 @@
 
   <!-- ── nav ──────────────────────────────────────────────────────── -->
   <header class="site-header">
-    <nav class="site-nav" aria-label="Site navigation">
-      <a class="nav-name" href="/">Sibt-e-Ali</a>
-      <a class="nav-email" href="mailto:sibteali786@gmail.com">sibteali786@gmail.com</a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a class="nav-name" href="/" aria-current="page">Sibt-e-Ali</a>
+      <div class="nav-right">
+        <a class="nav-email" href="mailto:sibteali786@gmail.com">sibteali786@gmail.com</a>
+        <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation menu">Menu</button>
+      </div>
+    </nav>
+    <nav class="nav-menu" id="nav-menu" hidden aria-label="Site pages">
+      <a href="/about.html">About</a>
+      <a href="/projects.html">Projects</a>
+      <a href="/contact.html">Contact</a>
     </nav>
   </header>
 
@@ -328,5 +336,6 @@
     </div>
   </footer>
 
+  <script src="nav.js"></script>
 </body>
 </html>
