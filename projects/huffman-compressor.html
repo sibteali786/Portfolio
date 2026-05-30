@@ -1,603 +1,1388 @@
-<!doctype html>
-<!-- Handled by Exflow.site -->
-<html
-  data-wf-page="68fcf76dce908baaeca052a1"
-  data-wf-site="68fcf76ace908baaeca05096"
-  data-wf-status="1"
-  lang="en"
-  data-wf-collection="68fcf76dce908baaeca0528e"
-  data-wf-item-slug="huffman-compressor"
->
-  <head>
-    <meta charset="utf-8" />
-    <title>Syed&#x27;s Portfolio</title>
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <meta content="Webflow" name="generator" />
-    <link
-      href="../css/syeds-portfolio-a02089.webflow.shared.159f0f492.css"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <link href="https://fonts.googleapis.com" rel="preconnect" />
-    <link href="https://fonts.gstatic.com" rel="preconnect" />
-    <script
-      src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"
-      type="text/javascript"
-    ></script>
-    <script type="text/javascript">
-      WebFont.load({
-        google: {
-          families: [
-            "Inter:300,400,500,600,700",
-            "Manrope:300,400,500,600,700",
-            "Space Grotesk:500,600,700",
-          ],
-        },
-      });
-    </script>
-    <script type="text/javascript">
-      !(function (o, c) {
-        var n = c.documentElement,
-          t = " w-mod-";
-        ((n.className += t + "js"),
-          ("ontouchstart" in o ||
-            (o.DocumentTouch && c instanceof DocumentTouch)) &&
-            (n.className += t + "touch"));
-      })(window, document);
-    </script>
-    <link
-      href="../images/favicon.png"
-      rel="shortcut icon"
-      type="image/x-icon"
-    />
-    <link href="../images/app-icon.png" rel="apple-touch-icon" />
-    <style>
-      * {
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        -o-font-smoothing: antialiased;
-      }
+<!DOCTYPE html>
+<!-- Hallmark · macrostructure: Catalogue · tone: technical-austere
+     theme: custom (dark / italic-serif / warm-amber) · design-system: design.md
+     note: coding challenge — terminal animation centrepiece, no background image,
+           pipeline flow diagram, file tree + byte-map two-column, 2-row decision blocks
+     pre-emit critique: P5 H5 E5 S5 R5 V5 -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Huffman Compressor — lossless file compression implementing Huffman coding from scratch in Go. A coding challenge case study by Sibt-e-Ali Baqar.">
+  <title>Huffman Compressor — Case Study · Sibt-e-Ali Baqar</title>
 
-      /* Task 7: Space Grotesk display + Inter body */
-      .heading-style-h1,
-      .heading-style-h2,
-      .heading-style-h3,
-      .heading-style-h4,
-      .heading-style-h5,
-      .heading-style-h6,
-      .stat-number,
-      .cta-heading-top,
-      .cta-heading-bottom {
-        font-family: "Space Grotesk", "Manrope", sans-serif;
-        letter-spacing: -0.01em;
+  <link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../images/favicon-96x96.png" sizes="96x96" type="image/png">
+  <link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="../index.css">
+
+  <style>
+    /* ── case study — huffman-compressor ────────────────────────────────
+       Catalogue: coding challenge variant.
+       Centrepiece: JS typewriter terminal (no fake chrome).
+       Distinctive: pipeline flow, file tree + byte-map two-column,
+       test coverage + complexity tables, 2-row decision blocks.
+    ─────────────────────────────────────────────────────────────────── */
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        transition-duration: 0ms !important;
+        animation-duration: 0ms !important;
       }
-      body,
-      .text-size-medium,
-      .text-size-large,
-      .text-size-regular,
-      .text-size-small {
-        font-family: "Inter", "Manrope", sans-serif;
-      }
-    </style>
-  </head>
-  <body class="body">
-    <div class="page-wrapper">
-      <div
-        data-animation="default"
-        class="navbar-component w-nav"
-        data-easing2="ease"
-        fs-scrolldisable-element="smart-nav"
-        data-easing="ease"
-        data-collapse="all"
-        data-w-id="d199289f-e495-5c49-2cd9-60a87f86a023"
-        role="banner"
-        data-duration="0"
-      >
-        <div class="navbar-container">
-          <a href="/" class="navbar-logo-link w-nav-brand"
-            ><img
-              src="../images/bc29e4ca38b1fbc3d718d13b683bfc3e_sibt-e-ali-20baqar.png"
-              loading="lazy"
-              width="Auto"
-              height="40"
-              alt=""
-              class="navbar-logo"
-          /></a>
-          <div class="navbar-wrapper">
-            <a
-              data-w-id="22384c17-123f-8d71-8e56-33428ac23afe"
-              href="/contact.html"
-              class="button is-alternate is-navbar w-inline-block"
-              ><div>Get in touch</div>
-              <div class="button-arrow w-embed">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink"
-                  aria-hidden="true"
-                  role="img"
-                  class="iconify iconify--ph"
-                  width="100%"
-                  height="100%"
-                  preserveAspectRatio="xMidYMid meet"
-                  viewBox="0 0 256 256"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M128 26a102 102 0 1 0 102 102A102.2 102.2 0 0 0 128 26Zm0 192a90 90 0 1 1 90-90a90.1 90.1 0 0 1-90 90Zm34-118v48a6 6 0 0 1-12 0v-33.5l-45.8 45.7a5.9 5.9 0 0 1-8.4-8.4l45.7-45.8H108a6 6 0 0 1 0-12h48a6 6 0 0 1 6 6Z"
-                  ></path>
-                </svg></div
-            ></a>
-            <nav role="navigation" class="navbar-menu w-nav-menu">
-              <div class="navbar-menu-wrapper">
-                <div class="navbar-links-wrapper">
-                  <a href="/" class="navbar-link w-nav-link">Home</a
-                  ><a href="/about.html" class="navbar-link w-nav-link">About</a
-                  ><a href="/projects.html" class="navbar-link w-nav-link"
-                    >Projects</a
-                  ><a href="/contact.html" class="navbar-link w-nav-link">Contact</a>
-                </div>
-                <div class="navbar-bottom">
-                  <div class="w-layout-grid navbar-social-list">
-                    <a
-                      href="https://github.com/sibteali786"
-                      target="_blank"
-                      class="navbar-social-link w-inline-block"
-                      ><div class="icon-xsmall w-embed">
-                        <svg
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            fill="currentColor"
-                            d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"
-                          />
-                        </svg></div></a
-                    ><a
-                      href="https://medium.com/@sibteali786"
-                      target="_blank"
-                      class="navbar-social-link w-inline-block"
-                      ><div class="icon-xsmall w-embed">
-                        <svg
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            fill="currentColor"
-                            d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"
-                          />
-                        </svg></div></a
-                    ><a
-                      href="https://x.com/SibtealiN"
-                      target="_blank"
-                      class="navbar-social-link w-inline-block"
-                      ><div class="icon-xsmall w-embed">
-                        <svg
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M17.1761 4H19.9362L13.9061 10.7774L21 20H15.4456L11.0951 14.4066L6.11723 20H3.35544L9.80517 12.7508L3 4H8.69545L12.6279 9.11262L17.1761 4ZM16.2073 18.3754H17.7368L7.86441 5.53928H6.2232L16.2073 18.3754Z"
-                            fill="currentColor"
-                          />
-                        </svg></div></a
-                    ><a
-                      href="https://www.linkedin.com/in/syed-sibteali-baqar/"
-                      target="_blank"
-                      class="navbar-social-link w-inline-block"
-                      ><div class="icon-xsmall w-embed">
-                        <svg
-                          width="100%"
-                          height="100%"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            fill-rule="evenodd"
-                            clip-rule="evenodd"
-                            d="M4.5 3C3.67157 3 3 3.67157 3 4.5V19.5C3 20.3284 3.67157 21 4.5 21H19.5C20.3284 21 21 20.3284 21 19.5V4.5C21 3.67157 20.3284 3 19.5 3H4.5ZM8.52076 7.00272C8.52639 7.95897 7.81061 8.54819 6.96123 8.54397C6.16107 8.53975 5.46357 7.90272 5.46779 7.00413C5.47201 6.15897 6.13998 5.47975 7.00764 5.49944C7.88795 5.51913 8.52639 6.1646 8.52076 7.00272ZM12.2797 9.76176H9.75971H9.7583V18.3216H12.4217V18.1219C12.4217 17.742 12.4214 17.362 12.4211 16.9819V16.9818V16.9816V16.9815V16.9812C12.4203 15.9674 12.4194 14.9532 12.4246 13.9397C12.426 13.6936 12.4372 13.4377 12.5005 13.2028C12.7381 12.3253 13.5271 11.7586 14.4074 11.8979C14.9727 11.9864 15.3467 12.3141 15.5042 12.8471C15.6013 13.1803 15.6449 13.5389 15.6491 13.8863C15.6605 14.9339 15.6589 15.9815 15.6573 17.0292V17.0294C15.6567 17.3992 15.6561 17.769 15.6561 18.1388V18.3202H18.328V18.1149C18.328 17.6629 18.3278 17.211 18.3275 16.7591V16.759V16.7588C18.327 15.6293 18.3264 14.5001 18.3294 13.3702C18.3308 12.8597 18.276 12.3563 18.1508 11.8627C17.9638 11.1286 17.5771 10.5211 16.9485 10.0824C16.5027 9.77019 16.0133 9.5691 15.4663 9.5466C15.404 9.54401 15.3412 9.54062 15.2781 9.53721L15.2781 9.53721L15.2781 9.53721C14.9984 9.52209 14.7141 9.50673 14.4467 9.56066C13.6817 9.71394 13.0096 10.0641 12.5019 10.6814C12.4429 10.7522 12.3852 10.8241 12.2991 10.9314L12.2991 10.9315L12.2797 10.9557V9.76176ZM5.68164 18.3244H8.33242V9.76733H5.68164V18.3244Z"
-                            fill="CurrentColor"
-                          />
-                        </svg></div
-                    ></a>
-                  </div>
-                </div>
-              </div>
-            </nav>
-            <div class="navbar-menu-button w-nav-button">
-              <div class="menu-icon">
-                <div class="menu-icon-wrapper">
-                  <div class="menu-icon-line-top"></div>
-                  <div class="menu-icon-line-middle">
-                    <div class="menu-icon-line-middle-top"></div>
-                    <div class="menu-icon-line-middle-base"></div>
-                  </div>
-                  <div class="menu-icon-line-bottom"></div>
-                </div>
-              </div>
-            </div>
+      .term-cursor { animation: none !important; opacity: 1; }
+    }
+
+    html, body { overflow-x: clip; }
+
+    /* ── hero (text only — no background image) ─────────────────────── */
+    .cs-hero {
+      padding-block: var(--space-3xl) var(--space-2xl);
+    }
+
+    .cs-back {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-ink-3);
+      text-decoration: none;
+      margin-bottom: var(--space-xl);
+      transition: color var(--dur-short) var(--ease-out);
+    }
+    .cs-back:hover { color: var(--color-ink-2); }
+    .cs-back:focus-visible {
+      outline: 2px solid var(--color-focus);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    .cs-hero__label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-accent-dim);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-sm);
+    }
+
+    .cs-hero__title {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: var(--text-display);
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      color: var(--color-ink);
+      margin-bottom: var(--space-lg);
+      overflow-wrap: anywhere;
+      min-width: 0;
+    }
+
+    .cs-hero__impact {
+      font-family: var(--font-body);
+      font-size: var(--text-md);
+      color: var(--color-ink-2);
+      line-height: 1.5;
+      max-width: 56ch;
+      margin-bottom: var(--space-xl);
+    }
+
+    .cs-hero__meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-lg) var(--space-2xl);
+    }
+
+    .cs-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3xs);
+    }
+
+    .cs-meta-item__key {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-ink-3);
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+
+    .cs-meta-item__val {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--color-ink-2);
+      line-height: 1.4;
+    }
+
+    .cs-hero__gh-link {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-accent);
+      text-decoration: none;
+      transition: color var(--dur-short) var(--ease-out);
+    }
+    .cs-hero__gh-link:hover { color: var(--color-ink); }
+    .cs-hero__gh-link:focus-visible {
+      outline: 2px solid var(--color-focus);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    /* ── terminal animation ─────────────────────────────────────────── */
+    .term-section {
+      border-top: var(--rule-hairline);
+      padding-block: var(--space-2xl);
+    }
+
+    .term-section__kicker {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-accent-dim);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-md);
+    }
+
+    .term-block {
+      background: var(--color-paper-2);
+      border: 1px solid var(--color-rule);
+      border-radius: var(--radius-card);
+      padding: var(--space-lg) var(--space-xl);
+      overflow-x: auto;
+    }
+
+    .term-pre {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      line-height: 1.75;
+      margin: 0;
+      white-space: pre;
+      color: var(--color-ink);
+      min-height: 20em;
+    }
+
+    .tl-cmd     { color: var(--color-accent); }
+    .tl-plain   { color: var(--color-ink); }
+    .tl-dim     { color: var(--color-ink-2); }
+    .tl-muted   { color: var(--color-ink-3); }
+    .tl-head    { color: var(--color-ink); }
+    .tl-stat    { color: var(--color-ink-2); }
+    .tl-success { color: var(--color-terminal); }
+
+    .term-cursor {
+      display: inline-block;
+      width: 0.55em;
+      height: 1em;
+      background: var(--color-accent);
+      vertical-align: text-bottom;
+      animation: term-blink 1s step-end infinite;
+    }
+
+    @keyframes term-blink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0; }
+    }
+
+    /* ── section shell ─────────────────────────────────────────────── */
+    .cs-s {
+      padding-block: var(--space-3xl);
+      border-top: var(--rule-hairline);
+    }
+
+    .cs-s__kicker {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-accent-dim);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-sm);
+    }
+
+    .cs-s__heading {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: var(--text-display-s);
+      line-height: 1.0;
+      letter-spacing: -0.015em;
+      color: var(--color-ink);
+      margin-bottom: var(--space-2xl);
+      overflow-wrap: anywhere;
+      min-width: 0;
+    }
+
+    .cs-s__body {
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      color: var(--color-ink-2);
+      line-height: 1.7;
+      max-width: 62ch;
+    }
+
+    .cs-s__body + .cs-s__body { margin-top: var(--space-lg); }
+
+    .cs-s__body a {
+      color: var(--color-accent);
+      text-decoration: none;
+    }
+    .cs-s__body a:hover { color: var(--color-ink); }
+    .cs-s__body a:focus-visible {
+      outline: 2px solid var(--color-focus);
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+
+    /* ── what I built — two column ─────────────────────────────────── */
+    .built-cols {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: var(--space-2xl);
+      align-items: start;
+    }
+
+    .built-col__label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-accent-dim);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-md);
+    }
+
+    .file-tree,
+    .byte-map {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      line-height: 1.65;
+      background: var(--color-paper-2);
+      border: 1px solid var(--color-rule);
+      border-radius: var(--radius-card);
+      padding: var(--space-md) var(--space-lg);
+      overflow-x: auto;
+      white-space: pre;
+      margin: 0;
+      color: var(--color-ink-2);
+    }
+
+    .ft-dir     { color: var(--color-ink); }
+    .ft-file    { color: var(--color-ink-2); }
+    .ft-comment { color: var(--color-ink-3); }
+    .ft-branch  { color: var(--color-rule); }
+
+    .bm-border { color: var(--color-ink-3); }
+    .bm-label  { color: var(--color-ink); }
+    .bm-type   { color: var(--color-ink-3); }
+    .bm-size   { color: var(--color-accent-dim); }
+    .bm-note   { color: var(--color-ink-3); }
+
+    /* ── algorithm pipeline ────────────────────────────────────────── */
+    .pipeline-section {
+      padding-block: var(--space-3xl);
+      border-top: var(--rule-hairline);
+    }
+
+    .pipeline-section__kicker {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-accent-dim);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-sm);
+    }
+
+    .pipeline-section__heading {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: var(--text-display-s);
+      line-height: 1.0;
+      letter-spacing: -0.015em;
+      color: var(--color-ink);
+      margin-bottom: var(--space-2xl);
+      overflow-wrap: anywhere;
+      min-width: 0;
+    }
+
+    .pipeline-row-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-ink-3);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-md);
+    }
+
+    .pipeline-row {
+      display: flex;
+      align-items: flex-start;
+      overflow-x: auto;
+      padding-bottom: var(--space-sm);
+      margin-bottom: var(--space-2xl);
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .pipeline-row::-webkit-scrollbar { height: 3px; }
+    .pipeline-row::-webkit-scrollbar-track { background: transparent; }
+    .pipeline-row::-webkit-scrollbar-thumb { background: var(--color-rule); border-radius: 2px; }
+
+    .pipeline-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+      min-width: 110px;
+    }
+
+    .pipeline-step__box {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-ink);
+      background: var(--color-paper-2);
+      border: 1px solid var(--color-rule);
+      border-radius: var(--radius-card);
+      padding: var(--space-xs) var(--space-sm);
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .pipeline-step__desc {
+      font-family: var(--font-mono);
+      font-size: 0.67rem;
+      color: var(--color-ink-3);
+      text-align: center;
+      margin-top: var(--space-xs);
+      max-width: 110px;
+      line-height: 1.3;
+      overflow-wrap: anywhere;
+    }
+
+    .pipeline-arrow {
+      font-family: var(--font-mono);
+      font-size: var(--text-base);
+      color: var(--color-accent);
+      flex-shrink: 0;
+      line-height: 1;
+      padding-top: calc(var(--space-xs) + 5px);
+      padding-inline: var(--space-2xs);
+      align-self: flex-start;
+    }
+
+    /* ── decision blocks (Decision + Why, no Rejected) ─────────────── */
+    .arch-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .arch-block {
+      background: var(--color-paper-2);
+      border: 1px solid var(--color-rule);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+    }
+
+    .arch-block__header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      padding: var(--space-sm) var(--space-md);
+      border-bottom: 1px solid var(--color-rule);
+      background: var(--color-paper-3);
+    }
+
+    .arch-block__num {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-accent-dim);
+      letter-spacing: 0.06em;
+      flex-shrink: 0;
+    }
+
+    .arch-block__name {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-ink-3);
+      overflow-wrap: anywhere;
+    }
+
+    .arch-rows {
+      display: flex;
+      flex-direction: column;
+      padding: var(--space-md);
+      gap: var(--space-sm);
+    }
+
+    .arch-row {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: var(--space-md);
+      align-items: start;
+    }
+
+    .arch-row__key {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding-top: 3px;
+    }
+    .arch-row__key--decision { color: var(--color-terminal); }
+    .arch-row__key--why      { color: var(--color-ink-3); }
+
+    .arch-row__val {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--color-ink);
+      line-height: 1.6;
+    }
+    .arch-row__val.is-why { color: var(--color-ink-2); }
+
+    .arch-row__val code {
+      font-family: var(--font-mono);
+      font-size: 0.88em;
+      color: var(--color-accent);
+      background: var(--color-paper);
+      padding: 0.1em 0.35em;
+      border-radius: 2px;
+    }
+
+    /* ── problems hit ───────────────────────────────────────────────── */
+    .log-list { display: flex; flex-direction: column; }
+
+    .log-entry {
+      padding-block: var(--space-xl);
+      border-top: 1px solid var(--color-rule);
+    }
+
+    .log-entry:last-child { border-bottom: 1px solid var(--color-rule); }
+
+    .log-entry__title {
+      font-family: var(--font-mono);
+      font-size: var(--text-base);
+      color: var(--color-ink);
+      margin-bottom: var(--space-md);
+      overflow-wrap: anywhere;
+    }
+
+    .log-entry__title::before {
+      content: "$ ";
+      color: var(--color-accent);
+    }
+
+    .log-rows {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .log-row {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: var(--space-sm);
+      align-items: start;
+    }
+
+    .log-row__key {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding-top: 3px;
+    }
+    .log-row__key--symptom { color: oklch(70% 0.17 42); }
+    .log-row__key--cause   { color: var(--color-ink-3); }
+    .log-row__key--fix     { color: var(--color-terminal); }
+
+    .log-row__val {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--color-ink-2);
+      line-height: 1.6;
+    }
+
+    .log-row__val code {
+      font-family: var(--font-mono);
+      font-size: 0.88em;
+      color: var(--color-accent);
+      background: var(--color-paper-2);
+      padding: 0.1em 0.35em;
+      border-radius: 2px;
+    }
+
+    /* ── tables ────────────────────────────────────────────────────── */
+    .table-wrap { overflow-x: auto; }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 420px;
+    }
+
+    .data-table th {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--color-ink-3);
+      text-align: left;
+      padding: var(--space-xs) var(--space-lg) var(--space-xs) 0;
+      border-bottom: 1px solid var(--color-rule);
+      font-weight: 400;
+    }
+
+    .data-table td {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--color-ink-2);
+      padding: var(--space-sm) var(--space-lg) var(--space-sm) 0;
+      border-bottom: 1px solid var(--color-rule);
+      vertical-align: top;
+      line-height: 1.5;
+    }
+
+    .data-table td:first-child {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-ink);
+      white-space: nowrap;
+      padding-right: var(--space-xl);
+    }
+
+    .data-table tbody tr:last-child td { border-bottom: none; }
+
+    .data-table td code {
+      font-family: var(--font-mono);
+      font-size: 0.88em;
+      color: var(--color-accent-dim);
+    }
+
+    .table-gap { margin-top: var(--space-2xl); }
+
+    /* ── retrospective ─────────────────────────────────────────────── */
+    .retro__body {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: var(--text-lg);
+      font-weight: 400;
+      color: var(--color-ink-2);
+      line-height: 1.5;
+      max-width: 58ch;
+    }
+
+    /* ── CTA ───────────────────────────────────────────────────────── */
+    .cs-cta {
+      padding-block: var(--space-3xl);
+      border-top: var(--rule-hairline);
+    }
+
+    .cs-cta__statement {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: var(--text-display-s);
+      font-weight: 400;
+      line-height: 1.0;
+      letter-spacing: -0.015em;
+      color: var(--color-ink);
+      margin-bottom: var(--space-xl);
+      overflow-wrap: anywhere;
+      min-width: 0;
+    }
+
+    .cs-cta__links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+      align-items: center;
+    }
+
+    .cs-cta__link {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-ink-2);
+      text-decoration: none;
+      border: 1px solid var(--color-rule);
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--radius-card);
+      transition:
+        color var(--dur-short) var(--ease-out),
+        border-color var(--dur-short) var(--ease-out),
+        background-color var(--dur-short) var(--ease-out);
+    }
+    .cs-cta__link:hover {
+      color: var(--color-ink);
+      border-color: var(--color-ink-2);
+    }
+    .cs-cta__link:focus-visible {
+      outline: 2px solid var(--color-focus);
+      outline-offset: 3px;
+    }
+    .cs-cta__link.is-primary {
+      background: var(--color-accent);
+      color: var(--color-accent-ink);
+      border-color: var(--color-accent);
+      font-weight: 500;
+    }
+    .cs-cta__link.is-primary:hover {
+      background: var(--color-ink);
+      border-color: var(--color-ink);
+      color: var(--color-paper);
+    }
+
+    /* ── footer ────────────────────────────────────────────────────── */
+    .site-footer {
+      border-top: var(--rule-hairline);
+      padding-block: var(--space-xl);
+    }
+
+    .footer__line {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-ink-3);
+      margin-bottom: var(--space-sm);
+    }
+
+    .footer__nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+      align-items: center;
+    }
+
+    .footer__nav a {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-ink-3);
+      text-decoration: none;
+      transition: color var(--dur-short) var(--ease-out);
+    }
+    .footer__nav a:hover { color: var(--color-ink-2); }
+    .footer__nav a:focus-visible {
+      outline: 2px solid var(--color-focus);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    .footer__copy {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-ink-3);
+      margin-left: auto;
+    }
+
+    /* ── responsive ────────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .built-cols { grid-template-columns: minmax(0, 1fr); }
+      .arch-row   { grid-template-columns: 70px 1fr; }
+      .log-row    { grid-template-columns: 90px 1fr; }
+    }
+
+    @media (max-width: 414px) {
+      .cs-hero__meta { gap: var(--space-md) var(--space-lg); }
+      .arch-row { grid-template-columns: 1fr; gap: var(--space-3xs); }
+      .arch-row__key { padding-top: 0; }
+      .log-row { grid-template-columns: 1fr; gap: var(--space-3xs); }
+      .log-row__key { padding-top: 0; }
+    }
+
+    @media (max-width: 375px) {
+      .cs-cta__links { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ── nav ──────────────────────────────────────────────────────── -->
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a class="nav-name" href="/">Sibt-e-Ali</a>
+      <div class="nav-right">
+        <a class="nav-email" href="mailto:sibteali786@gmail.com">sibteali786@gmail.com</a>
+        <button
+          class="nav-toggle"
+          aria-expanded="false"
+          aria-controls="nav-menu"
+          aria-label="Toggle navigation menu"
+        >Menu</button>
+      </div>
+    </nav>
+    <nav class="nav-menu" id="nav-menu" hidden aria-label="Site pages">
+      <a href="/about.html">About</a>
+      <a href="/projects.html" aria-current="page">Projects</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- ── hero ─────────────────────────────────────────────────── -->
+    <section class="cs-hero" aria-labelledby="cs-title">
+      <div class="container">
+        <a class="cs-back" href="/projects.html">&#8592; Projects</a>
+
+        <p class="cs-hero__label" aria-hidden="true">Coding Challenge</p>
+
+        <h1 class="cs-hero__title" id="cs-title">
+          Huffman<br>Compressor
+        </h1>
+
+        <p class="cs-hero__impact">
+          Lossless file compression implementing Huffman coding from scratch in Go.
+        </p>
+
+        <div class="cs-hero__meta">
+          <div class="cs-meta-item">
+            <span class="cs-meta-item__key">Stack</span>
+            <span class="cs-meta-item__val">Go &#183; stdlib only &#183; no compression libraries</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cs-meta-item__key">Source</span>
+            <a class="cs-hero__gh-link" href="https://github.com/sibteali786/huffman-compressor" target="_blank" rel="noopener noreferrer">github.com/sibteali786/huffman-compressor &#8599;</a>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cs-meta-item__key">Challenge</span>
+            <span class="cs-meta-item__val">John Crickett &#183; codingchallenges.fyi</span>
           </div>
         </div>
       </div>
-      <div class="main-wrapper">
-        <header class="section-portfolio-header">
-          <div class="padding-global">
-            <div class="container-large">
-              <div class="portfolio-header">
-                <div class="section-padding-large max-width-full">
-                  <div class="w-layout-grid portfolio-header-content-wrapper">
-                    <div
-                      id="w-node-a88256af-7997-c642-0ddc-1058084d3516-eca052a1"
-                      class="portfolio-header-content-left"
-                    >
-                      <div class="margin-bottom margin-small">
-                        <h1
-                          data-w-id="a88256af-7997-c642-0ddc-1058084d3518"
-                          style="opacity: 0"
-                          class="heading-style-h2 text-allcaps"
-                        >
-                          Huffman Compressor
-                        </h1>
-                      </div>
-                      <div
-                        data-w-id="a88256af-7997-c642-0ddc-1058084d351a"
-                        style="opacity: 0"
-                        class="text-size-medium"
-                      >
-                        A lossless file compression tool implementing Huffman
-                        coding from scratch in Go. Built to learn data
-                        structures, algorithms, and systems programming through
-                        hands-on practice. Features streaming I/O, custom
-                        priority queue with generics, and comprehensive testing.
-                      </div>
-                      <div
-                        data-w-id="a88256af-7997-c642-0ddc-1058084d351c"
-                        style="opacity: 0"
-                        class="portfolio-header-tags-list"
-                      >
-                        <div class="portfolio-tag-item">
-                          <div>Encoder and Decoders</div>
-                        </div>
-                        <div class="portfolio-tag-item">
-                          <div>Systems Programming</div>
-                        </div>
-                        <div class="portfolio-tag-item">
-                          <div>Binary Trees, Priority Queues</div>
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      id="w-node-a88256af-7997-c642-0ddc-1058084d3526-eca052a1"
-                      data-w-id="a88256af-7997-c642-0ddc-1058084d3526"
-                      style="opacity: 0"
-                      class="w-layout-grid portfolio-header-content-list"
-                    >
-                      <div
-                        id="w-node-a88256af-7997-c642-0ddc-1058084d3527-eca052a1"
-                        class="portfolio-header-item"
-                      >
-                        <div class="margin-bottom margin-tiny">
-                          <h6>Client</h6>
-                        </div>
-                        <div class="w-dyn-bind-empty"></div>
-                      </div>
-                      <div
-                        id="w-node-a88256af-7997-c642-0ddc-1058084d352d-eca052a1"
-                        class="portfolio-header-item"
-                      >
-                        <div class="margin-bottom margin-tiny">
-                          <h6>Date</h6>
-                        </div>
-                        <div class="w-dyn-bind-empty"></div>
-                      </div>
-                      <div
-                        id="w-node-a88256af-7997-c642-0ddc-1058084d3533-eca052a1"
-                        class="portfolio-header-item"
-                      >
-                        <div class="margin-bottom margin-tiny">
-                          <h6>Role</h6>
-                        </div>
-                        <div>Architect</div>
-                      </div>
-                      <div
-                        id="w-node-a88256af-7997-c642-0ddc-1058084d3539-eca052a1"
-                        class="portfolio-header-item"
-                      >
-                        <div class="margin-bottom margin-tiny">
-                          <h6>Website</h6>
-                        </div>
-                        <a
-                          href="https://github.com/sibteali786/huffman-compressor"
-                          class="text-link text-colour-white"
-                          >Huffman Compressor</a
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            data-w-id="a88256af-7997-c642-0ddc-1058084d353f"
-            style="opacity: 0"
-            class="portfolio-header-background-image-wrapper"
-          >
-            <div class="portfolio-header-background-image-overlay"></div>
-            <img
-              src="../images/screenshot-20from-202025-11-04-2023-18-55.png"
-              loading="lazy"
-              alt=""
-              sizes="100vw"
-              srcset="
-                ../images/screenshot-20from-202025-11-04-2023-18-55-p-500.png   500w,
-                ../images/screenshot-20from-202025-11-04-2023-18-55-p-800.png   800w,
-                ../images/screenshot-20from-202025-11-04-2023-18-55-p-1080.png 1080w,
-                ../images/screenshot-20from-202025-11-04-2023-18-55.png        1307w
-              "
-              class="portfolio-header-background-image"
-            />
-          </div>
-        </header>
-        <section class="section-about-project background-black">
-          <div class="padding-global">
-            <div class="container-large">
-              <div class="section-padding-large padding-bottom-0">
-                <div class="w-layout-grid about-project-component">
-                  <div
-                    id="w-node-_056cf0ad-be6d-2031-ab77-36ff76b7bc11-eca052a1"
-                    class="about-project-content-left"
-                  >
-                    <h2
-                      data-w-id="056cf0ad-be6d-2031-ab77-36ff76b7bc12"
-                      style="opacity: 0"
-                      class="heading-style-h2 text-allcaps"
-                    >
-                      Huffman Compressor
-                    </h2>
-                  </div>
-                  <div
-                    id="w-node-_056cf0ad-be6d-2031-ab77-36ff76b7bc14-eca052a1"
-                    class="about-project-content-right"
-                  >
-                    <p
-                      data-w-id="056cf0ad-be6d-2031-ab77-36ff76b7bc15"
-                      style="opacity: 0"
-                      class="text-size-medium text-colour-grey"
-                    >
-                      A lossless file compression tool implementing Huffman
-                      coding from scratch in Go. Built to learn data structures,
-                      algorithms, and systems programming through hands-on
-                      practice. Features streaming I/O, custom priority queue
-                      with generics, and comprehensive testing.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section class="section-project-showcase background-black">
-          <div class="padding-global">
-            <div class="container-large">
-              <div class="section-padding-large">
-                <div
-                  data-w-id="4f693294-cad1-9363-5740-820ebbf80132"
-                  style="opacity: 0"
-                  class="gallery-component"
-                >
-                  <div
-                    data-delay="4000"
-                    data-animation="slide"
-                    class="gallery-slider w-slider"
-                    data-autoplay="false"
-                    data-easing="ease"
-                    data-hide-arrows="false"
-                    data-disable-swipe="false"
-                    data-autoplay-limit="0"
-                    data-nav-spacing="3"
-                    data-duration="500"
-                    data-infinite="false"
-                  >
-                    <div class="gallery-mask w-slider-mask">
-                      <div
-                        data-w-id="4f693294-cad1-9363-5740-820ebbf80135"
-                        class="gallery-slide w-slide"
-                      >
-                        <div class="gallery-image-wrapper">
-                          <img
-                            src="../images/6191a88a1c0e39463c2bf022_placeholder-image.svg"
-                            loading="lazy"
-                            alt=""
-                            class="gallery-image w-dyn-bind-empty"
-                          />
-                        </div>
-                      </div>
-                      <div
-                        data-w-id="4f693294-cad1-9363-5740-820ebbf80138"
-                        class="gallery-slide w-slide"
-                      >
-                        <div class="gallery-image-wrapper">
-                          <img
-                            src="../images/6191a88a1c0e39463c2bf022_placeholder-image.svg"
-                            loading="lazy"
-                            alt=""
-                            class="gallery-image w-dyn-bind-empty"
-                          />
-                        </div>
-                      </div>
-                      <div
-                        data-w-id="4f693294-cad1-9363-5740-820ebbf8013b"
-                        class="gallery-slide w-slide"
-                      >
-                        <div class="gallery-image-wrapper">
-                          <img
-                            src="../images/6191a88a1c0e39463c2bf022_placeholder-image.svg"
-                            loading="lazy"
-                            alt=""
-                            class="gallery-image w-dyn-bind-empty"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section
-          data-w-id="c7a48850-583e-560b-556b-43b7a35cd7f8"
-          class="section-banner-cta"
+    </section>
+
+    <!-- ── terminal animation ─────────────────────────────────────── -->
+    <section class="term-section" aria-labelledby="term-heading">
+      <div class="container">
+        <p class="term-section__kicker" id="term-heading">Live Run</p>
+        <div
+          class="term-block"
+          role="img"
+          aria-label="Terminal: ./huffman compresses alice.txt from 167168 bytes to 93472 bytes, 55.91% compression ratio"
         >
-          <div class="section-padding-large">
-            <a href="#" class="banner-cta-component w-inline-block"
-              ><h2 class="cta-heading-top">READY TO SCALE YOUR PLATFORM?</h2>
-              <h2 class="cta-heading-bottom">
-                LET’S BUILD SOMETHING THAT DELIVERS RESULTS
-              </h2></a
-            >
-          </div>
-        </section>
-        <footer
-          data-w-id="5d53571d-05a3-3001-8aed-4eb278bd7aaf"
-          class="footer-component"
-        >
-          <div class="padding-global">
-            <div class="container-large">
-              <div class="padding-top padding-xxlarge">
-                <div class="padding-bottom padding-large">
-                  <div class="w-layout-grid footer-top-wrapper">
-                    <div class="footer-left-wrapper">
-                      <div class="margin-bottom margin-medium">
-                        <a href="/" class="footer-logo-link w-nav-brand"
-                          ><img
-                            src="../images/bc29e4ca38b1fbc3d718d13b683bfc3e_sibt-e-ali-20baqar.png"
-                            loading="lazy"
-                            alt=""
-                            height="40"
-                            class="footer-logo"
-                        /></a>
-                      </div>
-                      <div class="footer-details-wrapper">
-                        <div class="margin-bottom margin-tiny">
-                          <div
-                            class="text-size-regular weight-semibold text-colour-grey"
-                          >
-                            Address:
-                          </div>
-                        </div>
-                        <div class="margin-bottom margin-small">
-                          <div class="text-size-small">
-                            Street 4, F-15/2, Islamabad
-                          </div>
-                        </div>
-                        <div class="margin-bottom margin-tiny">
-                          <div
-                            class="text-size-regular weight-semibold text-colour-grey"
-                          >
-                            Contact:
-                          </div>
-                        </div>
-                        <div class="text-size-small">
-                          <a href="#" class="link-2">Email me now on </a
-                          ><a href="mailto:info@profilex.com" class="link"
-                            >sibteali786@gmail.com</a
-                          >
-                        </div>
-                      </div>
-                    </div>
-                    <div class="w-layout-grid footer-menu-wrapper">
-                      <div
-                        id="w-node-_5d53571d-05a3-3001-8aed-4eb278bd7ac9-78bd7aaf"
-                        class="footer-link-list"
-                      >
-                        <a href="/" class="footer-link">Home</a
-                        ><a href="/about.html" class="footer-link">About</a
-                        ><a href="/projects.html" class="footer-link">Projects</a
-                        ><a href="/projects.html" class="footer-link">Project CMS</a
-                        ><a href="/contact.html" class="footer-link">Contact</a>
-                      </div>
-                      <div
-                        id="w-node-_5d53571d-05a3-3001-8aed-4eb278bd7ad2-78bd7aaf"
-                        class="footer-link-list"
-                      >
-                        <a
-                          href="https://github.com/sibteali786"
-                          target="_blank"
-                          class="footer-link"
-                          >Github</a
-                        ><a
-                          href="https://www.instagram.com/"
-                          target="_blank"
-                          class="footer-link"
-                          >Instagram</a
-                        ><a
-                          href="https://x.com/SibtealiN"
-                          target="_blank"
-                          class="footer-link"
-                          >X / Twitter</a
-                        ><a
-                          href="https://www.linkedin.com/in/syed-sibteali-baqar/"
-                          target="_blank"
-                          class="footer-link"
-                          >LinkedIn</a
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="line-divider"></div>
-                <div class="padding-vertical padding-medium">
-                  <div class="footer-bottom">
-                    <div class="footer-credit-text">
-                      © 2025 Sibteali Baqar-
-                      <a href="/utility-pages/licenses"
-                        ><span class="text-span-6">Licensing</span></a
-                      >
-                    </div>
-                    <div class="footer-credit-text">
-                      Designed by
-                      <a
-                        href="https://www.influxdigital.com/"
-                        target="_blank"
-                        class="link-3"
-                        ><span class="influx">Influx Digital</span></a
-                      >
-                      - Powered by
-                      <a href="https://webflow.com/" target="_blank"
-                        ><span class="webflow">Webflow</span></a
-                      >
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </footer>
+          <pre class="term-pre" id="term-output"><span id="term-cursor" class="term-cursor" aria-hidden="true"></span></pre>
+        </div>
       </div>
+    </section>
+
+    <!-- ── the challenge ─────────────────────────────────────────── -->
+    <section class="cs-s" aria-labelledby="s-challenge">
+      <div class="container">
+        <p class="cs-s__kicker">The Challenge</p>
+        <h2 class="cs-s__heading" id="s-challenge">
+          One algorithm.<br>Six CS fundamentals.
+        </h2>
+
+        <p class="cs-s__body">
+          Huffman coding is a greedy compression algorithm that assigns shorter bit sequences to
+          more frequent characters and longer ones to rarer characters, producing variable-length
+          prefix-free codes that are guaranteed optimal for symbol-by-symbol encoding. I picked it
+          from <a href="https://codingchallenges.fyi/challenges/challenge-huffman/" target="_blank" rel="noopener noreferrer">John Crickett&#8217;s Coding Challenges</a>
+          because it&#8217;s a vertical slice through several CS fundamentals at once: greedy
+          algorithms, binary trees, priority queues, bit manipulation, and binary file I/O &#8212;
+          all in a single coherent project with a clear correctness criterion.
+        </p>
+        <p class="cs-s__body">
+          That criterion is round-trip fidelity: compress a file, decompress it, and the bytes must
+          match exactly. Any bug in bit ordering, padding, tree construction, or header encoding
+          fails this test with no ambiguity. Go is the right language for it &#8212; generics for
+          the priority queue,
+          <code style="font-family:var(--font-mono);font-size:0.9em;color:var(--color-accent-dim)">io.Reader</code>/<code style="font-family:var(--font-mono);font-size:0.9em;color:var(--color-accent-dim)">io.Writer</code>
+          for streaming I/O, and the standard library for binary encoding &#8212; without reaching
+          for a compression library.
+        </p>
+      </div>
+    </section>
+
+    <!-- ── what I built ──────────────────────────────────────────── -->
+    <section class="cs-s" aria-labelledby="s-built">
+      <div class="container">
+        <p class="cs-s__kicker">What I Built</p>
+        <h2 class="cs-s__heading" id="s-built">
+          Nine source files.<br>One binary.
+        </h2>
+
+        <div class="built-cols">
+
+          <div>
+            <p class="built-col__label">Package structure</p>
+            <pre class="file-tree" aria-label="Huffman compressor file structure"><span class="ft-dir">huffman-compressor/</span>
+<span class="ft-branch">&#9500;&#9472;&#9472; </span><span class="ft-dir">cmd/</span>
+<span class="ft-branch">&#9474;   &#9492;&#9472;&#9472; </span><span class="ft-file">main.go</span>
+<span class="ft-branch">&#9500;&#9472;&#9472; </span><span class="ft-dir">internal/</span>
+<span class="ft-branch">&#9474;   &#9500;&#9472;&#9472; </span><span class="ft-file">huffman.go       </span><span class="ft-comment">frequency analysis</span>
+<span class="ft-branch">&#9474;   &#9500;&#9472;&#9472; </span><span class="ft-file">tree.go          </span><span class="ft-comment">tree construction</span>
+<span class="ft-branch">&#9474;   &#9500;&#9472;&#9472; </span><span class="ft-file">priority_queue.go</span><span class="ft-comment">generic min-heap</span>
+<span class="ft-branch">&#9474;   &#9500;&#9472;&#9472; </span><span class="ft-file">encoder.go       </span><span class="ft-comment">code generation</span>
+<span class="ft-branch">&#9474;   &#9500;&#9472;&#9472; </span><span class="ft-file">bitbuffer.go     </span><span class="ft-comment">bit writer</span>
+<span class="ft-branch">&#9474;   &#9500;&#9472;&#9472; </span><span class="ft-file">bitreader.go     </span><span class="ft-comment">bit reader</span>
+<span class="ft-branch">&#9474;   &#9500;&#9472;&#9472; </span><span class="ft-file">header.go        </span><span class="ft-comment">.hf file format</span>
+<span class="ft-branch">&#9474;   &#9500;&#9472;&#9472; </span><span class="ft-file">compress.go      </span><span class="ft-comment">compression pipeline</span>
+<span class="ft-branch">&#9474;   &#9492;&#9472;&#9472; </span><span class="ft-file">decompress.go    </span><span class="ft-comment">decompression pipeline</span>
+<span class="ft-branch">&#9492;&#9472;&#9472; </span><span class="ft-dir">test/</span>
+<span class="ft-branch">    &#9492;&#9472;&#9472; </span><span class="ft-file">*_test.go        </span><span class="ft-comment">30+ tests</span></pre>
+          </div>
+
+          <div>
+            <p class="built-col__label">.hf file format</p>
+            <pre class="byte-map" aria-label=".hf format: 2-byte magic HF, 8-byte uint64 original size, 1-byte NumChars, 1-byte PaddingBits, N entries of 5 bytes"><span class="bm-border">&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;</span>
+<span class="bm-border">&#9474; </span><span class="bm-label">Magic   </span>  <span class="bm-type">"HF"      </span>   <span class="bm-size">2 bytes  </span><span class="bm-border"> &#9474;</span>
+<span class="bm-border">&#9474; </span><span class="bm-label">OrigSize</span>  <span class="bm-type">uint64    </span>   <span class="bm-size">8 bytes  </span><span class="bm-border"> &#9474;</span>
+<span class="bm-border">&#9474; </span><span class="bm-label">NumChars</span>  <span class="bm-type">uint8     </span>   <span class="bm-size">1 byte   </span><span class="bm-border"> &#9474;</span>
+<span class="bm-border">&#9474; </span><span class="bm-label">Padding </span>  <span class="bm-type">uint8     </span>   <span class="bm-size">1 byte   </span><span class="bm-border"> &#9474;</span>
+<span class="bm-border">&#9474; </span><span class="bm-label">Entries </span>  <span class="bm-type">N &#215; 5 bytes          </span><span class="bm-border"> &#9474;</span>
+<span class="bm-border">&#9474;   </span><span class="bm-label">char  </span>  <span class="bm-type">byte      </span>   <span class="bm-size">1 byte   </span><span class="bm-border"> &#9474;</span>
+<span class="bm-border">&#9474;   </span><span class="bm-label">freq  </span>  <span class="bm-type">uint32    </span>   <span class="bm-size">4 bytes  </span><span class="bm-border"> &#9474;</span>
+<span class="bm-border">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</span>
+<span class="bm-note">12 + (N &#215; 5) bytes total</span></pre>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── algorithm pipeline ─────────────────────────────────────── -->
+    <section class="pipeline-section" aria-labelledby="s-pipeline">
+      <div class="container">
+        <p class="pipeline-section__kicker">Algorithm Pipeline</p>
+        <h2 class="pipeline-section__heading" id="s-pipeline">
+          Seven steps to compress.<br>Five to decompress.
+        </h2>
+
+        <p class="pipeline-row-label">Compress</p>
+        <div class="pipeline-row" aria-label="Compression pipeline">
+          <div class="pipeline-step">
+            <div class="pipeline-step__box">AnalyzeFreqs</div>
+            <p class="pipeline-step__desc">1 KB chunks · FreqTable[byte]</p>
+          </div>
+          <span class="pipeline-arrow" aria-hidden="true">&#8594;</span>
+          <div class="pipeline-step">
+            <div class="pipeline-step__box">BuildTree</div>
+            <p class="pipeline-step__desc">sort · leaf nodes · PQ merge</p>
+          </div>
+          <span class="pipeline-arrow" aria-hidden="true">&#8594;</span>
+          <div class="pipeline-step">
+            <div class="pipeline-step__box">GenerateCodes</div>
+            <p class="pipeline-step__desc">DFS · CodeTable[byte]</p>
+          </div>
+          <span class="pipeline-arrow" aria-hidden="true">&#8594;</span>
+          <div class="pipeline-step">
+            <div class="pipeline-step__box">VerifyPrefixFree</div>
+            <p class="pipeline-step__desc">all pairs · returns bool</p>
+          </div>
+          <span class="pipeline-arrow" aria-hidden="true">&#8594;</span>
+          <div class="pipeline-step">
+            <div class="pipeline-step__box">WriteHeader</div>
+            <p class="pipeline-step__desc">HF magic · paddingBits=0</p>
+          </div>
+          <span class="pipeline-arrow" aria-hidden="true">&#8594;</span>
+          <div class="pipeline-step">
+            <div class="pipeline-step__box">WriteBits</div>
+            <p class="pipeline-step__desc">BitBuffer · MSB-first</p>
+          </div>
+          <span class="pipeline-arrow" aria-hidden="true">&#8594;</span>
+          <div class="pipeline-step">
+            <div class="pipeline-step__box">SeekAndPatch</div>
+            <p class="pipeline-step__desc">Seek(11) · write PaddingBits</p>
+          </div>
+        </div>
+
+        <p class="pipeline-row-label">Decompress</p>
+        <div class="pipeline-row" aria-label="Decompression pipeline">
+          <div class="pipeline-step">
+            <div class="pipeline-step__box">ReadHeader</div>
+            <p class="pipeline-step__desc">verify HF · recover FreqTable</p>
+          </div>
+          <span class="pipeline-arrow" aria-hidden="true">&#8594;</span>
+          <div class="pipeline-step">
+            <div class="pipeline-step__box">BuildTree</div>
+            <p class="pipeline-step__desc">identical algorithm · same sort</p>
+          </div>
+          <span class="pipeline-arrow" aria-hidden="true">&#8594;</span>
+          <div class="pipeline-step">
+            <div class="pipeline-step__box">NewBitReader</div>
+            <p class="pipeline-step__desc">cursor past header</p>
+          </div>
+          <span class="pipeline-arrow" aria-hidden="true">&#8594;</span>
+          <div class="pipeline-step">
+            <div class="pipeline-step__box">DecodeBits</div>
+            <p class="pipeline-step__desc">tree traversal · 1 KB buffer</p>
+          </div>
+          <span class="pipeline-arrow" aria-hidden="true">&#8594;</span>
+          <div class="pipeline-step">
+            <div class="pipeline-step__box">VerifyDecomp</div>
+            <p class="pipeline-step__desc">byte-for-byte comparison</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── key decisions ─────────────────────────────────────────── -->
+    <section class="cs-s" aria-labelledby="s-decisions">
+      <div class="container">
+        <p class="cs-s__kicker">Key Decisions</p>
+        <h2 class="cs-s__heading" id="s-decisions">
+          Four choices<br>worth explaining.
+        </h2>
+
+        <div class="arch-list" role="list" aria-label="Implementation decisions">
+
+          <article class="arch-block" role="listitem" aria-label="Decision 1: LSB-first storage">
+            <div class="arch-block__header">
+              <span class="arch-block__num">dec-01</span>
+              <span class="arch-block__name">lsb-first-storage-msb-first-transmission</span>
+            </div>
+            <div class="arch-rows">
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--decision">Decision</span>
+                <span class="arch-row__val">
+                  <code>appendBit</code> stores codes LSB-first &#8212; bit 0 is the root branch,
+                  higher positions are deeper. <code>WriteBits</code> loops
+                  <code>i = 0..length-1</code> to emit in append order.
+                  <code>WriteBit</code> packs each bit MSB-first into the output byte.
+                </span>
+              </div>
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--why">Why</span>
+                <span class="arch-row__val is-why">
+                  LSB-first internal storage makes <code>appendBit</code> a simple OR + shift
+                  with no reversal at append time. MSB-first transmission is the natural
+                  bit-stream convention. The two meet at <code>WriteBits</code>. Pinning all
+                  three directions consistent required <code>TestBitOrderingExplicit</code> &#8212;
+                  a test that asserts the exact expected byte value of a known bit pattern.
+                </span>
+              </div>
+            </div>
+          </article>
+
+          <article class="arch-block" role="listitem" aria-label="Decision 2: Dummy node for single-character files">
+            <div class="arch-block__header">
+              <span class="arch-block__num">dec-02</span>
+              <span class="arch-block__name">dummy-node-for-single-character-edge-case</span>
+            </div>
+            <div class="arch-rows">
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--decision">Decision</span>
+                <span class="arch-row__val">
+                  When <code>len(freqTable) == 1</code>, <code>BuildHuffmanTree</code> creates a
+                  dummy leaf (<code>char = 0, frequency = 0</code>) and pairs it with the real leaf
+                  under a synthetic root. <code>GenerateCodes</code> detects <code>IsDummy()</code>
+                  and assigns <code>&#123;bits: 1, length: 1&#125;</code> to the real character.
+                </span>
+              </div>
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--why">Why</span>
+                <span class="arch-row__val is-why">
+                  A single-leaf tree has no paths &#8212; <code>GenerateCodes</code> DFS finds a
+                  leaf at the root, stores a zero-length code, and <code>WriteBits</code> with
+                  <code>length = 0</code> writes nothing. The dummy node is the minimal fix:
+                  one extra leaf, one real path. <code>IsDummy()</code> guards the decode loop
+                  from treating the dummy as a valid output character.
+                </span>
+              </div>
+            </div>
+          </article>
+
+          <article class="arch-block" role="listitem" aria-label="Decision 3: Two-pass padding">
+            <div class="arch-block__header">
+              <span class="arch-block__num">dec-03</span>
+              <span class="arch-block__name">write-padding-zero-seek-and-patch</span>
+            </div>
+            <div class="arch-rows">
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--decision">Decision</span>
+                <span class="arch-row__val">
+                  <code>WriteHeader</code> writes <code>paddingBits = 0</code> as a placeholder.
+                  After the encode loop, <code>compress.go</code> calls
+                  <code>outputFile.Seek(11, io.SeekStart)</code> and overwrites the real value.
+                  This is the one place the streaming abstraction requires <code>os.File</code>
+                  rather than a generic <code>io.Writer</code>.
+                </span>
+              </div>
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--why">Why</span>
+                <span class="arch-row__val is-why">
+                  Padding is unknown until encoding finishes, but the header must be written before
+                  encoding begins. Buffering all output in memory to backfill it would destroy the
+                  O(1) memory property. <code>Seek</code> costs one syscall and keeps memory
+                  constant regardless of file size. The abstraction leak is contained &#8212;
+                  nothing else in the pipeline cares.
+                </span>
+              </div>
+            </div>
+          </article>
+
+          <article class="arch-block" role="listitem" aria-label="Decision 4: Generic priority queue">
+            <div class="arch-block__header">
+              <span class="arch-block__num">dec-04</span>
+              <span class="arch-block__name">generic-minheap-with-comparefunc</span>
+            </div>
+            <div class="arch-rows">
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--decision">Decision</span>
+                <span class="arch-row__val">
+                  <code>MinHeap[T]</code> and <code>PriorityQueue[T]</code> use Go generics
+                  with <code>CompareFunc[T any]</code>. The heap compares by
+                  <code>PriorityItem.Priority int</code> set at <code>Enqueue</code> time &#8212;
+                  it never calls methods on <code>T</code> directly.
+                </span>
+              </div>
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--why">Why</span>
+                <span class="arch-row__val is-why">
+                  The constraint is <code>any</code> &#8212; no interface methods required on the
+                  stored value. The same heap implementation works as min- or max-heap by swapping
+                  the comparator. For this project the comparator reads <code>node.frequency</code>,
+                  but the heap doesn&#8217;t need to know that. A concrete
+                  <code>*HuffmanNode</code> heap would have been faster to write and impossible
+                  to reuse.
+                </span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── problems hit ───────────────────────────────────────────── -->
+    <section class="cs-s" aria-labelledby="s-bugs">
+      <div class="container">
+        <p class="cs-s__kicker">Problems Hit</p>
+        <h2 class="cs-s__heading" id="s-bugs">
+          Three bugs<br>that needed tests.
+        </h2>
+
+        <div class="log-list">
+
+          <div class="log-entry">
+            <p class="log-entry__title">lsb-msb-mismatch-corrupting-all-output</p>
+            <div class="log-rows">
+              <div class="log-row">
+                <span class="log-row__key log-row__key--symptom">Symptom</span>
+                <span class="log-row__val">
+                  Decompression produced garbled output on every test file. Round-trip failed
+                  with no error &#8212; wrong bytes, no panic.
+                </span>
+              </div>
+              <div class="log-row">
+                <span class="log-row__key log-row__key--cause">Root cause</span>
+                <span class="log-row__val">
+                  Three directions must be consistent: <code>appendBit</code> builds codes in
+                  one bit order; <code>WriteBits</code> must emit in append order (root decision
+                  first); <code>WriteBit</code> must fill bytes MSB-first so the reader
+                  reconstructs correctly. Any one direction wrong produces corrupted but
+                  structurally valid-looking output.
+                </span>
+              </div>
+              <div class="log-row">
+                <span class="log-row__key log-row__key--fix">Fix</span>
+                <span class="log-row__val">
+                  Wrote <code>TestBitOrderingExplicit</code> &#8212; encodes a known bit pattern,
+                  asserts the exact expected byte value. Pinning the expected byte forced each
+                  direction to be correct rather than just internally consistent with each other.
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="log-entry">
+            <p class="log-entry__title">non-deterministic-tree-corrupting-round-trip-on-tied-frequencies</p>
+            <div class="log-rows">
+              <div class="log-row">
+                <span class="log-row__key log-row__key--symptom">Symptom</span>
+                <span class="log-row__val">
+                  Round-trip passed on most inputs but failed intermittently on inputs with
+                  tied character frequencies. No error &#8212; just wrong bytes.
+                </span>
+              </div>
+              <div class="log-row">
+                <span class="log-row__key log-row__key--cause">Root cause</span>
+                <span class="log-row__val">
+                  Huffman trees are not unique when frequencies tie. Without a consistent
+                  tiebreaker, compression and decompression could build different trees from
+                  the same frequency table and silently assign different codes to each character.
+                </span>
+              </div>
+              <div class="log-row">
+                <span class="log-row__key log-row__key--fix">Fix</span>
+                <span class="log-row__val">
+                  Sort characters by byte value before enqueuing &#8212; applied identically
+                  in <code>BuildHuffmanTree</code> and <code>WriteHeader</code> (which also
+                  sorts before writing frequency entries). Same sort, same input, same tree,
+                  every run.
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="log-entry">
+            <p class="log-entry__title">single-char-file-zero-length-code-writes-nothing</p>
+            <div class="log-rows">
+              <div class="log-row">
+                <span class="log-row__key log-row__key--symptom">Symptom</span>
+                <span class="log-row__val">
+                  Compressing a single-character file produced a non-zero output but
+                  decompression returned empty. The code table was empty.
+                </span>
+              </div>
+              <div class="log-row">
+                <span class="log-row__key log-row__key--cause">Root cause</span>
+                <span class="log-row__val">
+                  One unique character &#8594; one leaf node &#8594; root with no branches.
+                  <code>GenerateCodes</code> DFS hit a leaf at the root, appended no bits,
+                  stored a zero-length code. <code>WriteBits</code> with
+                  <code>length = 0</code> wrote nothing.
+                </span>
+              </div>
+              <div class="log-row">
+                <span class="log-row__key log-row__key--fix">Fix</span>
+                <span class="log-row__val">
+                  Detect <code>len(freqTable) == 1</code> in <code>BuildHuffmanTree</code>,
+                  create a dummy leaf, pair it with the real leaf under a synthetic root.
+                  <code>GenerateCodes</code> detects <code>IsDummy()</code> and assigns
+                  <code>&#123;bits: 1, length: 1&#125;</code> to the real character.
+                </span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── test coverage ─────────────────────────────────────────── -->
+    <section class="cs-s" aria-labelledby="s-tests">
+      <div class="container">
+        <p class="cs-s__kicker">Test Coverage</p>
+        <h2 class="cs-s__heading" id="s-tests">
+          8 test files.<br>30+ tests.
+        </h2>
+
+        <div class="table-wrap">
+          <table class="data-table" aria-label="Test file coverage breakdown">
+            <thead>
+              <tr>
+                <th scope="col">File</th>
+                <th scope="col">Coverage</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>bitBuffer_test.go</td>
+                <td>Bit writing, flush timing, padding, multi-byte, stress (1000 bits)</td>
+              </tr>
+              <tr>
+                <td>bitReader_test.go</td>
+                <td>Bit reading, EOF, reconstruction, partial reads, multi-byte</td>
+              </tr>
+              <tr>
+                <td>compres_test.go</td>
+                <td>Compress pipeline, empty file, single char, binary data, stats</td>
+              </tr>
+              <tr>
+                <td>decompress_test.go</td>
+                <td>Round-trip fidelity, corrupt data, invalid magic, special chars</td>
+              </tr>
+              <tr>
+                <td>encoder_test.go</td>
+                <td>Code generation, prefix-free property, Huffman ordering invariant</td>
+              </tr>
+              <tr>
+                <td>header_test.go</td>
+                <td>Write/read symmetry, invalid magic, size calculation</td>
+              </tr>
+              <tr>
+                <td>tree_test.go</td>
+                <td>Tree shape, leaf collection, frequency correctness, depth ordering</td>
+              </tr>
+              <tr>
+                <td>huffman_test.go</td>
+                <td><code>AnalyzeFrequencies</code> correctness (internal package)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="cs-s__kicker table-gap">Complexity</p>
+        <div class="table-wrap">
+          <table class="data-table" aria-label="Algorithmic complexity by phase">
+            <thead>
+              <tr>
+                <th scope="col">Phase</th>
+                <th scope="col">Complexity</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Frequency analysis</td>
+                <td>O(m), m = file size. Streaming 1 KB chunks, constant memory.</td>
+              </tr>
+              <tr>
+                <td>Tree construction</td>
+                <td>O(n log n), n = unique characters (&#8804; 255)</td>
+              </tr>
+              <tr>
+                <td>Code generation + encoding</td>
+                <td>O(m) &#8212; one table lookup per input byte</td>
+              </tr>
+              <tr>
+                <td>Decoding</td>
+                <td>O(m &#183; log n) &#8212; one tree traversal per output byte</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── what I'd do differently ────────────────────────────────── -->
+    <section class="cs-s" aria-labelledby="s-retro">
+      <div class="container">
+        <p class="cs-s__kicker">What I&#8217;d Do Differently</p>
+        <h2 class="cs-s__heading" id="s-retro">
+          One honest<br>paragraph.
+        </h2>
+        <p class="retro__body">
+          The <code style="font-family:var(--font-mono);font-size:0.88em;color:var(--color-accent-dim)">NumChars uint8</code>
+          field caps unique byte values at 255, enforced with a
+          <code style="font-family:var(--font-mono);font-size:0.88em;color:var(--color-accent-dim)">len(freqTable) &gt; 255</code>
+          check. The root cause isn&#8217;t the check &#8212; it&#8217;s the field width.
+          Changing it to <code style="font-family:var(--font-mono);font-size:0.88em;color:var(--color-accent-dim)">uint16</code>
+          would support all 256 possible byte values at a cost of one extra header byte.
+          The deeper fix is updating
+          <code style="font-family:var(--font-mono);font-size:0.88em;color:var(--color-accent-dim)">WriteHeader</code>
+          and <code style="font-family:var(--font-mono);font-size:0.88em;color:var(--color-accent-dim)">ReadHeader</code>
+          to use <code style="font-family:var(--font-mono);font-size:0.88em;color:var(--color-accent-dim)">binary.Write/Read</code>
+          with a <code style="font-family:var(--font-mono);font-size:0.88em;color:var(--color-accent-dim)">uint16</code>,
+          updating <code style="font-family:var(--font-mono);font-size:0.88em;color:var(--color-accent-dim)">CalculateHeaderSize</code>
+          accordingly, and bumping the magic number or adding a version byte so old and new
+          formats don&#8217;t silently misdecode each other.
+        </p>
+      </div>
+    </section>
+
+    <!-- ── CTA ──────────────────────────────────────────────────── -->
+    <section class="cs-cta" aria-labelledby="s-cta">
+      <div class="container">
+        <h2 class="cs-cta__statement" id="s-cta">
+          Have a problem worth<br>solving from first principles?
+        </h2>
+        <div class="cs-cta__links">
+          <a class="cs-cta__link is-primary" href="/contact.html">Get in touch</a>
+          <a class="cs-cta__link" href="/projects.html">See all projects</a>
+          <a class="cs-cta__link" href="https://github.com/sibteali786/huffman-compressor" target="_blank" rel="noopener noreferrer">GitHub &#8599;</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── footer ───────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer__line">Building production software from Islamabad.</p>
+      <nav class="footer__nav" aria-label="Footer links">
+        <a href="mailto:sibteali786@gmail.com">Email</a>
+        <a href="https://github.com/sibteali786" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/syed-sibteali-baqar/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <span class="footer__copy">&#169; 2025</span>
+      </nav>
     </div>
-    <script
-      src="../js/jquery.js?site=68fcf76ace908baaeca05096"
-      type="text/javascript"
-    ></script>
-    <script
-      src="../js/webflow.schunk.36b8fb49256177c8.js"
-      type="text/javascript"
-    ></script>
-    <script
-      src="../js/webflow.schunk.09a00a21d2c0230a.js"
-      type="text/javascript"
-    ></script>
-    <script src="../js/webflow-script-3.js" type="text/javascript"></script>
-  </body>
+  </footer>
+
+  <script src="../nav.js"></script>
+
+  <script>
+    /* Terminal animation — runs once on load, no loop */
+    (function () {
+      var out    = document.getElementById('term-output');
+      var cursor = document.getElementById('term-cursor');
+      if (!out || !cursor) return;
+
+      var CHAR_DELAY = 26;
+      var LINE_PAUSE = 150;
+
+      var seq = [
+        { t: 'type',  text: '$ ./huffman -compress -input alice.txt -output alice.hf', cls: 'tl-cmd' },
+        { t: 'pause', ms: 400 },
+        { t: 'line',  text: 'Analyzing frequencies...',                    cls: 'tl-plain' },
+        { t: 'pause', ms: 180 },
+        { t: 'line',  text: "Character 'e' (101): 12842 occurrences",      cls: 'tl-dim'   },
+        { t: 'line',  text: "Character 't' (116):  9143 occurrences",      cls: 'tl-dim'   },
+        { t: 'line',  text: "Character 'a' (97):   8432 occurrences",      cls: 'tl-dim'   },
+        { t: 'line',  text: "Character ' ' (32):  21503 occurrences",      cls: 'tl-dim'   },
+        { t: 'line',  text: '...',                                          cls: 'tl-muted' },
+        { t: 'pause', ms: 260 },
+        { t: 'line',  text: 'Building Huffman tree...',                     cls: 'tl-plain' },
+        { t: 'pause', ms: 210 },
+        { t: 'line',  text: 'Generating prefix codes...',                   cls: 'tl-plain' },
+        { t: 'pause', ms: 170 },
+        { t: 'line',  text: 'Verifying prefix-free property... ok',         cls: 'tl-plain' },
+        { t: 'pause', ms: 310 },
+        { t: 'line',  text: '=== Compression Statistics ===',              cls: 'tl-head'  },
+        { t: 'line',  text: 'Original size:    167168 bytes',              cls: 'tl-stat'  },
+        { t: 'line',  text: 'Compressed size:   93472 bytes',              cls: 'tl-stat'  },
+        { t: 'line',  text: 'Compression ratio:  55.91%',                  cls: 'tl-stat'  },
+        { t: 'line',  text: 'Space saved:        73696 bytes',             cls: 'tl-stat'  },
+        { t: 'pause', ms: 210 },
+        { t: 'line',  text: '✓ Successfully compressed to alice.hf',  cls: 'tl-success' },
+      ];
+
+      function insertLine(text, cls) {
+        var span = document.createElement('span');
+        span.className = cls;
+        span.textContent = text;
+        out.insertBefore(span, cursor);
+        out.insertBefore(document.createTextNode('\n'), cursor);
+      }
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        seq.forEach(function (s) {
+          if (s.t === 'type' || s.t === 'line') insertLine(s.text, s.cls);
+        });
+        cursor.hidden = true;
+        return;
+      }
+
+      var idx = 0;
+
+      function run() {
+        if (idx >= seq.length) return;
+        var step = seq[idx++];
+
+        if (step.t === 'pause') {
+          setTimeout(run, step.ms);
+
+        } else if (step.t === 'line') {
+          insertLine(step.text, step.cls);
+          setTimeout(run, LINE_PAUSE);
+
+        } else if (step.t === 'type') {
+          var span = document.createElement('span');
+          span.className = step.cls;
+          out.insertBefore(span, cursor);
+          var ci = 0;
+          (function typeChar() {
+            if (ci >= step.text.length) {
+              out.insertBefore(document.createTextNode('\n'), cursor);
+              setTimeout(run, 100);
+              return;
+            }
+            span.textContent += step.text[ci++];
+            setTimeout(typeChar, CHAR_DELAY);
+          }());
+        }
+      }
+
+      setTimeout(run, 500);
+    }());
+  </script>
+
+</body>
 </html>

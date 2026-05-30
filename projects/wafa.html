@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<!-- Hallmark · macrostructure: Catalogue · tone: personal-technical
+     theme: custom (dark / italic-serif / warm-amber) · design-system: design.md
+     note: personal product case study — first-person, no client attribution
+     pre-emit critique: P5 H5 E5 S5 R5 V5 -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Wafa — a private PWA for shared commitments. A personal engineering case study by Sibt-e-Ali Baqar covering Supabase RLS, Web Push on iOS, and PKT timezone handling.">
+  <title>Wafa — Personal Project · Sibt-e-Ali Baqar</title>
+
+  <link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../images/favicon-96x96.png" sizes="96x96" type="image/png">
+  <link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="../index.css">
+
+  <style>
+    /* ── case study page — wafa ─────────────────────────────────────────
+       Macrostructure: Catalogue (personal product variant)
+       Distinct from client case studies: first-person voice, no client meta,
+       status badge, phone-mockup strip, monospace stat row, in-progress section.
+       Problems section given full width and maximum visual weight.
+    ─────────────────────────────────────────────────────────────────── */
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        transition-duration: 0ms !important;
+        animation-duration: 0ms !important;
+      }
+    }
+
+    html, body { overflow-x: clip; }
+
+    /* ── hero ──────────────────────────────────────────────────────── */
+    .cs-hero {
+      position: relative;
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      overflow: hidden;
+    }
+
+    .cs-hero__bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      opacity: 0.10;
+      filter: grayscale(40%);
+    }
+
+    .cs-hero__gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        var(--color-paper) 35%,
+        oklch(8% 0.005 240 / 0.7) 75%,
+        oklch(8% 0.005 240 / 0.4) 100%
+      );
+    }
+
+    .cs-hero__content {
+      position: relative;
+      z-index: 1;
+      padding-block: var(--space-3xl) var(--space-2xl);
+    }
+
+    .cs-back {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-ink-3);
+      text-decoration: none;
+      margin-bottom: var(--space-xl);
+      transition: color var(--dur-short) var(--ease-out);
+    }
+    .cs-back:hover { color: var(--color-ink-2); }
+    .cs-back:focus-visible {
+      outline: 2px solid var(--color-focus);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    .cs-hero__label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-accent-dim);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-sm);
+    }
+
+    .cs-hero__title {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: var(--text-display);
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      color: var(--color-ink);
+      margin-bottom: var(--space-lg);
+      overflow-wrap: anywhere;
+      min-width: 0;
+    }
+
+    /* status badge — unique to this page */
+    .cs-hero__status {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-accent);
+      background: var(--color-paper-2);
+      border: 1px solid var(--color-accent-dim);
+      padding: var(--space-3xs) var(--space-xs);
+      border-radius: var(--radius-card);
+      margin-bottom: var(--space-md);
+    }
+
+    .cs-hero__status::before {
+      content: "$ ";
+      color: var(--color-accent-dim);
+    }
+
+    .cs-hero__impact {
+      font-family: var(--font-body);
+      font-size: var(--text-md);
+      color: var(--color-ink-2);
+      line-height: 1.5;
+      max-width: 56ch;
+      margin-bottom: var(--space-xl);
+    }
+
+    .cs-hero__meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-lg) var(--space-2xl);
+    }
+
+    .cs-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3xs);
+    }
+
+    .cs-meta-item__key {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-ink-3);
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+
+    .cs-meta-item__val {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--color-ink-2);
+      line-height: 1.4;
+    }
+
+    /* ── section shell ─────────────────────────────────────────────── */
+    .cs-s {
+      padding-block: var(--space-3xl);
+      border-top: var(--rule-hairline);
+    }
+
+    .cs-s__kicker {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-accent-dim);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-sm);
+    }
+
+    .cs-s__heading {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: var(--text-display-s);
+      line-height: 1.0;
+      letter-spacing: -0.015em;
+      color: var(--color-ink);
+      margin-bottom: var(--space-2xl);
+      overflow-wrap: anywhere;
+      min-width: 0;
+    }
+
+    .cs-s__body {
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      color: var(--color-ink-2);
+      line-height: 1.7;
+      max-width: 62ch;
+    }
+
+    .cs-s__body + .cs-s__body {
+      margin-top: var(--space-lg);
+    }
+
+    /* ── phone mockup strip ─────────────────────────────────────────── */
+    .phone-strip {
+      padding-block: var(--space-3xl);
+      border-top: var(--rule-hairline);
+    }
+
+    .phone-strip__kicker {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-accent-dim);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-sm);
+    }
+
+    .phone-strip__heading {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: var(--text-display-s);
+      line-height: 1.0;
+      letter-spacing: -0.015em;
+      color: var(--color-ink);
+      margin-bottom: var(--space-sm);
+      overflow-wrap: anywhere;
+      min-width: 0;
+    }
+
+    .phone-strip__note {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--color-ink-3);
+      margin-bottom: var(--space-2xl);
+      max-width: 52ch;
+      line-height: 1.5;
+    }
+
+    .phone-strip__grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-lg);
+      align-items: start;
+    }
+
+    .phone-figure {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .phone-figure__frame {
+      background: oklch(96% 0.008 75);   /* warm off-white — matches brief */
+      border-radius: 18px;
+      padding: var(--space-xs);
+      box-shadow:
+        0 4px 12px oklch(0% 0 0 / 0.35),
+        0 1px 3px oklch(0% 0 0 / 0.25);
+      overflow: hidden;
+      transition: opacity var(--dur-short) var(--ease-out);
+    }
+
+    .phone-figure:hover .phone-figure__frame { opacity: 0.88; }
+
+    .phone-figure__img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+    }
+
+    .phone-figure__caption {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-ink-3);
+      line-height: 1.4;
+    }
+
+    /* ── architecture decisions ─────────────────────────────────────── */
+    .arch-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .arch-block {
+      background: var(--color-paper-2);
+      border: 1px solid var(--color-rule);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+    }
+
+    .arch-block__header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      padding: var(--space-sm) var(--space-md);
+      border-bottom: 1px solid var(--color-rule);
+      background: var(--color-paper-3);
+    }
+
+    .arch-block__num {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-accent-dim);
+      letter-spacing: 0.06em;
+      flex-shrink: 0;
+    }
+
+    .arch-block__name {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-ink-3);
+      overflow-wrap: anywhere;
+    }
+
+    .arch-rows {
+      display: flex;
+      flex-direction: column;
+      padding: var(--space-md);
+      gap: var(--space-sm);
+    }
+
+    .arch-row {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: var(--space-md);
+      align-items: start;
+    }
+
+    .arch-row__key {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding-top: 3px;
+    }
+    .arch-row__key--decision { color: var(--color-terminal); }
+    .arch-row__key--why      { color: var(--color-ink-3); }
+    .arch-row__key--rejected { color: oklch(62% 0.18 22); }
+
+    .arch-row__val {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--color-ink);
+      line-height: 1.6;
+    }
+    .arch-row__val.is-why      { color: var(--color-ink-2); }
+    .arch-row__val.is-rejected { color: var(--color-ink-3); }
+
+    .arch-row__val code {
+      font-family: var(--font-mono);
+      font-size: 0.88em;
+      color: var(--color-accent);
+      background: var(--color-paper);
+      padding: 0.1em 0.35em;
+      border-radius: 2px;
+    }
+
+    /* ── problems hit ── full width, max visual weight ───────────────── */
+    .problems-section {
+      padding-block: var(--space-3xl);
+      border-top: var(--rule-hairline);
+    }
+
+    .problems-section__kicker {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-accent-dim);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-sm);
+    }
+
+    .problems-section__heading {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: var(--text-display-s);
+      line-height: 1.0;
+      letter-spacing: -0.015em;
+      color: var(--color-ink);
+      margin-bottom: var(--space-2xl);
+      overflow-wrap: anywhere;
+      min-width: 0;
+    }
+
+    .log-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .log-entry {
+      padding-block: var(--space-xl);
+      border-top: 1px solid var(--color-rule);
+    }
+
+    /* last entry gets a bottom border too since section ends here */
+    .log-entry:last-child {
+      border-bottom: 1px solid var(--color-rule);
+    }
+
+    .log-entry__title {
+      font-family: var(--font-mono);
+      font-size: var(--text-base);
+      color: var(--color-ink);
+      margin-bottom: var(--space-md);
+      overflow-wrap: anywhere;
+    }
+
+    .log-entry__title::before {
+      content: "$ ";
+      color: var(--color-accent);
+    }
+
+    .log-rows {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .log-row {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: var(--space-sm);
+      align-items: start;
+    }
+
+    .log-row__key {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding-top: 3px;
+    }
+    .log-row__key--symptom { color: oklch(70% 0.17 42); }
+    .log-row__key--cause   { color: var(--color-ink-3); }
+    .log-row__key--fix     { color: var(--color-terminal); }
+
+    .log-row__val {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--color-ink-2);
+      line-height: 1.6;
+    }
+
+    .log-row__val code {
+      font-family: var(--font-mono);
+      font-size: 0.88em;
+      color: var(--color-accent);
+      background: var(--color-paper-2);
+      padding: 0.1em 0.35em;
+      border-radius: 2px;
+    }
+
+    /* ── what shipped — monospace stat row ─────────────────────────── */
+    .shipped-section {
+      padding-block: var(--space-3xl);
+      border-top: var(--rule-hairline);
+    }
+
+    .shipped-section__kicker {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-accent-dim);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-sm);
+    }
+
+    .shipped-section__heading {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: var(--text-display-s);
+      line-height: 1.0;
+      letter-spacing: -0.015em;
+      color: var(--color-ink);
+      margin-bottom: var(--space-2xl);
+      overflow-wrap: anywhere;
+      min-width: 0;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      border: 1px solid var(--color-rule);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+    }
+
+    .stat-row__item {
+      flex: 1 1 auto;
+      padding: var(--space-md) var(--space-lg);
+      border-right: 1px solid var(--color-rule);
+      border-bottom: 1px solid var(--color-rule);
+      background: var(--color-paper-2);
+    }
+
+    .stat-row__item:last-child {
+      border-right: none;
+    }
+
+    .stat-row__val {
+      font-family: var(--font-mono);
+      font-size: var(--text-lg);
+      font-weight: 500;
+      color: var(--color-accent);
+      line-height: 1.1;
+      display: block;
+      margin-bottom: var(--space-3xs);
+    }
+
+    .stat-row__label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-ink-3);
+      letter-spacing: 0.06em;
+      line-height: 1.3;
+    }
+
+    /* ── still being built ─────────────────────────────────────────── */
+    .in-progress-section {
+      padding-block: var(--space-3xl);
+      border-top: var(--rule-hairline);
+    }
+
+    .in-progress-section__label {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-accent);
+      margin-bottom: var(--space-lg);
+    }
+
+    .in-progress-section__label::before {
+      content: "$ ";
+      color: var(--color-accent-dim);
+    }
+
+    .in-progress-section__heading {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: var(--text-display-s);
+      line-height: 1.0;
+      letter-spacing: -0.015em;
+      color: var(--color-ink);
+      margin-bottom: var(--space-2xl);
+      overflow-wrap: anywhere;
+      min-width: 0;
+    }
+
+    .in-progress-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .in-progress-item {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-md);
+      padding-block: var(--space-md);
+      border-top: 1px solid var(--color-rule);
+    }
+
+    .in-progress-item:last-child {
+      border-bottom: 1px solid var(--color-rule);
+    }
+
+    .in-progress-item__tag {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-ink-3);
+      background: var(--color-paper-2);
+      border: 1px solid var(--color-rule);
+      padding: var(--space-3xs) var(--space-xs);
+      border-radius: var(--radius-card);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .in-progress-item__desc {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--color-ink-2);
+      line-height: 1.5;
+    }
+
+    /* ── retrospective ─────────────────────────────────────────────── */
+    .retro__body {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: var(--text-lg);
+      font-weight: 400;
+      color: var(--color-ink-2);
+      line-height: 1.5;
+      max-width: 58ch;
+    }
+
+    /* ── CTA ───────────────────────────────────────────────────────── */
+    .cs-cta {
+      padding-block: var(--space-3xl);
+      border-top: var(--rule-hairline);
+    }
+
+    .cs-cta__statement {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: var(--text-display-s);
+      font-weight: 400;
+      line-height: 1.0;
+      letter-spacing: -0.015em;
+      color: var(--color-ink);
+      margin-bottom: var(--space-xl);
+      overflow-wrap: anywhere;
+      min-width: 0;
+    }
+
+    .cs-cta__links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+      align-items: center;
+    }
+
+    .cs-cta__link {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-ink-2);
+      text-decoration: none;
+      border: 1px solid var(--color-rule);
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--radius-card);
+      transition:
+        color var(--dur-short) var(--ease-out),
+        border-color var(--dur-short) var(--ease-out),
+        background-color var(--dur-short) var(--ease-out);
+    }
+    .cs-cta__link:hover {
+      color: var(--color-ink);
+      border-color: var(--color-ink-2);
+    }
+    .cs-cta__link:focus-visible {
+      outline: 2px solid var(--color-focus);
+      outline-offset: 3px;
+    }
+    .cs-cta__link.is-primary {
+      background: var(--color-accent);
+      color: var(--color-accent-ink);
+      border-color: var(--color-accent);
+      font-weight: 500;
+    }
+    .cs-cta__link.is-primary:hover {
+      background: var(--color-ink);
+      border-color: var(--color-ink);
+      color: var(--color-paper);
+    }
+
+    /* ── footer ────────────────────────────────────────────────────── */
+    .site-footer {
+      border-top: var(--rule-hairline);
+      padding-block: var(--space-xl);
+    }
+
+    .footer__line {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-ink-3);
+      margin-bottom: var(--space-sm);
+    }
+
+    .footer__nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+      align-items: center;
+    }
+
+    .footer__nav a {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-ink-3);
+      text-decoration: none;
+      transition: color var(--dur-short) var(--ease-out);
+    }
+    .footer__nav a:hover { color: var(--color-ink-2); }
+    .footer__nav a:focus-visible {
+      outline: 2px solid var(--color-focus);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    .footer__copy {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-ink-3);
+      margin-left: auto;
+    }
+
+    /* ── responsive ────────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .phone-strip__grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .phone-figure:nth-child(n+2) {
+        display: none;
+      }
+
+      .stat-row {
+        flex-direction: column;
+      }
+
+      .stat-row__item {
+        border-right: none;
+      }
+
+      .arch-row {
+        grid-template-columns: 70px 1fr;
+      }
+
+      .log-row {
+        grid-template-columns: 90px 1fr;
+      }
+
+      .in-progress-item {
+        flex-direction: column;
+        gap: var(--space-xs);
+      }
+    }
+
+    @media (max-width: 414px) {
+      .cs-hero__meta {
+        gap: var(--space-md) var(--space-lg);
+      }
+
+      .arch-row {
+        grid-template-columns: 1fr;
+        gap: var(--space-3xs);
+      }
+
+      .arch-row__key {
+        padding-top: 0;
+      }
+
+      .log-row {
+        grid-template-columns: 1fr;
+        gap: var(--space-3xs);
+      }
+
+      .log-row__key {
+        padding-top: 0;
+      }
+    }
+
+    @media (max-width: 375px) {
+      .cs-cta__links {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ── nav ──────────────────────────────────────────────────────── -->
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a class="nav-name" href="/">Sibt-e-Ali</a>
+      <div class="nav-right">
+        <a class="nav-email" href="mailto:sibteali786@gmail.com">sibteali786@gmail.com</a>
+        <button
+          class="nav-toggle"
+          aria-expanded="false"
+          aria-controls="nav-menu"
+          aria-label="Toggle navigation menu"
+        >Menu</button>
+      </div>
+    </nav>
+    <nav class="nav-menu" id="nav-menu" hidden aria-label="Site pages">
+      <a href="/about.html">About</a>
+      <a href="/projects.html" aria-current="page">Projects</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- ── hero ─────────────────────────────────────────────────── -->
+    <section class="cs-hero" aria-labelledby="cs-title">
+      <img
+        class="cs-hero__bg"
+        src="../images/wafa-1.jpeg"
+        alt=""
+        aria-hidden="true"
+        fetchpriority="high"
+      >
+      <div class="cs-hero__gradient" aria-hidden="true"></div>
+
+      <div class="container cs-hero__content">
+        <a class="cs-back" href="/projects.html">&#8592; Projects</a>
+
+        <p class="cs-hero__label" aria-hidden="true">Personal Project</p>
+
+        <h1 class="cs-hero__title" id="cs-title">Wafa</h1>
+
+        <p class="cs-hero__impact">
+          A private PWA for shared commitments between people you trust &#8212;
+          installable, offline-capable, push-notifying.
+        </p>
+
+        <p class="cs-hero__status" aria-label="Project status: in progress">status: in-progress</p>
+
+        <div class="cs-hero__meta">
+          <div class="cs-meta-item">
+            <span class="cs-meta-item__key">Type</span>
+            <span class="cs-meta-item__val">Self-initiated product</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cs-meta-item__key">Role</span>
+            <span class="cs-meta-item__val">Solo &#8212; design &#43; engineering</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cs-meta-item__key">Stack</span>
+            <span class="cs-meta-item__val">Next.js &#183; Supabase &#183; Cloudflare R2 &#183; Web Push API &#183; GitHub Actions &#183; next-pwa</span>
+          </div>
+          <div class="cs-meta-item">
+            <span class="cs-meta-item__key">Status</span>
+            <span class="cs-meta-item__val">In active development</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── why it exists ─────────────────────────────────────────── -->
+    <section class="cs-s" aria-labelledby="s-why">
+      <div class="container">
+        <p class="cs-s__kicker">Why It Exists</p>
+        <h2 class="cs-s__heading" id="s-why">
+          Built from<br>a felt need.
+        </h2>
+
+        <p class="cs-s__body">
+          Generic task managers don&#8217;t model mutual accountability between two specific
+          people. Social apps lack privacy boundaries between distinct relationships. I wanted
+          a private space &#8212; per relationship, not per person &#8212; where commitments
+          don&#8217;t get lost in chat threads.
+        </p>
+        <p class="cs-s__body">
+          Wafa organises around <em>spaces</em>: one space per relationship (family, a friend,
+          a business partner). Inside a space, you create <em>promises</em> &#8212; each with
+          a title, description, due date, and time in PKT. Reminders fire via Web Push before
+          the deadline. Files attach via Cloudflare R2. When you&#8217;re offline, the action
+          queues in IndexedDB and syncs on reconnect.
+        </p>
+      </div>
+    </section>
+
+    <!-- ── design process / phone mockups ────────────────────────── -->
+    <section class="phone-strip" aria-labelledby="s-design">
+      <div class="container">
+        <p class="phone-strip__kicker">Design Process</p>
+        <h2 class="phone-strip__heading" id="s-design">
+          Wireframes first,<br>code second.
+        </h2>
+        <p class="phone-strip__note">
+          I sketched the full information architecture and screen flows before writing a line
+          of code. The screens below are from the running application &#8212; they match the
+          original wireframe layout closely enough that no structural rework was needed
+          after the first commit.
+        </p>
+
+        <div class="phone-strip__grid">
+
+          <figure class="phone-figure">
+            <div class="phone-figure__frame">
+              <img
+                class="phone-figure__img"
+                src="../images/wafa-1.jpeg"
+                alt="Wafa spaces home screen showing three spaces: My Life, Chacha, and Meshlink"
+                loading="lazy"
+              >
+            </div>
+            <figcaption class="phone-figure__caption">wafa-1.jpeg &middot; real device</figcaption>
+          </figure>
+
+          <figure class="phone-figure">
+            <div class="phone-figure__frame">
+              <img
+                class="phone-figure__img"
+                src="../images/wafa-3.jpeg"
+                alt="New promise form with fields for title, description, due date, and time in PKT"
+                loading="lazy"
+              >
+            </div>
+            <figcaption class="phone-figure__caption">wafa-3.jpeg &middot; real device</figcaption>
+          </figure>
+
+          <figure class="phone-figure">
+            <div class="phone-figure__frame">
+              <img
+                class="phone-figure__img"
+                src="../images/wafa-4.jpeg"
+                alt="Promise detail view showing description, notes section, and file attachments"
+                loading="lazy"
+              >
+            </div>
+            <figcaption class="phone-figure__caption">wafa-4.jpeg &middot; real device</figcaption>
+          </figure>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── architecture decisions ────────────────────────────────── -->
+    <section class="cs-s" aria-labelledby="s-arch">
+      <div class="container">
+        <p class="cs-s__kicker">Architecture Decisions</p>
+        <h2 class="cs-s__heading" id="s-arch">
+          Three decisions<br>I&#8217;d make again.
+        </h2>
+
+        <div class="arch-list" role="list" aria-label="Architecture decisions">
+
+          <!-- 01 -->
+          <article class="arch-block" role="listitem" aria-label="Architecture decision 1: RLS in PostgreSQL">
+            <div class="arch-block__header">
+              <span class="arch-block__num">arch-01</span>
+              <span class="arch-block__name">rls-in-postgresql-not-in-api-routes</span>
+            </div>
+            <div class="arch-rows">
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--decision">Decision</span>
+                <span class="arch-row__val">
+                  Row-Level Security policies enforced in PostgreSQL via Supabase RLS,
+                  not in Next.js API route middleware.
+                </span>
+              </div>
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--why">Why</span>
+                <span class="arch-row__val is-why">
+                  API-route guards are easy to miss &#8212; a new route added without
+                  the guard check silently exposes another user&#8217;s data. RLS at the
+                  database layer is a hard floor: no query reaches rows the calling user
+                  doesn&#8217;t own, regardless of how the API route is written. With
+                  ~15 policies in place, I can add API routes without a per-route
+                  security audit.
+                </span>
+              </div>
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--rejected">Rejected</span>
+                <span class="arch-row__val is-rejected">
+                  Middleware-only guards &#8212; too easy to forget on a new endpoint;
+                  a missed guard would be invisible until a cross-user query surfaced it.
+                </span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 02 -->
+          <article class="arch-block" role="listitem" aria-label="Architecture decision 2: SHA-256 invite tokens">
+            <div class="arch-block__header">
+              <span class="arch-block__num">arch-02</span>
+              <span class="arch-block__name">invite-tokens-as-sha256-hashes-raw-token-only-in-url</span>
+            </div>
+            <div class="arch-rows">
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--decision">Decision</span>
+                <span class="arch-row__val">
+                  Space invite links carry a raw random token in the URL query string.
+                  The database stores only the <code>SHA-256</code> hash. On accept,
+                  the server hashes the incoming token and compares; raw token never touches
+                  the database.
+                </span>
+              </div>
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--why">Why</span>
+                <span class="arch-row__val is-why">
+                  If the <code>space_invites</code> table is ever read by a third party
+                  (misconfigured RLS, a backup leak), the stored hashes are useless without
+                  the raw tokens. The raw token lives only in the URL shared between the
+                  inviting user and the recipient &#8212; a channel Supabase never sees.
+                </span>
+              </div>
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--rejected">Rejected</span>
+                <span class="arch-row__val is-rejected">
+                  Storing the raw token directly &#8212; any DB read leak would immediately
+                  expose valid invite tokens.
+                </span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 03 -->
+          <article class="arch-block" role="listitem" aria-label="Architecture decision 3: PKT timezone at write time">
+            <div class="arch-block__header">
+              <span class="arch-block__num">arch-03</span>
+              <span class="arch-block__name">pkt-offset-applied-at-write-time-in-api-not-display-time</span>
+            </div>
+            <div class="arch-rows">
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--decision">Decision</span>
+                <span class="arch-row__val">
+                  When a user picks a due time in PKT, the API converts it to UTC
+                  (<code>utcHour = (hour - 5 + 24) % 24</code>) before writing
+                  <code>next_run_at</code> to the database. Display converts back to PKT.
+                  Conversion happens in two explicit, tested utility functions &#8212;
+                  nowhere else.
+                </span>
+              </div>
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--why">Why</span>
+                <span class="arch-row__val is-why">
+                  Storing the raw PKT hour and converting at cron time means every place
+                  that reads <code>next_run_at</code> must remember to apply the offset.
+                  It&#8217;s the kind of bug that passes unit tests and breaks in production
+                  only for users in a non-UTC timezone.
+                </span>
+              </div>
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--rejected">Rejected</span>
+                <span class="arch-row__val is-rejected">
+                  Storing PKT hours raw and converting at reminder-fire time &#8212;
+                  I hit exactly this bug first. Reminders fired 5 hours late.
+                </span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── problems hit ──────────────────────────────────────────── -->
+    <section class="problems-section" aria-labelledby="s-bugs">
+      <div class="container">
+        <p class="problems-section__kicker">Problems Hit</p>
+        <h2 class="problems-section__heading" id="s-bugs">
+          Five bugs I hit<br>and actually fixed.
+        </h2>
+
+        <div class="log-list">
+
+          <!-- 01 -->
+          <div class="log-entry">
+            <p class="log-entry__title">ios-safari-losing-supabase-session-on-tab-close</p>
+            <div class="log-rows">
+              <div class="log-row">
+                <span class="log-row__key log-row__key--symptom">Symptom</span>
+                <span class="log-row__val">
+                  Users on iOS Safari were logged out every time they closed the tab. Closing
+                  and reopening the PWA from the home screen required signing in again.
+                </span>
+              </div>
+              <div class="log-row">
+                <span class="log-row__key log-row__key--cause">Root cause</span>
+                <span class="log-row__val">
+                  Supabase stores the session in <code>localStorage</code> by default.
+                  iOS Safari aggressively purges <code>localStorage</code> for PWAs
+                  that haven&#8217;t been opened recently &#8212; the purge window is
+                  shorter than most users&#8217; usage pattern.
+                </span>
+              </div>
+              <div class="log-row">
+                <span class="log-row__key log-row__key--fix">Fix</span>
+                <span class="log-row__val">
+                  Switched Supabase session storage to cookie-based sessions.
+                  Cookies persist across iOS Safari&#8217;s <code>localStorage</code>
+                  eviction and survive PWA reinstalls.
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 02 -->
+          <div class="log-entry">
+            <p class="log-entry__title">reminder-fires-5-hours-late-pkt-utc-mismatch</p>
+            <div class="log-rows">
+              <div class="log-row">
+                <span class="log-row__key log-row__key--symptom">Symptom</span>
+                <span class="log-row__val">
+                  Push notifications for promise reminders arrived exactly 5 hours after
+                  the time the user set. A promise due at 09:00 PKT fired the notification
+                  at 14:00 PKT.
+                </span>
+              </div>
+              <div class="log-row">
+                <span class="log-row__key log-row__key--cause">Root cause</span>
+                <span class="log-row__val">
+                  The API was writing the PKT hour directly to <code>next_run_at</code>
+                  as if it were UTC. PKT is UTC+5, so a 09:00 PKT entry stored as
+                  <code>09:00 UTC</code> fires at 14:00 PKT.
+                </span>
+              </div>
+              <div class="log-row">
+                <span class="log-row__key log-row__key--fix">Fix</span>
+                <span class="log-row__val">
+                  Added explicit conversion at write time:
+                  <code>utcHour = (hour - 5 + 24) % 24</code>.
+                  Wrapped in a <code>pktToUtcHour</code> utility and a corresponding
+                  <code>utcToPktHour</code> for display. Both are tested. Neither is
+                  called anywhere except those two functions.
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 03 -->
+          <div class="log-entry">
+            <p class="log-entry__title">bottom-sheet-backdrop-eating-all-pointer-events</p>
+            <div class="log-rows">
+              <div class="log-row">
+                <span class="log-row__key log-row__key--symptom">Symptom</span>
+                <span class="log-row__val">
+                  Tapping the backdrop behind an open bottom sheet had no effect on mobile.
+                  The sheet stayed open; the dismiss tap didn&#8217;t register.
+                </span>
+              </div>
+              <div class="log-row">
+                <span class="log-row__key log-row__key--cause">Root cause</span>
+                <span class="log-row__val">
+                  The bottom sheet was rendered inside a scroll container. The scroll
+                  container established a new stacking context. The backdrop
+                  <code>div</code> sat visually behind the sheet but was positioned
+                  inside the wrong layer &#8212; pointer events hit the scroll container
+                  before reaching the backdrop handler.
+                </span>
+              </div>
+              <div class="log-row">
+                <span class="log-row__key log-row__key--fix">Fix</span>
+                <span class="log-row__val">
+                  Moved the bottom sheet and its backdrop to a React portal:
+                  <code>createPortal(sheetMarkup, document.body)</code>. Both now render
+                  at the <code>body</code> level, outside all scroll containers and
+                  stacking contexts. Dismiss tap works reliably.
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 04 -->
+          <div class="log-entry">
+            <p class="log-entry__title">ios-service-worker-push-hanging-on-install</p>
+            <div class="log-rows">
+              <div class="log-row">
+                <span class="log-row__key log-row__key--symptom">Symptom</span>
+                <span class="log-row__val">
+                  VAPID push notifications worked on Android and desktop. On iOS, the
+                  subscription registered without error but no notification ever arrived.
+                  No errors in the service worker console.
+                </span>
+              </div>
+              <div class="log-row">
+                <span class="log-row__key log-row__key--cause">Root cause</span>
+                <span class="log-row__val">
+                  The service worker hadn&#8217;t progressed past the <em>installing</em>
+                  state before the push was attempted. On iOS, a service worker that doesn&#8217;t
+                  explicitly call <code>self.skipWaiting()</code> and <code>self.clients.claim()</code>
+                  stays in waiting indefinitely. No active worker means no
+                  <code>push</code> event handler is registered.
+                </span>
+              </div>
+              <div class="log-row">
+                <span class="log-row__key log-row__key--fix">Fix</span>
+                <span class="log-row__val">
+                  Added explicit <code>install</code> and <code>activate</code> event
+                  handlers to the service worker. The <code>install</code> handler calls
+                  <code>self.skipWaiting()</code>; the <code>activate</code> handler calls
+                  <code>self.clients.claim()</code>. The push handler is now guaranteed
+                  to be active before the first subscription fires.
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 05 -->
+          <div class="log-entry">
+            <p class="log-entry__title">vercel-hobby-cron-daily-limit-blocking-reminder-cadence</p>
+            <div class="log-rows">
+              <div class="log-row">
+                <span class="log-row__key log-row__key--symptom">Symptom</span>
+                <span class="log-row__val">
+                  Reminders were only firing once per day at most. Promises due at
+                  arbitrary times were missed entirely.
+                </span>
+              </div>
+              <div class="log-row">
+                <span class="log-row__key log-row__key--cause">Root cause</span>
+                <span class="log-row__val">
+                  Vercel Hobby plan limits cron jobs to once per day. The reminder system
+                  required polling every 5 minutes to catch promises with sub-hour granularity.
+                </span>
+              </div>
+              <div class="log-row">
+                <span class="log-row__key log-row__key--fix">Fix</span>
+                <span class="log-row__val">
+                  Moved the reminder cron out of Vercel entirely. A GitHub Actions workflow
+                  runs on schedule <code>*/5 * * * *</code>, calls the reminder API endpoint
+                  with a shared secret, and has no plan-based frequency limit. GitHub Actions
+                  free tier is generous enough for this cadence.
+                </span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── what shipped ───────────────────────────────────────────── -->
+    <section class="shipped-section" aria-labelledby="s-shipped">
+      <div class="container">
+        <p class="shipped-section__kicker">What Shipped</p>
+        <h2 class="shipped-section__heading" id="s-shipped">
+          Honest scale.<br>Personal project.
+        </h2>
+
+        <div class="stat-row" role="list" aria-label="Project statistics">
+          <div class="stat-row__item" role="listitem">
+            <span class="stat-row__val">3</span>
+            <span class="stat-row__label">DB migrations</span>
+          </div>
+          <div class="stat-row__item" role="listitem">
+            <span class="stat-row__val">11</span>
+            <span class="stat-row__label">tables</span>
+          </div>
+          <div class="stat-row__item" role="listitem">
+            <span class="stat-row__val">8</span>
+            <span class="stat-row__label">enums</span>
+          </div>
+          <div class="stat-row__item" role="listitem">
+            <span class="stat-row__val">~15</span>
+            <span class="stat-row__label">RLS policies</span>
+          </div>
+          <div class="stat-row__item" role="listitem">
+            <span class="stat-row__val">20+</span>
+            <span class="stat-row__label">API routes</span>
+          </div>
+          <div class="stat-row__item" role="listitem">
+            <span class="stat-row__val">30+</span>
+            <span class="stat-row__label">components</span>
+          </div>
+        </div>
+
+        <div class="stat-row" role="list" aria-label="Infrastructure shipped" style="margin-top: var(--space-md);">
+          <div class="stat-row__item" role="listitem">
+            <span class="stat-row__val">R2</span>
+            <span class="stat-row__label">Cloudflare attachments</span>
+          </div>
+          <div class="stat-row__item" role="listitem">
+            <span class="stat-row__val">VAPID</span>
+            <span class="stat-row__label">Web Push · tested on iOS</span>
+          </div>
+          <div class="stat-row__item" role="listitem">
+            <span class="stat-row__val">IDB</span>
+            <span class="stat-row__label">IndexedDB offline queue</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── still being built ─────────────────────────────────────── -->
+    <section class="in-progress-section" aria-labelledby="s-inprogress">
+      <div class="container">
+        <p class="in-progress-section__label" aria-label="Section: in progress">in progress</p>
+        <h2 class="in-progress-section__heading" id="s-inprogress">
+          What&#8217;s still<br>being built.
+        </h2>
+
+        <div class="in-progress-list" role="list">
+
+          <div class="in-progress-item" role="listitem">
+            <span class="in-progress-item__tag">auth</span>
+            <span class="in-progress-item__desc">
+              Magic-link login &#8212; currently using password-based auth;
+              magic link removes the password surface entirely.
+            </span>
+          </div>
+
+          <div class="in-progress-item" role="listitem">
+            <span class="in-progress-item__tag">pwa</span>
+            <span class="in-progress-item__desc">
+              iOS splash screens &#8212; the installed PWA shows a blank white screen
+              on launch; proper splash assets needed per device resolution.
+            </span>
+          </div>
+
+          <div class="in-progress-item" role="listitem">
+            <span class="in-progress-item__tag">session</span>
+            <span class="in-progress-item__desc">
+              <code style="font-family: var(--font-mono); font-size: 0.9em; color: var(--color-accent-dim);">visibilitychange</code> session
+              refresh &#8212; long-backgrounded tabs silently expire; need a
+              token refresh on document becoming visible.
+            </span>
+          </div>
+
+          <div class="in-progress-item" role="listitem">
+            <span class="in-progress-item__tag">offline</span>
+            <span class="in-progress-item__desc">
+              Offline sync conflict resolution &#8212; the IndexedDB queue replays
+              actions on reconnect but doesn&#8217;t yet handle the case where the
+              server state changed while offline.
+            </span>
+          </div>
+
+          <div class="in-progress-item" role="listitem">
+            <span class="in-progress-item__tag">feature</span>
+            <span class="in-progress-item__desc">
+              Suggestion lifecycle &#8212; one person can propose a commitment,
+              the other can accept or counter. Designed; not yet implemented.
+            </span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── retrospective ─────────────────────────────────────────── -->
+    <section class="cs-s" aria-labelledby="s-retro">
+      <div class="container">
+        <p class="cs-s__kicker">What I&#8217;d Do Differently</p>
+        <h2 class="cs-s__heading" id="s-retro">
+          One honest<br>paragraph.
+        </h2>
+        <p class="retro__body">
+          Timezone handling should have been a first-class concern from migration 1.
+          I should have defined a <code style="font-family: var(--font-mono); font-size: 0.88em; color: var(--color-accent-dim);">pktToUtc</code>
+          and <code style="font-family: var(--font-mono); font-size: 0.88em; color: var(--color-accent-dim);">utcToPkt</code>
+          utility, written tests for both, and documented the invariant &#8212;
+          <em>all timestamps stored in UTC, all PKT display conversions go through the utility</em>
+          &#8212; before the first reminder fired. Instead I wrote the raw PKT hour into the database,
+          hit the 5-hour drift bug in production, and spent time patching what a single
+          deliberate decision at the schema stage would have prevented entirely.
+        </p>
+      </div>
+    </section>
+
+    <!-- ── CTA ──────────────────────────────────────────────────── -->
+    <section class="cs-cta" aria-labelledby="s-cta">
+      <div class="container">
+        <h2 class="cs-cta__statement" id="s-cta">
+          If you have a problem<br>worth solving &#8212; let&#8217;s talk.
+        </h2>
+        <div class="cs-cta__links">
+          <a class="cs-cta__link is-primary" href="mailto:sibteali786@gmail.com">sibteali786@gmail.com</a>
+          <a class="cs-cta__link" href="/projects.html">See all projects</a>
+          <a class="cs-cta__link" href="/projects/whats-next-please.html">WhatsNextPlease &#8594;</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── footer ───────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer__line">Building production software from Islamabad.</p>
+      <nav class="footer__nav" aria-label="Footer links">
+        <a href="mailto:sibteali786@gmail.com">Email</a>
+        <a href="https://github.com/sibteali786" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/syed-sibteali-baqar/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <span class="footer__copy">&#169; 2025</span>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="../nav.js"></script>
+
+</body>
+</html>

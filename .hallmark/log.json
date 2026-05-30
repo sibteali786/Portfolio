@@ -1,5 +1,25 @@
 [
   {
+    "date": "2026-05-31",
+    "macrostructure": "Catalogue",
+    "theme": "custom",
+    "theme_axes": "dark / italic-serif / warm-amber",
+    "enrichment": "JS typewriter terminal animation (Tier-A, no fake chrome)",
+    "brief": "Sibt-e-Ali portfolio — Huffman Compressor coding challenge, pipeline flow + file tree + byte-map",
+    "scope": "projects/huffman-compressor.html",
+    "note": "coding challenge variant — terminal centrepiece, pipeline flow diagram, 2-row decision blocks, test + complexity tables"
+  },
+  {
+    "date": "2026-05-30",
+    "macrostructure": "Catalogue",
+    "theme": "custom",
+    "theme_axes": "dark / italic-serif / warm-amber",
+    "enrichment": "3 real device screenshots in phone-mockup figures (no fake chrome)",
+    "brief": "Sibt-e-Ali portfolio — Wafa personal PWA case study, first-person voice, in-progress product",
+    "scope": "projects/wafa.html",
+    "note": "personal product variant — status badge, phone-mockup strip, monospace stat row, in-progress section"
+  },
+  {
     "date": "2026-05-30",
     "macrostructure": "Catalogue",
     "theme": "custom",
