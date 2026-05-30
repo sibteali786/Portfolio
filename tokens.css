@@ -23,6 +23,8 @@
   /* ── typography ─────────────────────────────────────────────────── */
   --font-display: "DM Serif Display", ui-serif, Georgia, serif;
   --font-mono:    "JetBrains Mono", ui-monospace, "Cascadia Code", monospace;
+  /* design.md specifies Inter or DM Sans for body prose; both are banned by
+     typography.md's defaults list. IBM Plex Sans is the allowlist substitute. */
   --font-body:    "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
 
   /* ── type scale (major-third 1.25) ──────────────────────────────── */
