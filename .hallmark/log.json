@@ -4,6 +4,15 @@
     "macrostructure": "Catalogue",
     "theme": "custom",
     "theme_axes": "dark / italic-serif / warm-amber",
+    "enrichment": "3 real screenshots in figure strip (no fake chrome)",
+    "brief": "Sibt-e-Ali portfolio — Real-Time Chat case study, HMAC SSO + multi-tenant Socket.IO",
+    "scope": "projects/real-time-chat.html"
+  },
+  {
+    "date": "2026-05-30",
+    "macrostructure": "Catalogue",
+    "theme": "custom",
+    "theme_axes": "dark / italic-serif / warm-amber",
     "enrichment": "real screenshots in figure elements (no fake chrome)",
     "brief": "Sibt-e-Ali portfolio — Asia Builders ERP case study, stack-tier shipped grid + arch blocks",
     "scope": "projects/asia-builders.html",
