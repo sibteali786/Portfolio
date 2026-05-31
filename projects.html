@@ -45,7 +45,7 @@
     <section class="projects-header">
       <div class="container">
         <h1 class="projects-header__title">Projects</h1>
-        <span class="projects-header__count">6 total &#183; 2 featured</span>
+        <span class="projects-header__count">6 total &#183; 2 featured &#183; 2 OSS</span>
       </div>
     </section>
 
@@ -238,6 +238,32 @@
             <a class="oss-card__link" href="https://github.com/zen-browser/desktop/commit/d7faa54" target="_blank" rel="noopener noreferrer">Commit d7faa54</a>
             <span class="oss-card__sep">&#183;</span>
             <a class="oss-card__link oss-card__link--detail" href="projects/zen.html">Detail &#8594;</a>
+          </p>
+        </article>
+
+        <article class="oss-card" aria-labelledby="oss-gobp-title">
+          <div class="oss-card__header">
+            <h3 class="oss-card__project" id="oss-gobp-title">Melkeydev/go-blueprint</h3>
+            <span class="oss-card__stars">&#9733; 8.9k</span>
+          </div>
+
+          <p class="oss-card__bug">React frontend hardcoded port 8080 &#8212; changing the <code class="oss-card__mono">PORT</code> env var disconnected frontend from backend silently.</p>
+
+          <p class="oss-card__cause"><span class="oss-card__cause-label">Root cause</span><code class="oss-card__mono">Vite requires VITE_ prefix; no bridge between Go&#8217;s root .env and the frontend build</code></p>
+
+          <p class="oss-card__fix"><code class="oss-card__mono">program.go</code> reads root <code class="oss-card__mono">.env</code>, extracts <code class="oss-card__mono">PORT=</code>, writes <code class="oss-card__mono">VITE_PORT</code> to <code class="oss-card__mono">frontend/.env</code> at generation time; <code class="oss-card__mono">app.tsx.tmpl</code> uses <code class="oss-card__mono">import.meta.env.VITE_PORT</code>.</p>
+
+          <pre class="oss-card__diff" aria-label="Patch diff"><code><span class="oss-diff__del">- fetch('http://localhost:8080/')</span>
+<span class="oss-diff__add">+ fetch(`http://localhost:${import.meta.env.VITE_PORT}/`)</span></code></pre>
+
+          <p class="oss-card__links">
+            <a class="oss-card__link" href="https://github.com/Melkeydev/go-blueprint/issues/350" target="_blank" rel="noopener noreferrer">Issue #350</a>
+            <span class="oss-card__sep">&#183;</span>
+            <a class="oss-card__link" href="https://github.com/Melkeydev/go-blueprint/pull/355" target="_blank" rel="noopener noreferrer">PR #355</a>
+            <span class="oss-card__sep">&#183;</span>
+            <a class="oss-card__link" href="https://github.com/Melkeydev/go-blueprint/commit/f13c8b708e2b7294d4214e891fd0b4fbb981d63b" target="_blank" rel="noopener noreferrer">Commit f13c8b7</a>
+            <span class="oss-card__sep">&#183;</span>
+            <a class="oss-card__link oss-card__link--detail" href="projects/go-blueprint.html">Detail &#8594;</a>
           </p>
         </article>
 

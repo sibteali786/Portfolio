@@ -4,6 +4,16 @@
     "macrostructure": "Workbench",
     "theme": "custom",
     "theme_axes": "dark / italic-serif / warm-amber",
+    "enrichment": "none (typography only) — CSS constraint diagram + three-part code walkthrough",
+    "brief": "Sibt-e-Ali portfolio — go-blueprint cross-boundary PORT env fix, Go + Vite toolchain bridge",
+    "scope": "projects/go-blueprint.html",
+    "note": "sister page to zen.html — same field-notes series, gob- prefix, constraint diagram centrepiece"
+  },
+  {
+    "date": "2026-05-31",
+    "macrostructure": "Workbench",
+    "theme": "custom",
+    "theme_axes": "dark / italic-serif / warm-amber",
     "enrichment": "none (typography only) — CSS feedback-loop diagram",
     "brief": "Sibt-e-Ali portfolio — zen-browser/desktop drag-flicker fix, field notes page",
     "scope": "projects/zen.html",

@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<!-- Hallmark · macrostructure: Workbench · tone: technical-austere
+     theme: custom (dark / italic-serif / warm-amber) · design-system: design.md
+     note: field-notes sister page — cross-boundary env fix, Melkeydev/go-blueprint
+     pre-emit critique: P5 H5 E5 S5 R5 V4 -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="go-blueprint PORT env fix — bridging Go's code generation and Vite's VITE_ prefix requirement. Open source contribution by Sibt-e-Ali Baqar.">
+  <title>go-blueprint · Sibt-e-Ali Baqar</title>
+
+  <link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../images/favicon-96x96.png" sizes="96x96" type="image/png">
+  <link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="../index.css">
+
+  <style>
+    /* ── go-blueprint field notes — workbench macrostructure ───────────
+       Sister page to zen.html. Same field-notes register.
+       Centrepiece: constraint diagram + three-part code walkthrough.
+    ─────────────────────────────────────────────────────────────────── */
+
+    :root {
+      --color-diff-add: var(--color-terminal);     /* terminal green for + lines */
+      --color-diff-del: oklch(62% 0.18 20);        /* warm red for - lines */
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        transition-duration: 0ms !important;
+        animation-duration: 0ms !important;
+      }
+    }
+
+    /* ── hero ──────────────────────────────────────────────────────── */
+    .gob-hero {
+      padding-block: var(--space-3xl) var(--space-2xl);
+      border-bottom: var(--rule-hairline);
+    }
+
+    .gob-hero__back {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-ink-3);
+      text-decoration: none;
+      margin-bottom: var(--space-xl);
+      transition: color var(--dur-short) var(--ease-out);
+    }
+    .gob-hero__back:hover { color: var(--color-ink-2); }
+    .gob-hero__back:focus-visible {
+      outline: 2px solid var(--color-focus);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    .gob-hero__label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-ink-3);
+      letter-spacing: 0.04em;
+      margin-bottom: var(--space-md);
+    }
+
+    .gob-hero__title {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: var(--text-display-s);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--color-ink);
+      margin-bottom: var(--space-lg);
+      overflow-wrap: anywhere;
+      min-width: 0;
+    }
+
+    .gob-hero__meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: var(--space-md);
+    }
+
+    .gob-hero__repo {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-ink-3);
+      text-decoration: none;
+      transition: color var(--dur-short) var(--ease-out);
+    }
+    .gob-hero__repo:hover { color: var(--color-ink-2); }
+    .gob-hero__repo:focus-visible {
+      outline: 2px solid var(--color-focus);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    .gob-hero__stars {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-accent);
+    }
+
+    /* ── section wrapper ───────────────────────────────────────────── */
+    .gob-s {
+      padding-block: var(--space-2xl);
+      border-bottom: var(--rule-hairline);
+    }
+    .gob-s:last-of-type { border-bottom: none; }
+
+    /* ── section kicker heading ────────────────────────────────────── */
+    .gob-kicker {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-ink-3);
+      letter-spacing: 0.04em;
+      margin-bottom: var(--space-md);
+    }
+
+    /* ── what the user saw — two-column ────────────────────────────── */
+    .gob-seen {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: var(--space-md);
+      margin-top: var(--space-lg);
+    }
+
+    .gob-seen__col-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-ink-3);
+      letter-spacing: 0.03em;
+      margin-bottom: var(--space-xs);
+    }
+
+    .gob-code-plain {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      background: var(--color-paper-2);
+      border: var(--rule-hairline);
+      border-radius: var(--radius-card);
+      padding: var(--space-md);
+      overflow-x: auto;
+      white-space: pre;
+      line-height: 1.8;
+      color: var(--color-ink-2);
+      margin: 0;
+    }
+
+    .gob-error-block {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      background: var(--color-paper-2);
+      border: 1px solid var(--color-diff-del);
+      border-radius: var(--radius-card);
+      padding: var(--space-md);
+      overflow-x: auto;
+      white-space: pre;
+      line-height: 1.8;
+      color: var(--color-diff-del);
+      margin: 0;
+    }
+
+    /* ── constraint diagram ────────────────────────────────────────── */
+    .gob-constraint {
+      display: flex;
+      align-items: stretch;
+      gap: var(--space-lg);
+      margin-top: var(--space-lg);
+    }
+
+    .gob-constraint__box {
+      flex: 1;
+      border: var(--rule-hairline);
+      border-radius: var(--radius-card);
+      padding: var(--space-md) var(--space-lg);
+      background: var(--color-paper-2);
+    }
+
+    .gob-constraint__layer {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-ink-3);
+      letter-spacing: 0.04em;
+      margin-bottom: var(--space-2xs);
+    }
+
+    .gob-constraint__file {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-ink);
+      margin-bottom: var(--space-2xs);
+    }
+
+    .gob-constraint__desc {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-ink-3);
+      line-height: 1.55;
+    }
+
+    .gob-constraint__arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-family: var(--font-mono);
+      font-size: var(--text-xl);
+      color: var(--color-accent);
+    }
+
+    .gob-constraint__note {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-ink-3);
+      line-height: 1.6;
+      margin-top: var(--space-md);
+    }
+
+    /* ── three-part fix walkthrough ────────────────────────────────── */
+    .gob-fix {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xl);
+      margin-top: var(--space-md);
+    }
+
+    .gob-fix__part-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-ink-3);
+      letter-spacing: 0.03em;
+      margin-bottom: var(--space-xs);
+    }
+
+    .gob-diff-block {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      background: var(--color-paper-2);
+      border: var(--rule-hairline);
+      border-radius: var(--radius-card);
+      padding: var(--space-md) var(--space-lg);
+      overflow-x: auto;
+      white-space: pre;
+      line-height: 1.85;
+      margin: 0;
+    }
+
+    .gob-diff-block--secondary {
+      font-size: var(--text-xs);
+    }
+
+    /* ── diff line colours ─────────────────────────────────────────── */
+    .diff-add {
+      display: block;
+      color: var(--color-diff-add);
+    }
+
+    .diff-del {
+      display: block;
+      color: var(--color-diff-del);
+    }
+
+    .diff-ctx {
+      display: block;
+      color: var(--color-ink-3);
+    }
+
+    /* ── scope stat row ────────────────────────────────────────────── */
+    .gob-stats {
+      margin-top: var(--space-md);
+    }
+
+    .gob-stats__numbers {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: var(--space-xs) var(--space-sm);
+      font-family: var(--font-mono);
+      font-size: var(--text-base);
+      color: var(--color-ink-2);
+      margin-bottom: var(--space-sm);
+    }
+
+    .gob-stats__num {
+      color: var(--color-accent-dim);
+    }
+
+    .gob-stats__sep {
+      color: var(--color-ink-3);
+      user-select: none;
+    }
+
+    .gob-stats__files {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-ink-3);
+      line-height: 1.7;
+    }
+
+    /* ── what I learned ────────────────────────────────────────────── */
+    .gob-learned {
+      margin-top: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .gob-learned__item {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-ink-2);
+      line-height: 1.6;
+      padding-left: var(--space-lg);
+      position: relative;
+    }
+
+    .gob-learned__item::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--color-accent-dim);
+    }
+
+    /* ── links row ─────────────────────────────────────────────────── */
+    .gob-links {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-xs) var(--space-sm);
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+    }
+
+    .gob-links__link {
+      color: var(--color-accent);
+      text-decoration: none;
+      transition: color var(--dur-short) var(--ease-out);
+      white-space: nowrap;
+    }
+    .gob-links__link:hover { color: var(--color-ink); }
+    .gob-links__link:focus-visible {
+      outline: 2px solid var(--color-focus);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    .gob-links__sep {
+      color: var(--color-ink-3);
+      user-select: none;
+    }
+
+    /* ── CTA ───────────────────────────────────────────────────────── */
+    .gob-cta {
+      padding-block: var(--space-3xl);
+      border-top: var(--rule-hairline);
+    }
+
+    .gob-cta__statement {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: var(--text-display-s);
+      font-weight: 400;
+      line-height: 1.0;
+      letter-spacing: -0.015em;
+      color: var(--color-ink);
+      margin-bottom: var(--space-xl);
+      overflow-wrap: anywhere;
+      min-width: 0;
+    }
+
+    .gob-cta__links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+      align-items: center;
+    }
+
+    .gob-cta__link {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-ink-2);
+      text-decoration: none;
+      border: var(--rule-hairline);
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--radius-card);
+      transition:
+        color var(--dur-short) var(--ease-out),
+        border-color var(--dur-short) var(--ease-out);
+    }
+    .gob-cta__link:hover {
+      color: var(--color-ink);
+      border-color: var(--color-ink-2);
+    }
+    .gob-cta__link:focus-visible {
+      outline: 2px solid var(--color-focus);
+      outline-offset: 3px;
+    }
+    .gob-cta__link.is-primary {
+      background: var(--color-accent);
+      color: var(--color-accent-ink);
+      border-color: var(--color-accent);
+      font-weight: 500;
+    }
+    .gob-cta__link.is-primary:hover {
+      background: var(--color-ink);
+      border-color: var(--color-ink);
+      color: var(--color-paper);
+    }
+
+    /* ── footer ────────────────────────────────────────────────────── */
+    .site-footer {
+      border-top: var(--rule-hairline);
+      padding-block: var(--space-xl);
+    }
+
+    .footer__line {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-ink-3);
+      margin-bottom: var(--space-sm);
+    }
+
+    .footer__nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+      align-items: center;
+    }
+
+    .footer__nav a {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-ink-3);
+      text-decoration: none;
+      transition: color var(--dur-short) var(--ease-out);
+    }
+    .footer__nav a:hover { color: var(--color-ink-2); }
+    .footer__nav a:focus-visible {
+      outline: 2px solid var(--color-focus);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    .footer__copy {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-ink-3);
+      margin-left: auto;
+    }
+
+    /* ── responsive ────────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .container { padding-inline: var(--space-lg); }
+
+      .gob-seen {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .gob-constraint {
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--space-md);
+      }
+
+      .gob-constraint__arrow {
+        transform: rotate(90deg);
+        padding-block: var(--space-xs);
+      }
+
+      .gob-diff-block {
+        font-size: var(--text-xs);
+        padding: var(--space-md);
+      }
+
+      .gob-diff-block--secondary {
+        font-size: var(--text-xs);
+      }
+    }
+
+    @media (max-width: 414px) {
+      .gob-hero__title {
+        font-size: clamp(1.75rem, 7vw, 2.5rem);
+      }
+
+      .gob-cta__statement {
+        font-size: clamp(1.75rem, 6vw, 2.5rem);
+      }
+
+      .gob-cta__links {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ── nav ──────────────────────────────────────────────────────── -->
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a class="nav-name" href="/">Sibt-e-Ali</a>
+      <div class="nav-right">
+        <a class="nav-email" href="mailto:sibteali786@gmail.com">sibteali786@gmail.com</a>
+        <button
+          class="nav-toggle"
+          aria-expanded="false"
+          aria-controls="nav-menu"
+          aria-label="Toggle navigation menu"
+        >Menu</button>
+      </div>
+    </nav>
+    <nav class="nav-menu" id="nav-menu" hidden aria-label="Site pages">
+      <a href="/about.html">About</a>
+      <a href="/projects.html" aria-current="page">Projects</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- ── hero ──────────────────────────────────────────────────── -->
+    <section class="gob-hero" aria-labelledby="gob-title">
+      <div class="container">
+        <a class="gob-hero__back" href="/projects.html">&#8592; Projects</a>
+
+        <p class="gob-hero__label">Open source contribution &middot; cross-boundary env fix</p>
+
+        <h1 class="gob-hero__title" id="gob-title">go-blueprint</h1>
+
+        <div class="gob-hero__meta">
+          <a
+            class="gob-hero__repo"
+            href="https://github.com/Melkeydev/go-blueprint"
+            target="_blank"
+            rel="noopener noreferrer"
+          >github.com/Melkeydev/go-blueprint &#8599;</a>
+          <span class="gob-hero__stars">&#9733;&nbsp;8.9k</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── what the user saw ─────────────────────────────────────── -->
+    <section class="gob-s" aria-labelledby="s-bug">
+      <div class="container">
+        <h2 class="gob-kicker" id="s-bug">What the user saw</h2>
+
+        <div
+          class="gob-seen"
+          aria-label="Bug evidence: hardcoded fetch call and resulting browser error"
+        >
+          <div>
+            <p class="gob-seen__col-label">the broken call</p>
+            <pre class="gob-code-plain" aria-label="Hardcoded fetch to port 8080"><code>fetch('http://localhost:8080/')</code></pre>
+          </div>
+          <div>
+            <p class="gob-seen__col-label">browser console</p>
+            <pre class="gob-error-block" aria-label="Browser error output"><code>ERR_CONNECTION_REFUSED
+localhost:8080</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── why it wasn't simple ──────────────────────────────────── -->
+    <section class="gob-s" aria-labelledby="s-constraint">
+      <div class="container">
+        <h2 class="gob-kicker" id="s-constraint">Why it wasn&#8217;t simple</h2>
+
+        <div
+          class="gob-constraint"
+          role="img"
+          aria-label="Two-layer problem: Go program.go generates project files and must pass PORT to Vite layer app.tsx.tmpl which runs in the browser"
+        >
+          <div class="gob-constraint__box">
+            <p class="gob-constraint__layer">Go layer</p>
+            <p class="gob-constraint__file">program.go</p>
+            <p class="gob-constraint__desc">generates<br>project files</p>
+          </div>
+          <div class="gob-constraint__arrow" aria-hidden="true">&#8594;</div>
+          <div class="gob-constraint__box">
+            <p class="gob-constraint__layer">Vite layer</p>
+            <p class="gob-constraint__file">app.tsx.tmpl</p>
+            <p class="gob-constraint__desc">runs in<br>browser</p>
+          </div>
+        </div>
+
+        <p class="gob-constraint__note">
+          Vite blocks any env var without
+          <code style="font-family:var(--font-mono);font-size:0.85em;color:var(--color-accent-dim)">VITE_</code>
+          prefix.
+          <code style="font-family:var(--font-mono);font-size:0.85em;color:var(--color-accent-dim)">program.go</code>
+          had to write the bridge.
+        </p>
+      </div>
+    </section>
+
+    <!-- ── the fix ───────────────────────────────────────────────── -->
+    <section class="gob-s" aria-labelledby="s-fix">
+      <div class="container">
+        <h2 class="gob-kicker" id="s-fix">The fix</h2>
+
+        <div class="gob-fix">
+
+          <!-- Part 1 — program.go reads and bridges -->
+          <div>
+            <p class="gob-fix__part-label">program.go &#8212; reads root .env, writes frontend/.env</p>
+            <pre class="gob-diff-block" aria-label="Go code: reads PORT from root .env, writes VITE_PORT to frontend/.env"><code><span class="diff-ctx"> globalEnvPath := filepath.Join(projectPath, ".env")</span>
+<span class="diff-ctx"> vitePort := "8080" // Default fallback</span>
+<span class="diff-ctx"> if strings.HasPrefix(line, "PORT=") {</span>
+<span class="diff-ctx">   vitePort = strings.SplitN(line, "=", 2)[1]</span>
+<span class="diff-ctx"> }</span>
+<span class="diff-ctx"> frontendEnvContent := fmt.Sprintf("VITE_PORT=%s\n", vitePort)</span>
+<span class="diff-ctx"> os.WriteFile(filepath.Join(frontendPath, ".env"), ...)</span></code></pre>
+          </div>
+
+          <!-- Part 2 — template diff -->
+          <div>
+            <p class="gob-fix__part-label">app.tsx.tmpl &#8212; the visible change (react &amp; react+tailwind)</p>
+            <pre class="gob-diff-block" aria-label="Template diff: hardcoded 8080 replaced with VITE_PORT"><code><span class="diff-del">- fetch('http://localhost:8080/')</span>
+<span class="diff-add">+ fetch(`http://localhost:${import.meta.env.VITE_PORT}/`)</span></code></pre>
+          </div>
+
+          <!-- Part 3 — CI fix (secondary) -->
+          <div>
+            <p class="gob-fix__part-label">3 CI workflow files &#8212; trailing <code style="font-family:var(--font-mono);font-size:0.85em;color:var(--color-accent-dim)">/dev/null</code> was silently breaking builds</p>
+            <pre class="gob-diff-block gob-diff-block--secondary" aria-label="CI fix: trailing /dev/null argument removed from script command"><code><span class="diff-del">- script -q /dev/null -c "go run ..." /dev/null</span>
+<span class="diff-add">+ script -q /dev/null -c "go run ..."</span></code></pre>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── scope ─────────────────────────────────────────────────── -->
+    <section class="gob-s" aria-labelledby="s-scope">
+      <div class="container">
+        <h2 class="gob-kicker" id="s-scope">Scope</h2>
+
+        <div class="gob-stats">
+          <div class="gob-stats__numbers">
+            <span class="gob-stats__num">7 files</span>
+            <span class="gob-stats__sep" aria-hidden="true">&middot;</span>
+            <span class="gob-stats__num">+36 &#8722;5 lines</span>
+          </div>
+          <p class="gob-stats__files">
+            program.go &nbsp;&middot;&nbsp;
+            app.tsx.tmpl (&times;2) &nbsp;&middot;&nbsp;
+            3 CI workflows &nbsp;&middot;&nbsp;
+            react-vite.md
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── what I learned ────────────────────────────────────────── -->
+    <section class="gob-s" aria-labelledby="s-learned">
+      <div class="container">
+        <h2 class="gob-kicker" id="s-learned">What I learned</h2>
+
+        <ul class="gob-learned" aria-label="Four takeaways">
+          <li class="gob-learned__item">Vite&#8217;s <code style="font-family:var(--font-mono);font-size:0.9em;color:var(--color-accent-dim)">VITE_</code> prefix requirement and why it exists &#8212; security: don&#8217;t accidentally expose server env vars to the browser bundle.</li>
+          <li class="gob-learned__item">Go&#8217;s code generation pattern: <code style="font-family:var(--font-mono);font-size:0.9em;color:var(--color-accent-dim)">program.go</code> doesn&#8217;t just copy files, it reads and transforms env state at generation time.</li>
+          <li class="gob-learned__item">How to test GitHub Actions locally &#8212; asked in the PR, learned about <code style="font-family:var(--font-mono);font-size:0.9em;color:var(--color-accent-dim)">act</code>.</li>
+          <li class="gob-learned__item">Trailing <code style="font-family:var(--font-mono);font-size:0.9em;color:var(--color-accent-dim)">/dev/null</code> in <code style="font-family:var(--font-mono);font-size:0.9em;color:var(--color-accent-dim)">script -c</code> breaks CI &#8212; silent failure, hard to spot without running it.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ── links row ─────────────────────────────────────────────── -->
+    <section class="gob-s" aria-label="Source links">
+      <div class="container">
+        <div class="gob-links">
+          <a
+            class="gob-links__link"
+            href="https://github.com/Melkeydev/go-blueprint/issues/350"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Issue #350</a>
+          <span class="gob-links__sep" aria-hidden="true">&middot;</span>
+          <a
+            class="gob-links__link"
+            href="https://github.com/Melkeydev/go-blueprint/pull/355"
+            target="_blank"
+            rel="noopener noreferrer"
+          >PR #355</a>
+          <span class="gob-links__sep" aria-hidden="true">&middot;</span>
+          <a
+            class="gob-links__link"
+            href="https://github.com/Melkeydev/go-blueprint/commit/f13c8b708e2b7294d4214e891fd0b4fbb981d63b"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Commit f13c8b7</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA ────────────────────────────────────────────────────── -->
+    <section class="gob-cta" aria-labelledby="s-cta">
+      <div class="container">
+        <h2 class="gob-cta__statement" id="s-cta">
+          If you have a problem<br>worth solving &#8212;<br>let&#8217;s talk.
+        </h2>
+        <div class="gob-cta__links">
+          <a class="gob-cta__link is-primary" href="/contact.html">Get in touch</a>
+          <a class="gob-cta__link" href="/projects.html">All projects</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── footer ───────────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer__line">Building production software from Islamabad.</p>
+      <nav class="footer__nav" aria-label="Footer links">
+        <a href="mailto:sibteali786@gmail.com">Email</a>
+        <a href="https://github.com/sibteali786" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/syed-sibteali-baqar/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <span class="footer__copy">&#169; 2025</span>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="../nav.js"></script>
+
+</body>
+</html>
