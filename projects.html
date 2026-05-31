@@ -179,25 +179,6 @@
             </div>
           </li>
 
-          <!-- Zen Browser -->
-          <li class="project-supporting">
-            <div class="project-supporting__meta">
-              <span class="project-supporting__stack">JavaScript &#183; Firefox</span>
-              <span class="project-supporting__badge">Open source</span>
-            </div>
-            <div class="project-supporting__content">
-              <h3 class="project-supporting__title">Zen Browser</h3>
-              <p class="project-supporting__desc">
-                Active contributor to
-                <a href="https://github.com/zen-browser/desktop" target="_blank" rel="noopener noreferrer">Zen Browser</a>
-                &#8212; a modern minimalist wrapper around Firefox.
-                UI contributions and JavaScript systems work on one of the most
-                actively maintained open-source browser projects.
-              </p>
-              <a class="project-supporting__detail" href="projects/zen.html">Detail &#8594;</a>
-            </div>
-          </li>
-
           <!-- Wafa — in progress -->
           <li class="project-supporting">
             <div class="project-supporting__meta">
@@ -223,6 +204,43 @@
           </li>
 
         </ol>
+      </div>
+    </section>
+
+    <!-- ── open source contributions ───────────────────────────── -->
+    <section class="oss-section" aria-labelledby="oss-heading">
+      <div class="container">
+        <h2 class="section-label" id="oss-heading">Open Source</h2>
+
+        <article class="oss-card" aria-labelledby="oss-zen-title">
+          <div class="oss-card__header">
+            <h3 class="oss-card__project" id="oss-zen-title">zen-browser/desktop</h3>
+            <span class="oss-card__stars">&#9733; 42k+</span>
+          </div>
+
+          <p class="oss-card__bug">Sidebar flickered rapidly when dragging content to window edge in compact mode.</p>
+
+          <p class="oss-card__cause"><span class="oss-card__cause-label">Root cause</span><code class="oss-card__mono">dragover &#8594; expand &#8594; dragleave &#8594; collapse &#8594; repeat</code></p>
+
+          <p class="oss-card__fix">4-line guard using <code class="oss-card__mono">event.explicitOriginalTarget</code> to ignore <code class="oss-card__mono">dragleave</code> events fired from inside the sidebar&#8217;s own children.</p>
+
+          <pre class="oss-card__diff" aria-label="Patch diff"><code><span class="oss-diff__del">-  this._ignoreNextHover ||</span>
+<span class="oss-diff__add">+  this._ignoreNextHover ||</span>
+<span class="oss-diff__add">+  (event.type === 'dragleave' &amp;&amp;</span>
+<span class="oss-diff__add">+    event.explicitOriginalTarget !== target &amp;&amp;</span>
+<span class="oss-diff__add">+    target.contains?.(event.explicitOriginalTarget))</span></code></pre>
+
+          <p class="oss-card__links">
+            <a class="oss-card__link" href="https://github.com/zen-browser/desktop/issues/10942" target="_blank" rel="noopener noreferrer">Issue #10942</a>
+            <span class="oss-card__sep">&#183;</span>
+            <a class="oss-card__link" href="https://github.com/zen-browser/desktop/pull/11015" target="_blank" rel="noopener noreferrer">PR #11015</a>
+            <span class="oss-card__sep">&#183;</span>
+            <a class="oss-card__link" href="https://github.com/zen-browser/desktop/commit/d7faa54" target="_blank" rel="noopener noreferrer">Commit d7faa54</a>
+            <span class="oss-card__sep">&#183;</span>
+            <a class="oss-card__link oss-card__link--detail" href="projects/zen.html">Detail &#8594;</a>
+          </p>
+        </article>
+
       </div>
     </section>
 

@@ -1,600 +1,665 @@
-<!doctype html>
-<!-- Handled by Exflow.site -->
-<html
-  data-wf-page="68fcf76dce908baaeca052a1"
-  data-wf-site="68fcf76ace908baaeca05096"
-  data-wf-status="1"
-  lang="en"
-  data-wf-collection="68fcf76dce908baaeca0528e"
-  data-wf-item-slug="zen"
->
-  <head>
-    <meta charset="utf-8" />
-    <title>Syed&#x27;s Portfolio</title>
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <meta content="Webflow" name="generator" />
-    <link
-      href="../css/syeds-portfolio-a02089.webflow.shared.159f0f492.css"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <link href="https://fonts.googleapis.com" rel="preconnect" />
-    <link href="https://fonts.gstatic.com" rel="preconnect" />
-    <script
-      src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"
-      type="text/javascript"
-    ></script>
-    <script type="text/javascript">
-      WebFont.load({
-        google: {
-          families: [
-            "Inter:300,400,500,600,700",
-            "Manrope:300,400,500,600,700",
-            "Space Grotesk:500,600,700",
-          ],
-        },
-      });
-    </script>
-    <script type="text/javascript">
-      !(function (o, c) {
-        var n = c.documentElement,
-          t = " w-mod-";
-        ((n.className += t + "js"),
-          ("ontouchstart" in o ||
-            (o.DocumentTouch && c instanceof DocumentTouch)) &&
-            (n.className += t + "touch"));
-      })(window, document);
-    </script>
-    <link
-      href="../images/favicon.png"
-      rel="shortcut icon"
-      type="image/x-icon"
-    />
-    <link href="../images/app-icon.png" rel="apple-touch-icon" />
-    <style>
-      * {
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        -o-font-smoothing: antialiased;
+<!DOCTYPE html>
+<!-- Hallmark · macrostructure: Workbench · tone: technical-austere
+     theme: custom (dark / italic-serif / warm-amber) · design-system: design.md
+     note: field-notes page — single bug fix, zen-browser/desktop
+     pre-emit critique: P5 H5 E5 S5 R5 V4 -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Zen Browser drag-flicker fix — a 4-line guard against spurious dragleave events in compact mode. Open source contribution by Sibt-e-Ali Baqar.">
+  <title>Zen Browser · Sibt-e-Ali Baqar</title>
+
+  <link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../images/favicon-96x96.png" sizes="96x96" type="image/png">
+  <link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="../index.css">
+
+  <style>
+    /* ── zen field notes — workbench macrostructure ────────────────────
+       Single contribution page: no hero image, no case study structure.
+       Sections are tight and sequential — field notes, not a report.
+    ─────────────────────────────────────────────────────────────────── */
+
+    :root {
+      --color-diff-add: var(--color-terminal);     /* terminal green for + lines */
+      --color-diff-del: oklch(62% 0.18 20);        /* warm red for - lines */
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        transition-duration: 0ms !important;
+        animation-duration: 0ms !important;
+      }
+    }
+
+    /* ── hero ──────────────────────────────────────────────────────── */
+    .zen-hero {
+      padding-block: var(--space-3xl) var(--space-2xl);
+      border-bottom: var(--rule-hairline);
+    }
+
+    .zen-hero__back {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-ink-3);
+      text-decoration: none;
+      margin-bottom: var(--space-xl);
+      transition: color var(--dur-short) var(--ease-out);
+    }
+    .zen-hero__back:hover { color: var(--color-ink-2); }
+    .zen-hero__back:focus-visible {
+      outline: 2px solid var(--color-focus);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    .zen-hero__label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-ink-3);
+      letter-spacing: 0.04em;
+      margin-bottom: var(--space-md);
+    }
+
+    .zen-hero__title {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: var(--text-display-s);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--color-ink);
+      margin-bottom: var(--space-lg);
+      overflow-wrap: anywhere;
+      min-width: 0;
+    }
+
+    .zen-hero__meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: var(--space-md);
+    }
+
+    .zen-hero__repo {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-ink-3);
+      text-decoration: none;
+      transition: color var(--dur-short) var(--ease-out);
+    }
+    .zen-hero__repo:hover { color: var(--color-ink-2); }
+    .zen-hero__repo:focus-visible {
+      outline: 2px solid var(--color-focus);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    .zen-hero__stars {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-accent);
+    }
+
+    /* ── section wrapper ───────────────────────────────────────────── */
+    .zen-s {
+      padding-block: var(--space-2xl);
+      border-bottom: var(--rule-hairline);
+    }
+
+    .zen-s:last-of-type {
+      border-bottom: none;
+    }
+
+    /* ── section heading (kicker style) ────────────────────────────── */
+    .zen-kicker {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-ink-3);
+      letter-spacing: 0.04em;
+      margin-bottom: var(--space-md);
+    }
+
+    /* ── body text ─────────────────────────────────────────────────── */
+    .zen-prose {
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      color: var(--color-ink-2);
+      line-height: 1.65;
+      max-width: 65ch;
+    }
+
+    /* ── feedback loop diagram ─────────────────────────────────────── */
+    .zen-loop {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-2xs) var(--space-xs);
+      margin-top: var(--space-lg);
+    }
+
+    .zen-loop__event {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-ink-2);
+      background: var(--color-paper-2);
+      border: var(--rule-hairline);
+      padding: var(--space-3xs) var(--space-sm);
+      border-radius: var(--radius-card);
+      white-space: nowrap;
+    }
+
+    .zen-loop__state {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-ink-3);
+      background: var(--color-paper-2);
+      border: 1px dashed oklch(38% 0.015 75 / 0.6);
+      padding: var(--space-3xs) var(--space-sm);
+      border-radius: var(--radius-card);
+      white-space: nowrap;
+    }
+
+    .zen-loop__arrow {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-accent);
+      flex-shrink: 0;
+    }
+
+    .zen-loop__repeat {
+      width: 100%;
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-accent-dim);
+      margin-top: var(--space-sm);
+      padding-top: var(--space-xs);
+      border-top: 1px solid var(--color-rule);
+    }
+
+    /* ── two-column diff comparison ────────────────────────────────── */
+    .zen-compare {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: var(--space-lg);
+      margin-top: var(--space-lg);
+    }
+
+    .zen-compare__col-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-ink-3);
+      letter-spacing: 0.03em;
+      margin-bottom: var(--space-xs);
+    }
+
+    .zen-diff-block {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      background: var(--color-paper-2);
+      border: var(--rule-hairline);
+      border-radius: var(--radius-card);
+      padding: var(--space-md);
+      overflow-x: auto;
+      white-space: pre;
+      line-height: 1.8;
+      margin: 0;
+    }
+
+    .zen-compare__verdict {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-ink-3);
+      margin-top: var(--space-md);
+      grid-column: 1 / -1;
+    }
+
+    /* ── diff line colours ─────────────────────────────────────────── */
+    .diff-add {
+      display: block;
+      color: var(--color-diff-add);
+    }
+
+    .diff-del {
+      display: block;
+      color: var(--color-diff-del);
+    }
+
+    .diff-ctx {
+      display: block;
+      color: var(--color-ink-3);
+    }
+
+    /* ── the centrepiece patch ─────────────────────────────────────── */
+    .zen-patch__file {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-ink-3);
+      margin-bottom: var(--space-xs);
+    }
+
+    .zen-patch {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      background: var(--color-paper-2);
+      border: var(--rule-hairline);
+      border-radius: var(--radius-card);
+      padding: var(--space-lg) var(--space-xl);
+      overflow-x: auto;
+      white-space: pre;
+      line-height: 2;
+      margin: 0;
+    }
+
+    /* ── what I learned ────────────────────────────────────────────── */
+    .zen-learned {
+      margin-top: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .zen-learned__item {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-ink-2);
+      line-height: 1.6;
+      padding-left: var(--space-lg);
+      position: relative;
+    }
+
+    .zen-learned__item::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--color-accent-dim);
+    }
+
+    /* ── links row ─────────────────────────────────────────────────── */
+    .zen-links {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-xs) var(--space-sm);
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+    }
+
+    .zen-links__link {
+      color: var(--color-accent);
+      text-decoration: none;
+      transition: color var(--dur-short) var(--ease-out);
+      white-space: nowrap;
+    }
+    .zen-links__link:hover { color: var(--color-ink); }
+    .zen-links__link:focus-visible {
+      outline: 2px solid var(--color-focus);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    .zen-links__sep {
+      color: var(--color-ink-3);
+      user-select: none;
+    }
+
+    /* ── CTA ───────────────────────────────────────────────────────── */
+    .zen-cta {
+      padding-block: var(--space-3xl);
+      border-top: var(--rule-hairline);
+    }
+
+    .zen-cta__statement {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: var(--text-display-s);
+      font-weight: 400;
+      line-height: 1.0;
+      letter-spacing: -0.015em;
+      color: var(--color-ink);
+      margin-bottom: var(--space-xl);
+      overflow-wrap: anywhere;
+      min-width: 0;
+    }
+
+    .zen-cta__links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+      align-items: center;
+    }
+
+    .zen-cta__link {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-ink-2);
+      text-decoration: none;
+      border: var(--rule-hairline);
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--radius-card);
+      transition:
+        color var(--dur-short) var(--ease-out),
+        border-color var(--dur-short) var(--ease-out);
+    }
+    .zen-cta__link:hover {
+      color: var(--color-ink);
+      border-color: var(--color-ink-2);
+    }
+    .zen-cta__link:focus-visible {
+      outline: 2px solid var(--color-focus);
+      outline-offset: 3px;
+    }
+    .zen-cta__link.is-primary {
+      background: var(--color-accent);
+      color: var(--color-accent-ink);
+      border-color: var(--color-accent);
+      font-weight: 500;
+    }
+    .zen-cta__link.is-primary:hover {
+      background: var(--color-ink);
+      border-color: var(--color-ink);
+      color: var(--color-paper);
+    }
+
+    /* ── footer ────────────────────────────────────────────────────── */
+    .site-footer {
+      border-top: var(--rule-hairline);
+      padding-block: var(--space-xl);
+    }
+
+    .footer__line {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-ink-3);
+      margin-bottom: var(--space-sm);
+    }
+
+    .footer__nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+      align-items: center;
+    }
+
+    .footer__nav a {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-ink-3);
+      text-decoration: none;
+      transition: color var(--dur-short) var(--ease-out);
+    }
+    .footer__nav a:hover { color: var(--color-ink-2); }
+    .footer__nav a:focus-visible {
+      outline: 2px solid var(--color-focus);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    .footer__copy {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: var(--color-ink-3);
+      margin-left: auto;
+    }
+
+    /* ── responsive ────────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .container { padding-inline: var(--space-lg); }
+
+      .zen-compare {
+        grid-template-columns: minmax(0, 1fr);
       }
 
-      /* Task 7: Space Grotesk display + Inter body */
-      .heading-style-h1,
-      .heading-style-h2,
-      .heading-style-h3,
-      .heading-style-h4,
-      .heading-style-h5,
-      .heading-style-h6,
-      .stat-number,
-      .cta-heading-top,
-      .cta-heading-bottom {
-        font-family: "Space Grotesk", "Manrope", sans-serif;
-        letter-spacing: -0.01em;
+      .zen-compare__verdict {
+        grid-column: 1;
       }
-      body,
-      .text-size-medium,
-      .text-size-large,
-      .text-size-regular,
-      .text-size-small {
-        font-family: "Inter", "Manrope", sans-serif;
+
+      .zen-patch {
+        padding: var(--space-md);
+        font-size: var(--text-xs);
       }
-    </style>
-  </head>
-  <body class="body">
-    <div class="page-wrapper">
-      <div
-        data-animation="default"
-        class="navbar-component w-nav"
-        data-easing2="ease"
-        fs-scrolldisable-element="smart-nav"
-        data-easing="ease"
-        data-collapse="all"
-        data-w-id="d199289f-e495-5c49-2cd9-60a87f86a023"
-        role="banner"
-        data-duration="0"
-      >
-        <div class="navbar-container">
-          <a href="/" class="navbar-logo-link w-nav-brand"
-            ><img
-              src="../images/bc29e4ca38b1fbc3d718d13b683bfc3e_sibt-e-ali-20baqar.png"
-              loading="lazy"
-              width="Auto"
-              height="40"
-              alt=""
-              class="navbar-logo"
-          /></a>
-          <div class="navbar-wrapper">
-            <a
-              data-w-id="22384c17-123f-8d71-8e56-33428ac23afe"
-              href="/contact.html"
-              class="button is-alternate is-navbar w-inline-block"
-              ><div>Get in touch</div>
-              <div class="button-arrow w-embed">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink"
-                  aria-hidden="true"
-                  role="img"
-                  class="iconify iconify--ph"
-                  width="100%"
-                  height="100%"
-                  preserveAspectRatio="xMidYMid meet"
-                  viewBox="0 0 256 256"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M128 26a102 102 0 1 0 102 102A102.2 102.2 0 0 0 128 26Zm0 192a90 90 0 1 1 90-90a90.1 90.1 0 0 1-90 90Zm34-118v48a6 6 0 0 1-12 0v-33.5l-45.8 45.7a5.9 5.9 0 0 1-8.4-8.4l45.7-45.8H108a6 6 0 0 1 0-12h48a6 6 0 0 1 6 6Z"
-                  ></path>
-                </svg></div
-            ></a>
-            <nav role="navigation" class="navbar-menu w-nav-menu">
-              <div class="navbar-menu-wrapper">
-                <div class="navbar-links-wrapper">
-                  <a href="/" class="navbar-link w-nav-link">Home</a
-                  ><a href="/about.html" class="navbar-link w-nav-link">About</a
-                  ><a href="/projects.html" class="navbar-link w-nav-link"
-                    >Projects</a
-                  ><a href="/contact.html" class="navbar-link w-nav-link">Contact</a>
-                </div>
-                <div class="navbar-bottom">
-                  <div class="w-layout-grid navbar-social-list">
-                    <a
-                      href="https://github.com/sibteali786"
-                      target="_blank"
-                      class="navbar-social-link w-inline-block"
-                      ><div class="icon-xsmall w-embed">
-                        <svg
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            fill="currentColor"
-                            d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"
-                          />
-                        </svg></div></a
-                    ><a
-                      href="https://medium.com/@sibteali786"
-                      target="_blank"
-                      class="navbar-social-link w-inline-block"
-                      ><div class="icon-xsmall w-embed">
-                        <svg
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            fill="currentColor"
-                            d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"
-                          />
-                        </svg></div></a
-                    ><a
-                      href="https://x.com/SibtealiN"
-                      target="_blank"
-                      class="navbar-social-link w-inline-block"
-                      ><div class="icon-xsmall w-embed">
-                        <svg
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M17.1761 4H19.9362L13.9061 10.7774L21 20H15.4456L11.0951 14.4066L6.11723 20H3.35544L9.80517 12.7508L3 4H8.69545L12.6279 9.11262L17.1761 4ZM16.2073 18.3754H17.7368L7.86441 5.53928H6.2232L16.2073 18.3754Z"
-                            fill="currentColor"
-                          />
-                        </svg></div></a
-                    ><a
-                      href="https://www.linkedin.com/in/syed-sibteali-baqar/"
-                      target="_blank"
-                      class="navbar-social-link w-inline-block"
-                      ><div class="icon-xsmall w-embed">
-                        <svg
-                          width="100%"
-                          height="100%"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            fill-rule="evenodd"
-                            clip-rule="evenodd"
-                            d="M4.5 3C3.67157 3 3 3.67157 3 4.5V19.5C3 20.3284 3.67157 21 4.5 21H19.5C20.3284 21 21 20.3284 21 19.5V4.5C21 3.67157 20.3284 3 19.5 3H4.5ZM8.52076 7.00272C8.52639 7.95897 7.81061 8.54819 6.96123 8.54397C6.16107 8.53975 5.46357 7.90272 5.46779 7.00413C5.47201 6.15897 6.13998 5.47975 7.00764 5.49944C7.88795 5.51913 8.52639 6.1646 8.52076 7.00272ZM12.2797 9.76176H9.75971H9.7583V18.3216H12.4217V18.1219C12.4217 17.742 12.4214 17.362 12.4211 16.9819V16.9818V16.9816V16.9815V16.9812C12.4203 15.9674 12.4194 14.9532 12.4246 13.9397C12.426 13.6936 12.4372 13.4377 12.5005 13.2028C12.7381 12.3253 13.5271 11.7586 14.4074 11.8979C14.9727 11.9864 15.3467 12.3141 15.5042 12.8471C15.6013 13.1803 15.6449 13.5389 15.6491 13.8863C15.6605 14.9339 15.6589 15.9815 15.6573 17.0292V17.0294C15.6567 17.3992 15.6561 17.769 15.6561 18.1388V18.3202H18.328V18.1149C18.328 17.6629 18.3278 17.211 18.3275 16.7591V16.759V16.7588C18.327 15.6293 18.3264 14.5001 18.3294 13.3702C18.3308 12.8597 18.276 12.3563 18.1508 11.8627C17.9638 11.1286 17.5771 10.5211 16.9485 10.0824C16.5027 9.77019 16.0133 9.5691 15.4663 9.5466C15.404 9.54401 15.3412 9.54062 15.2781 9.53721L15.2781 9.53721L15.2781 9.53721C14.9984 9.52209 14.7141 9.50673 14.4467 9.56066C13.6817 9.71394 13.0096 10.0641 12.5019 10.6814C12.4429 10.7522 12.3852 10.8241 12.2991 10.9314L12.2991 10.9315L12.2797 10.9557V9.76176ZM5.68164 18.3244H8.33242V9.76733H5.68164V18.3244Z"
-                            fill="CurrentColor"
-                          />
-                        </svg></div
-                    ></a>
-                  </div>
-                </div>
-              </div>
-            </nav>
-            <div class="navbar-menu-button w-nav-button">
-              <div class="menu-icon">
-                <div class="menu-icon-wrapper">
-                  <div class="menu-icon-line-top"></div>
-                  <div class="menu-icon-line-middle">
-                    <div class="menu-icon-line-middle-top"></div>
-                    <div class="menu-icon-line-middle-base"></div>
-                  </div>
-                  <div class="menu-icon-line-bottom"></div>
-                </div>
-              </div>
-            </div>
-          </div>
+    }
+
+    @media (max-width: 414px) {
+      .zen-hero__title {
+        font-size: clamp(1.75rem, 7vw, 2.5rem);
+      }
+
+      .zen-cta__statement {
+        font-size: clamp(1.75rem, 6vw, 2.5rem);
+      }
+
+      .zen-cta__links {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ── nav ──────────────────────────────────────────────────────── -->
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a class="nav-name" href="/">Sibt-e-Ali</a>
+      <div class="nav-right">
+        <a class="nav-email" href="mailto:sibteali786@gmail.com">sibteali786@gmail.com</a>
+        <button
+          class="nav-toggle"
+          aria-expanded="false"
+          aria-controls="nav-menu"
+          aria-label="Toggle navigation menu"
+        >Menu</button>
+      </div>
+    </nav>
+    <nav class="nav-menu" id="nav-menu" hidden aria-label="Site pages">
+      <a href="/about.html">About</a>
+      <a href="/projects.html" aria-current="page">Projects</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- ── hero ──────────────────────────────────────────────────── -->
+    <section class="zen-hero" aria-labelledby="zen-title">
+      <div class="container">
+        <a class="zen-hero__back" href="/projects.html">&#8592; Projects</a>
+
+        <p class="zen-hero__label">Open source contribution &middot; co-authored fix</p>
+
+        <h1 class="zen-hero__title" id="zen-title">Zen Browser</h1>
+
+        <div class="zen-hero__meta">
+          <a
+            class="zen-hero__repo"
+            href="https://github.com/zen-browser/desktop"
+            target="_blank"
+            rel="noopener noreferrer"
+          >github.com/zen-browser/desktop &#8599;</a>
+          <span class="zen-hero__stars">&#9733;&nbsp;42.4k</span>
         </div>
       </div>
-      <div class="main-wrapper">
-        <header class="section-portfolio-header">
-          <div class="padding-global">
-            <div class="container-large">
-              <div class="portfolio-header">
-                <div class="section-padding-large max-width-full">
-                  <div class="w-layout-grid portfolio-header-content-wrapper">
-                    <div
-                      id="w-node-a88256af-7997-c642-0ddc-1058084d3516-eca052a1"
-                      class="portfolio-header-content-left"
-                    >
-                      <div class="margin-bottom margin-small">
-                        <h1
-                          data-w-id="a88256af-7997-c642-0ddc-1058084d3518"
-                          style="opacity: 0"
-                          class="heading-style-h2 text-allcaps"
-                        >
-                          Zen
-                        </h1>
-                      </div>
-                      <div
-                        data-w-id="a88256af-7997-c642-0ddc-1058084d351a"
-                        style="opacity: 0"
-                        class="text-size-medium"
-                      >
-                        Actively contribute to UI issues in Zen desktop to
-                        utilize my Javascript skills to work on one of modern
-                        favourite tools.
-                      </div>
-                      <div
-                        data-w-id="a88256af-7997-c642-0ddc-1058084d351c"
-                        style="opacity: 0"
-                        class="portfolio-header-tags-list"
-                      >
-                        <div class="portfolio-tag-item">
-                          <div>Systems Programming</div>
-                        </div>
-                        <div class="portfolio-tag-item">
-                          <div>Open Source</div>
-                        </div>
-                        <div class="portfolio-tag-item w-condition-invisible">
-                          <div class="w-dyn-bind-empty"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      id="w-node-a88256af-7997-c642-0ddc-1058084d3526-eca052a1"
-                      data-w-id="a88256af-7997-c642-0ddc-1058084d3526"
-                      style="opacity: 0"
-                      class="w-layout-grid portfolio-header-content-list"
-                    >
-                      <div
-                        id="w-node-a88256af-7997-c642-0ddc-1058084d3527-eca052a1"
-                        class="portfolio-header-item"
-                      >
-                        <div class="margin-bottom margin-tiny">
-                          <h6>Client</h6>
-                        </div>
-                        <div>Zen</div>
-                      </div>
-                      <div
-                        id="w-node-a88256af-7997-c642-0ddc-1058084d352d-eca052a1"
-                        class="portfolio-header-item"
-                      >
-                        <div class="margin-bottom margin-tiny">
-                          <h6>Date</h6>
-                        </div>
-                        <div class="w-dyn-bind-empty"></div>
-                      </div>
-                      <div
-                        id="w-node-a88256af-7997-c642-0ddc-1058084d3533-eca052a1"
-                        class="portfolio-header-item"
-                      >
-                        <div class="margin-bottom margin-tiny">
-                          <h6>Role</h6>
-                        </div>
-                        <div>Open Source Contributor</div>
-                      </div>
-                      <div
-                        id="w-node-a88256af-7997-c642-0ddc-1058084d3539-eca052a1"
-                        class="portfolio-header-item"
-                      >
-                        <div class="margin-bottom margin-tiny">
-                          <h6>Website</h6>
-                        </div>
-                        <a
-                          href="https://zen-browser.app/"
-                          class="text-link text-colour-white"
-                          >Zen</a
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            data-w-id="a88256af-7997-c642-0ddc-1058084d353f"
-            style="opacity: 0"
-            class="portfolio-header-background-image-wrapper"
-          >
-            <div class="portfolio-header-background-image-overlay"></div>
-            <img
-              src="../images/screenshot-20from-202025-11-04-2023-00-45.png"
-              loading="lazy"
-              alt=""
-              sizes="100vw"
-              srcset="
-                ../images/screenshot-20from-202025-11-04-2023-00-45-p-500.png   500w,
-                ../images/screenshot-20from-202025-11-04-2023-00-45-p-800.png   800w,
-                ../images/screenshot-20from-202025-11-04-2023-00-45-p-1080.png 1080w,
-                ../images/screenshot-20from-202025-11-04-2023-00-45.png        1293w
-              "
-              class="portfolio-header-background-image"
-            />
-          </div>
-        </header>
-        <section class="section-about-project background-black">
-          <div class="padding-global">
-            <div class="container-large">
-              <div class="section-padding-large padding-bottom-0">
-                <div class="w-layout-grid about-project-component">
-                  <div
-                    id="w-node-_056cf0ad-be6d-2031-ab77-36ff76b7bc11-eca052a1"
-                    class="about-project-content-left"
-                  >
-                    <h2
-                      data-w-id="056cf0ad-be6d-2031-ab77-36ff76b7bc12"
-                      style="opacity: 0"
-                      class="heading-style-h2 text-allcaps"
-                    >
-                      Poductivity at its peak
-                    </h2>
-                  </div>
-                  <div
-                    id="w-node-_056cf0ad-be6d-2031-ab77-36ff76b7bc14-eca052a1"
-                    class="about-project-content-right"
-                  >
-                    <p
-                      data-w-id="056cf0ad-be6d-2031-ab77-36ff76b7bc15"
-                      style="opacity: 0"
-                      class="text-size-medium text-colour-grey"
-                    >
-                      Zen is packed with features that help you stay productive
-                      and focused. Browsers should be tools that help you get
-                      things done, not distractions that keep you from your
-                      work.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section class="section-project-showcase background-black">
-          <div class="padding-global">
-            <div class="container-large">
-              <div class="section-padding-large">
-                <div
-                  data-w-id="4f693294-cad1-9363-5740-820ebbf80132"
-                  style="opacity: 0"
-                  class="gallery-component"
-                >
-                  <div
-                    data-delay="4000"
-                    data-animation="slide"
-                    class="gallery-slider w-slider"
-                    data-autoplay="false"
-                    data-easing="ease"
-                    data-hide-arrows="false"
-                    data-disable-swipe="false"
-                    data-autoplay-limit="0"
-                    data-nav-spacing="3"
-                    data-duration="500"
-                    data-infinite="false"
-                  >
-                    <div class="gallery-mask w-slider-mask">
-                      <div
-                        data-w-id="4f693294-cad1-9363-5740-820ebbf80135"
-                        class="gallery-slide w-slide"
-                      >
-                        <div class="gallery-image-wrapper">
-                          <img
-                            src="../images/6191a88a1c0e39463c2bf022_placeholder-image.svg"
-                            loading="lazy"
-                            alt=""
-                            class="gallery-image w-dyn-bind-empty"
-                          />
-                        </div>
-                      </div>
-                      <div
-                        data-w-id="4f693294-cad1-9363-5740-820ebbf80138"
-                        class="gallery-slide w-slide"
-                      >
-                        <div class="gallery-image-wrapper">
-                          <img
-                            src="../images/6191a88a1c0e39463c2bf022_placeholder-image.svg"
-                            loading="lazy"
-                            alt=""
-                            class="gallery-image w-dyn-bind-empty"
-                          />
-                        </div>
-                      </div>
-                      <div
-                        data-w-id="4f693294-cad1-9363-5740-820ebbf8013b"
-                        class="gallery-slide w-slide"
-                      >
-                        <div class="gallery-image-wrapper">
-                          <img
-                            src="../images/6191a88a1c0e39463c2bf022_placeholder-image.svg"
-                            loading="lazy"
-                            alt=""
-                            class="gallery-image w-dyn-bind-empty"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section
-          data-w-id="c7a48850-583e-560b-556b-43b7a35cd7f8"
-          class="section-banner-cta"
-        >
-          <div class="section-padding-large">
-            <a href="#" class="banner-cta-component w-inline-block"
-              ><h2 class="cta-heading-top">READY TO SCALE YOUR PLATFORM?</h2>
-              <h2 class="cta-heading-bottom">
-                LET’S BUILD SOMETHING THAT DELIVERS RESULTS
-              </h2></a
-            >
-          </div>
-        </section>
-        <footer
-          data-w-id="5d53571d-05a3-3001-8aed-4eb278bd7aaf"
-          class="footer-component"
-        >
-          <div class="padding-global">
-            <div class="container-large">
-              <div class="padding-top padding-xxlarge">
-                <div class="padding-bottom padding-large">
-                  <div class="w-layout-grid footer-top-wrapper">
-                    <div class="footer-left-wrapper">
-                      <div class="margin-bottom margin-medium">
-                        <a href="/" class="footer-logo-link w-nav-brand"
-                          ><img
-                            src="../images/bc29e4ca38b1fbc3d718d13b683bfc3e_sibt-e-ali-20baqar.png"
-                            loading="lazy"
-                            alt=""
-                            height="40"
-                            class="footer-logo"
-                        /></a>
-                      </div>
-                      <div class="footer-details-wrapper">
-                        <div class="margin-bottom margin-tiny">
-                          <div
-                            class="text-size-regular weight-semibold text-colour-grey"
-                          >
-                            Address:
-                          </div>
-                        </div>
-                        <div class="margin-bottom margin-small">
-                          <div class="text-size-small">
-                            Street 4, F-15/2, Islamabad
-                          </div>
-                        </div>
-                        <div class="margin-bottom margin-tiny">
-                          <div
-                            class="text-size-regular weight-semibold text-colour-grey"
-                          >
-                            Contact:
-                          </div>
-                        </div>
-                        <div class="text-size-small">
-                          <a href="#" class="link-2">Email me now on </a
-                          ><a href="mailto:info@profilex.com" class="link"
-                            >sibteali786@gmail.com</a
-                          >
-                        </div>
-                      </div>
-                    </div>
-                    <div class="w-layout-grid footer-menu-wrapper">
-                      <div
-                        id="w-node-_5d53571d-05a3-3001-8aed-4eb278bd7ac9-78bd7aaf"
-                        class="footer-link-list"
-                      >
-                        <a href="/" class="footer-link">Home</a
-                        ><a href="/about.html" class="footer-link">About</a
-                        ><a href="/projects.html" class="footer-link">Projects</a
-                        ><a href="/projects.html" class="footer-link">Project CMS</a
-                        ><a href="/contact.html" class="footer-link">Contact</a>
-                      </div>
-                      <div
-                        id="w-node-_5d53571d-05a3-3001-8aed-4eb278bd7ad2-78bd7aaf"
-                        class="footer-link-list"
-                      >
-                        <a
-                          href="https://github.com/sibteali786"
-                          target="_blank"
-                          class="footer-link"
-                          >Github</a
-                        ><a
-                          href="https://www.instagram.com/"
-                          target="_blank"
-                          class="footer-link"
-                          >Instagram</a
-                        ><a
-                          href="https://x.com/SibtealiN"
-                          target="_blank"
-                          class="footer-link"
-                          >X / Twitter</a
-                        ><a
-                          href="https://www.linkedin.com/in/syed-sibteali-baqar/"
-                          target="_blank"
-                          class="footer-link"
-                          >LinkedIn</a
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="line-divider"></div>
-                <div class="padding-vertical padding-medium">
-                  <div class="footer-bottom">
-                    <div class="footer-credit-text">
-                      © 2025 Sibteali Baqar-
-                      <a href="/utility-pages/licenses"
-                        ><span class="text-span-6">Licensing</span></a
-                      >
-                    </div>
-                    <div class="footer-credit-text">
-                      Designed by
-                      <a
-                        href="https://www.influxdigital.com/"
-                        target="_blank"
-                        class="link-3"
-                        ><span class="influx">Influx Digital</span></a
-                      >
-                      - Powered by
-                      <a href="https://webflow.com/" target="_blank"
-                        ><span class="webflow">Webflow</span></a
-                      >
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </footer>
+    </section>
+
+    <!-- ── the bug ───────────────────────────────────────────────── -->
+    <section class="zen-s" aria-label="The bug">
+      <div class="container">
+        <p class="zen-prose">
+          Compact Mode. Drag text or a URL toward the window edge to
+          reveal the sidebar. The sidebar flickers &#8212; cycling rapidly
+          between visible and hidden. Drag-and-drop completely unusable.
+          Reported on Windows x64, version&nbsp;1.17b, issue&nbsp;#10942.
+        </p>
       </div>
+    </section>
+
+    <!-- ── root cause ────────────────────────────────────────────── -->
+    <section class="zen-s" aria-labelledby="s-cause">
+      <div class="container">
+        <h2 class="zen-kicker" id="s-cause">Root cause</h2>
+
+        <p class="zen-prose">
+          Expanding the sidebar during
+          <code style="font-family:var(--font-mono);font-size:0.85em;color:var(--color-accent-dim)">dragover</code>
+          changes the DOM boundaries. The browser fires a spurious
+          <code style="font-family:var(--font-mono);font-size:0.85em;color:var(--color-accent-dim)">dragleave</code>
+          because the cursor is suddenly &#8220;outside&#8221; the element it just
+          expanded into. That triggers a collapse &#8212; which fires another
+          <code style="font-family:var(--font-mono);font-size:0.85em;color:var(--color-accent-dim)">dragover</code>
+          &#8212; and the loop repeats faster than the eye can track.
+        </p>
+
+        <div
+          class="zen-loop"
+          role="img"
+          aria-label="Feedback loop: dragover triggers expand, expand triggers dragleave, dragleave triggers collapse, collapse triggers dragover again"
+        >
+          <span class="zen-loop__event">dragover</span>
+          <span class="zen-loop__arrow" aria-hidden="true">&#8594;</span>
+          <span class="zen-loop__state">[expand]</span>
+          <span class="zen-loop__arrow" aria-hidden="true">&#8594;</span>
+          <span class="zen-loop__event">dragleave</span>
+          <span class="zen-loop__arrow" aria-hidden="true">&#8594;</span>
+          <span class="zen-loop__state">[collapse]</span>
+          <span class="zen-loop__arrow" aria-hidden="true">&#8594;</span>
+          <span class="zen-loop__event">dragover</span>
+          <span class="zen-loop__arrow" aria-hidden="true">&#8594;</span>
+          <span class="zen-loop__state">&#8230;</span>
+          <p class="zen-loop__repeat" aria-hidden="true">&#x21BA;&ensp;repeats until drag ends</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── two fixes ─────────────────────────────────────────────── -->
+    <section class="zen-s" aria-labelledby="s-compare">
+      <div class="container">
+        <h2 class="zen-kicker" id="s-compare">Two fixes</h2>
+
+        <div class="zen-compare">
+
+          <div>
+            <p class="zen-compare__col-label">my PR &#8212; debounce</p>
+            <pre class="zen-diff-block" aria-label="Debounce approach"><code><span class="diff-ctx"> handleDragleave(event) {</span>
+<span class="diff-add">+  this._isDragging = true;</span>
+<span class="diff-add">+  clearTimeout(this._debounceTimer);</span>
+<span class="diff-add">+  this._debounceTimer = setTimeout(</span>
+<span class="diff-add">+    () =&gt; this._collapse(), 150);</span>
+<span class="diff-ctx"> }</span></code></pre>
+          </div>
+
+          <div>
+            <p class="zen-compare__col-label">what shipped &#8212; contains() check</p>
+            <pre class="zen-diff-block" aria-label="Contains check — what the maintainer shipped"><code><span class="diff-del">-  this._ignoreNextHover</span>
+<span class="diff-add">+  this._ignoreNextHover ||</span>
+<span class="diff-add">+  (event.type === 'dragleave' &amp;&amp;</span>
+<span class="diff-add">+    event.explicitOriginalTarget !== target &amp;&amp;</span>
+<span class="diff-add">+    target.contains?.(event.explicitOriginalTarget))</span></code></pre>
+          </div>
+
+          <p class="zen-compare__verdict">Both work. One addresses the cause.</p>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── the actual diff ───────────────────────────────────────── -->
+    <section class="zen-s" aria-labelledby="s-patch">
+      <div class="container">
+        <h2 class="zen-kicker" id="s-patch">The patch</h2>
+
+        <p class="zen-patch__file">src/zen/compact-mode/ZenCompactMode.mjs &ensp;+4 &#8722;1</p>
+
+        <pre class="zen-patch" aria-label="Commit diff — ZenCompactMode.mjs, 4 lines added, 1 removed"><code><span class="diff-del">-  this._ignoreNextHover</span>
+<span class="diff-add">+  this._ignoreNextHover ||</span>
+<span class="diff-add">+  (event.type === 'dragleave' &amp;&amp;</span>
+<span class="diff-add">+    event.explicitOriginalTarget !== target &amp;&amp;</span>
+<span class="diff-add">+    target.contains?.(event.explicitOriginalTarget))</span></code></pre>
+      </div>
+    </section>
+
+    <!-- ── what I learned ────────────────────────────────────────── -->
+    <section class="zen-s" aria-labelledby="s-learned">
+      <div class="container">
+        <h2 class="zen-kicker" id="s-learned">What I learned</h2>
+
+        <ul class="zen-learned" aria-label="Four takeaways">
+          <li class="zen-learned__item">Browser Toolbox + log breakpoints for DOM event debugging.</li>
+          <li class="zen-learned__item"><code style="font-family:var(--font-mono);font-size:0.9em;color:var(--color-accent-dim)">explicitOriginalTarget</code> vs <code style="font-family:var(--font-mono);font-size:0.9em;color:var(--color-accent-dim)">target</code> in Firefox&#8217;s event model.</li>
+          <li class="zen-learned__item">Debouncing can solve the symptom; <code style="font-family:var(--font-mono);font-size:0.9em;color:var(--color-accent-dim)">contains()</code> checks solve the cause.</li>
+          <li class="zen-learned__item">When a maintainer overrides your fix, ask why &#8212; the answer is usually worth more than the merge.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ── links row ─────────────────────────────────────────────── -->
+    <section class="zen-s" aria-label="Source links">
+      <div class="container">
+        <div class="zen-links">
+          <a
+            class="zen-links__link"
+            href="https://github.com/zen-browser/desktop/issues/10942"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Issue #10942</a>
+          <span class="zen-links__sep" aria-hidden="true">&middot;</span>
+          <a
+            class="zen-links__link"
+            href="https://github.com/zen-browser/desktop/pull/11015"
+            target="_blank"
+            rel="noopener noreferrer"
+          >PR #11015</a>
+          <span class="zen-links__sep" aria-hidden="true">&middot;</span>
+          <a
+            class="zen-links__link"
+            href="https://github.com/zen-browser/desktop/commit/d7faa54"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Commit d7faa54</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA ────────────────────────────────────────────────────── -->
+    <section class="zen-cta" aria-labelledby="s-cta">
+      <div class="container">
+        <h2 class="zen-cta__statement" id="s-cta">
+          If you have a problem<br>worth solving &#8212;<br>let&#8217;s talk.
+        </h2>
+        <div class="zen-cta__links">
+          <a class="zen-cta__link is-primary" href="/contact.html">Get in touch</a>
+          <a class="zen-cta__link" href="/projects.html">All projects</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── footer ───────────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer__line">Building production software from Islamabad.</p>
+      <nav class="footer__nav" aria-label="Footer links">
+        <a href="mailto:sibteali786@gmail.com">Email</a>
+        <a href="https://github.com/sibteali786" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/syed-sibteali-baqar/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <span class="footer__copy">&#169; 2025</span>
+      </nav>
     </div>
-    <script
-      src="../js/jquery.js?site=68fcf76ace908baaeca05096"
-      type="text/javascript"
-    ></script>
-    <script
-      src="../js/webflow.schunk.36b8fb49256177c8.js"
-      type="text/javascript"
-    ></script>
-    <script
-      src="../js/webflow.schunk.09a00a21d2c0230a.js"
-      type="text/javascript"
-    ></script>
-    <script src="../js/webflow-script-3.js" type="text/javascript"></script>
-  </body>
+  </footer>
+
+  <script src="../nav.js"></script>
+
+</body>
 </html>

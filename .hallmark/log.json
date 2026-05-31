@@ -1,6 +1,16 @@
 [
   {
     "date": "2026-05-31",
+    "macrostructure": "Workbench",
+    "theme": "custom",
+    "theme_axes": "dark / italic-serif / warm-amber",
+    "enrichment": "none (typography only) — CSS feedback-loop diagram",
+    "brief": "Sibt-e-Ali portfolio — zen-browser/desktop drag-flicker fix, field notes page",
+    "scope": "projects/zen.html",
+    "note": "open source contribution variant — no hero image, diff centrepiece, feedback-loop diagram, two-column fix comparison"
+  },
+  {
+    "date": "2026-05-31",
     "macrostructure": "Catalogue",
     "theme": "custom",
     "theme_axes": "dark / italic-serif / warm-amber",
