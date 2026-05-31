@@ -429,6 +429,7 @@ ul, ol { list-style: none; }
   white-space: nowrap;
 }
 .proj__link:hover { color: var(--color-ink); }
+.proj__link + .proj__link { margin-inline-start: var(--space-sm); }
 
 /* ═══════════════════════════════════════════════════════════════════
    APPROACH
