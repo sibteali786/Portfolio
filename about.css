@@ -28,7 +28,7 @@
 
 .aph__name {
   font-family: var(--font-display);
-  font-style: italic;
+  font-weight: 700;
   font-size: var(--text-display-s);
   line-height: 1.0;
   letter-spacing: -0.03em;
@@ -110,7 +110,7 @@
 
 .exp__role {
   font-family: var(--font-display);
-  font-style: italic;
+  font-weight: 700;
   font-size: var(--text-xl);
   color: var(--color-ink);
   line-height: 1.15;
@@ -179,7 +179,7 @@
 
 .edu__degree {
   font-family: var(--font-display);
-  font-style: italic;
+  font-weight: 700;
   font-size: var(--text-xl);
   color: var(--color-ink);
   line-height: 1.15;
@@ -219,7 +219,7 @@
 
 .award__title {
   font-family: var(--font-display);
-  font-style: italic;
+  font-weight: 700;
   font-size: var(--text-lg);
   color: var(--color-ink);
   line-height: 1.2;

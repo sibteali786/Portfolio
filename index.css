@@ -80,7 +80,7 @@ ul, ol { list-style: none; }
 
 .nav-name {
   font-family: var(--font-display);
-  font-style: italic;
+  font-weight: 700;
   font-size: var(--text-md);
   color: var(--color-ink);
   text-decoration: none;
@@ -188,7 +188,7 @@ ul, ol { list-style: none; }
 
 .hero__name {
   font-family: var(--font-display);
-  font-style: italic;
+  font-weight: 700;
   font-size: var(--text-display);
   line-height: 1.0;
   letter-spacing: -0.03em;
@@ -270,7 +270,7 @@ ul, ol { list-style: none; }
 .stat__num {
   display: block;
   font-family: var(--font-display);
-  font-style: italic;
+  font-weight: 700;
   font-size: var(--text-3xl);
   color: var(--color-accent);
   line-height: 1.0;
@@ -374,7 +374,7 @@ ul, ol { list-style: none; }
 
 .proj__title {
   font-family: var(--font-display);
-  font-style: italic;
+  font-weight: 700;
   font-size: var(--text-xl);
   color: var(--color-ink);
   margin-block-end: var(--space-sm);
@@ -455,7 +455,7 @@ ul, ol { list-style: none; }
 
 .approach__thesis {
   font-family: var(--font-display);
-  font-style: italic;
+  font-weight: 700;
   font-size: var(--text-xl);
   color: var(--color-ink);
   line-height: 1.2;
@@ -606,7 +606,7 @@ ul, ol { list-style: none; }
 
 .contact__statement {
   font-family: var(--font-display);
-  font-style: italic;
+  font-weight: 700;
   font-size: var(--text-display-s);
   color: var(--color-ink);
   line-height: 1.1;

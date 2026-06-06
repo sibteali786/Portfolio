@@ -26,7 +26,7 @@
 
 .cpg__heading {
   font-family: var(--font-display);
-  font-style: italic;
+  font-weight: 700;
   font-size: var(--text-display);
   line-height: 1.0;
   letter-spacing: -0.03em;
@@ -76,7 +76,7 @@
 .eh__link {
   display: block;
   font-family: var(--font-display);
-  font-style: italic;
+  font-weight: 700;
   font-size: clamp(1.75rem, 4vw + 0.5rem, 3.5rem);
   line-height: 1.05;
   letter-spacing: -0.03em;

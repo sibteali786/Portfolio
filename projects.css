@@ -21,7 +21,7 @@
 
 .projects-header__title {
   font-family: var(--font-display);
-  font-style: italic;
+  font-weight: 700;
   font-size: var(--text-display-s);
   line-height: 1.0;
   letter-spacing: -0.03em;
@@ -109,7 +109,7 @@
 
 .project-featured__title {
   font-family: var(--font-display);
-  font-style: italic;
+  font-weight: 700;
   font-size: var(--text-display-s);
   line-height: 1.05;
   letter-spacing: -0.03em;
@@ -219,7 +219,7 @@
 
 .project-supporting__title {
   font-family: var(--font-display);
-  font-style: italic;
+  font-weight: 700;
   font-size: var(--text-xl);
   color: var(--color-ink);
   line-height: 1.15;
