@@ -33,9 +33,12 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        transition-duration: 0ms !important;
-        animation-duration: 0ms !important;
+      .gob-hero__back,
+      .gob-hero__repo,
+      .gob-links__link,
+      .gob-cta__link,
+      .footer__nav a {
+        transition: none;
       }
     }
 

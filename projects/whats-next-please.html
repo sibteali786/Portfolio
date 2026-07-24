@@ -30,9 +30,12 @@
     ─────────────────────────────────────────────────────────────────── */
 
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        transition-duration: 0ms !important;
-        animation-duration: 0ms !important;
+      .cs-back,
+      .cs-meta-item__link,
+      .cs-screenshots__img,
+      .cs-cta__link,
+      .footer__nav a {
+        transition: none;
       }
     }
 
@@ -188,10 +191,18 @@
       width: 100%;
       height: auto;
       display: block;
-      opacity: 0.85;
-      transition: opacity var(--dur-mid) var(--ease-out);
+      opacity: 1;
     }
-    .cs-screenshots__figure:hover .cs-screenshots__img { opacity: 1; }
+
+    @media (hover: hover) and (pointer: fine) {
+      .cs-screenshots__img {
+        opacity: 0.85;
+        transition: opacity var(--dur-mid) var(--ease-out);
+      }
+      .cs-screenshots__figure:hover .cs-screenshots__img {
+        opacity: 1;
+      }
+    }
 
     /* ── content sections ──────────────────────────────────────────── */
     .cs-s {

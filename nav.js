@@ -49,11 +49,61 @@
   });
 })();
 
+/* height is the deliberately-chosen animated property below (see the
+   comment above .proj__arch in index.css for why transform/opacity-only
+   alternatives were rejected). */
+/* ── animated open/close for architecture-notes disclosures ─────────── */
+(function () {
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion) return;
+
+  var detailsList = document.querySelectorAll('.proj__details, .project-featured__details');
+
+  detailsList.forEach(function (details) {
+    var content = details.querySelector('.proj__arch, .project-featured__arch');
+    var summary = details.querySelector('summary');
+    if (!content || !summary) return;
+
+    summary.addEventListener('click', function (e) {
+      e.preventDefault();
+
+      if (details.open) {
+        content.style.height = content.scrollHeight + 'px';
+        requestAnimationFrame(function () {
+          content.style.height = '0px';
+          content.style.opacity = '0';
+        });
+        content.addEventListener('transitionend', function handler(ev) {
+          if (ev.propertyName !== 'height') return;
+          details.open = false;
+          content.style.height = '';
+          content.removeEventListener('transitionend', handler);
+        });
+      } else {
+        details.open = true;
+        content.style.height = '0px';
+        content.style.opacity = '0';
+        requestAnimationFrame(function () {
+          content.style.height = content.scrollHeight + 'px';
+          content.style.opacity = '1';
+        });
+        content.addEventListener('transitionend', function handler(ev) {
+          if (ev.propertyName !== 'height') return;
+          content.style.height = 'auto';
+          content.removeEventListener('transitionend', handler);
+        });
+      }
+    });
+  });
+})();
+
 /* ── scroll-reveal for work cards + count-up for the dominant stat ──── */
 (function () {
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  var cards = document.querySelectorAll('.proj--featured, .proj--supporting');
+  var cards = document.querySelectorAll(
+    '.proj--featured, .proj--supporting, .project-featured, .project-supporting, .oss-card, .exp-item'
+  );
   if (cards.length && 'IntersectionObserver' in window && !reduceMotion) {
     cards.forEach(function (c) { c.classList.add('reveal-pending'); });
     {

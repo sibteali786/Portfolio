@@ -77,12 +77,24 @@
   top: calc(56px + var(--space-lg));
 }
 
+.project-featured__figure-link {
+  display: block;
+  cursor: pointer;
+}
+
 .project-featured__img {
   width: 100%;
   display: block;
   aspect-ratio: 16 / 10;
   object-fit: cover;
   object-position: top;
+  transition: transform var(--dur-mid) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .project-featured__figure-link:hover .project-featured__img {
+    transform: scale(1.02);
+  }
 }
 
 /* content elements */
@@ -138,6 +150,10 @@
 .project-featured__details summary:hover { color: var(--color-ink-2); }
 .project-featured__details[open] summary { color: var(--color-ink-2); }
 
+/* height is intentionally the animated property here, not transform/opacity —
+   evaluated grid-template-rows and interpolate-size alternatives, both
+   require either a markup restructure or don't actually avoid layout cost.
+   Accepted: low-frequency trigger (accordion toggle), short bounded content. */
 .project-featured__arch {
   display: flex;
   flex-direction: column;
@@ -146,6 +162,10 @@
   border-top: var(--rule-hairline);
   border-bottom: var(--rule-hairline);
   margin-block-end: var(--space-lg);
+  overflow: hidden;
+  transition:
+    height var(--dur-mid) var(--ease-in-out),
+    opacity var(--dur-short) var(--ease-out);
 }
 
 .project-featured__arch-item {
@@ -472,9 +492,17 @@
   .project-featured__link,
   .project-featured__detail-link,
   .project-featured__details summary,
+  .project-featured__arch,
   .project-supporting__link,
   .project-supporting__detail,
+  .project-featured__img,
   .oss-card__link {
+    transition: none;
+  }
+
+  .reveal-pending {
+    opacity: 1;
+    transform: none;
     transition: none;
   }
 

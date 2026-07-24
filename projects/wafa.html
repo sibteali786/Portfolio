@@ -30,9 +30,11 @@
     ─────────────────────────────────────────────────────────────────── */
 
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        transition-duration: 0ms !important;
-        animation-duration: 0ms !important;
+      .cs-back,
+      .phone-figure__frame,
+      .cs-cta__link,
+      .footer__nav a {
+        transition: none;
       }
     }
 

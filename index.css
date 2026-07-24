@@ -245,6 +245,11 @@ ol {
 }
 
 /* nav menu panel */
+/* max-height/padding-block are intentionally the animated properties here —
+   a transform/opacity-only rewrite (grid-template-rows) would require
+   wrapping the nav links in every one of the 11 pages that duplicate this
+   markup. Accepted: low-frequency trigger (mobile menu toggle), small
+   bounded content, capped at max-height: 20rem. */
 .nav-menu {
   display: flex;
   flex-wrap: wrap;
@@ -347,6 +352,25 @@ ol {
 .hero__main,
 .hero__side {
   min-width: 0;
+}
+
+/* one-time entrance on first paint — staggered by source order */
+.hero__reveal {
+  opacity: 0;
+  transform: translateY(6px);
+  animation: hero-reveal var(--dur-mid) var(--ease-out) forwards;
+}
+.hero__label.hero__reveal   { animation-delay: 0ms; }
+.hero__name.hero__reveal    { animation-delay: 60ms; }
+.hero__byline.hero__reveal  { animation-delay: 120ms; }
+.hero__desc.hero__reveal    { animation-delay: 180ms; }
+.hero__actions.hero__reveal { animation-delay: 240ms; }
+
+@keyframes hero-reveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .hero__side {
@@ -567,14 +591,14 @@ ol {
 .proj--supporting:not(:first-child) {
   padding-block-start: var(--space-xl);
 }
-.proj.reveal-pending {
+.reveal-pending {
   opacity: 0;
   transform: translateY(8px);
   transition:
     opacity var(--dur-mid) var(--ease-out),
     transform var(--dur-mid) var(--ease-out);
 }
-.proj.reveal-pending.is-visible {
+.reveal-pending.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
@@ -674,11 +698,19 @@ ol {
   color: var(--color-ink-2);
 }
 
+/* height is intentionally the animated property here, not transform/opacity —
+   evaluated grid-template-rows and interpolate-size alternatives, both
+   require either a markup restructure or don't actually avoid layout cost.
+   Accepted: low-frequency trigger (accordion toggle), short bounded content. */
 .proj__arch {
   display: flex;
   flex-direction: column;
   gap: var(--space-2xs);
   margin-block: var(--space-md);
+  overflow: hidden;
+  transition:
+    height var(--dur-mid) var(--ease-in-out),
+    opacity var(--dur-short) var(--ease-out);
 }
 
 .proj__arch-item {
@@ -1092,6 +1124,7 @@ ol {
   .proj__rule,
   .proj__link,
   .proj__details summary,
+  .proj__arch,
   .btn,
   .contact__email,
   .footer__nav a {
@@ -1101,10 +1134,15 @@ ol {
   .nav-menu {
     transition: none;
   }
-  .proj.reveal-pending {
+  .reveal-pending {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+  .hero__reveal {
+    opacity: 1;
+    transform: none;
+    animation: none;
   }
   .theme-toggle__icon {
     transition: none;

@@ -33,9 +33,12 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        transition-duration: 0ms !important;
-        animation-duration: 0ms !important;
+      .zen-hero__back,
+      .zen-hero__repo,
+      .zen-links__link,
+      .zen-cta__link,
+      .footer__nav a {
+        transition: none;
       }
     }
 
