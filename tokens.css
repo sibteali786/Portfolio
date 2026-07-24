@@ -1,26 +1,26 @@
-/* Hallmark · macrostructure: Split-Editorial (redesign) · genre: editorial
+/* Hallmark · macrostructure: Showcase (redesign, was Split-Editorial) · genre: editorial
  * theme: custom (vibe: "warm editorial authority, plain-spoken, one accent"
- *   · paper oklch(15% 0.010 55) · accent oklch(74% 0.140 55) warm-amber)
+ *   · paper oklch(97% 0.008 85) light-default · accent oklch(52% 0.150 55) warm-amber)
  * tone: editorial · design-system: design.md · designed-as-app
  * pre-emit critique: P5 H4 E5 S5 R5 V4
- * redesign note: dropped terminal-green + mono-as-headline-voice; mono now
- * reserved for small stack tags only. See .hallmark/log.json for history.
+ * redesign note: light is now the default palette (was dark-default); dark
+ * moved to [data-theme="dark"], toggled via nav.js. See .hallmark/log.json.
  */
 
 :root {
-  /* ── colour ─────────────────────────────────────────────────────── */
-  --color-paper:       oklch(15% 0.010  55);   /* warm charcoal — not cool black */
-  --color-paper-2:     oklch(20% 0.012  58);   /* warm dark surface — cards */
-  --color-paper-3:     oklch(26% 0.014  58);   /* hover surface lift */
-  --color-ink:         oklch(94% 0.006  65);   /* warm off-white body text */
-  --color-ink-2:       oklch(62% 0.014  62);   /* muted prose, secondary labels */
-  --color-ink-3:       oklch(40% 0.012  60);   /* very muted — metadata */
-  --color-rule:        oklch(28% 0.014  58);   /* hairline dividers */
-  --color-accent:      oklch(74% 0.140  55);   /* warm amber — CTA, active stat */
-  --color-accent-dim:  oklch(54% 0.110  55);   /* muted accent — rules, roles */
-  --color-accent-ink:  oklch(12% 0.010  55);   /* near-black — text on accent bg */
-  --color-focus:       oklch(74% 0.140  55);   /* focus ring — same as accent */
-  --color-terminal:    oklch(58% 0.150 145);   /* semantic success/fix green — case-study diffs & logs only */
+  /* ── colour — light default ────────────────────────────────────── */
+  --color-paper:       oklch(97% 0.008  85);   /* warm paper white — not cool #fff */
+  --color-paper-2:     oklch(93% 0.010  80);
+  --color-paper-3:     oklch(88% 0.012  78);
+  --color-ink:         oklch(20% 0.012  60);
+  --color-ink-2:       oklch(40% 0.014  60);
+  --color-ink-3:       oklch(58% 0.012  60);
+  --color-rule:        oklch(85% 0.010  78);
+  --color-accent:      oklch(52% 0.150  55);   /* warm amber, tuned for contrast on light paper */
+  --color-accent-dim:  oklch(44% 0.120  55);
+  --color-accent-ink:  oklch(98% 0.006  85);
+  --color-focus:       oklch(52% 0.150  55);
+  --color-terminal:    oklch(42% 0.140 145);   /* semantic success/fix green — case-study diffs & logs only */
 
   /* ── typography ─────────────────────────────────────────────────── */
   --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
@@ -28,8 +28,9 @@
   --font-body:    "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
 
   /* ── type scale (major-third 1.25) ──────────────────────────────── */
-  --text-xs:        0.64rem;    /* ~10px */
+  --text-xs:        0.64rem;    /* ~10px — short labels/badges only, never prose */
   --text-sm:        0.80rem;    /* ~13px */
+  --text-reading-sm: 0.875rem;  /* 14px — reading-safe floor for small prose (arch notes, context lines) */
   --text-base:      1.00rem;    /* 16px  */
   --text-md:        1.25rem;    /* 20px  */
   --text-lg:        1.5625rem;  /* 25px  */
@@ -51,6 +52,7 @@
   --space-xl:  3rem;      /* 48px */
   --space-2xl: 4.5rem;    /* 72px */
   --space-3xl: 7rem;      /* 112px */
+  --space-4xl: 10rem;     /* 160px — generous section-to-section rhythm */
 
   /* ── motion ─────────────────────────────────────────────────────── */
   --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
@@ -68,38 +70,37 @@
   --rule-hairline: 1px solid var(--color-rule);
 }
 
-/* ── light mode — same tokens, re-tuned values, no selector changes
-   elsewhere. Applied via [data-theme="light"] on <html>, set by nav.js
-   before paint. Falls back to system preference when no override is
-   stored. ─────────────────────────────────────────────────────────── */
-:root[data-theme="light"] {
-  --color-paper:       oklch(97% 0.008  85);   /* warm paper white — not cool #fff */
-  --color-paper-2:     oklch(93% 0.010  80);
-  --color-paper-3:     oklch(88% 0.012  78);
-  --color-ink:         oklch(20% 0.012  60);
-  --color-ink-2:       oklch(40% 0.014  60);
-  --color-ink-3:       oklch(58% 0.012  60);
-  --color-rule:        oklch(85% 0.010  78);
-  --color-accent:      oklch(52% 0.150  55);   /* darker + more chroma — needed for contrast on light paper */
-  --color-accent-dim:  oklch(44% 0.120  55);
-  --color-accent-ink:  oklch(98% 0.006  85);
-  --color-focus:       oklch(52% 0.150  55);
-  --color-terminal:    oklch(42% 0.140 145);   /* darker green — same contrast reasoning as accent */
+/* ── dark mode — opt-in via toggle, no longer the default. Applied via
+   [data-theme="dark"] on <html>, set by nav.js. Falls back to system
+   preference when no override is stored. ─────────────────────────── */
+:root[data-theme="dark"] {
+  --color-paper:       oklch(15% 0.010  55);   /* warm charcoal — not cool black */
+  --color-paper-2:     oklch(20% 0.012  58);
+  --color-paper-3:     oklch(26% 0.014  58);
+  --color-ink:         oklch(94% 0.006  65);
+  --color-ink-2:       oklch(62% 0.014  62);
+  --color-ink-3:       oklch(40% 0.012  60);
+  --color-rule:        oklch(28% 0.014  58);
+  --color-accent:      oklch(74% 0.140  55);   /* warm amber — brighter, needed for contrast on dark paper */
+  --color-accent-dim:  oklch(54% 0.110  55);
+  --color-accent-ink:  oklch(12% 0.010  55);
+  --color-focus:       oklch(74% 0.140  55);
+  --color-terminal:    oklch(58% 0.150 145);
 }
 
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) {
-    --color-paper:       oklch(97% 0.008  85);
-    --color-paper-2:     oklch(93% 0.010  80);
-    --color-paper-3:     oklch(88% 0.012  78);
-    --color-ink:         oklch(20% 0.012  60);
-    --color-ink-2:       oklch(40% 0.014  60);
-    --color-ink-3:       oklch(58% 0.012  60);
-    --color-rule:        oklch(85% 0.010  78);
-    --color-accent:      oklch(52% 0.150  55);
-    --color-accent-dim:  oklch(44% 0.120  55);
-    --color-accent-ink:  oklch(98% 0.006  85);
-    --color-focus:       oklch(52% 0.150  55);
-    --color-terminal:    oklch(42% 0.140 145);
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="dark"]):not([data-theme="light"]) {
+    --color-paper:       oklch(15% 0.010  55);
+    --color-paper-2:     oklch(20% 0.012  58);
+    --color-paper-3:     oklch(26% 0.014  58);
+    --color-ink:         oklch(94% 0.006  65);
+    --color-ink-2:       oklch(62% 0.014  62);
+    --color-ink-3:       oklch(40% 0.012  60);
+    --color-rule:        oklch(28% 0.014  58);
+    --color-accent:      oklch(74% 0.140  55);
+    --color-accent-dim:  oklch(54% 0.110  55);
+    --color-accent-ink:  oklch(12% 0.010  55);
+    --color-focus:       oklch(74% 0.140  55);
+    --color-terminal:    oklch(58% 0.150 145);
   }
 }

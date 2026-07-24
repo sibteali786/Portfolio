@@ -55,7 +55,7 @@
    EMAIL HERO
 ═══════════════════════════════════════════════════════════════════ */
 .email-hero {
-  padding-block: var(--space-3xl);
+  padding-block: var(--space-4xl);
 }
 
 .email-hero .container {
@@ -107,7 +107,7 @@
    CHANNELS
 ═══════════════════════════════════════════════════════════════════ */
 .channels-section {
-  padding-block: var(--space-3xl);
+  padding-block: var(--space-4xl);
 }
 
 .channels-section .container {

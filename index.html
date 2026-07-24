@@ -90,17 +90,18 @@
     <main id="main">
       <!-- ── hero ─────────────────────────────────────────────────── -->
       <section class="hero" aria-labelledby="hero-name">
-        <div class="container">
-          <div class="hero__left">
+        <div class="container hero__grid">
+          <div class="hero__main">
             <p class="hero__label">Software engineer &#183; Islamabad</p>
             <h1 class="hero__name" id="hero-name">
-              I Engineer manual work with software people trust.
+              I turn "the spreadsheet is a mess" into software people trust.
             </h1>
             <p class="hero__byline">Syed Sibt-e-Ali Baqar</p>
             <p class="hero__desc">
               Three years building web platforms and ERPs for startups,
-              agencies, and construction companies &#8212; the kind of software
-              a business ends up actually running on.
+              agencies, and construction companies &#8212; the kind of
+              software a business ends up actually running on, not the kind
+              that gets replaced in six months.
             </p>
             <div class="hero__actions">
               <a
@@ -119,20 +120,18 @@
               >
             </div>
           </div>
-          <div class="hero__right">
-            <figure class="highlight-card" aria-label="What I do">
-              <p class="highlight-card__eyebrow">What I build</p>
-              <ul class="highlight-card__list">
-                <li>Full ERPs and internal tools that replace Excel</li>
-                <li>Multi-tenant SaaS platforms for real teams</li>
-                <li>Mobile apps shipped for startups, end to end</li>
-              </ul>
-              <p class="highlight-card__note">
-                TypeScript &#183; Go &#183; Python &#183; NestJS &#183; Next.js
-                &#183; PostgreSQL &#183; AWS
-              </p>
-            </figure>
-          </div>
+          <aside class="hero__side" aria-label="Stack and availability">
+            <p class="hero__side-label">Currently</p>
+            <p class="hero__side-body">
+              Leading engineering at Hill Country Coders, open to freelance
+              and contract work on the side.
+            </p>
+            <p class="hero__side-label">Stack</p>
+            <p class="hero__side-body hero__side-body--mono">
+              TypeScript &#183; Go &#183; Python<br />NestJS &#183; Next.js
+              &#183; PostgreSQL &#183; AWS
+            </p>
+          </aside>
         </div>
       </section>
 
@@ -173,148 +172,162 @@
         <div class="container">
           <h2 class="section-label" id="work-heading">Work</h2>
 
-          <!-- featured: 2 projects, asymmetric 1.6fr / 1fr -->
-          <div class="work__featured">
+          <!-- full-width showcase blocks, one per project, generous rhythm -->
+          <div class="work__list">
             <!-- Asia Builders ERP — primary featured -->
             <article class="proj proj--featured">
               <div class="proj__rule" aria-hidden="true"></div>
-              <div class="proj__meta">
+              <div class="proj__side">
                 <span class="proj__role">Lead &#183; 2024&#8211;present</span>
+                <ul class="proj__tags" aria-label="Tech stack">
+                  <li>NestJS</li>
+                  <li>PostgreSQL</li>
+                  <li>Next.js 15</li>
+                  <li>Cloudflare R2</li>
+                </ul>
               </div>
-              <h3 class="proj__title">Asia Builders ERP</h3>
-              <p class="proj__impact">
-                The accountant was spending 40 hours a month in Excel. Now they
-                have a full ERP &#8212; projects, transactions, vendors,
-                documents, reports, and a role-based dashboard. Built for Asia
-                Group of Companies.
-              </p>
-              <ul class="proj__tags" aria-label="Tech stack">
-                <li>NestJS</li>
-                <li>PostgreSQL</li>
-                <li>Next.js 15</li>
-                <li>Cloudflare R2</li>
-              </ul>
-              <details class="proj__details">
-                <summary>How it&#8217;s built</summary>
-                <div class="proj__arch">
-                  <p class="proj__arch-item">
-                    13 production tables &#183; 50+ REST endpoints &#183; 10
-                    feature modules &#183; 6 DB migrations
-                  </p>
-                  <p class="proj__arch-item">
-                    6 report types &#215; PDF + Excel &#8212; P&amp;L, Expense
-                    Breakdown, Vendor Payment, Govt Audit
-                  </p>
-                  <p class="proj__arch-item">
-                    Safe file handling so a failed save never leaves an orphaned
-                    document behind
-                  </p>
-                  <p class="proj__arch-item">
-                    Independent per-section dashboard queries &#8212; one
-                    failure doesn&#8217;t blank the screen
-                  </p>
-                  <p class="proj__arch-item">
-                    3 roles (OWNER &#183; ACCOUNTANT &#183; REVIEWER) with
-                    proper access control
-                  </p>
-                </div>
-              </details>
-              <a
-                class="proj__link"
-                href="https://accounts.asiabuilderz.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                >asiabuilderz.com &#8599;</a
-              >
-              <a class="proj__link" href="projects/asia-builders.html"
-                >Case study &#8594;</a
-              >
+              <div class="proj__content">
+                <h3 class="proj__title">Asia Builders ERP</h3>
+                <p class="proj__impact">
+                  The accountant was spending 40 hours a month in Excel. Now
+                  they have a full ERP &#8212; projects, transactions,
+                  vendors, documents, reports, and a role-based dashboard.
+                  Built for Asia Group of Companies.
+                </p>
+                <details class="proj__details">
+                  <summary>How it&#8217;s built</summary>
+                  <div class="proj__arch">
+                    <p class="proj__arch-item">
+                      13 production tables &#183; 50+ REST endpoints &#183;
+                      10 feature modules &#183; 6 DB migrations
+                    </p>
+                    <p class="proj__arch-item">
+                      6 report types &#215; PDF + Excel &#8212; P&amp;L,
+                      Expense Breakdown, Vendor Payment, Govt Audit
+                    </p>
+                    <p class="proj__arch-item">
+                      Safe file handling so a failed save never leaves an
+                      orphaned document behind
+                    </p>
+                    <p class="proj__arch-item">
+                      Independent per-section dashboard queries &#8212; one
+                      failure doesn&#8217;t blank the screen
+                    </p>
+                    <p class="proj__arch-item">
+                      3 roles (OWNER &#183; ACCOUNTANT &#183; REVIEWER) with
+                      proper access control
+                    </p>
+                  </div>
+                </details>
+                <a
+                  class="proj__link"
+                  href="https://accounts.asiabuilderz.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >asiabuilderz.com &#8599;</a
+                >
+                <a class="proj__link" href="projects/asia-builders.html"
+                  >Case study &#8594;</a
+                >
+              </div>
             </article>
 
             <!-- WhatsNextPlease — secondary featured -->
             <article class="proj proj--featured">
               <div class="proj__rule" aria-hidden="true"></div>
-              <div class="proj__meta">
+              <div class="proj__side">
                 <span class="proj__role"
                   >Lead Engineer &#183; Hill Country Coders</span
                 >
+                <ul class="proj__tags" aria-label="Tech stack">
+                  <li>Next.js</li>
+                  <li>TypeScript</li>
+                  <li>PostgreSQL</li>
+                </ul>
               </div>
-              <h3 class="proj__title">WhatsNextPlease</h3>
-              <p class="proj__impact">
-                Multi-tenant task management platform that replaced Excel-based
-                tracking and drove a 10&#8211;12% company-wide efficiency gain
-                in under six months.
-              </p>
-              <ul class="proj__tags" aria-label="Tech stack">
-                <li>Next.js</li>
-                <li>TypeScript</li>
-                <li>PostgreSQL</li>
-              </ul>
-              <details class="proj__details">
-                <summary>How it&#8217;s built</summary>
-                <div class="proj__arch">
-                  <p class="proj__arch-item">
-                    Internal and external project tracking &#183; skill matching
-                    &#183; priority levels
-                  </p>
-                  <p class="proj__arch-item">
-                    Email notifications &#183; separate data per client &#183;
-                    real-time companion chat
-                  </p>
-                </div>
-              </details>
-              <a
-                class="proj__link"
-                href="https://app.whatsnextplease.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                >whatsnextplease.com &#8599;</a
-              >
-              <a class="proj__link" href="projects/whats-next-please.html"
-                >Case study &#8594;</a
-              >
-            </article>
-          </div>
-
-          <!-- supporting: 3 projects, typographic treatment, no containers -->
-          <div class="work__supporting">
-            <article class="proj proj--supporting">
-              <div class="proj__rule" aria-hidden="true"></div>
-              <span class="proj__stack">Node.js, WebSockets, React</span>
-              <h3 class="proj__title">Real-Time Chat</h3>
-              <p class="proj__desc">
-                Low-cost full-featured internal messaging for Hill Country
-                Coders: file sharing, rich text editor, real-time delivery.
-                Companion to WhatsNextPlease.
-              </p>
-            </article>
-
-            <article class="proj proj--supporting">
-              <div class="proj__rule" aria-hidden="true"></div>
-              <span class="proj__stack">Go</span>
-              <h3 class="proj__title">Huffman Compressor</h3>
-              <p class="proj__desc">
-                Lossless file compression implementing Huffman coding from
-                scratch &#8212; streaming I/O, a custom generic priority queue,
-                comprehensive tests. Built to learn Go&#8217;s data structures
-                hands-on.
-              </p>
-            </article>
-
-            <article class="proj proj--supporting">
-              <div class="proj__rule" aria-hidden="true"></div>
-              <span class="proj__stack">JavaScript &#183; Firefox</span>
-              <h3 class="proj__title">Zen Browser</h3>
-              <p class="proj__desc">
-                Active contributor to
+              <div class="proj__content">
+                <h3 class="proj__title">WhatsNextPlease</h3>
+                <p class="proj__impact">
+                  Multi-tenant task management platform that replaced
+                  Excel-based tracking and drove a 10&#8211;12%
+                  company-wide efficiency gain in under six months.
+                </p>
+                <details class="proj__details">
+                  <summary>How it&#8217;s built</summary>
+                  <div class="proj__arch">
+                    <p class="proj__arch-item">
+                      Internal and external project tracking &#183; skill
+                      matching &#183; priority levels
+                    </p>
+                    <p class="proj__arch-item">
+                      Email notifications &#183; separate data per client
+                      &#183; real-time companion chat
+                    </p>
+                  </div>
+                </details>
                 <a
-                  href="https://github.com/zen-browser/desktop"
+                  class="proj__link"
+                  href="https://app.whatsnextplease.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  >Zen Browser</a
-                >, a modern minimalist wrapper around Firefox. UI contributions
-                and systems work.
-              </p>
+                  >whatsnextplease.com &#8599;</a
+                >
+                <a class="proj__link" href="projects/whats-next-please.html"
+                  >Case study &#8594;</a
+                >
+              </div>
+            </article>
+
+            <!-- supporting projects — same left-rail/content split, lighter weight -->
+            <article class="proj proj--supporting">
+              <div class="proj__rule" aria-hidden="true"></div>
+              <div class="proj__side">
+                <span class="proj__stack">Node.js, WebSockets, React</span>
+              </div>
+              <div class="proj__content">
+                <h3 class="proj__title">Real-Time Chat</h3>
+                <p class="proj__desc">
+                  Low-cost full-featured internal messaging for Hill Country
+                  Coders: file sharing, rich text editor, real-time delivery.
+                  Companion to WhatsNextPlease.
+                </p>
+              </div>
+            </article>
+
+            <article class="proj proj--supporting">
+              <div class="proj__rule" aria-hidden="true"></div>
+              <div class="proj__side">
+                <span class="proj__stack">Go</span>
+              </div>
+              <div class="proj__content">
+                <h3 class="proj__title">Huffman Compressor</h3>
+                <p class="proj__desc">
+                  Lossless file compression implementing Huffman coding from
+                  scratch &#8212; streaming I/O, a custom generic priority
+                  queue, comprehensive tests. Built to learn Go&#8217;s data
+                  structures hands-on.
+                </p>
+              </div>
+            </article>
+
+            <article class="proj proj--supporting">
+              <div class="proj__rule" aria-hidden="true"></div>
+              <div class="proj__side">
+                <span class="proj__stack">JavaScript &#183; Firefox</span>
+              </div>
+              <div class="proj__content">
+                <h3 class="proj__title">Zen Browser</h3>
+                <p class="proj__desc">
+                  Active contributor to
+                  <a
+                    href="https://github.com/zen-browser/desktop"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Zen Browser</a
+                  >, a modern minimalist wrapper around Firefox. UI
+                  contributions and systems work.
+                </p>
+              </div>
             </article>
           </div>
         </div>

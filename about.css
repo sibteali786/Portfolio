@@ -61,7 +61,7 @@
    EXPERIENCE TIMELINE
 ═══════════════════════════════════════════════════════════════════ */
 .experience {
-  padding-block: var(--space-3xl);
+  padding-block: var(--space-4xl);
 }
 
 .experience .container {
@@ -153,7 +153,7 @@
    EDUCATION + RECOGNITION
 ═══════════════════════════════════════════════════════════════════ */
 .edu-section {
-  padding-block: var(--space-3xl);
+  padding-block: var(--space-4xl);
 }
 
 .edu-section .container {
@@ -229,7 +229,7 @@
 
 .award__detail {
   font-family: var(--font-mono);
-  font-size: var(--text-xs);
+  font-size: var(--text-reading-sm);
   color: var(--color-ink-3);
   line-height: 1.5;
 }

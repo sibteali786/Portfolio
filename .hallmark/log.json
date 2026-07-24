@@ -1,6 +1,16 @@
 [
   {
     "date": "2026-07-24",
+    "macrostructure": "Showcase (was Split-Editorial)",
+    "theme": "custom",
+    "theme_axes": "light-default (was dark-default) / grotesk-sans / warm-amber",
+    "enrichment": "none (typography only) — dropped highlight-card hero side panel",
+    "brief": "Sibt-e-Ali portfolio — BananaStudio-inspired hybrid: single-column typographic hero (no side card), work section flattened from asymmetric grid to full-width showcase blocks, section rhythm widened (space-3xl to space-4xl sitewide), light mode flipped to default (dark now opt-in via toggle)",
+    "scope": "tokens.css, index.html, index.css, about.css, contact.css, projects.css, nav.js",
+    "note": "user felt prior redesign was generic/template-y and disliked the dark-amber Split-Editorial structure itself, independent of copy quality. Studied 4 live Hallmark examples (BananaStudio, Hyperlane, Carnival-01, Press-01) for direction, picked BananaStudio (warm typographic hero, generous whitespace, no imagery) as base."
+  },
+  {
+    "date": "2026-07-24",
     "macrostructure": "Split-Editorial",
     "nav": "N1b (was N1a — hamburger-only, hidden even on desktop)",
     "scope": "index.css nav only — desktop ≥769px shows links inline, mobile <769px keeps hamburger collapse",

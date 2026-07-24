@@ -186,30 +186,30 @@ ol {
   -webkit-mask-image: url("images/dark-theme-svgrepo-com.svg");
 }
 
-/* dark mode (default): show sun (click → light) */
-.theme-toggle__icon--sun {
+/* light mode (default): show moon (click → dark) */
+.theme-toggle__icon--moon {
   opacity: 1;
   transform: scale(1) rotate(0deg);
 }
 
-/* light mode: show moon (click → dark) */
-:root[data-theme="light"] .theme-toggle__icon--sun {
+/* dark mode: show sun (click → light) */
+:root[data-theme="dark"] .theme-toggle__icon--moon {
   opacity: 0;
-  transform: scale(0.7) rotate(30deg);
+  transform: scale(0.7) rotate(-30deg);
 }
-:root[data-theme="light"] .theme-toggle__icon--moon {
+:root[data-theme="dark"] .theme-toggle__icon--sun {
   opacity: 1;
   transform: scale(1) rotate(0deg);
 }
 
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]):not([data-theme="light"])
-    .theme-toggle__icon--sun {
-    opacity: 0;
-    transform: scale(0.7) rotate(30deg);
-  }
+@media (prefers-color-scheme: dark) {
   :root:not([data-theme="dark"]):not([data-theme="light"])
     .theme-toggle__icon--moon {
+    opacity: 0;
+    transform: scale(0.7) rotate(-30deg);
+  }
+  :root:not([data-theme="dark"]):not([data-theme="light"])
+    .theme-toggle__icon--sun {
     opacity: 1;
     transform: scale(1) rotate(0deg);
   }
@@ -334,19 +334,51 @@ ol {
    HERO
 ═══════════════════════════════════════════════════════════════════ */
 .hero {
-  padding-block: var(--space-3xl) var(--space-2xl);
+  padding-block: var(--space-4xl) var(--space-3xl);
 }
 
-.hero .container {
+.hero__grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
   gap: var(--space-2xl);
   align-items: start;
 }
 
-.hero__left,
-.hero__right {
+.hero__main,
+.hero__side {
   min-width: 0;
+}
+
+.hero__side {
+  padding-inline-start: var(--space-xl);
+  border-inline-start: var(--rule-hairline);
+  margin-block-start: var(--space-3xs);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+}
+
+.hero__side-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+  margin-block-start: var(--space-lg);
+}
+.hero__side-label:first-child {
+  margin-block-start: 0;
+}
+
+.hero__side-body {
+  font-size: var(--text-reading-sm);
+  color: var(--color-ink-2);
+  line-height: 1.55;
+  max-width: 28ch;
+}
+.hero__side-body--mono {
+  font-family: var(--font-mono);
+  color: var(--color-ink-3);
 }
 
 .hero__label {
@@ -378,7 +410,7 @@ ol {
 .hero__desc {
   font-size: var(--text-md);
   color: var(--color-ink-2);
-  max-width: 42ch;
+  max-width: 52ch;
   line-height: 1.55;
 }
 
@@ -429,62 +461,11 @@ ol {
   color: var(--color-accent);
 }
 
-/* highlight card — replaces the old terminal block */
-.highlight-card {
-  background-color: var(--color-paper-2);
-  border: var(--rule-hairline);
-  border-radius: var(--radius-card);
-  padding: var(--space-lg);
-}
-
-.highlight-card__eyebrow {
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-ink-3);
-  margin-block-end: var(--space-md);
-}
-
-.highlight-card__list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-sm);
-  margin-block-end: var(--space-lg);
-}
-
-.highlight-card__list li {
-  font-size: var(--text-base);
-  color: var(--color-ink);
-  line-height: 1.5;
-  padding-inline-start: var(--space-md);
-  position: relative;
-}
-.highlight-card__list li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.6em;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: var(--color-accent);
-}
-
-.highlight-card__note {
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  color: var(--color-ink-3);
-  line-height: 1.6;
-  padding-block-start: var(--space-md);
-  border-top: var(--rule-hairline);
-}
-
 /* ═══════════════════════════════════════════════════════════════════
    IMPACT STRIP
 ═══════════════════════════════════════════════════════════════════ */
 .impact {
-  padding-block: var(--space-3xl);
+  padding-block: var(--space-4xl);
 }
 
 .impact .container {
@@ -530,7 +511,7 @@ ol {
 
 .stat__context {
   font-family: var(--font-mono);
-  font-size: var(--text-xs);
+  font-size: var(--text-reading-sm);
   color: var(--color-ink-3);
   line-height: 1.5;
 }
@@ -539,7 +520,7 @@ ol {
    WORK
 ═══════════════════════════════════════════════════════════════════ */
 .work {
-  padding-block: var(--space-3xl);
+  padding-block: var(--space-4xl);
 }
 
 .work .container {
@@ -558,27 +539,33 @@ ol {
   margin-block-end: var(--space-xl);
 }
 
-/* featured grid — asymmetric */
-.work__featured {
-  display: grid;
-  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
-  gap: var(--space-2xl);
-  margin-block-end: var(--space-2xl);
-}
-
-/* supporting grid — three columns, no card containers */
-.work__supporting {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0 var(--space-xl);
-  padding-block-start: var(--space-xl);
-  border-top: var(--rule-hairline);
+/* single-column showcase list — one full-width block per project,
+   generous vertical rhythm instead of the old dense asymmetric grid */
+.work__list {
+  display: flex;
+  flex-direction: column;
 }
 
 /* project items — reveal-on-scroll only applies once JS opts a card in,
    so the cards stay visible if JS fails or IntersectionObserver is unsupported */
 .proj {
+  display: grid;
+  grid-template-columns: 16ch minmax(0, 1fr);
+  gap: 0 var(--space-2xl);
   min-width: 0;
+  max-width: 64rem;
+  padding-block-end: var(--space-2xl);
+}
+.work__list .proj:not(:first-child) {
+  padding-block-start: var(--space-2xl);
+}
+
+.proj--supporting {
+  max-width: 56rem;
+  padding-block-end: var(--space-xl);
+}
+.proj--supporting:not(:first-child) {
+  padding-block-start: var(--space-xl);
 }
 .proj.reveal-pending {
   opacity: 0;
@@ -593,9 +580,10 @@ ol {
 }
 
 .proj__rule {
+  grid-column: 1 / -1;
   height: 1px;
   background-color: var(--color-rule);
-  margin-block-end: var(--space-md);
+  margin-block-end: var(--space-lg);
   transition: background-color var(--dur-short) var(--ease-out);
 }
 
@@ -603,12 +591,12 @@ ol {
   background-color: var(--color-accent-dim);
 }
 
-.proj__meta {
+.proj__side {
   display: flex;
-  gap: var(--space-md);
-  flex-wrap: wrap;
-  margin-block-end: var(--space-sm);
-  align-items: baseline;
+  flex-direction: column;
+  gap: var(--space-sm);
+  min-width: 0;
+  padding-block-start: 5px; /* optical alignment with title cap-height */
 }
 
 .proj__stack {
@@ -616,12 +604,18 @@ ol {
   font-size: var(--text-xs);
   color: var(--color-ink-3);
   letter-spacing: 0.02em;
+  line-height: 1.5;
 }
 
 .proj__role {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   color: var(--color-accent-dim);
+  line-height: 1.5;
+}
+
+.proj__content {
+  min-width: 0;
 }
 
 .proj__title {
@@ -638,7 +632,6 @@ ol {
 
 .proj--supporting .proj__title {
   font-size: var(--text-lg);
-  margin-block-start: var(--space-xs);
 }
 
 .proj__impact {
@@ -690,13 +683,13 @@ ol {
 
 .proj__arch-item {
   font-family: var(--font-mono);
-  font-size: var(--text-xs);
+  font-size: var(--text-reading-sm);
   color: var(--color-ink-2);
   line-height: 1.55;
 }
 
 .proj__desc {
-  font-size: var(--text-sm);
+  font-size: var(--text-reading-sm);
   color: var(--color-ink-2);
   line-height: 1.6;
   margin-block-start: var(--space-xs);
@@ -723,7 +716,7 @@ ol {
    APPROACH
 ═══════════════════════════════════════════════════════════════════ */
 .approach {
-  padding-block: var(--space-3xl);
+  padding-block: var(--space-4xl);
 }
 
 .approach .container {
@@ -776,7 +769,7 @@ ol {
    STACK
 ═══════════════════════════════════════════════════════════════════ */
 .stack-section {
-  padding-block: var(--space-3xl);
+  padding-block: var(--space-4xl);
 }
 
 .stack-section .container {
@@ -822,7 +815,7 @@ ol {
    ABOUT
 ═══════════════════════════════════════════════════════════════════ */
 .about-section {
-  padding-block: var(--space-3xl);
+  padding-block: var(--space-4xl);
 }
 
 .about-section .container {
@@ -891,7 +884,7 @@ ol {
    CONTACT
 ═══════════════════════════════════════════════════════════════════ */
 .contact-section {
-  padding-block: var(--space-3xl);
+  padding-block: var(--space-4xl);
 }
 
 .contact-section .container {
@@ -986,11 +979,6 @@ ol {
    RESPONSIVE — 1024px
 ═══════════════════════════════════════════════════════════════════ */
 @media (max-width: 1024px) {
-  .work__featured {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-xl);
-  }
-
   .stat-row {
     grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, 1fr);
     gap: 0 var(--space-xl);
@@ -1017,9 +1005,16 @@ ol {
     padding-inline: var(--space-lg);
   }
 
-  .hero .container {
+  .hero__grid {
     grid-template-columns: 1fr;
     gap: var(--space-xl);
+  }
+
+  .hero__side {
+    padding-inline-start: 0;
+    border-inline-start: none;
+    padding-block-start: var(--space-lg);
+    border-block-start: var(--rule-hairline);
   }
 
   .stat-row {
@@ -1031,14 +1026,17 @@ ol {
     order: -1;
   }
 
-  .work__featured {
+  .proj {
     grid-template-columns: 1fr;
-    gap: var(--space-xl);
+    gap: var(--space-sm) 0;
   }
 
-  .work__supporting {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-lg) var(--space-xl);
+  .proj__side {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 var(--space-md);
+    padding-block-start: 0;
   }
 
   .approach__grid {
@@ -1068,10 +1066,6 @@ ol {
 
   .contact__statement {
     font-size: clamp(1.75rem, 8vw, 2.5rem);
-  }
-
-  .work__supporting {
-    grid-template-columns: 1fr;
   }
 
   .stack-row {
