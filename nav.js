@@ -15,9 +15,20 @@
 
   applyTheme(currentTheme());
 
+  var reduceMotionForSwap = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   themeToggle.addEventListener('click', function () {
     var next = currentTheme() === 'light' ? 'dark' : 'light';
     localStorage.setItem('theme', next);
+    /* blur-mask the palette swap so every color on the page doesn't hard-cut
+       at once — see body.theme-swapping in index.css. Skipped under reduced
+       motion since it's a movement-adjacent visual effect, not just color. */
+    if (!reduceMotionForSwap) {
+      document.body.classList.add('theme-swapping');
+      setTimeout(function () {
+        document.body.classList.remove('theme-swapping');
+      }, 260);
+    }
     applyTheme(next);
   });
 })();
@@ -198,7 +209,12 @@
       });
     }
 
-    /* magnetic tilt — desktop-only, mouse-tracking, purely decorative */
+    /* magnetic tilt + cursor-spotlight — desktop-only, mouse-tracking,
+       purely decorative. The spotlight reads --spot-x/--spot-y set here
+       directly on the card element itself (see the ::after rules in
+       index.css/projects.css) — never on a shared ancestor — so updating
+       them on every pointermove only recalculates this one element's
+       style, not its children's. */
     if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
       var tiltCards = document.querySelectorAll('.proj, .project-featured, .oss-card');
       tiltCards.forEach(function (card) {
@@ -206,6 +222,8 @@
           var rect = card.getBoundingClientRect();
           var px = (e.clientX - rect.left) / rect.width - 0.5;
           var py = (e.clientY - rect.top) / rect.height - 0.5;
+          card.style.setProperty('--spot-x', (px + 0.5) * 100 + '%');
+          card.style.setProperty('--spot-y', (py + 0.5) * 100 + '%');
           animate(
             card,
             { transform: 'perspective(900px) rotateX(' + (-py * 4) + 'deg) rotateY(' + (px * 4) + 'deg)' },
@@ -257,6 +275,24 @@
         }
       });
       menuObserver.observe(mobileMenu, { attributes: true, attributeFilter: ['class'] });
+    }
+
+    /* stat count-up completion pulse — the dominant metric currently counts
+       up (see the scroll-reveal block above) and then just stops; this adds
+       a small landing beat once it settles. The 700 here must match the
+       `duration` constant in that block's count-up step function. */
+    var statEl = document.querySelector('.stat--dominant .stat__num');
+    if (statEl && 'IntersectionObserver' in window) {
+      var statPulseObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          statPulseObserver.unobserve(entry.target);
+          setTimeout(function () {
+            animate(statEl, { scale: [1, 1.12, 1] }, { type: 'spring', duration: 0.5, bounce: 0.45 });
+          }, 700);
+        });
+      }, { threshold: 0.6 });
+      statPulseObserver.observe(statEl);
     }
   });
 })();

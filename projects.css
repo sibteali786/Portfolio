@@ -46,8 +46,31 @@
 }
 
 .project-featured {
+  position: relative;
   padding-block: var(--space-2xl);
   border-bottom: var(--rule-hairline);
+}
+
+/* cursor-spotlight glow — see the matching comment on .proj in index.css */
+@media (hover: hover) and (pointer: fine) {
+  .project-featured::after,
+  .oss-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      240px circle at var(--spot-x, 50%) var(--spot-y, 50%),
+      color-mix(in oklch, var(--color-accent) 14%, transparent),
+      transparent 70%
+    );
+    opacity: 0;
+    transition: opacity var(--dur-mid) var(--ease-out);
+    pointer-events: none;
+  }
+  .project-featured:hover::after,
+  .oss-card:hover::after {
+    opacity: 1;
+  }
 }
 
 .project-featured__inner {
@@ -312,6 +335,7 @@
 }
 
 .oss-card {
+  position: relative;
   margin-block-start: var(--space-xl);
   border: var(--rule-hairline);
   border-radius: var(--radius-card);
@@ -503,6 +527,7 @@
   .reveal-pending {
     opacity: 1;
     transform: none;
+    clip-path: none;
     transition: none;
   }
 
