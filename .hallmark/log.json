@@ -1,5 +1,22 @@
 [
   {
+    "date": "2026-07-24",
+    "macrostructure": "Split-Editorial",
+    "nav": "N1b (was N1a — hamburger-only, hidden even on desktop)",
+    "scope": "index.css nav only — desktop ≥769px shows links inline, mobile <769px keeps hamburger collapse",
+    "brief": "Sibt-e-Ali portfolio — nav redesign, links no longer hidden behind hamburger on desktop"
+  },
+  {
+    "date": "2026-07-24",
+    "macrostructure": "Split-Editorial",
+    "theme": "custom",
+    "theme_axes": "dark / grotesk-sans / warm-amber",
+    "enrichment": "none (typography only) — dropped terminal chrome for highlight-card",
+    "brief": "Sibt-e-Ali portfolio redesign — genre technical-atmospheric to editorial, less jargon, clear CTAs (book call / resume)",
+    "scope": "index.html, about.html, contact.html, projects.html, tokens.css, nav.js",
+    "note": "removed fake terminal hero + shell-prompt copy, de-jargoned Approach + project arch copy behind <details>, added Book a call / Résumé CTAs site-wide, mobile-menu + card-reveal + dominant-stat count-up motion"
+  },
+  {
     "date": "2026-05-31",
     "macrostructure": "Workbench",
     "theme": "custom",

@@ -1,349 +1,550 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Syed Sibt-e-Ali Baqar — Software engineer based in Islamabad. Building production systems with NestJS, Next.js 15, PostgreSQL, and Go.">
-  <title>Syed Sibt-e-Ali Baqar — Software Engineer</title>
+  <head>
+    <script>
+      (function () {
+        var t = localStorage.getItem("theme");
+        if (t) document.documentElement.setAttribute("data-theme", t);
+      })();
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Syed Sibt-e-Ali Baqar — software engineer in Islamabad. I build web platforms and ERPs that replace spreadsheets and manual work for real teams."
+    />
+    <title>Syed Sibt-e-Ali Baqar — Software Engineer</title>
 
-  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="images/favicon-96x96.png" sizes="96x96" type="image/png">
-  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-  <link rel="manifest" href="images/site.webmanifest">
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+    <link
+      rel="icon"
+      href="images/favicon-96x96.png"
+      sizes="96x96"
+      type="image/png"
+    />
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
+    <link rel="manifest" href="images/site.webmanifest" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
 
-  <link rel="stylesheet" href="tokens.css">
-  <link rel="stylesheet" href="index.css">
-</head>
-<body>
+    <link rel="stylesheet" href="tokens.css" />
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
 
-  <a class="skip-link" href="#main">Skip to content</a>
-
-  <!-- ── nav ──────────────────────────────────────────────────────── -->
-  <header class="site-header">
-    <nav class="site-nav" aria-label="Primary navigation">
-      <a class="nav-name" href="/" aria-current="page">Sibt-e-Ali</a>
-      <div class="nav-right">
-        <a class="nav-email" href="mailto:sibteali786@gmail.com">sibteali786@gmail.com</a>
-        <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation menu">Menu</button>
-      </div>
-    </nav>
-    <nav class="nav-menu" id="nav-menu" hidden aria-label="Site pages">
-      <a href="/about.html">About</a>
-      <a href="/projects.html">Projects</a>
-      <a href="/contact.html">Contact</a>
-    </nav>
-  </header>
-
-  <main id="main">
-
-    <!-- ── hero ─────────────────────────────────────────────────── -->
-    <section class="hero" aria-labelledby="hero-name">
-      <div class="container">
-        <div class="hero__left">
-          <p class="hero__label">$ software engineer --location=islamabad</p>
-          <h1 class="hero__name" id="hero-name">Syed Sibt-e-Ali<br>Baqar</h1>
-          <p class="hero__desc">
-            Three years building production software across startups
-            and agencies. Systems first, frameworks second.
-          </p>
+    <!-- ── nav ──────────────────────────────────────────────────────── -->
+    <header class="site-header">
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a class="nav-name" href="/" aria-current="page">Sibt-e-Ali</a>
+        <div class="nav-right">
+          <a
+            class="nav-cta"
+            href="https://calendly.com/sibteali786/new-meeting"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Book a call</a
+          >
+          <button
+            class="theme-toggle"
+            aria-label="Toggle light and dark theme"
+            aria-pressed="false"
+          >
+            <span
+              class="theme-toggle__icon theme-toggle__icon--sun"
+              aria-hidden="true"
+            ></span>
+            <span
+              class="theme-toggle__icon theme-toggle__icon--moon"
+              aria-hidden="true"
+            ></span>
+          </button>
+          <button
+            class="nav-toggle"
+            aria-expanded="false"
+            aria-controls="nav-menu"
+            aria-label="Toggle navigation menu"
+          >
+            Menu
+          </button>
         </div>
-        <div class="hero__right">
-          <figure class="terminal" aria-label="Tech stack summary">
-            <pre class="terminal__body"><span class="t-prompt">~</span> <span class="t-cmd">stack --engineer=sibt-e-ali</span>
-
-<span class="t-key">lang</span>      TypeScript · Go · Python
-<span class="t-key">backend</span>   NestJS · Node.js · PostgreSQL
-<span class="t-key">frontend</span>  Next.js 15 · React · Tailwind
-<span class="t-key">infra</span>     AWS · Cloudflare R2 · CDK
-<span class="t-key">os</span>        Linux
-<span class="t-cursor" aria-hidden="true">&#x258A;</span></pre>
-          </figure>
-        </div>
-      </div>
-    </section>
-
-    <!-- ── impact strip ─────────────────────────────────────────── -->
-    <section class="impact" aria-label="Impact metrics">
-      <div class="container">
-        <div class="stat-row">
-
-          <article class="stat stat--dominant">
-            <span class="stat__num">5&times;</span>
-            <p class="stat__label">cost reduction</p>
-            <p class="stat__context">Swoop Inc mobile dev &#8212; 3 apps shipped in 4 months,&nbsp;40% faster delivery</p>
-          </article>
-
-          <article class="stat">
-            <span class="stat__num">30%</span>
-            <p class="stat__label">team efficiency gain</p>
-            <p class="stat__context">CI/CD pipelines + testing frameworks &#183; Hill Country Coders</p>
-          </article>
-
-          <article class="stat">
-            <span class="stat__num">50%</span>
-            <p class="stat__label">fewer support queries</p>
-            <p class="stat__context">Ensemble UI docs &#8212; searchable examples, ~10% productivity boost</p>
-          </article>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ── work ─────────────────────────────────────────────────── -->
-    <section class="work" aria-labelledby="work-heading">
-      <div class="container">
-
-        <h2 class="section-label" id="work-heading">Work</h2>
-
-        <!-- featured: 2 projects, asymmetric 1.6fr / 1fr -->
-        <div class="work__featured">
-
-          <!-- Asia Builders ERP — primary featured -->
-          <article class="proj proj--featured">
-            <div class="proj__rule" aria-hidden="true"></div>
-            <div class="proj__meta">
-              <span class="proj__stack">NestJS &#183; PostgreSQL &#183; Next.js 15 &#183; Cloudflare R2</span>
-              <span class="proj__role">Lead &#183; 2024&#8211;present</span>
-            </div>
-            <h3 class="proj__title">Asia Builders ERP</h3>
-            <p class="proj__impact">
-              The accountant was spending 40 hours a month in Excel.
-              Now they have a full ERP &#8212; projects, transactions, vendors,
-              documents, reports, and a role-based dashboard.
-              Built for Asia Group of Companies.
-            </p>
-            <div class="proj__arch">
-              <p class="proj__arch-item">13 production tables &#183; 50+ REST endpoints &#183; 10 feature modules &#183; 6 DB migrations</p>
-              <p class="proj__arch-item">6 report types &#215; PDF + Excel &#8212; P&amp;L, Expense Breakdown, Vendor Payment, Govt Audit</p>
-              <p class="proj__arch-item">Saga pattern: R2 delete on DB save failure &#8212; atomicity without a transaction manager</p>
-              <p class="proj__arch-item">Independent per-section dashboard queries &#8212; one failure doesn&#8217;t blank the screen</p>
-              <p class="proj__arch-item">3 roles (OWNER &#183; ACCOUNTANT &#183; REVIEWER) &#183; JWT in cookie &#183; Zustand middleware guards</p>
-            </div>
-            <a class="proj__link" href="https://accounts.asiabuilderz.com" target="_blank" rel="noopener noreferrer">asiabuilderz.com &#8599;</a>
-            <a class="proj__link" href="projects/asia-builders.html">Case study &#8594;</a>
-          </article>
-
-          <!-- WhatsNextPlease — secondary featured -->
-          <article class="proj proj--featured">
-            <div class="proj__rule" aria-hidden="true"></div>
-            <div class="proj__meta">
-              <span class="proj__stack">Next.js &#183; TypeScript &#183; PostgreSQL</span>
-              <span class="proj__role">Lead Engineer &#183; Hill Country Coders</span>
-            </div>
-            <h3 class="proj__title">WhatsNextPlease</h3>
-            <p class="proj__impact">
-              Multi-tenant task management platform that replaced
-              Excel-based tracking and drove a 10&#8211;12% company-wide
-              efficiency gain in under six months.
-            </p>
-            <div class="proj__arch">
-              <p class="proj__arch-item">Internal and external project tracking &#183; skill matching &#183; priority levels</p>
-              <p class="proj__arch-item">Email notifications &#183; multi-tenant data isolation &#183; real-time companion chat</p>
-            </div>
-            <a class="proj__link" href="https://app.whatsnextplease.com" target="_blank" rel="noopener noreferrer">whatsnextplease.com &#8599;</a>
-            <a class="proj__link" href="projects/whats-next-please.html">Case study &#8594;</a>
-          </article>
-
-        </div>
-
-        <!-- supporting: 3 projects, typographic treatment, no containers -->
-        <div class="work__supporting">
-
-          <article class="proj proj--supporting">
-            <div class="proj__rule" aria-hidden="true"></div>
-            <span class="proj__stack">Node.js &#183; WebSockets &#183; React</span>
-            <h3 class="proj__title">Real-Time Chat</h3>
-            <p class="proj__desc">
-              Low-cost full-featured internal messaging for Hill Country Coders:
-              file sharing, rich text editor, real-time delivery.
-              Companion to WhatsNextPlease.
-            </p>
-          </article>
-
-          <article class="proj proj--supporting">
-            <div class="proj__rule" aria-hidden="true"></div>
-            <span class="proj__stack">Go</span>
-            <h3 class="proj__title">Huffman Compressor</h3>
-            <p class="proj__desc">
-              Lossless file compression implementing Huffman coding from scratch &#8212;
-              streaming I/O, a custom generic priority queue, comprehensive tests.
-              Built to learn Go&#8217;s data structures hands-on.
-            </p>
-          </article>
-
-          <article class="proj proj--supporting">
-            <div class="proj__rule" aria-hidden="true"></div>
-            <span class="proj__stack">JavaScript &#183; Firefox</span>
-            <h3 class="proj__title">Zen Browser</h3>
-            <p class="proj__desc">
-              Active contributor to
-              <a href="https://github.com/zen-browser/desktop" target="_blank" rel="noopener noreferrer">Zen Browser</a>,
-              a modern minimalist wrapper around Firefox.
-              UI contributions and systems work.
-            </p>
-          </article>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ── approach ─────────────────────────────────────────────── -->
-    <section class="approach" aria-labelledby="approach-heading">
-      <div class="container">
-        <div class="approach__grid">
-
-          <div class="approach__left">
-            <h2 class="section-label" id="approach-heading">Approach</h2>
-            <p class="approach__thesis">
-              Most software problems are operations problems.
-            </p>
-            <p class="approach__body">
-              The Asia Builders ERP started as &#8220;the accountant spends
-              40&nbsp;hours a month in Excel.&#8221; The WhatsNextPlease platform
-              started as &#8220;the team doesn&#8217;t know who owns what.&#8221;
-              The data models followed from those problems &#8212;
-              not the other way around.
-            </p>
-          </div>
-
-          <div class="approach__right">
-            <p class="approach__body">
-              Read the error logs before Stack Overflow.
-              Know why <code class="approach__code">EXTRACT(DAY FROM date - date)</code>
-              returns an integer instead of an interval &#8212; and why that breaks
-              due-date queries at 11&nbsp;pm on a deadline day.
-            </p>
-            <p class="approach__body">
-              Design for the failure case: Saga pattern for R2 rollback
-              when a DB save fails. Independent dashboard endpoints so one
-              broken query doesn&#8217;t blank the whole screen.
-              Soft deletes so nothing disappears without a trace.
-            </p>
-            <p class="approach__body">
-              Working code over perfect code &#8212;
-              but the working code ships with tests.
-            </p>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ── stack ─────────────────────────────────────────────────── -->
-    <section class="stack-section" aria-labelledby="stack-heading">
-      <div class="container">
-
-        <h2 class="section-label" id="stack-heading">Stack</h2>
-
-        <dl class="stack-grid">
-          <div class="stack-row">
-            <dt class="stack-cat">Lang</dt>
-            <dd class="stack-items">TypeScript &#183; Go &#183; Python &#183; JavaScript</dd>
-          </div>
-          <div class="stack-row">
-            <dt class="stack-cat">Backend</dt>
-            <dd class="stack-items">NestJS &#183; Node.js &#183; PostgreSQL &#183; MySQL &#183; MongoDB</dd>
-          </div>
-          <div class="stack-row">
-            <dt class="stack-cat">Frontend</dt>
-            <dd class="stack-items">React &#183; Next.js 15 &#183; Tailwind</dd>
-          </div>
-          <div class="stack-row">
-            <dt class="stack-cat">Infra</dt>
-            <dd class="stack-items">AWS &#183; AWS CDK &#183; Cloudflare R2 &#183; Hostinger VPS</dd>
-          </div>
-          <div class="stack-row">
-            <dt class="stack-cat">Testing</dt>
-            <dd class="stack-items">Jest &#183; Vitest &#183; React Testing Library</dd>
-          </div>
-          <div class="stack-row">
-            <dt class="stack-cat">Tooling</dt>
-            <dd class="stack-items">Figma &#183; Claude Code &#183; Cursor &#183; GitHub Actions</dd>
-          </div>
-        </dl>
-
-      </div>
-    </section>
-
-    <!-- ── about ─────────────────────────────────────────────────── -->
-    <section class="about-section" aria-labelledby="about-heading">
-      <div class="container">
-
-        <h2 class="section-label" id="about-heading">About</h2>
-
-        <div class="about__grid">
-          <div class="about__bio">
-            <p class="about__body">
-              Computer Engineering graduate from NUST, Islamabad (2023).
-              Started writing production code in 2021 &#8212;
-              blockchain social platforms, then mobile development at Ensemble UI,
-              now leading engineering at Hill Country Coders.
-            </p>
-            <p class="about__body">
-              Two competition results worth mentioning: Top 10 Startups at
-              iCreate-21 (PIEAS) and Runner-Up at FICS-2022 (NUST),
-              both with Gul-e-Shaor, which went on to NIC incubation in Peshawar.
-            </p>
-          </div>
-
-          <div class="about__meta">
-            <dl class="about__dl">
-              <div class="about__dl-row">
-                <dt class="about__dt">Location</dt>
-                <dd class="about__dd">F-15, Islamabad</dd>
-              </div>
-              <div class="about__dl-row">
-                <dt class="about__dt">Education</dt>
-                <dd class="about__dd">NUST &#183; Computer Engineering &#183; 2023</dd>
-              </div>
-              <div class="about__dl-row">
-                <dt class="about__dt">Current</dt>
-                <dd class="about__dd">Lead Engineer &#183; Hill Country Coders</dd>
-              </div>
-              <div class="about__dl-row">
-                <dt class="about__dt">GitHub</dt>
-                <dd class="about__dd">
-                  <a href="https://github.com/sibteali786" target="_blank" rel="noopener noreferrer">sibteali786</a>
-                </dd>
-              </div>
-            </dl>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ── contact ───────────────────────────────────────────────── -->
-    <section class="contact-section" aria-labelledby="contact-heading">
-      <div class="container">
-        <div class="contact__inner">
-          <h2 class="contact__statement" id="contact-heading">
-            If you have a problem<br>worth solving &#8212;<br>let&#8217;s talk.
-          </h2>
-          <a class="contact__email" href="mailto:sibteali786@gmail.com">sibteali786@gmail.com</a>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- ── footer ───────────────────────────────────────────────────── -->
-  <footer class="site-footer">
-    <div class="container">
-      <p class="footer__line">Building production software from Islamabad.</p>
-      <nav class="footer__nav" aria-label="Footer links">
-        <a href="mailto:sibteali786@gmail.com">Email</a>
-        <a href="https://github.com/sibteali786" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a href="https://www.linkedin.com/in/syed-sibteali-baqar/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <span class="footer__copy">&#169; 2025</span>
       </nav>
-    </div>
-  </footer>
+      <nav class="nav-menu" id="nav-menu" hidden aria-label="Site pages">
+        <a href="/about.html">About</a>
+        <a href="/projects.html">Projects</a>
+        <a href="/contact.html">Contact</a>
+        <a
+          href="https://pub-df01b6824e12429a8b28593c8c253132.r2.dev/Sibteali-Baqar.docx"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Résumé &#8599;</a
+        >
+      </nav>
+    </header>
 
-  <script src="nav.js"></script>
-</body>
+    <main id="main">
+      <!-- ── hero ─────────────────────────────────────────────────── -->
+      <section class="hero" aria-labelledby="hero-name">
+        <div class="container">
+          <div class="hero__left">
+            <p class="hero__label">Software engineer &#183; Islamabad</p>
+            <h1 class="hero__name" id="hero-name">
+              I Engineer manual work with software people trust.
+            </h1>
+            <p class="hero__byline">Syed Sibt-e-Ali Baqar</p>
+            <p class="hero__desc">
+              Three years building web platforms and ERPs for startups,
+              agencies, and construction companies &#8212; the kind of software
+              a business ends up actually running on.
+            </p>
+            <div class="hero__actions">
+              <a
+                class="btn btn--primary"
+                href="https://calendly.com/sibteali786/new-meeting"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Book a call</a
+              >
+              <a
+                class="btn btn--secondary"
+                href="https://pub-df01b6824e12429a8b28593c8c253132.r2.dev/Sibteali-Baqar.docx"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Download résumé</a
+              >
+            </div>
+          </div>
+          <div class="hero__right">
+            <figure class="highlight-card" aria-label="What I do">
+              <p class="highlight-card__eyebrow">What I build</p>
+              <ul class="highlight-card__list">
+                <li>Full ERPs and internal tools that replace Excel</li>
+                <li>Multi-tenant SaaS platforms for real teams</li>
+                <li>Mobile apps shipped for startups, end to end</li>
+              </ul>
+              <p class="highlight-card__note">
+                TypeScript &#183; Go &#183; Python &#183; NestJS &#183; Next.js
+                &#183; PostgreSQL &#183; AWS
+              </p>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── impact strip ─────────────────────────────────────────── -->
+      <section class="impact" aria-label="Impact metrics">
+        <div class="container">
+          <div class="stat-row">
+            <article class="stat stat--dominant">
+              <span class="stat__num">5&times;</span>
+              <p class="stat__label">cost reduction</p>
+              <p class="stat__context">
+                Swoop Inc mobile dev &#8212; 3 apps shipped in 4
+                months,&nbsp;40% faster delivery
+              </p>
+            </article>
+
+            <article class="stat">
+              <span class="stat__num">30%</span>
+              <p class="stat__label">team efficiency gain</p>
+              <p class="stat__context">
+                Better tooling and processes &#183; Hill Country Coders
+              </p>
+            </article>
+
+            <article class="stat">
+              <span class="stat__num">50%</span>
+              <p class="stat__label">fewer support queries</p>
+              <p class="stat__context">
+                Rebuilt docs with real examples &#8212; Ensemble UI
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── work ─────────────────────────────────────────────────── -->
+      <section class="work" aria-labelledby="work-heading">
+        <div class="container">
+          <h2 class="section-label" id="work-heading">Work</h2>
+
+          <!-- featured: 2 projects, asymmetric 1.6fr / 1fr -->
+          <div class="work__featured">
+            <!-- Asia Builders ERP — primary featured -->
+            <article class="proj proj--featured">
+              <div class="proj__rule" aria-hidden="true"></div>
+              <div class="proj__meta">
+                <span class="proj__role">Lead &#183; 2024&#8211;present</span>
+              </div>
+              <h3 class="proj__title">Asia Builders ERP</h3>
+              <p class="proj__impact">
+                The accountant was spending 40 hours a month in Excel. Now they
+                have a full ERP &#8212; projects, transactions, vendors,
+                documents, reports, and a role-based dashboard. Built for Asia
+                Group of Companies.
+              </p>
+              <ul class="proj__tags" aria-label="Tech stack">
+                <li>NestJS</li>
+                <li>PostgreSQL</li>
+                <li>Next.js 15</li>
+                <li>Cloudflare R2</li>
+              </ul>
+              <details class="proj__details">
+                <summary>How it&#8217;s built</summary>
+                <div class="proj__arch">
+                  <p class="proj__arch-item">
+                    13 production tables &#183; 50+ REST endpoints &#183; 10
+                    feature modules &#183; 6 DB migrations
+                  </p>
+                  <p class="proj__arch-item">
+                    6 report types &#215; PDF + Excel &#8212; P&amp;L, Expense
+                    Breakdown, Vendor Payment, Govt Audit
+                  </p>
+                  <p class="proj__arch-item">
+                    Safe file handling so a failed save never leaves an orphaned
+                    document behind
+                  </p>
+                  <p class="proj__arch-item">
+                    Independent per-section dashboard queries &#8212; one
+                    failure doesn&#8217;t blank the screen
+                  </p>
+                  <p class="proj__arch-item">
+                    3 roles (OWNER &#183; ACCOUNTANT &#183; REVIEWER) with
+                    proper access control
+                  </p>
+                </div>
+              </details>
+              <a
+                class="proj__link"
+                href="https://accounts.asiabuilderz.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                >asiabuilderz.com &#8599;</a
+              >
+              <a class="proj__link" href="projects/asia-builders.html"
+                >Case study &#8594;</a
+              >
+            </article>
+
+            <!-- WhatsNextPlease — secondary featured -->
+            <article class="proj proj--featured">
+              <div class="proj__rule" aria-hidden="true"></div>
+              <div class="proj__meta">
+                <span class="proj__role"
+                  >Lead Engineer &#183; Hill Country Coders</span
+                >
+              </div>
+              <h3 class="proj__title">WhatsNextPlease</h3>
+              <p class="proj__impact">
+                Multi-tenant task management platform that replaced Excel-based
+                tracking and drove a 10&#8211;12% company-wide efficiency gain
+                in under six months.
+              </p>
+              <ul class="proj__tags" aria-label="Tech stack">
+                <li>Next.js</li>
+                <li>TypeScript</li>
+                <li>PostgreSQL</li>
+              </ul>
+              <details class="proj__details">
+                <summary>How it&#8217;s built</summary>
+                <div class="proj__arch">
+                  <p class="proj__arch-item">
+                    Internal and external project tracking &#183; skill matching
+                    &#183; priority levels
+                  </p>
+                  <p class="proj__arch-item">
+                    Email notifications &#183; separate data per client &#183;
+                    real-time companion chat
+                  </p>
+                </div>
+              </details>
+              <a
+                class="proj__link"
+                href="https://app.whatsnextplease.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                >whatsnextplease.com &#8599;</a
+              >
+              <a class="proj__link" href="projects/whats-next-please.html"
+                >Case study &#8594;</a
+              >
+            </article>
+          </div>
+
+          <!-- supporting: 3 projects, typographic treatment, no containers -->
+          <div class="work__supporting">
+            <article class="proj proj--supporting">
+              <div class="proj__rule" aria-hidden="true"></div>
+              <span class="proj__stack">Node.js, WebSockets, React</span>
+              <h3 class="proj__title">Real-Time Chat</h3>
+              <p class="proj__desc">
+                Low-cost full-featured internal messaging for Hill Country
+                Coders: file sharing, rich text editor, real-time delivery.
+                Companion to WhatsNextPlease.
+              </p>
+            </article>
+
+            <article class="proj proj--supporting">
+              <div class="proj__rule" aria-hidden="true"></div>
+              <span class="proj__stack">Go</span>
+              <h3 class="proj__title">Huffman Compressor</h3>
+              <p class="proj__desc">
+                Lossless file compression implementing Huffman coding from
+                scratch &#8212; streaming I/O, a custom generic priority queue,
+                comprehensive tests. Built to learn Go&#8217;s data structures
+                hands-on.
+              </p>
+            </article>
+
+            <article class="proj proj--supporting">
+              <div class="proj__rule" aria-hidden="true"></div>
+              <span class="proj__stack">JavaScript &#183; Firefox</span>
+              <h3 class="proj__title">Zen Browser</h3>
+              <p class="proj__desc">
+                Active contributor to
+                <a
+                  href="https://github.com/zen-browser/desktop"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Zen Browser</a
+                >, a modern minimalist wrapper around Firefox. UI contributions
+                and systems work.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── approach ─────────────────────────────────────────────── -->
+      <section class="approach" aria-labelledby="approach-heading">
+        <div class="container">
+          <div class="approach__grid">
+            <div class="approach__left">
+              <h2 class="section-label" id="approach-heading">Approach</h2>
+              <p class="approach__thesis">
+                Most software problems are operations problems.
+              </p>
+              <p class="approach__body">
+                The Asia Builders ERP started as &#8220;the accountant spends
+                40&nbsp;hours a month in Excel.&#8221; WhatsNextPlease started
+                as &#8220;the team doesn&#8217;t know who owns what.&#8221; I
+                design around the real problem first &#8212; the technical
+                decisions follow from that, not the other way around.
+              </p>
+            </div>
+
+            <div class="approach__right">
+              <p class="approach__body">
+                I read the actual error before searching for it online, and I
+                trace bugs back to their real cause instead of patching the
+                symptom &#8212; that&#8217;s what stops the same issue from
+                resurfacing at 11&nbsp;pm on a deadline day.
+              </p>
+              <p class="approach__body">
+                I design for things going wrong: a failed save shouldn&#8217;t
+                leave orphaned files behind, one broken part of a dashboard
+                shouldn&#8217;t blank the whole screen, and deleted records stay
+                recoverable instead of disappearing without a trace.
+              </p>
+              <p class="approach__body">
+                Working software over perfect software &#8212; but the working
+                version ships with tests.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── stack ─────────────────────────────────────────────────── -->
+      <section class="stack-section" aria-labelledby="stack-heading">
+        <div class="container">
+          <h2 class="section-label" id="stack-heading">Stack</h2>
+
+          <dl class="stack-grid">
+            <div class="stack-row">
+              <dt class="stack-cat">Lang</dt>
+              <dd class="stack-items">
+                TypeScript &#183; Go &#183; Python &#183; JavaScript
+              </dd>
+            </div>
+            <div class="stack-row">
+              <dt class="stack-cat">Backend</dt>
+              <dd class="stack-items">
+                NestJS &#183; Node.js &#183; PostgreSQL &#183; MySQL &#183;
+                MongoDB
+              </dd>
+            </div>
+            <div class="stack-row">
+              <dt class="stack-cat">Frontend</dt>
+              <dd class="stack-items">
+                React &#183; Next.js 15 &#183; Tailwind
+              </dd>
+            </div>
+            <div class="stack-row">
+              <dt class="stack-cat">Infra</dt>
+              <dd class="stack-items">
+                AWS &#183; AWS CDK &#183; Cloudflare R2 &#183; Hostinger VPS
+              </dd>
+            </div>
+            <div class="stack-row">
+              <dt class="stack-cat">Testing</dt>
+              <dd class="stack-items">
+                Jest &#183; Vitest &#183; React Testing Library
+              </dd>
+            </div>
+            <div class="stack-row">
+              <dt class="stack-cat">Tooling</dt>
+              <dd class="stack-items">
+                Figma &#183; Claude Code &#183; Cursor &#183; GitHub Actions
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <!-- ── about ─────────────────────────────────────────────────── -->
+      <section class="about-section" aria-labelledby="about-heading">
+        <div class="container">
+          <h2 class="section-label" id="about-heading">About</h2>
+
+          <div class="about__grid">
+            <div class="about__bio">
+              <p class="about__body">
+                Computer Engineering graduate from NUST, Islamabad (2023).
+                Started writing production code in 2021 &#8212; blockchain
+                social platforms, then mobile development at Ensemble UI, now
+                leading engineering at Hill Country Coders.
+              </p>
+              <p class="about__body">
+                Two competition results worth mentioning: Top 10 Startups at
+                iCreate-21 (PIEAS) and Runner-Up at FICS-2022 (NUST), both with
+                Gul-e-Shaor, which went on to NIC incubation in Peshawar.
+              </p>
+              <p class="about__body about__body--meta">
+                I also write about the engineering work on
+                <a
+                  href="https://substack.com/@syedsibtealibaqar"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Substack</a
+                >
+                and post shorter build notes on
+                <a
+                  href="https://x.com/SibtealiN"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >X</a
+                >
+                and
+                <a
+                  href="https://instagram.com/sibt_e_ali_baqar"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Instagram</a
+                >.
+              </p>
+            </div>
+
+            <div class="about__meta">
+              <dl class="about__dl">
+                <div class="about__dl-row">
+                  <dt class="about__dt">Location</dt>
+                  <dd class="about__dd">F-15, Islamabad</dd>
+                </div>
+                <div class="about__dl-row">
+                  <dt class="about__dt">Education</dt>
+                  <dd class="about__dd">
+                    NUST &#183; Computer Engineering &#183; 2023
+                  </dd>
+                </div>
+                <div class="about__dl-row">
+                  <dt class="about__dt">Current</dt>
+                  <dd class="about__dd">
+                    Lead Engineer &#183; Hill Country Coders
+                  </dd>
+                </div>
+                <div class="about__dl-row">
+                  <dt class="about__dt">GitHub</dt>
+                  <dd class="about__dd">
+                    <a
+                      href="https://github.com/sibteali786"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >sibteali786</a
+                    >
+                  </dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── contact ───────────────────────────────────────────────── -->
+      <section class="contact-section" aria-labelledby="contact-heading">
+        <div class="container">
+          <div class="contact__inner">
+            <h2 class="contact__statement" id="contact-heading">
+              If you have a problem<br />worth solving &#8212;<br />let&#8217;s
+              talk.
+            </h2>
+            <div class="contact__actions">
+              <a
+                class="btn btn--primary"
+                href="https://calendly.com/sibteali786/new-meeting"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Book a call</a
+              >
+              <a class="contact__email" href="mailto:sibteali786@gmail.com"
+                >sibteali786@gmail.com</a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ── footer ───────────────────────────────────────────────────── -->
+    <footer class="site-footer">
+      <div class="container">
+        <p class="footer__line">Building production software from Islamabad.</p>
+        <nav class="footer__nav" aria-label="Footer links">
+          <a href="mailto:sibteali786@gmail.com">Email</a>
+          <a
+            href="https://github.com/sibteali786"
+            target="_blank"
+            rel="noopener noreferrer"
+            >GitHub</a
+          >
+          <a
+            href="https://www.linkedin.com/in/syed-sibteali-baqar/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >LinkedIn</a
+          >
+          <a
+            href="https://x.com/SibtealiN"
+            target="_blank"
+            rel="noopener noreferrer"
+            >X</a
+          >
+          <a
+            href="https://substack.com/@syedsibtealibaqar"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Substack</a
+          >
+          <span class="footer__copy">&#169; 2025</span>
+        </nav>
+      </div>
+    </footer>
+
+    <script src="nav.js"></script>
+  </body>
 </html>

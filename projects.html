@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>(function(){var t=localStorage.getItem("theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Projects by Syed Sibt-e-Ali Baqar — production ERP systems, multi-tenant platforms, real-time tools, and open-source contributions.">
@@ -28,7 +29,11 @@
     <nav class="site-nav" aria-label="Primary navigation">
       <a class="nav-name" href="/">Sibt-e-Ali</a>
       <div class="nav-right">
-        <a class="nav-email" href="mailto:sibteali786@gmail.com">sibteali786@gmail.com</a>
+        <a class="nav-cta" href="https://calendly.com/sibteali786/new-meeting" target="_blank" rel="noopener noreferrer">Book a call</a>
+        <button class="theme-toggle" aria-label="Toggle light and dark theme" aria-pressed="false">
+          <span class="theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true"></span>
+          <span class="theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true"></span>
+        </button>
         <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation menu">Menu</button>
       </div>
     </nav>
@@ -36,6 +41,7 @@
       <a href="/about.html">About</a>
       <a href="/projects.html" aria-current="page">Projects</a>
       <a href="/contact.html">Contact</a>
+    <a href="https://pub-df01b6824e12429a8b28593c8c253132.r2.dev/Sibteali-Baqar.docx" target="_blank" rel="noopener noreferrer">Résumé &#8599;</a>
     </nav>
   </header>
 
@@ -68,14 +74,17 @@
               documents, reports, and a role-based dashboard.
               Built for Asia Group of Companies, live at asiabuilderz.com.
             </p>
-            <div class="project-featured__arch">
-              <p class="project-featured__arch-item">13 production tables &#183; 50+ REST endpoints &#183; 10 feature modules &#183; 6 DB migrations</p>
-              <p class="project-featured__arch-item">6 report types &#215; PDF + Excel &#8212; P&amp;L, Expense Breakdown, Vendor Payment, Govt Audit, Investment Portfolio</p>
-              <p class="project-featured__arch-item">3 roles (OWNER &#183; ACCOUNTANT &#183; REVIEWER) &#183; JWT in cookie &#183; Zustand middleware guards</p>
-              <p class="project-featured__arch-item">Saga pattern: R2 delete on DB save failure &#8212; atomicity without a distributed transaction manager</p>
-              <p class="project-featured__arch-item">Independent per-section dashboard queries &#8212; one broken endpoint doesn&#8217;t blank the screen</p>
-              <p class="project-featured__arch-item">Soft deletes on all entities &#183; signed URL generation on demand &#183; auto-generated txnRef codes (e.g. EXP-NIS-0001)</p>
-            </div>
+            <details class="project-featured__details">
+              <summary>How it&#8217;s built</summary>
+              <div class="project-featured__arch">
+                <p class="project-featured__arch-item">13 production tables &#183; 50+ REST endpoints &#183; 10 feature modules &#183; 6 DB migrations</p>
+                <p class="project-featured__arch-item">6 report types &#215; PDF + Excel &#8212; P&amp;L, Expense Breakdown, Vendor Payment, Govt Audit, Investment Portfolio</p>
+                <p class="project-featured__arch-item">3 roles (OWNER &#183; ACCOUNTANT &#183; REVIEWER) with proper access control</p>
+                <p class="project-featured__arch-item">Safe file handling so a failed save never leaves an orphaned document behind</p>
+                <p class="project-featured__arch-item">Independent per-section dashboard queries &#8212; one broken endpoint doesn&#8217;t blank the screen</p>
+                <p class="project-featured__arch-item">Soft deletes on all entities &#183; auto-generated transaction reference codes</p>
+              </div>
+            </details>
             <a class="project-featured__link" href="https://accounts.asiabuilderz.com" target="_blank" rel="noopener noreferrer">asiabuilderz.com &#8599;</a>
             <a class="project-featured__detail-link"  href="projects/asia-builders.html">Case study &#8594;</a>
           </div>
@@ -109,12 +118,15 @@
               Replacing Excel-based tracking drove a 10&#8211;12% company-wide
               efficiency gain in under six months.
             </p>
-            <div class="project-featured__arch">
-              <p class="project-featured__arch-item">Multi-tenant data isolation &#183; internal and external project tracking</p>
-              <p class="project-featured__arch-item">Skill matching &#183; priority levels &#183; task categorization &#183; file management</p>
-              <p class="project-featured__arch-item">User mentions &#183; email notifications &#183; real-time companion chat (WebSockets)</p>
-              <p class="project-featured__arch-item">AWS-based deployment &#183; CI/CD via GitHub Actions &#183; AWS CDK infrastructure</p>
-            </div>
+            <details class="project-featured__details">
+              <summary>How it&#8217;s built</summary>
+              <div class="project-featured__arch">
+                <p class="project-featured__arch-item">Separate data per client &#183; internal and external project tracking</p>
+                <p class="project-featured__arch-item">Skill matching &#183; priority levels &#183; task categorization &#183; file management</p>
+                <p class="project-featured__arch-item">User mentions &#183; email notifications &#183; real-time companion chat</p>
+                <p class="project-featured__arch-item">Automated deployments and testing so releases stay reliable</p>
+              </div>
+            </details>
             <a class="project-featured__link" href="https://app.whatsnextplease.com" target="_blank" rel="noopener noreferrer">whatsnextplease.com &#8599;</a>
             <a class="project-featured__detail-link" href="projects/whats-next-please.html">Case study &#8594;</a>
           </div>
@@ -292,6 +304,8 @@
         <a href="mailto:sibteali786@gmail.com">Email</a>
         <a href="https://github.com/sibteali786" target="_blank" rel="noopener noreferrer">GitHub</a>
         <a href="https://www.linkedin.com/in/syed-sibteali-baqar/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://x.com/SibtealiN" target="_blank" rel="noopener noreferrer">X</a>
+        <a href="https://substack.com/@syedsibtealibaqar" target="_blank" rel="noopener noreferrer">Substack</a>
         <span class="footer__copy">&#169; 2025</span>
       </nav>
     </div>

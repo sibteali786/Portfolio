@@ -127,6 +127,17 @@
   margin-block-end: var(--space-lg);
 }
 
+.project-featured__details summary {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--color-ink-3);
+  cursor: pointer;
+  margin-block-end: var(--space-sm);
+  transition: color var(--dur-short) var(--ease-out);
+}
+.project-featured__details summary:hover { color: var(--color-ink-2); }
+.project-featured__details[open] summary { color: var(--color-ink-2); }
+
 .project-featured__arch {
   display: flex;
   flex-direction: column;
@@ -355,9 +366,9 @@
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   line-height: 1.7;
-  background: var(--color-surface-2, #0d0d0d);
+  background: var(--color-paper-2);
   border: var(--rule-hairline);
-  border-radius: var(--radius-sm, 4px);
+  border-radius: var(--radius-card);
   padding: var(--space-md);
   overflow-x: auto;
   margin-block-end: var(--space-lg);
@@ -366,12 +377,12 @@
 
 .oss-diff__del {
   display: block;
-  color: #f87171;
+  color: var(--color-ink-3);
 }
 
 .oss-diff__add {
   display: block;
-  color: #4ade80;
+  color: var(--color-terminal);
 }
 
 .oss-card__links {
@@ -460,6 +471,7 @@
 @media (prefers-reduced-motion: reduce) {
   .project-featured__link,
   .project-featured__detail-link,
+  .project-featured__details summary,
   .project-supporting__link,
   .project-supporting__detail,
   .oss-card__link {
