@@ -73,7 +73,7 @@ ol {
 .skip-link {
   position: absolute;
   top: -100%;
-  left: var(--space-md);
+  inset-inline-start: var(--space-md);
   background: var(--color-accent);
   color: var(--color-accent-ink);
   font-family: var(--font-mono);
@@ -1118,10 +1118,6 @@ ol {
   .stat-row {
     grid-template-columns: 1fr;
     gap: var(--space-xl) 0;
-  }
-
-  .stat--dominant {
-    order: -1;
   }
 
   .proj {

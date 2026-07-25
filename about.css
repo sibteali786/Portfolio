@@ -139,7 +139,7 @@
 .exp__outcomes li::before {
   content: "—";
   position: absolute;
-  left: 0;
+  inset-inline-start: 0;
   color: var(--color-ink-3);
   font-family: var(--font-mono);
 }
