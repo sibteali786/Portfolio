@@ -37,7 +37,7 @@
         <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation menu">Menu</button>
       </div>
     </nav>
-    <nav class="nav-menu" id="nav-menu" hidden aria-label="Site pages">
+    <nav class="nav-menu" id="nav-menu" aria-label="Site pages">
       <a href="/about.html">About</a>
       <a href="/projects.html" aria-current="page">Projects</a>
       <a href="/contact.html">Contact</a>
@@ -211,9 +211,9 @@
               <p class="project-supporting__note">
                 Engineering notes: iOS Safari localStorage purge &#8594; switched to cookie-based
                 Supabase sessions. PKT timezone bug firing reminders 5h early &#8594; store
-                <code style="font-family:var(--font-mono);font-size:0.875em">utcHour = (hour - 5 + 24) % 24</code>.
+                <code class="project-supporting__note-code">utcHour = (hour - 5 + 24) % 24</code>.
                 Vercel Hobby cron only supports daily &#8594; moved to GitHub Actions on
-                <code style="font-family:var(--font-mono);font-size:0.875em">*/5 * * * *</code>.
+                <code class="project-supporting__note-code">*/5 * * * *</code>.
               </p>
               <a class="project-supporting__detail" href="projects/wafa.html">Detail &#8594;</a>
             </div>

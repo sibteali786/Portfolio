@@ -14,7 +14,7 @@
   --color-paper-3:     oklch(88% 0.012  78);
   --color-ink:         oklch(20% 0.012  60);
   --color-ink-2:       oklch(40% 0.014  60);
-  --color-ink-3:       oklch(58% 0.012  60);
+  --color-ink-3:       oklch(47% 0.012  60);
   --color-rule:        oklch(85% 0.010  78);
   --color-accent:      oklch(52% 0.150  55);   /* warm amber, tuned for contrast on light paper */
   --color-accent-dim:  oklch(44% 0.120  55);
@@ -80,10 +80,10 @@
   --color-paper-3:     oklch(26% 0.014  58);
   --color-ink:         oklch(94% 0.006  65);
   --color-ink-2:       oklch(62% 0.014  62);
-  --color-ink-3:       oklch(40% 0.012  60);
+  --color-ink-3:       oklch(60% 0.012  60);
   --color-rule:        oklch(28% 0.014  58);
   --color-accent:      oklch(74% 0.140  55);   /* warm amber — brighter, needed for contrast on dark paper */
-  --color-accent-dim:  oklch(54% 0.110  55);
+  --color-accent-dim:  oklch(62% 0.110  55);
   --color-accent-ink:  oklch(12% 0.010  55);
   --color-focus:       oklch(74% 0.140  55);
   --color-terminal:    oklch(58% 0.150 145);
@@ -96,10 +96,10 @@
     --color-paper-3:     oklch(26% 0.014  58);
     --color-ink:         oklch(94% 0.006  65);
     --color-ink-2:       oklch(62% 0.014  62);
-    --color-ink-3:       oklch(40% 0.012  60);
+    --color-ink-3:       oklch(60% 0.012  60);
     --color-rule:        oklch(28% 0.014  58);
     --color-accent:      oklch(74% 0.140  55);
-    --color-accent-dim:  oklch(54% 0.110  55);
+    --color-accent-dim:  oklch(62% 0.110  55);
     --color-accent-ink:  oklch(12% 0.010  55);
     --color-focus:       oklch(74% 0.140  55);
     --color-terminal:    oklch(58% 0.150 145);

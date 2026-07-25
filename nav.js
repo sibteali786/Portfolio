@@ -38,9 +38,9 @@
   var menu   = document.getElementById('nav-menu');
   if (!toggle || !menu) return;
 
-  /* JS drives the animated open state via a class instead of [hidden],
-     so max-height/opacity can transition instead of snapping. */
-  menu.hidden = false;
+  /* nav-menu ships visible/expanded in CSS so links work with no JS.
+     Only once this runs do we opt into the collapsible mobile menu. */
+  menu.classList.add('js-collapsed');
 
   function setOpen(open) {
     toggle.setAttribute('aria-expanded', String(open));

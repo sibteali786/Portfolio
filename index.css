@@ -266,7 +266,11 @@ ol {
 }
 
 /* nav menu panel */
-/* max-height/padding-block are intentionally the animated properties here —
+/* Visible/expanded by default so the page links work with no JS at all
+   (blocked script, network failure, JS error). nav.js adds .js-collapsed
+   on init to opt into the collapsible mobile-menu behavior; only then do
+   .is-open/absence-of-it control open vs. closed.
+   max-height/padding-block are intentionally the animated properties here —
    a transform/opacity-only rewrite (grid-template-rows) would require
    wrapping the nav links in every one of the 11 pages that duplicate this
    markup. Accepted: low-frequency trigger (mobile menu toggle), small
@@ -279,9 +283,9 @@ ol {
   margin-inline: auto;
   padding-inline: var(--space-2xl);
   overflow: hidden;
-  max-height: 0;
-  opacity: 0;
-  padding-block: 0;
+  max-height: 20rem;
+  opacity: 1;
+  padding-block: var(--space-sm) var(--space-md);
   transform-origin: top;
   transition:
     max-height var(--dur-short) var(--ease-out),
@@ -289,10 +293,12 @@ ol {
     padding-block var(--dur-short) var(--ease-out);
 }
 
-.nav-menu[hidden] {
-  display: flex;
-} /* overridden below once JS drops [hidden] in favor of .is-open */
-.nav-menu.is-open {
+.nav-menu.js-collapsed {
+  max-height: 0;
+  opacity: 0;
+  padding-block: 0;
+}
+.nav-menu.js-collapsed.is-open {
   max-height: 20rem;
   opacity: 1;
   padding-block: var(--space-sm) var(--space-md);
@@ -331,7 +337,8 @@ ol {
   .nav-name {
     order: 1;
   }
-  .nav-menu {
+  .nav-menu,
+  .nav-menu.js-collapsed {
     order: 2;
     flex: 1;
     display: flex;
@@ -345,9 +352,6 @@ ol {
     overflow: visible;
     max-height: none;
     opacity: 1;
-  }
-  .nav-menu[hidden] {
-    display: flex;
   }
   .nav-right {
     order: 3;

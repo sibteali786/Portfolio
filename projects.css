@@ -299,6 +299,10 @@
   margin-block-end: var(--space-sm);
 }
 
+.project-supporting__note-code {
+  font-size: 0.875em;
+}
+
 .project-supporting__link {
   display: inline-block;
   font-family: var(--font-mono);
