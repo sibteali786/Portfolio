@@ -978,6 +978,21 @@ ol {
   margin-inline-start: 0;
 }
 
+.about__bootdev-card {
+  display: block;
+  margin-block-start: var(--space-md);
+  border-top: var(--rule-hairline);
+  padding-block-start: var(--space-md);
+}
+
+.about__bootdev-card img {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  border-radius: var(--radius-sm, 6px);
+}
+
 /* ═══════════════════════════════════════════════════════════════════
    CONTACT
 ═══════════════════════════════════════════════════════════════════ */
