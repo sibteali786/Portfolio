@@ -113,7 +113,8 @@
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var cards = document.querySelectorAll(
-    '.proj--featured, .proj--supporting, .project-featured, .project-supporting, .oss-card, .exp-item'
+    '.proj--featured, .proj--supporting, .project-featured, .project-supporting, .oss-card, .exp-item,' +
+    ' .arch-block, .log-entry, .shipped-group, .req-item, .pipeline-step, .zen-loop'
   );
   if (cards.length && 'IntersectionObserver' in window && !reduceMotion) {
     cards.forEach(function (c) { c.classList.add('reveal-pending'); });

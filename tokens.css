@@ -21,6 +21,7 @@
   --color-accent-ink:  oklch(98% 0.006  85);
   --color-focus:       oklch(52% 0.150  55);
   --color-terminal:    oklch(42% 0.140 145);   /* semantic success/fix green — case-study diffs & logs only */
+  --color-danger:      oklch(55% 0.180  22);   /* semantic rejected/error red — case-study arch blocks & diffs only */
 
   /* ── typography ─────────────────────────────────────────────────── */
   --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
@@ -87,6 +88,7 @@
   --color-accent-ink:  oklch(12% 0.010  55);
   --color-focus:       oklch(74% 0.140  55);
   --color-terminal:    oklch(58% 0.150 145);
+  --color-danger:      oklch(65% 0.190  22);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -103,5 +105,6 @@
     --color-accent-ink:  oklch(12% 0.010  55);
     --color-focus:       oklch(74% 0.140  55);
     --color-terminal:    oklch(58% 0.150 145);
+    --color-danger:      oklch(65% 0.190  22);
   }
 }

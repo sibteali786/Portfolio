@@ -4,6 +4,7 @@
      pre-emit critique: P5 H4 E5 S5 R5 V4 -->
 <html lang="en">
 <head>
+  <script>(function(){var t=localStorage.getItem("theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="WhatsNextPlease — a task management platform case study by Sibt-e-Ali Baqar. Six role-based dashboards, SSE real-time notifications, BFF proxy auth, and AWS CDK deployment.">
@@ -66,8 +67,8 @@
       background: linear-gradient(
         to top,
         var(--color-paper) 30%,
-        oklch(8% 0.005 240 / 0.6) 70%,
-        oklch(8% 0.005 240 / 0.2) 100%
+        color-mix(in oklch, var(--color-ink) 60%, transparent) 70%,
+        color-mix(in oklch, var(--color-ink) 20%, transparent) 100%
       );
     }
 
@@ -374,7 +375,7 @@
 
     .arch-row__key--decision { color: var(--color-terminal); }
     .arch-row__key--why      { color: var(--color-ink-3); }
-    .arch-row__key--rejected { color: oklch(62% 0.18 22); } /* muted red */
+    .arch-row__key--rejected { color: var(--color-danger); }
 
     .arch-row__val {
       font-family: var(--font-mono);
@@ -398,7 +399,7 @@
 
     .arch-row__val.is-rejected {
       color: var(--color-ink-3);
-      text-decoration-color: oklch(62% 0.18 22 / 0.4);
+      text-decoration-color: color-mix(in oklch, var(--color-danger) 40%, transparent);
     }
 
     /* ── problems / log entries ─────────────────────────────────────── */
@@ -700,7 +701,11 @@
     <nav class="site-nav" aria-label="Primary navigation">
       <a class="nav-name" href="/">Sibt-e-Ali</a>
       <div class="nav-right">
-        <a class="nav-email" href="mailto:sibteali786@gmail.com">sibteali786@gmail.com</a>
+        <a class="nav-cta" href="https://calendly.com/sibteali786/new-meeting" target="_blank" rel="noopener noreferrer">Book a call</a>
+        <button class="theme-toggle" aria-label="Toggle light and dark theme" aria-pressed="false">
+          <span class="theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true"></span>
+          <span class="theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true"></span>
+        </button>
         <button
           class="nav-toggle"
           aria-expanded="false"
@@ -709,10 +714,11 @@
         >Menu</button>
       </div>
     </nav>
-    <nav class="nav-menu" id="nav-menu" hidden aria-label="Site pages">
+    <nav class="nav-menu" id="nav-menu" aria-label="Site pages">
       <a href="/about.html">About</a>
       <a href="/projects.html" aria-current="page">Projects</a>
       <a href="/contact.html">Contact</a>
+      <a href="https://pub-df01b6824e12429a8b28593c8c253132.r2.dev/Sibteali-Baqar.docx" target="_blank" rel="noopener noreferrer">Résumé &#8599;</a>
     </nav>
   </header>
 
