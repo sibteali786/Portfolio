@@ -28,13 +28,25 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
 
     <link rel="stylesheet" href="tokens.css" />
     <link rel="stylesheet" href="index.css" />
-  </head>
+  
+  <link rel="canonical" href="https://sibteali-portfolio.vercel.app/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Syed Sibt-e-Ali Baqar">
+  <meta property="og:title" content="Syed Sibt-e-Ali Baqar — Software Engineer">
+  <meta property="og:description" content="Syed Sibt-e-Ali Baqar — software engineer in Islamabad. I build web platforms and ERPs that replace spreadsheets and manual work for real teams.">
+  <meta property="og:url" content="https://sibteali-portfolio.vercel.app/">
+  <meta property="og:image" content="https://sibteali-portfolio.vercel.app/images/asia-builders.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Syed Sibt-e-Ali Baqar — Software Engineer">
+  <meta name="twitter:description" content="Syed Sibt-e-Ali Baqar — software engineer in Islamabad. I build web platforms and ERPs that replace spreadsheets and manual work for real teams.">
+  <meta name="twitter:image" content="https://sibteali-portfolio.vercel.app/images/asia-builders.png">
+</head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
 
@@ -79,7 +91,7 @@
         <a href="/projects.html">Projects</a>
         <a href="/contact.html">Contact</a>
         <a
-          href="https://pub-df01b6824e12429a8b28593c8c253132.r2.dev/Sibteali-Baqar.docx"
+          href="/Sibteali-Baqar-Resume.pdf"
           target="_blank"
           rel="noopener noreferrer"
           >Résumé &#8599;</a
@@ -94,8 +106,8 @@
           <div class="hero__main">
             <p class="hero__label hero__reveal">Software engineer &#183; Islamabad</p>
             <h1 class="hero__name hero__reveal" id="hero-name">
-              I turn your ideas, pain points and manual work into product that
-              you trust.
+              I turn your ideas, pain points and manual work into products you
+              can trust.
             </h1>
             <p class="hero__byline hero__reveal">Syed Sibt-e-Ali Baqar</p>
             <p class="hero__desc hero__reveal">
@@ -114,7 +126,7 @@
               >
               <a
                 class="btn btn--secondary"
-                href="https://pub-df01b6824e12429a8b28593c8c253132.r2.dev/Sibteali-Baqar.docx"
+                href="/Sibteali-Baqar-Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 >Download résumé</a
@@ -141,6 +153,15 @@
         <div class="container">
           <div class="stat-row">
             <article class="stat stat--dominant">
+              <span class="stat__num">40</span>
+              <p class="stat__label">hours of Excel a month, eliminated</p>
+              <p class="stat__context">
+                Asia Builders ERP now runs projects, payments, and reports
+                end-to-end
+              </p>
+            </article>
+
+            <article class="stat">
               <span class="stat__num">5&times;</span>
               <p class="stat__label">cost reduction</p>
               <p class="stat__context">
@@ -154,14 +175,6 @@
               <p class="stat__label">team efficiency gain</p>
               <p class="stat__context">
                 Better tooling and processes &#183; Hill Country Coders
-              </p>
-            </article>
-
-            <article class="stat">
-              <span class="stat__num">50%</span>
-              <p class="stat__label">fewer support queries</p>
-              <p class="stat__context">
-                Rebuilt docs with real examples &#8212; Ensemble UI
               </p>
             </article>
           </div>
@@ -195,17 +208,19 @@
                   documents, reports, and a role-based dashboard. Built for Asia
                   Group of Companies.
                 </p>
+                <div class="proj__arch-lead">
+                  <p class="proj__arch-item">
+                    13 production tables &#183; 50+ REST endpoints &#183; 10
+                    feature modules &#183; 6 DB migrations
+                  </p>
+                  <p class="proj__arch-item">
+                    6 report types &#215; PDF + Excel &#8212; P&amp;L, Expense
+                    Breakdown, Vendor Payment, Govt Audit
+                  </p>
+                </div>
                 <details class="proj__details">
-                  <summary>How it&#8217;s built</summary>
+                  <summary>More on how it&#8217;s built</summary>
                   <div class="proj__arch">
-                    <p class="proj__arch-item">
-                      13 production tables &#183; 50+ REST endpoints &#183; 10
-                      feature modules &#183; 6 DB migrations
-                    </p>
-                    <p class="proj__arch-item">
-                      6 report types &#215; PDF + Excel &#8212; P&amp;L, Expense
-                      Breakdown, Vendor Payment, Govt Audit
-                    </p>
                     <p class="proj__arch-item">
                       Safe file handling so a failed save never leaves an
                       orphaned document behind
@@ -220,15 +235,15 @@
                     </p>
                   </div>
                 </details>
+                <a class="proj__cta" href="projects/asia-builders.html"
+                  >Read the case study &#8594;</a
+                >
                 <a
                   class="proj__link"
                   href="https://accounts.asiabuilderz.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   >asiabuilderz.com &#8599;</a
-                >
-                <a class="proj__link" href="projects/asia-builders.html"
-                  >Case study &#8594;</a
                 >
               </div>
             </article>
@@ -253,28 +268,25 @@
                   Excel-based tracking and drove a 10&#8211;12% company-wide
                   efficiency gain in under six months.
                 </p>
-                <details class="proj__details">
-                  <summary>How it&#8217;s built</summary>
-                  <div class="proj__arch">
-                    <p class="proj__arch-item">
-                      Internal and external project tracking &#183; skill
-                      matching &#183; priority levels
-                    </p>
-                    <p class="proj__arch-item">
-                      Email notifications &#183; separate data per client &#183;
-                      real-time companion chat
-                    </p>
-                  </div>
-                </details>
+                <div class="proj__arch-lead">
+                  <p class="proj__arch-item">
+                    Internal and external project tracking &#183; skill
+                    matching &#183; priority levels
+                  </p>
+                  <p class="proj__arch-item">
+                    Email notifications &#183; separate data per client &#183;
+                    real-time companion chat
+                  </p>
+                </div>
+                <a class="proj__cta" href="projects/whats-next-please.html"
+                  >Read the case study &#8594;</a
+                >
                 <a
                   class="proj__link"
                   href="https://app.whatsnextplease.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   >whatsnextplease.com &#8599;</a
-                >
-                <a class="proj__link" href="projects/whats-next-please.html"
-                  >Case study &#8594;</a
                 >
               </div>
             </article>
@@ -314,20 +326,50 @@
             <article class="proj proj--supporting">
               <div class="proj__rule" aria-hidden="true"></div>
               <div class="proj__side">
-                <span class="proj__stack">JavaScript &#183; Firefox</span>
+                <span class="proj__stack">Next.js &#183; Supabase</span>
               </div>
               <div class="proj__content">
-                <h3 class="proj__title">Zen Browser</h3>
+                <h3 class="proj__title">Wafa</h3>
                 <p class="proj__desc">
-                  Active contributor to
+                  Private PWA for tracking shared commitments &#8212; a promise
+                  journal with reminders, attachments, push notifications, and
+                  a Supabase Realtime backend. In progress.
+                </p>
+                <a class="proj__link" href="projects/wafa.html"
+                  >Detail &#8594;</a
+                >
+              </div>
+            </article>
+
+            <article class="proj proj--supporting">
+              <div class="proj__rule" aria-hidden="true"></div>
+              <div class="proj__side">
+                <span class="proj__stack">Firefox &#183; Go toolchains</span>
+              </div>
+              <div class="proj__content">
+                <h3 class="proj__title">Open Source</h3>
+                <p class="proj__desc">
+                  Merged fixes in
                   <a
                     href="https://github.com/zen-browser/desktop"
                     target="_blank"
                     rel="noopener noreferrer"
-                    >Zen Browser</a
-                  >, a modern minimalist wrapper around Firefox. UI
-                  contributions and systems work.
+                    >zen-browser/desktop</a
+                  >
+                  (&#9733;&nbsp;42k &#8212; sidebar drag-flicker root-caused to
+                  a dragleave feedback loop) and
+                  <a
+                    href="https://github.com/Melkeydev/go-blueprint"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Melkeydev/go-blueprint</a
+                  >
+                  (&#9733;&nbsp;8.9k &#8212; bridged the PORT env var across
+                  the Go/Vite boundary).
                 </p>
+                <a class="proj__link" href="projects.html#oss-heading"
+                  >Read both fixes with diffs &#8594;</a
+                >
               </div>
             </article>
           </div>
@@ -585,7 +627,7 @@
             rel="noopener noreferrer"
             >Substack</a
           >
-          <span class="footer__copy">&#169; 2025</span>
+          <span class="footer__copy">&#169; 2026</span>
         </nav>
       </div>
     </footer>

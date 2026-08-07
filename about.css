@@ -1,4 +1,4 @@
-/* Hallmark · macrostructure: Long Document · genre: technical-atmospheric
+/* Hallmark · macrostructure: Long Document · genre: editorial
  * design-system: design.md · designed-as-app · page: about.html
  */
 
@@ -11,7 +11,7 @@
 
 .aph .container {
   display: grid;
-  grid-template-columns: 1fr 1.6fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
   gap: var(--space-2xl);
   align-items: start;
 }
@@ -163,7 +163,7 @@
 
 .edu-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: var(--space-2xl);
   align-items: start;
 }

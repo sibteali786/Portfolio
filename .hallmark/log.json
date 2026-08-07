@@ -1,5 +1,14 @@
 [
   {
+    "date": "2026-08-07",
+    "macrostructure": "Showcase (unchanged — audit + repair pass)",
+    "theme": "custom",
+    "theme_axes": "light-default / grotesk-sans / warm-amber",
+    "enrichment": "none",
+    "brief": "Sibt-e-Ali portfolio — hallmark audit fixes: loaded missing Space Grotesk (display font had been silently falling back to system-ui, DM Serif Display was loaded-but-unused), theme init + toggle added to all case-study pages, dark-era hero scrims made theme-agnostic via color-mix on --color-paper, motion diet (removed tilt/magnetic/spotlight/body-blur/pulses + Motion CDN), case-study links promoted to bordered buttons, first 2 arch items un-collapsed, OSS card + Wafa added to homepage, resume converted to local PDF, OG/canonical meta site-wide, wrote design.md as the real locked system",
+    "scope": "tokens.css, index.css, projects.css, about.css, contact.css, nav.js, all 5 root pages, all 7 projects/*.html, design.md, Sibteali-Baqar-Resume.pdf"
+  },
+  {
     "date": "2026-07-24",
     "macrostructure": "Showcase (was Split-Editorial)",
     "theme": "custom",

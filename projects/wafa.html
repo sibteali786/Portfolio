@@ -5,6 +5,7 @@
      pre-emit critique: P5 H5 E5 S5 R5 V5 -->
 <html lang="en">
 <head>
+  <script>(function(){var t=localStorage.getItem("theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Wafa — a private PWA for shared commitments. A personal engineering case study by Sibt-e-Ali Baqar covering Supabase RLS, Web Push on iOS, and PKT timezone handling.">
@@ -16,7 +17,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="../tokens.css">
   <link rel="stylesheet" href="../index.css">
@@ -67,8 +68,8 @@
       background: linear-gradient(
         to top,
         var(--color-paper) 35%,
-        oklch(8% 0.005 240 / 0.7) 75%,
-        oklch(8% 0.005 240 / 0.4) 100%
+        color-mix(in oklch, var(--color-paper) 60%, transparent) 75%,
+        color-mix(in oklch, var(--color-paper) 30%, transparent) 100%
       );
     }
 
@@ -765,6 +766,18 @@
       }
     }
   </style>
+
+  <link rel="canonical" href="https://sibteali-portfolio.vercel.app/projects/wafa">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Syed Sibt-e-Ali Baqar">
+  <meta property="og:title" content="Wafa — Personal Project · Sibt-e-Ali Baqar">
+  <meta property="og:description" content="Wafa — a private PWA for shared commitments. A personal engineering case study by Sibt-e-Ali Baqar covering Supabase RLS, Web Push on iOS, and PKT timezone handling.">
+  <meta property="og:url" content="https://sibteali-portfolio.vercel.app/projects/wafa">
+  <meta property="og:image" content="https://sibteali-portfolio.vercel.app/images/wafa-1.jpeg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Wafa — Personal Project · Sibt-e-Ali Baqar">
+  <meta name="twitter:description" content="Wafa — a private PWA for shared commitments. A personal engineering case study by Sibt-e-Ali Baqar covering Supabase RLS, Web Push on iOS, and PKT timezone handling.">
+  <meta name="twitter:image" content="https://sibteali-portfolio.vercel.app/images/wafa-1.jpeg">
 </head>
 
 <body>
@@ -776,7 +789,11 @@
     <nav class="site-nav" aria-label="Primary navigation">
       <a class="nav-name" href="/">Sibt-e-Ali</a>
       <div class="nav-right">
-        <a class="nav-email" href="mailto:sibteali786@gmail.com">sibteali786@gmail.com</a>
+        <a class="nav-cta" href="https://calendly.com/sibteali786/new-meeting" target="_blank" rel="noopener noreferrer">Book a call</a>
+        <button class="theme-toggle" aria-label="Toggle light and dark theme" aria-pressed="false">
+          <span class="theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true"></span>
+          <span class="theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true"></span>
+        </button>
         <button
           class="nav-toggle"
           aria-expanded="false"
@@ -789,6 +806,7 @@
       <a href="/about.html">About</a>
       <a href="/projects.html" aria-current="page">Projects</a>
       <a href="/contact.html">Contact</a>
+      <a href="/Sibteali-Baqar-Resume.pdf" target="_blank" rel="noopener noreferrer">Résumé &#8599;</a>
     </nav>
   </header>
 
@@ -1369,7 +1387,7 @@
         <a href="https://github.com/sibteali786" target="_blank" rel="noopener noreferrer">GitHub</a>
         <a href="https://www.boot.dev/u/sibteali" target="_blank" rel="noopener noreferrer">boot.dev</a>
         <a href="https://www.linkedin.com/in/syed-sibteali-baqar/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <span class="footer__copy">&#169; 2025</span>
+        <span class="footer__copy">&#169; 2026</span>
       </nav>
     </div>
   </footer>
