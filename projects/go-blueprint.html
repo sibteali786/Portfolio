@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <!-- Hallmark · macrostructure: Workbench · tone: technical-austere
      theme: custom (dark / italic-serif / warm-amber) · design-system: design.md
-     note: field-notes sister page — cross-boundary env fix, Melkeydev/go-blueprint
+     note: field-notes sister page: cross-boundary env fix, Melkeydev/go-blueprint
      pre-emit critique: P5 H5 E5 S5 R5 V4 -->
 <html lang="en">
 <head>
   <script>(function(){var t=localStorage.getItem("theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="go-blueprint PORT env fix — bridging Go's code generation and Vite's VITE_ prefix requirement. Open source contribution by Sibt-e-Ali Baqar.">
+  <meta name="description" content="go-blueprint PORT env fix, bridging Go's code generation and Vite's VITE_ prefix requirement. Open source contribution by Sibt-e-Ali Baqar.">
   <title>go-blueprint · Sibt-e-Ali Baqar</title>
 
   <link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="../index.css">
 
   <style>
-    /* ── go-blueprint field notes — workbench macrostructure ───────────
+    /* ── go-blueprint field notes: workbench macrostructure ───────────
        Sister page to zen.html. Same field-notes register.
        Centrepiece: constraint diagram + three-part code walkthrough.
     ─────────────────────────────────────────────────────────────────── */
@@ -128,7 +128,7 @@
       margin-bottom: var(--space-md);
     }
 
-    /* ── what the user saw — two-column ────────────────────────────── */
+    /* ── what the user saw: two-column ────────────────────────────── */
     .gob-seen {
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -327,7 +327,7 @@
     }
 
     .gob-learned__item::before {
-      content: "—";
+      content: "\2022";
       position: absolute;
       left: 0;
       color: var(--color-accent-dim);
@@ -508,11 +508,11 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Syed Sibt-e-Ali Baqar">
   <meta property="og:title" content="go-blueprint · Sibt-e-Ali Baqar">
-  <meta property="og:description" content="go-blueprint PORT env fix — bridging Go's code generation and Vite's VITE_ prefix requirement. Open source contribution by Sibt-e-Ali Baqar.">
+  <meta property="og:description" content="go-blueprint PORT env fix, bridging Go's code generation and Vite's VITE_ prefix requirement. Open source contribution by Sibt-e-Ali Baqar.">
   <meta property="og:url" content="https://sibteali-portfolio.vercel.app/projects/go-blueprint">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="go-blueprint · Sibt-e-Ali Baqar">
-  <meta name="twitter:description" content="go-blueprint PORT env fix — bridging Go's code generation and Vite's VITE_ prefix requirement. Open source contribution by Sibt-e-Ali Baqar.">
+  <meta name="twitter:description" content="go-blueprint PORT env fix, bridging Go's code generation and Vite's VITE_ prefix requirement. Open source contribution by Sibt-e-Ali Baqar.">
 </head>
 
 <body>
@@ -630,9 +630,9 @@ localhost:8080</code></pre>
 
         <div class="gob-fix">
 
-          <!-- Part 1 — program.go reads and bridges -->
+          <!-- Part 1: program.go reads and bridges -->
           <div>
-            <p class="gob-fix__part-label">program.go &#8212; reads root .env, writes frontend/.env</p>
+            <p class="gob-fix__part-label">program.go: reads root .env, writes frontend/.env</p>
             <pre class="gob-diff-block" aria-label="Go code: reads PORT from root .env, writes VITE_PORT to frontend/.env"><code><span class="diff-ctx"> globalEnvPath := filepath.Join(projectPath, ".env")</span>
 <span class="diff-ctx"> vitePort := "8080" // Default fallback</span>
 <span class="diff-ctx"> if strings.HasPrefix(line, "PORT=") {</span>
@@ -642,16 +642,16 @@ localhost:8080</code></pre>
 <span class="diff-ctx"> os.WriteFile(filepath.Join(frontendPath, ".env"), ...)</span></code></pre>
           </div>
 
-          <!-- Part 2 — template diff -->
+          <!-- Part 2: template diff -->
           <div>
-            <p class="gob-fix__part-label">app.tsx.tmpl &#8212; the visible change (react &amp; react+tailwind)</p>
+            <p class="gob-fix__part-label">app.tsx.tmpl: the visible change (react &amp; react+tailwind)</p>
             <pre class="gob-diff-block" aria-label="Template diff: hardcoded 8080 replaced with VITE_PORT"><code><span class="diff-del">- fetch('http://localhost:8080/')</span>
 <span class="diff-add">+ fetch(`http://localhost:${import.meta.env.VITE_PORT}/`)</span></code></pre>
           </div>
 
-          <!-- Part 3 — CI fix (secondary) -->
+          <!-- Part 3: CI fix (secondary) -->
           <div>
-            <p class="gob-fix__part-label">3 CI workflow files &#8212; trailing <code style="font-family:var(--font-mono);font-size:0.85em;color:var(--color-accent-dim)">/dev/null</code> was silently breaking builds</p>
+            <p class="gob-fix__part-label">3 CI workflow files: trailing <code style="font-family:var(--font-mono);font-size:0.85em;color:var(--color-accent-dim)">/dev/null</code> was silently breaking builds</p>
             <pre class="gob-diff-block gob-diff-block--secondary" aria-label="CI fix: trailing /dev/null argument removed from script command"><code><span class="diff-del">- script -q /dev/null -c "go run ..." /dev/null</span>
 <span class="diff-add">+ script -q /dev/null -c "go run ..."</span></code></pre>
           </div>
@@ -687,10 +687,10 @@ localhost:8080</code></pre>
         <h2 class="gob-kicker" id="s-learned">What I learned</h2>
 
         <ul class="gob-learned" aria-label="Four takeaways">
-          <li class="gob-learned__item">Vite&#8217;s <code style="font-family:var(--font-mono);font-size:0.9em;color:var(--color-accent-dim)">VITE_</code> prefix requirement and why it exists &#8212; security: don&#8217;t accidentally expose server env vars to the browser bundle.</li>
+          <li class="gob-learned__item">Vite&#8217;s <code style="font-family:var(--font-mono);font-size:0.9em;color:var(--color-accent-dim)">VITE_</code> prefix requirement and why it exists (security: don&#8217;t accidentally expose server env vars to the browser bundle).</li>
           <li class="gob-learned__item">Go&#8217;s code generation pattern: <code style="font-family:var(--font-mono);font-size:0.9em;color:var(--color-accent-dim)">program.go</code> doesn&#8217;t just copy files, it reads and transforms env state at generation time.</li>
-          <li class="gob-learned__item">How to test GitHub Actions locally &#8212; asked in the PR, learned about <code style="font-family:var(--font-mono);font-size:0.9em;color:var(--color-accent-dim)">act</code>.</li>
-          <li class="gob-learned__item">Trailing <code style="font-family:var(--font-mono);font-size:0.9em;color:var(--color-accent-dim)">/dev/null</code> in <code style="font-family:var(--font-mono);font-size:0.9em;color:var(--color-accent-dim)">script -c</code> breaks CI &#8212; silent failure, hard to spot without running it.</li>
+          <li class="gob-learned__item">How to test GitHub Actions locally: it came up in the PR review, which led me to <code style="font-family:var(--font-mono);font-size:0.9em;color:var(--color-accent-dim)">act</code>.</li>
+          <li class="gob-learned__item">Trailing <code style="font-family:var(--font-mono);font-size:0.9em;color:var(--color-accent-dim)">/dev/null</code> in <code style="font-family:var(--font-mono);font-size:0.9em;color:var(--color-accent-dim)">script -c</code> breaks CI: silent failure, hard to spot without running it.</li>
         </ul>
       </div>
     </section>
@@ -727,7 +727,7 @@ localhost:8080</code></pre>
     <section class="gob-cta" aria-labelledby="s-cta">
       <div class="container">
         <h2 class="gob-cta__statement" id="s-cta">
-          If you have a problem<br>worth solving &#8212;<br>let&#8217;s talk.
+          If you have a problem<br>worth solving,<br>let&#8217;s talk.
         </h2>
         <div class="gob-cta__links">
           <a class="gob-cta__link is-primary" href="/contact.html">Get in touch</a>

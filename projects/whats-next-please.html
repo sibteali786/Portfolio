@@ -7,8 +7,8 @@
   <script>(function(){var t=localStorage.getItem("theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="WhatsNextPlease — a task management platform case study by Sibt-e-Ali Baqar. Six role-based dashboards, SSE real-time notifications, BFF proxy auth, and AWS CDK deployment.">
-  <title>WhatsNextPlease — Case Study · Sibt-e-Ali Baqar</title>
+  <meta name="description" content="WhatsNextPlease: a task management platform case study by Sibt-e-Ali Baqar. Six role-based dashboards, SSE real-time notifications, BFF proxy auth, and AWS CDK deployment.">
+  <title>WhatsNextPlease: Case Study · Sibt-e-Ali Baqar</title>
 
   <link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="../images/favicon-96x96.png" sizes="96x96" type="image/png">
@@ -22,12 +22,12 @@
   <link rel="stylesheet" href="../index.css">
 
   <style>
-    /* ── case study page — whats-next-please ───────────────────────────
+    /* == case study page: whats-next-please ============================
        Macrostructure: Catalogue
        Each section is a named entry in a sequential technical document.
        Sections alternate between full-width prose and constrained two-
        column layouts. Terminal blocks and log entries are the signature
-       visual elements — monospace keys, amber highlights, dark surfaces.
+       visual elements: monospace keys, amber highlights, dark surfaces.
     ─────────────────────────────────────────────────────────────────── */
 
     @media (prefers-reduced-motion: reduce) {
@@ -466,7 +466,7 @@
       border-radius: 2px;
     }
 
-    /* ── what shipped — grouped feature grid ───────────────────────── */
+    /* == what shipped: grouped feature grid =========================== */
     .shipped-groups {
       display: flex;
       flex-direction: column;
@@ -694,13 +694,13 @@
   <link rel="canonical" href="https://sibteali-portfolio.vercel.app/projects/whats-next-please">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Syed Sibt-e-Ali Baqar">
-  <meta property="og:title" content="WhatsNextPlease — Case Study · Sibt-e-Ali Baqar">
-  <meta property="og:description" content="WhatsNextPlease — a task management platform case study by Sibt-e-Ali Baqar. Six role-based dashboards, SSE real-time notifications, BFF proxy auth, and AWS CDK deployment.">
+  <meta property="og:title" content="WhatsNextPlease: Case Study · Sibt-e-Ali Baqar">
+  <meta property="og:description" content="WhatsNextPlease: a task management platform case study by Sibt-e-Ali Baqar. Six role-based dashboards, SSE real-time notifications, BFF proxy auth, and AWS CDK deployment.">
   <meta property="og:url" content="https://sibteali-portfolio.vercel.app/projects/whats-next-please">
   <meta property="og:image" content="https://sibteali-portfolio.vercel.app/images/whatsnextplease.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="WhatsNextPlease — Case Study · Sibt-e-Ali Baqar">
-  <meta name="twitter:description" content="WhatsNextPlease — a task management platform case study by Sibt-e-Ali Baqar. Six role-based dashboards, SSE real-time notifications, BFF proxy auth, and AWS CDK deployment.">
+  <meta name="twitter:title" content="WhatsNextPlease: Case Study · Sibt-e-Ali Baqar">
+  <meta name="twitter:description" content="WhatsNextPlease: a task management platform case study by Sibt-e-Ali Baqar. Six role-based dashboards, SSE real-time notifications, BFF proxy auth, and AWS CDK deployment.">
   <meta name="twitter:image" content="https://sibteali-portfolio.vercel.app/images/whatsnextplease.png">
 </head>
 
@@ -767,7 +767,7 @@
           Supervisors and agents went from coordinating work across disconnected
           tools to a single platform where every task has an owner, a status, a
           time log, a comment thread, a file trail, and real-time
-          notifications&#8202;&#8212;&#8202;whether the tab is open or not.
+          notifications, whether the tab is open or not.
         </p>
 
         <div class="cs-hero__meta">
@@ -859,7 +859,7 @@
         <div class="cs-s__body">
           <p>
             A single organization was running task delegation, client requests,
-            and agent assignments through a combination of informal tools &#8212;
+            and agent assignments through a combination of informal tools:
             no unified system for tracking who owns what, no visibility into task
             status across roles, and no audit trail for time spent or work
             completed.
@@ -893,7 +893,7 @@
               <p class="req-item__q">Who are the actors and what can each do?</p>
               <p class="req-item__a">
                 Surfaced 6 distinct roles: Super User, Task Supervisor, Task Agent,
-                Client, District/Territory Manager, Account Executive &#8212; each
+                Client, District/Territory Manager, Account Executive, each
                 needing a separate dashboard and permission set.
               </p>
             </div>
@@ -916,7 +916,7 @@
               <p class="req-item__q">How do we identify tasks externally?</p>
               <p class="req-item__a">
                 Clients and agents need a human-readable reference, not a UUID.
-                Led to a serial number system with per-category prefixes &#8212;
+                Led to a serial number system with per-category prefixes,
                 e.g. <code>WD-00042</code>.
               </p>
             </div>
@@ -928,7 +928,7 @@
               <p class="req-item__a">
                 Notifications needed to update the UI without polling.
                 <code>EventSource</code> incompatibility with
-                <code>httpOnly</code> cookies had to be resolved &#8212;
+                <code>httpOnly</code> cookies had to be resolved,
                 which drove the single-use SSE token design.
               </p>
             </div>
@@ -949,7 +949,7 @@
               <p class="req-item__q">What are the scale expectations?</p>
               <p class="req-item__a">
                 Single-organization internal tool, not multi-tenant at the data
-                layer. Not discussed explicitly &#8212; noted as a future constraint
+                layer. Not discussed explicitly, noted as a future constraint
                 if the product scope expands.
               </p>
             </div>
@@ -964,7 +964,7 @@
       <div class="container">
         <p class="cs-s__kicker">Architecture Decisions</p>
         <h2 class="cs-s__heading" id="s-arch">
-          Five calls that<br>shaped the system.
+          Seven calls that<br>shaped the system.
         </h2>
 
         <div class="arch-list" role="list">
@@ -986,14 +986,14 @@
               <div class="arch-row">
                 <span class="arch-row__key arch-row__key--why">Why</span>
                 <span class="arch-row__val is-why">
-                  Reduced risk &#8212; old routes stay functional while new ones are
+                  Reduced risk: old routes stay functional while new ones are
                   built properly in Express; team ships features during migration.
                 </span>
               </div>
               <div class="arch-row">
                 <span class="arch-row__key arch-row__key--rejected">Rejected</span>
                 <span class="arch-row__val is-rejected">
-                  Full rewrite upfront &#8212; too risky with active users and no
+                  Full rewrite upfront: too risky with active users and no
                   feature freeze.
                 </span>
               </div>
@@ -1027,8 +1027,8 @@
                 <span class="arch-row__key arch-row__key--rejected">Rejected</span>
                 <span class="arch-row__val is-rejected">
                   Direct client-to-backend calls with <code>localStorage</code>
-                  tokens &#8212; exposes tokens to XSS.
-                  <code>getServerSideProps</code> per-route pattern &#8212; too
+                  tokens: exposes tokens to XSS.
+                  <code>getServerSideProps</code> per-route pattern: too
                   much boilerplate per module.
                 </span>
               </div>
@@ -1054,7 +1054,7 @@
               <div class="arch-row">
                 <span class="arch-row__key arch-row__key--why">Why</span>
                 <span class="arch-row__val is-why">
-                  <code>EventSource</code> API does not support custom headers &#8212;
+                  <code>EventSource</code> API does not support custom headers:
                   <code>httpOnly</code> cookies are invisible to it, and proxying a
                   long-lived stream through Next.js risks Vercel timeout limits.
                 </span>
@@ -1062,9 +1062,9 @@
               <div class="arch-row">
                 <span class="arch-row__key arch-row__key--rejected">Rejected</span>
                 <span class="arch-row__val is-rejected">
-                  Proxying SSE through Next.js &#8212; functionally broken on Vercel
+                  Proxying SSE through Next.js: functionally broken on Vercel
                   due to streaming timeouts. Using <code>localStorage</code> for the
-                  main token &#8212; security downgrade.
+                  main token: security downgrade.
                 </span>
               </div>
             </div>
@@ -1094,7 +1094,7 @@
               <div class="arch-row">
                 <span class="arch-row__key arch-row__key--rejected">Rejected</span>
                 <span class="arch-row__val is-rejected">
-                  IDP sync inside the service &#8212; would require passing plaintext
+                  IDP sync inside the service: would require passing plaintext
                   password deeper into the stack, violating separation of concerns.
                 </span>
               </div>
@@ -1119,7 +1119,7 @@
               <div class="arch-row">
                 <span class="arch-row__key arch-row__key--why">Why</span>
                 <span class="arch-row__val is-why">
-                  Different lifecycles &#8212; image infrastructure changes rarely;
+                  Different lifecycles: image infrastructure changes rarely;
                   backend deploys on every push. Separating them avoids unnecessary
                   CloudFront invalidations on code deploys.
                 </span>
@@ -1127,8 +1127,86 @@
               <div class="arch-row">
                 <span class="arch-row__key arch-row__key--rejected">Rejected</span>
                 <span class="arch-row__val is-rejected">
-                  Single CDK stack &#8212; tight coupling between infra that has no
+                  Single CDK stack: tight coupling between infra that has no
                   reason to change together.
+                </span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 06 -->
+          <article class="arch-block" role="listitem" aria-label="Architecture decision 6: Atomic IDP migration with compensating rollback">
+            <div class="arch-block__header">
+              <span class="arch-block__num">arch-06</span>
+              <span class="arch-block__name">atomic-idp-migration-with-compensating-rollback</span>
+            </div>
+            <div class="arch-rows">
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--decision">Decision</span>
+                <span class="arch-row__val">
+                  Signin-time migration to Keycloak&#x2F;Cognito verifies the password
+                  first, creates the IDP user, then attempts to link
+                  <code>cognitoSub</code> in Postgres, and on DB failure,
+                  explicitly deletes the just-created IDP user before falling back
+                  to legacy JWT for that login.
+                </span>
+              </div>
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--why">Why</span>
+                <span class="arch-row__val is-why">
+                  No shared transaction is possible across Postgres and an external
+                  IDP. Verifying the password before any IDP call avoids wasted
+                  writes; the compensating delete on link failure avoids orphaned
+                  IDP accounts under normal failure modes.
+                </span>
+              </div>
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--rejected">Rejected</span>
+                <span class="arch-row__val is-rejected">
+                  Saga&#x2F;outbox pattern with a durable job queue: correct even
+                  across process crashes mid-migration, but over-engineered for
+                  signin-time migration on an internal tool.
+                </span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 07 -->
+          <article class="arch-block" role="listitem" aria-label="Architecture decision 7: Private package auth evolved after credential leaks">
+            <div class="arch-block__header">
+              <span class="arch-block__num">arch-07</span>
+              <span class="arch-block__name">private-package-auth-evolved-after-two-credential-leaks</span>
+            </div>
+            <div class="arch-rows">
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--decision">Decision</span>
+                <span class="arch-row__val">
+                  Vercel installs use a filtered <code>pnpm install --filter=web
+                  --filter=@wnp/types --filter=@wnp/logger --filter=cdk</code> with
+                  no secrets at all; GitHub Actions uses a PAT with
+                  <code>read:packages</code> scope as a repo secret; Docker builds
+                  mount credentials via BuildKit&#8217;s <code>--secret</code> flag
+                  instead of <code>ARG</code>&#x2F;<code>ENV</code>.
+                </span>
+              </div>
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--why">Why</span>
+                <span class="arch-row__val is-why">
+                  Vercel has no native GitHub Packages auth, and the monorepo&#8217;s
+                  default install pulls in backend workspaces the frontend doesn&#8217;t
+                  need. This landed after two raw PATs were accidentally committed
+                  to <code>.npmrc</code> in earlier commits, the fix that stuck
+                  was deleting <code>.npmrc</code> from the repo entirely and moving
+                  off file-based token storage, not just swapping in a placeholder.
+                </span>
+              </div>
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--rejected">Rejected</span>
+                <span class="arch-row__val is-rejected">
+                  <code>NPM_TOKEN</code> in Vercel env vars: simpler, but puts a
+                  GitHub PAT with package-read scope on a third-party platform.
+                  <code>ARG</code>&#x2F;<code>ENV</code>-passed Docker secrets:
+                  persist in image layers.
                 </span>
               </div>
             </div>
@@ -1143,7 +1221,7 @@
       <div class="container">
         <p class="cs-s__kicker">Problems Hit</p>
         <h2 class="cs-s__heading" id="s-bugs">
-          Five bugs worth<br>writing down.
+          Seven bugs worth<br>writing down.
         </h2>
 
         <div class="log-list">
@@ -1157,7 +1235,7 @@
               </div>
               <div class="log-row">
                 <span class="log-row__key log-row__key--cause">Root cause</span>
-                <span class="log-row__val">The Cognito Admin API requires the login username string, not the <code>sub</code> UUID &#8212; but the code was passing <code>sub</code>.</span>
+                <span class="log-row__val">The Cognito Admin API requires the login username string, not the <code>sub</code> UUID, but the code was passing <code>sub</code>.</span>
               </div>
               <div class="log-row">
                 <span class="log-row__key log-row__key--fix">Fix</span>
@@ -1238,6 +1316,42 @@
             </div>
           </div>
 
+          <div class="log-entry">
+            <p class="log-entry__title">env-var-typo-ALLOWED_ORIGIS-silently-broke-cors</p>
+            <div class="log-rows">
+              <div class="log-row">
+                <span class="log-row__key log-row__key--symptom">Symptom</span>
+                <span class="log-row__val">CORS requests were rejected in production, with nothing in the deploy pipeline pointing to why.</span>
+              </div>
+              <div class="log-row">
+                <span class="log-row__key log-row__key--cause">Root cause</span>
+                <span class="log-row__val">A one-character typo in a CDK Secrets Manager key name: <code>ALLOWED_ORIGIS</code> instead of <code>ALLOWED_ORIGINS</code>. The value was wired through Secrets Manager and CDK correctly, just under the wrong name, so it deployed cleanly with no build or deploy error.</span>
+              </div>
+              <div class="log-row">
+                <span class="log-row__key log-row__key--fix">Fix</span>
+                <span class="log-row__val">Corrected the key name and redeployed. Flagged as a known gap: no schema validation (e.g. zod) runs against required env vars at container boot, so this class of bug can recur.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="log-entry">
+            <p class="log-entry__title">hardening-commit-silently-broke-multi-tab-notifications</p>
+            <div class="log-rows">
+              <div class="log-row">
+                <span class="log-row__key log-row__key--symptom">Symptom</span>
+                <span class="log-row__val">Opening a second browser tab silently disconnected the first tab&#8217;s SSE notification stream.</span>
+              </div>
+              <div class="log-row">
+                <span class="log-row__key log-row__key--cause">Root cause</span>
+                <span class="log-row__val">A later commit adding CORS headers and server-side keepalive pings changed <code>addClient</code> to kill any existing SSE connection for a given <code>userId</code>, a &#8220;reliability improvement&#8221; that was actually a regression.</span>
+              </div>
+              <div class="log-row">
+                <span class="log-row__key log-row__key--fix">Fix</span>
+                <span class="log-row__val">Restructured the connection store from <code>Map&lt;userId, ClientConnection&gt;</code> to <code>Map&lt;userId, Map&lt;connectionId, ClientConnection&gt;&gt;</code>, tracking <code>tabId</code>, <code>userAgent</code>, and <code>connectedAt</code> so removal happens per-connection, not per-user.</span>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
@@ -1258,7 +1372,7 @@
             <ul class="shipped-list" aria-label="Auth and access features">
               <li class="shipped-item">
                 <p class="shipped-item__name">6 role-based dashboards</p>
-                <p class="shipped-item__desc">Super User, Task Supervisor, Task Agent, Client, District Manager, Account Executive &#8212; distinct permission sets and UI layouts per role.</p>
+                <p class="shipped-item__desc">Super User, Task Supervisor, Task Agent, Client, District Manager, Account Executive: distinct permission sets and UI layouts per role.</p>
               </li>
               <li class="shipped-item">
                 <p class="shipped-item__name">Hybrid IDP auth</p>
@@ -1300,7 +1414,7 @@
             <ul class="shipped-list" aria-label="View and filtering features">
               <li class="shipped-item">
                 <p class="shipped-item__name">Three task views</p>
-                <p class="shipped-item__desc">Kanban (dnd-kit with per-column infinite scroll), Gantt (frappe-gantt with synchronized sidebar), and tabular list &#8212; switchable via query param.</p>
+                <p class="shipped-item__desc">Kanban (dnd-kit with per-column infinite scroll), Gantt (frappe-gantt with synchronized sidebar), and tabular list, switchable via query param.</p>
               </li>
               <li class="shipped-item">
                 <p class="shipped-item__name">Advanced filter builder</p>
@@ -1323,7 +1437,7 @@
               </li>
               <li class="shipped-item">
                 <p class="shipped-item__name">Push notifications</p>
-                <p class="shipped-item__desc">Web Push API with VAPID, persistent subscription storage, and <code>sw.js</code> service worker &#8212; delivers notifications when the tab is inactive or closed.</p>
+                <p class="shipped-item__desc">Web Push API with VAPID, persistent subscription storage, and <code>sw.js</code> service worker: delivers notifications when the tab is inactive or closed.</p>
               </li>
               <li class="shipped-item">
                 <p class="shipped-item__name">Overdue task scheduler</p>
@@ -1361,7 +1475,7 @@
             <ul class="shipped-list" aria-label="Infrastructure features">
               <li class="shipped-item">
                 <p class="shipped-item__name">Dual CDK stacks</p>
-                <p class="shipped-item__desc">ECS&#x2F;Fargate for backend, S3 + CloudFront for image serving &#8212; independent deployment lifecycles.</p>
+                <p class="shipped-item__desc">ECS&#x2F;Fargate for backend, S3 + CloudFront for image serving: independent deployment lifecycles.</p>
               </li>
               <li class="shipped-item">
                 <p class="shipped-item__name">CI&#x2F;CD pipelines</p>
@@ -1369,7 +1483,7 @@
               </li>
               <li class="shipped-item">
                 <p class="shipped-item__name">Shared packages</p>
-                <p class="shipped-item__desc"><code>@wnp/types</code> (Zod schemas + TS types), <code>@wnp/logger</code>, <code>typescript-config</code> &#8212; single source of truth across the monorepo.</p>
+                <p class="shipped-item__desc"><code>@wnp/types</code> (Zod schemas + TS types), <code>@wnp/logger</code>, <code>typescript-config</code>: single source of truth across the monorepo.</p>
               </li>
             </ul>
           </div>
@@ -1390,16 +1504,22 @@
           <p class="retro__body">
             The two Prisma schemas (<code style="font-family: var(--font-mono); font-size: 0.75em; color: var(--color-accent-dim);">apps/web/prisma</code>
             and <code style="font-family: var(--font-mono); font-size: 0.75em; color: var(--color-accent-dim);">apps/backend/prisma</code>)
-            being maintained separately &#8212; kept in sync manually with a note in
-            the README &#8212; is the highest-risk part of this codebase. A single
-            schema drift can cause silent type mismatches that only surface at
-            runtime. The right call would have been a shared
+            are two fully independent files: 39 models each, effectively
+            identical, kept in sync manually with a note in the README, with
+            no automated check enforcing parity. Git history shows 24 vs. 22
+            commits touching each file respectively, 7 of them divergent. This
+            wasn&#8217;t a deliberate architecture choice: WNP started as separate
+            frontend and backend services, and when they were merged into a
+            monorepo, the schema consolidation was logged as follow-up work and
+            never finished. It&#8217;s the highest-risk part of this codebase:
+            a single missed edit causes silent type mismatches that only surface
+            at runtime. The right call would have been a shared
             <code style="font-family: var(--font-mono); font-size: 0.75em; color: var(--color-accent-dim);">packages/database</code>
             workspace from the start.
           </p>
           <p class="retro__body">
             The chat integration via iframe and <code style="font-family: var(--font-mono); font-size: 0.75em; color: var(--color-accent-dim);">postMessage</code>
-            is the most fragile coupling in the system &#8212; any change to the
+            is the most fragile coupling in the system, any change to the
             external chat service&#8217;s origin, auth contract, or message
             protocol silently breaks the integration with no type safety. A
             versioned message schema shared between both apps, or building the

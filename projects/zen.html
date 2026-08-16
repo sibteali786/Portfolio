@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <!-- Hallmark · macrostructure: Workbench · tone: technical-austere
      theme: custom (dark / italic-serif / warm-amber) · design-system: design.md
-     note: field-notes page — single bug fix, zen-browser/desktop
+     note: field-notes page, single bug fix, zen-browser/desktop
      pre-emit critique: P5 H5 E5 S5 R5 V4 -->
 <html lang="en">
 <head>
   <script>(function(){var t=localStorage.getItem("theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Zen Browser drag-flicker fix — a 4-line guard against spurious dragleave events in compact mode. Open source contribution by Sibt-e-Ali Baqar.">
+  <meta name="description" content="Zen Browser drag-flicker fix: a 4-line guard against spurious dragleave events in compact mode. Open source contribution by Sibt-e-Ali Baqar.">
   <title>Zen Browser · Sibt-e-Ali Baqar</title>
 
   <link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
@@ -23,9 +23,9 @@
   <link rel="stylesheet" href="../index.css">
 
   <style>
-    /* ── zen field notes — workbench macrostructure ────────────────────
+    /* ── zen field notes: workbench macrostructure ────────────────────
        Single contribution page: no hero image, no case study structure.
-       Sections are tight and sequential — field notes, not a report.
+       Sections are tight and sequential: field notes, not a report.
     ─────────────────────────────────────────────────────────────────── */
 
     :root {
@@ -280,7 +280,7 @@
     }
 
     .zen-learned__item::before {
-      content: "—";
+      content: "\2022";
       position: absolute;
       left: 0;
       color: var(--color-accent-dim);
@@ -450,11 +450,11 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Syed Sibt-e-Ali Baqar">
   <meta property="og:title" content="Zen Browser · Sibt-e-Ali Baqar">
-  <meta property="og:description" content="Zen Browser drag-flicker fix — a 4-line guard against spurious dragleave events in compact mode. Open source contribution by Sibt-e-Ali Baqar.">
+  <meta property="og:description" content="Zen Browser drag-flicker fix: a 4-line guard against spurious dragleave events in compact mode. Open source contribution by Sibt-e-Ali Baqar.">
   <meta property="og:url" content="https://sibteali-portfolio.vercel.app/projects/zen">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Zen Browser · Sibt-e-Ali Baqar">
-  <meta name="twitter:description" content="Zen Browser drag-flicker fix — a 4-line guard against spurious dragleave events in compact mode. Open source contribution by Sibt-e-Ali Baqar.">
+  <meta name="twitter:description" content="Zen Browser drag-flicker fix: a 4-line guard against spurious dragleave events in compact mode. Open source contribution by Sibt-e-Ali Baqar.">
 </head>
 
 <body>
@@ -515,7 +515,7 @@
       <div class="container">
         <p class="zen-prose">
           Compact Mode. Drag text or a URL toward the window edge to
-          reveal the sidebar. The sidebar flickers &#8212; cycling rapidly
+          reveal the sidebar. The sidebar flickers, cycling rapidly
           between visible and hidden. Drag-and-drop completely unusable.
           Reported on Windows x64, version&nbsp;1.17b, issue&nbsp;#10942.
         </p>
@@ -533,9 +533,9 @@
           changes the DOM boundaries. The browser fires a spurious
           <code style="font-family:var(--font-mono);font-size:0.85em;color:var(--color-accent-dim)">dragleave</code>
           because the cursor is suddenly &#8220;outside&#8221; the element it just
-          expanded into. That triggers a collapse &#8212; which fires another
-          <code style="font-family:var(--font-mono);font-size:0.85em;color:var(--color-accent-dim)">dragover</code>
-          &#8212; and the loop repeats faster than the eye can track.
+          expanded into. That triggers a collapse, which fires another
+          <code style="font-family:var(--font-mono);font-size:0.85em;color:var(--color-accent-dim)">dragover</code>,
+          and the loop repeats faster than the eye can track.
         </p>
 
         <div
@@ -567,7 +567,7 @@
         <div class="zen-compare">
 
           <div>
-            <p class="zen-compare__col-label">my PR &#8212; debounce</p>
+            <p class="zen-compare__col-label">my PR: debounce</p>
             <pre class="zen-diff-block" aria-label="Debounce approach"><code><span class="diff-ctx"> handleDragleave(event) {</span>
 <span class="diff-add">+  this._isDragging = true;</span>
 <span class="diff-add">+  clearTimeout(this._debounceTimer);</span>
@@ -577,8 +577,8 @@
           </div>
 
           <div>
-            <p class="zen-compare__col-label">what shipped &#8212; contains() check</p>
-            <pre class="zen-diff-block" aria-label="Contains check — what the maintainer shipped"><code><span class="diff-del">-  this._ignoreNextHover</span>
+            <p class="zen-compare__col-label">what shipped: contains() check</p>
+            <pre class="zen-diff-block" aria-label="Contains check: what the maintainer shipped"><code><span class="diff-del">-  this._ignoreNextHover</span>
 <span class="diff-add">+  this._ignoreNextHover ||</span>
 <span class="diff-add">+  (event.type === 'dragleave' &amp;&amp;</span>
 <span class="diff-add">+    event.explicitOriginalTarget !== target &amp;&amp;</span>
@@ -598,7 +598,7 @@
 
         <p class="zen-patch__file">src/zen/compact-mode/ZenCompactMode.mjs &ensp;+4 &#8722;1</p>
 
-        <pre class="zen-patch" aria-label="Commit diff — ZenCompactMode.mjs, 4 lines added, 1 removed"><code><span class="diff-del">-  this._ignoreNextHover</span>
+        <pre class="zen-patch" aria-label="Commit diff: ZenCompactMode.mjs, 4 lines added, 1 removed"><code><span class="diff-del">-  this._ignoreNextHover</span>
 <span class="diff-add">+  this._ignoreNextHover ||</span>
 <span class="diff-add">+  (event.type === 'dragleave' &amp;&amp;</span>
 <span class="diff-add">+    event.explicitOriginalTarget !== target &amp;&amp;</span>
@@ -615,7 +615,7 @@
           <li class="zen-learned__item">Browser Toolbox + log breakpoints for DOM event debugging.</li>
           <li class="zen-learned__item"><code style="font-family:var(--font-mono);font-size:0.9em;color:var(--color-accent-dim)">explicitOriginalTarget</code> vs <code style="font-family:var(--font-mono);font-size:0.9em;color:var(--color-accent-dim)">target</code> in Firefox&#8217;s event model.</li>
           <li class="zen-learned__item">Debouncing can solve the symptom; <code style="font-family:var(--font-mono);font-size:0.9em;color:var(--color-accent-dim)">contains()</code> checks solve the cause.</li>
-          <li class="zen-learned__item">When a maintainer overrides your fix, ask why &#8212; the answer is usually worth more than the merge.</li>
+          <li class="zen-learned__item">When a maintainer overrides your fix, ask why: the answer is usually worth more than the merge.</li>
         </ul>
       </div>
     </section>
@@ -652,7 +652,7 @@
     <section class="zen-cta" aria-labelledby="s-cta">
       <div class="container">
         <h2 class="zen-cta__statement" id="s-cta">
-          If you have a problem<br>worth solving &#8212;<br>let&#8217;s talk.
+          If you have a problem<br>worth solving,<br>let&#8217;s talk.
         </h2>
         <div class="zen-cta__links">
           <a class="zen-cta__link is-primary" href="/contact.html">Get in touch</a>

@@ -8,8 +8,8 @@
   <script>(function(){var t=localStorage.getItem("theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Real-Time Chat — a multi-tenant, embeddable chat platform case study by Sibt-e-Ali Baqar. SSO via HMAC tokens, Socket.IO, MongoDB tenant isolation, and AWS CDK deployment.">
-  <title>Real-Time Chat — Case Study · Sibt-e-Ali Baqar</title>
+  <meta name="description" content="Real-Time Chat: a multi-tenant, embeddable chat platform case study by Sibt-e-Ali Baqar. SSO via HMAC tokens, Socket.IO, MongoDB tenant isolation, and AWS CDK deployment.">
+  <title>Real-Time Chat: Case Study · Sibt-e-Ali Baqar</title>
 
   <link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="../images/favicon-96x96.png" sizes="96x96" type="image/png">
@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="../index.css">
 
   <style>
-    /* ── case study page — real-time-chat ──────────────────────────────
+    /* == case study page: real-time-chat ==============================
        Macrostructure: Catalogue (third in the portfolio case study series)
        Same component vocabulary: arch blocks, log entries, shipped grid.
        Distinct rhythm in Requirements: question → constraint → driver
@@ -252,7 +252,7 @@
       font-style: italic;
     }
 
-    /* ── requirements — question / constraint / driver format ──────── */
+    /* == requirements: question / constraint / driver format ========= */
     .req-list {
       list-style: none;
       counter-reset: req;
@@ -308,6 +308,107 @@
       letter-spacing: 0.04em;
       margin-top: var(--space-xs);
     }
+
+    /* ── architecture diagram ──────────────────────────────────────── */
+    .diagram-figure {
+      margin: 0 0 var(--space-xl);
+      background: var(--color-paper-2);
+      border: 1px solid var(--color-rule);
+      border-radius: var(--radius-card);
+      padding: var(--space-md);
+    }
+
+    .diagram-scroll {
+      overflow-x: auto;
+    }
+
+    .diagram-figure svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      min-width: 820px;
+    }
+
+    .diagram-figure figcaption {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-ink-3);
+      line-height: 1.6;
+      margin-top: var(--space-md);
+      padding-top: var(--space-sm);
+      border-top: 1px solid var(--color-rule);
+      max-width: 80ch;
+    }
+
+    .diagram-figure figcaption code {
+      font-family: var(--font-mono);
+      font-size: 0.9em;
+      color: var(--color-accent);
+      background: var(--color-paper);
+      padding: 0.1em 0.35em;
+      border-radius: 2px;
+    }
+
+    .diagram-notes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--space-md);
+      margin-bottom: var(--space-xl);
+    }
+
+    .diagram-note {
+      border-left: 3px solid var(--color-danger);
+      background: color-mix(in oklch, var(--color-danger) 8%, transparent);
+      padding: var(--space-sm) var(--space-md);
+      border-radius: 0 var(--radius-card) var(--radius-card) 0;
+    }
+
+    .diagram-note.is-ok {
+      border-left-color: var(--color-terminal);
+      background: color-mix(in oklch, var(--color-terminal) 8%, transparent);
+    }
+
+    .diagram-note__label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-danger);
+      margin-bottom: var(--space-3xs);
+    }
+    .diagram-note.is-ok .diagram-note__label { color: var(--color-terminal); }
+
+    .diagram-note__body {
+      font-family: var(--font-body);
+      font-size: var(--text-reading-sm);
+      color: var(--color-ink-2);
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    .diagram-note__body code {
+      font-family: var(--font-mono);
+      font-size: 0.88em;
+      color: var(--color-accent);
+      background: var(--color-paper-2);
+      padding: 0.1em 0.3em;
+      border-radius: 2px;
+    }
+
+    .n-box { fill: var(--color-paper); stroke: var(--color-ink-2); stroke-width: 1.5; }
+    .n-box--accent { fill: color-mix(in oklch, var(--color-accent) 14%, var(--color-paper)); stroke: var(--color-accent); stroke-width: 2; }
+    .n-box--danger { fill: color-mix(in oklch, var(--color-danger) 10%, var(--color-paper)); stroke: var(--color-danger); stroke-width: 1.5; stroke-dasharray: 5 4; }
+    .n-box--ok { fill: color-mix(in oklch, var(--color-terminal) 12%, var(--color-paper)); stroke: var(--color-terminal); stroke-width: 1.5; }
+    .n-title { font-family: var(--font-mono); font-size: 13px; fill: var(--color-ink); font-weight: 600; }
+    .n-sub { font-family: var(--font-mono); font-size: 10.5px; fill: var(--color-ink-3); }
+    .e-line { stroke: var(--color-ink-2); stroke-width: 1.4; fill: none; }
+    .e-line--danger { stroke: var(--color-danger); }
+    .e-line--muted { stroke: var(--color-ink-3); stroke-dasharray: 4 4; }
+    .e-line--bold { stroke: var(--color-accent); stroke-width: 2.4; }
+    .e-label { font-family: var(--font-mono); font-size: 10.5px; fill: var(--color-ink-2); }
+    .e-label--danger { fill: var(--color-danger); }
+    .e-label--bold { fill: var(--color-accent); font-weight: 600; }
+    .group-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.06em; fill: var(--color-ink-3); text-transform: uppercase; }
 
     /* ── architecture decision blocks ──────────────────────────────── */
     .arch-list {
@@ -683,13 +784,13 @@
   <link rel="canonical" href="https://sibteali-portfolio.vercel.app/projects/real-time-chat">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Syed Sibt-e-Ali Baqar">
-  <meta property="og:title" content="Real-Time Chat — Case Study · Sibt-e-Ali Baqar">
-  <meta property="og:description" content="Real-Time Chat — a multi-tenant, embeddable chat platform case study by Sibt-e-Ali Baqar. SSO via HMAC tokens, Socket.IO, MongoDB tenant isolation, and AWS CDK deployment.">
+  <meta property="og:title" content="Real-Time Chat: Case Study · Sibt-e-Ali Baqar">
+  <meta property="og:description" content="Real-Time Chat: a multi-tenant, embeddable chat platform case study by Sibt-e-Ali Baqar. SSO via HMAC tokens, Socket.IO, MongoDB tenant isolation, and AWS CDK deployment.">
   <meta property="og:url" content="https://sibteali-portfolio.vercel.app/projects/real-time-chat">
   <meta property="og:image" content="https://sibteali-portfolio.vercel.app/images/messaging_shared.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Real-Time Chat — Case Study · Sibt-e-Ali Baqar">
-  <meta name="twitter:description" content="Real-Time Chat — a multi-tenant, embeddable chat platform case study by Sibt-e-Ali Baqar. SSO via HMAC tokens, Socket.IO, MongoDB tenant isolation, and AWS CDK deployment.">
+  <meta name="twitter:title" content="Real-Time Chat: Case Study · Sibt-e-Ali Baqar">
+  <meta name="twitter:description" content="Real-Time Chat: a multi-tenant, embeddable chat platform case study by Sibt-e-Ali Baqar. SSO via HMAC tokens, Socket.IO, MongoDB tenant isolation, and AWS CDK deployment.">
   <meta name="twitter:image" content="https://sibteali-portfolio.vercel.app/images/messaging_shared.png">
 </head>
 
@@ -756,7 +857,7 @@
         <p class="cs-hero__impact">
           WhatNextPlease went from zero chat capability to a fully embedded,
           SSO-authenticated real-time messaging system their users never have
-          to log into separately &#8212; and the same infrastructure is ready
+          to log into separately, and the same infrastructure is ready
           to onboard the next tenant with a credential form and a database row.
         </p>
 
@@ -850,7 +951,7 @@
           <p>
             The client needed a real-time chat application that could be embedded
             inside WhatNextPlease and eventually offered to other third-party
-            clients. There was no existing chat infrastructure &#8212; the starting
+            clients. There was no existing chat infrastructure: the starting
             point was a greenfield design discussion.
           </p>
           <p>
@@ -882,7 +983,7 @@
               <p class="req-item__q">What&#8217;s the realistic concurrent user ceiling?</p>
               <p class="req-item__a">
                 Answered: ~100 users. This single number drove the entire infrastructure
-                simplification &#8212; single Node.js process, no message queue, no
+                simplification: single Node.js process, no message queue, no
                 separate presence server.
               </p>
               <p class="req-item__driver">&#8594; Drove: single-server architecture decision</p>
@@ -894,7 +995,7 @@
               <p class="req-item__q">Single-tenant or multi-tenant from day one?</p>
               <p class="req-item__a">
                 Multi-tenant from day one. This shaped every MongoDB index and middleware
-                decision &#8212; all 9 models needed <code>tenantId</code> scoping.
+                decision: all 9 models needed <code>tenantId</code> scoping.
               </p>
               <p class="req-item__driver">&#8594; Drove: AsyncLocalStorage plugin + compound index design</p>
             </div>
@@ -904,7 +1005,7 @@
             <div>
               <p class="req-item__q">How will external apps authenticate their users into the chat?</p>
               <p class="req-item__a">
-                HMAC-signed SSO tokens &#8212; replacing an earlier shared-login idea
+                HMAC-signed SSO tokens, replacing an earlier shared-login idea
                 that would have required external apps to know internal credentials.
               </p>
               <p class="req-item__driver">&#8594; Drove: <code>verifySSOToken</code> middleware + 3-step tenant registration</p>
@@ -915,7 +1016,7 @@
             <div>
               <p class="req-item__q">Where do tokens live in an iframe context?</p>
               <p class="req-item__a">
-                <code>localStorage</code> fallback, not cookies &#8212; discovered during
+                <code>localStorage</code> fallback, not cookies, discovered during
                 integration. Third-party cookies are blocked by default in most browsers
                 in cross-site iframe contexts.
               </p>
@@ -938,7 +1039,7 @@
             <div>
               <p class="req-item__q">Should &#8220;delete conversation&#8221; be permanent or reversible?</p>
               <p class="req-item__a">
-                Per-user soft delete with restore-on-new-message &#8212; not discussed
+                Per-user soft delete with restore-on-new-message, not discussed
                 initially, emerged from a product review. If User B sends a new message
                 to User A who deleted the conversation, only messages after the deletion
                 should be restored.
@@ -1013,13 +1114,13 @@
                 <span class="arch-row__val is-why">
                   A Spot interruption in staging dropped all active socket connections
                   mid-session. For a user-facing real-time backend, connection drops
-                  are unacceptable &#8212; not a graceful degradation.
+                  are unacceptable, not a graceful degradation.
                 </span>
               </div>
               <div class="arch-row">
                 <span class="arch-row__key arch-row__key--rejected">Rejected</span>
                 <span class="arch-row__val is-rejected">
-                  Fargate Spot for production &#8212; initially chosen for ~70% cost
+                  Fargate Spot for production: initially chosen for ~70% cost
                   savings, abandoned after the staging interruption incident.
                 </span>
               </div>
@@ -1037,14 +1138,14 @@
                 <span class="arch-row__key arch-row__key--decision">Decision</span>
                 <span class="arch-row__val">
                   HMAC-signed token passed as a URL query param to the iframe.
-                  Auth starts the moment the socket connects &#8212; no timing
+                  Auth starts the moment the socket connects, no timing
                   dependency on <code>postMessage</code> sequencing.
                 </span>
               </div>
               <div class="arch-row">
                 <span class="arch-row__key arch-row__key--why">Why</span>
                 <span class="arch-row__val is-why">
-                  The original postMessage-based auth flow had race conditions &#8212;
+                  The original postMessage-based auth flow had race conditions:
                   the iframe fired <code>EMBED_READY</code> before the parent had
                   attached its message listener, or <code>hasSentAuth.current</code>
                   persisted across remounts.
@@ -1089,7 +1190,7 @@
                 <span class="arch-row__key arch-row__key--rejected">Rejected</span>
                 <span class="arch-row__val is-rejected">
                   Separate database per tenant (too expensive at this stage).
-                  Query-level filtering without a plugin (error-prone — any missed
+                  Query-level filtering without a plugin (error-prone, any missed
                   query leaks cross-tenant data).
                 </span>
               </div>
@@ -1117,14 +1218,287 @@
                 <span class="arch-row__val is-why">
                   The iframe solved the immediate integration need. The SDK eliminates
                   cookie&#x2F;localStorage restrictions, postMessage race conditions,
-                  and CORS complexity &#8212; but that&#8217;s future scope.
+                  and CORS complexity, but that&#8217;s future scope.
                 </span>
               </div>
               <div class="arch-row">
                 <span class="arch-row__key arch-row__key--rejected">Rejected</span>
                 <span class="arch-row__val is-rejected">
-                  Mixing the SDK workspace into existing frontend&#x2F;backend repos now &#8212;
+                  Mixing the SDK workspace into existing frontend&#x2F;backend repos now:
                   would have caused lockfile interference (both use npm, not pnpm).
+                </span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── multi-file upload system ─────────────────────────────── -->
+    <section class="cs-s" aria-labelledby="s-uploads">
+      <div class="container">
+        <p class="cs-s__kicker">Multi-File Upload System</p>
+        <h2 class="cs-s__heading" id="s-uploads">
+          Four decisions in<br>the file pipeline.
+        </h2>
+        <p class="cs-s__intro">
+          Messages needed to carry multiple attachments (images, documents,
+          video) uploaded straight from the browser, without one failed file
+          blocking the rest of the batch.
+        </p>
+
+        <figure class="diagram-figure">
+          <div class="diagram-scroll">
+            <svg viewBox="0 0 1040 440" role="img" aria-label="Diagram of the multi-file upload flow: the browser requests a presigned URL from the API, which runs a synchronous extension and size check in-process before issuing the URL. The browser then PUTs the file bytes directly to S3, bypassing the API entirely, and confirms completion, which the API records as ready immediately. The API pushes status changes to the browser over Socket.IO to keep other open sessions in sync. A batch of files uploads sequentially, and one file failing does not block the rest.">
+              <defs>
+                <marker id="mfu-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M0,0 L10,5 L0,10 z" fill="var(--color-ink-2)"></path>
+                </marker>
+                <marker id="mfu-arrow-bold" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M0,0 L10,5 L0,10 z" fill="var(--color-accent)"></path>
+                </marker>
+              </defs>
+
+              <!-- Browser / batch queue -->
+              <rect class="n-box" x="20" y="150" width="200" height="170" rx="6"></rect>
+              <text class="n-title" x="120" y="174" text-anchor="middle">Browser</text>
+              <text class="n-sub" x="120" y="190" text-anchor="middle">useFileUpload batch</text>
+
+              <rect class="n-box--ok n-box" x="38" y="204" width="166" height="26" rx="4"></rect>
+              <text class="n-sub" x="121" y="221" text-anchor="middle">file1.png · completed</text>
+
+              <rect class="n-box n-box--danger" x="38" y="234" width="166" height="26" rx="4"></rect>
+              <text class="n-sub" x="121" y="251" text-anchor="middle">file2.png · failed</text>
+
+              <rect class="n-box n-box--accent" x="38" y="264" width="166" height="26" rx="4"></rect>
+              <text class="n-sub" x="121" y="281" text-anchor="middle">file3.pdf · uploading</text>
+
+              <text class="n-sub" x="120" y="304" text-anchor="middle">one failure doesn&#8217;t</text>
+              <text class="n-sub" x="120" y="316" text-anchor="middle">block the batch</text>
+
+              <!-- API -->
+              <rect class="n-box" x="420" y="160" width="210" height="140" rx="6"></rect>
+              <text class="n-title" x="525" y="184" text-anchor="middle">API</text>
+              <text class="n-sub" x="525" y="200" text-anchor="middle">attachments controller</text>
+
+              <rect class="n-box" x="438" y="212" width="174" height="30" rx="4"></rect>
+              <text class="n-sub" x="525" y="231" text-anchor="middle">extension + size check, sync</text>
+
+              <rect class="n-box" x="438" y="248" width="174" height="30" rx="4"></rect>
+              <text class="n-sub" x="525" y="267" text-anchor="middle">issues presigned URL</text>
+
+              <text class="n-sub" x="525" y="288" text-anchor="middle">no Lambda in this path</text>
+
+              <!-- presigned URL exchange, bidirectional -->
+              <line class="e-line" x1="220" y1="188" x2="414" y2="188" marker-start="url(#mfu-arrow)" marker-end="url(#mfu-arrow)"></line>
+              <text class="e-label" x="317" y="172" text-anchor="middle">presigned URL exchange</text>
+              <text class="e-label" x="317" y="208" text-anchor="middle">validated in-process first</text>
+
+              <!-- POST /complete -->
+              <line class="e-line" x1="220" y1="250" x2="414" y2="255" marker-end="url(#mfu-arrow)"></line>
+              <text class="e-label" x="330" y="246" text-anchor="middle">POST /complete</text>
+              <text class="e-label" x="330" y="278" text-anchor="middle">status: ready, immediately</text>
+
+              <!-- S3 -->
+              <rect class="n-box" x="780" y="90" width="200" height="60" rx="6"></rect>
+              <text class="n-title" x="880" y="114" text-anchor="middle">S3 bucket</text>
+              <text class="n-sub" x="880" y="130" text-anchor="middle">presigned PUT target</text>
+
+              <!-- direct-to-S3 bypass, bold -->
+              <path class="e-line e-line--bold" d="M 220 166 C 420 55, 640 55, 774 118" marker-end="url(#mfu-arrow-bold)"></path>
+              <text class="e-label e-label--bold" x="495" y="48" text-anchor="middle">PUT file bytes directly</text>
+              <text class="e-label e-label--bold" x="495" y="64" text-anchor="middle">bypasses the API entirely</text>
+
+              <!-- Socket.IO push back to browser -->
+              <path class="e-line" d="M 480 300 C 480 390, 260 412, 165 322" marker-end="url(#mfu-arrow)"></path>
+              <text class="e-label" x="320" y="398" text-anchor="middle">Socket.IO push:</text>
+              <text class="e-label" x="320" y="412" text-anchor="middle">syncs status to other open sessions</text>
+            </svg>
+          </div>
+          <figcaption>
+            The browser never sends file bytes to the API: it exchanges JSON for
+            a presigned URL, then PUTs directly to S3. There is no Lambda in
+            this path today. The only Lambda this system ever had was a
+            virus-scan step (extension blocklist, size check) that ran for about
+            a month before being replaced with the same check running in-process
+            on the API, synchronously, before a presigned URL is ever issued.
+            Uploads run sequentially, not in parallel, so a failed file (drawn
+            dashed above) is caught and skipped while the rest of the batch
+            continues.
+          </figcaption>
+        </figure>
+
+        <div class="diagram-notes">
+          <div class="diagram-note is-ok">
+            <p class="diagram-note__label">Working as intended</p>
+            <p class="diagram-note__body">
+              The app server&#8217;s request-handling capacity is never spent on file
+              transfer, only short-lived signed URLs and small JSON confirmations.
+              Per-file failure is isolated by design: a caught error marks one file
+              <code>failed</code> and the loop moves on rather than aborting the batch.
+            </p>
+          </div>
+          <div class="diagram-note">
+            <p class="diagram-note__label">Known gap · reconciliation</p>
+            <p class="diagram-note__body">
+              Uploaded files are matched back to pending entries by
+              <code>name === attachment.name &amp;&amp; size === attachment.size</code>,
+              not by the unique id each pending file already carries. Two files
+              with the same name and size in one batch can collide.
+            </p>
+          </div>
+        </div>
+
+        <div class="arch-list" role="list">
+
+          <!-- 01 -->
+          <article class="arch-block" role="listitem" aria-label="Upload decision 1: direct-to-S3 presigned uploads">
+            <div class="arch-block__header">
+              <span class="arch-block__num">upl-01</span>
+              <span class="arch-block__name">direct-to-s3-presigned-uploads-instead-of-server-proxy</span>
+            </div>
+            <div class="arch-rows">
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--decision">Decision</span>
+                <span class="arch-row__val">
+                  Browser validates size&#x2F;MIME&#x2F;extension client-side, generates a
+                  thumbnail and compresses the image, then requests a presigned S3
+                  PUT URL and uploads directly: a second presigned URL covers
+                  the thumbnail. <code>POST /attachments/complete</code> confirms the
+                  upload and creates the DB record.
+                </span>
+              </div>
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--why">Why</span>
+                <span class="arch-row__val is-why">
+                  The app server never touches file bytes, only short-lived
+                  signed URLs and small JSON completion payloads. Request-handling
+                  capacity doesn&#8217;t scale with upload volume.
+                </span>
+              </div>
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--rejected">Rejected</span>
+                <span class="arch-row__val is-rejected">
+                  Proxying file bytes through the Express server: couples
+                  server capacity to upload throughput for no benefit.
+                </span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 02 -->
+          <article class="arch-block" role="listitem" aria-label="Upload decision 2: synchronous in-process validation replaced the virus-scan Lambda">
+            <div class="arch-block__header">
+              <span class="arch-block__num">upl-02</span>
+              <span class="arch-block__name">virus-scan-lambda-replaced-with-in-process-sync-validation</span>
+            </div>
+            <div class="arch-rows">
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--decision">Decision</span>
+                <span class="arch-row__val">
+                  A Lambda function did exist in this pipeline, but only briefly
+                  and only for virus scanning: an extension blocklist plus a size
+                  check, added May 2025 and deleted a month later once that same
+                  check was rewritten as synchronous, in-process validation on the
+                  API. Thumbnails were never part of what it did.
+                </span>
+              </div>
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--why">Why</span>
+                <span class="arch-row__val is-why">
+                  Extension and size checks are cheap enough to run inline before
+                  issuing a presigned URL. There was no real reason to pay for an
+                  async round-trip through Lambda for a check that fast.
+                </span>
+              </div>
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--rejected">Rejected</span>
+                <span class="arch-row__val is-rejected">
+                  Keeping the validation on Lambda once it stopped buying any
+                  latency or isolation benefit over doing the same check in-process.
+                </span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 03 -->
+          <article class="arch-block" role="listitem" aria-label="Upload decision 3: Socket.IO status push instead of polling">
+            <div class="arch-block__header">
+              <span class="arch-block__num">upl-03</span>
+              <span class="arch-block__name">socket-io-status-push-instead-of-polling</span>
+            </div>
+            <div class="arch-rows">
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--decision">Decision</span>
+                <span class="arch-row__val">
+                  The frontend subscribes per-attachment: <code>socket.emit("subscribe_attachment_updates",
+                  { attachmentIds, requestCurrentStatus: true })</code>, then listens for
+                  <code>attachment_status_update</code> and
+                  <code>attachment_processing_complete</code>. The tracked ID list is
+                  sorted and diffed so the subscription only re-fires when the actual
+                  set of attachments changes, not on every render.
+                </span>
+              </div>
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--why">Why</span>
+                <span class="arch-row__val is-why">
+                  Socket.IO was already the transport for messaging and presence
+                  since reusing it for attachment status avoided adding a polling
+                  loop on top of an already-open connection.
+                </span>
+              </div>
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--rejected">Rejected</span>
+                <span class="arch-row__val is-rejected">
+                  Client-side polling of an attachment status endpoint: extra
+                  requests, extra latency on status changes, no reuse of the
+                  existing socket connection.
+                </span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 04 -->
+          <article class="arch-block" role="listitem" aria-label="Upload decision 4: sequential batch upload with per-file failure isolation">
+            <div class="arch-block__header">
+              <span class="arch-block__num">upl-04</span>
+              <span class="arch-block__name">sequential-batch-upload-with-per-file-failure-isolation</span>
+            </div>
+            <div class="arch-rows">
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--decision">Decision</span>
+                <span class="arch-row__val">
+                  The <code>useFileUpload</code> hook uploads files in a batch
+                  sequentially, not in parallel. Each file moves through
+                  <code>pending &#8594; uploading &#8594; completed | failed</code>
+                  independently: a failed file is caught, marked
+                  <code>failed</code> with its error, and the loop continues to the
+                  next file instead of aborting the batch. <code>hasOnlyFailedFiles</code>
+                  distinguishes &#8220;every file failed&#8221; (blocks send) from
+                  &#8220;some failed&#8221; (allows sending the successful subset).
+                  <code>retryFailedUploads</code> and <code>retrySpecificFile</code>
+                  avoid re-uploading a whole successful batch over one failure.
+                </span>
+              </div>
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--why">Why</span>
+                <span class="arch-row__val is-why">
+                  A tradeoff for connection&#x2F;server stability over raw upload
+                  speed. For a handful of attachments per chat message, sequential
+                  upload has a low UX cost and the reliability gain is real.
+                  <code>validateFiles()</code> also checks total file count against
+                  <code>maxFilesPerMessage</code> and combined size against
+                  <code>maxTotalSize</code> up front, before any file starts
+                  uploading.
+                </span>
+              </div>
+              <div class="arch-row">
+                <span class="arch-row__key arch-row__key--rejected">Rejected</span>
+                <span class="arch-row__val is-rejected">
+                  Parallel batch upload: higher risk of overwhelming the
+                  connection with N simultaneous large uploads for marginal speed
+                  gain at chat-message scale.
                 </span>
               </div>
             </div>
@@ -1139,7 +1513,7 @@
       <div class="container">
         <p class="cs-s__kicker">Problems Hit</p>
         <h2 class="cs-s__heading" id="s-bugs">
-          Five bugs worth<br>writing down.
+          Nine bugs worth<br>writing down.
         </h2>
 
         <div class="log-list">
@@ -1171,7 +1545,7 @@
               </div>
               <div class="log-row">
                 <span class="log-row__key log-row__key--cause">Root cause</span>
-                <span class="log-row__val">The <code>ChannelMember</code> model was missing <code>tenantId</code> in its schema field definition. The <code>tenantIsolationPlugin</code> tried to inject it pre-validate, but Mongoose strict mode stripped unknown fields &#8212; so docs saved without <code>tenantId</code>. The global unique index on <code>channelId + userId</code> then correctly rejected the second doc.</span>
+                <span class="log-row__val">The <code>ChannelMember</code> model was missing <code>tenantId</code> in its schema field definition. The <code>tenantIsolationPlugin</code> tried to inject it pre-validate, but Mongoose strict mode stripped unknown fields, so docs saved without <code>tenantId</code>. The global unique index on <code>channelId + userId</code> then correctly rejected the second doc.</span>
               </div>
               <div class="log-row">
                 <span class="log-row__key log-row__key--fix">Fix</span>
@@ -1203,7 +1577,7 @@
             <div class="log-rows">
               <div class="log-row">
                 <span class="log-row__key log-row__key--symptom">Symptom</span>
-                <span class="log-row__val">When User B sent a new message to User A (who had deleted the conversation), all previous messages reappeared &#8212; not just messages after the deletion.</span>
+                <span class="log-row__val">When User B sent a new message to User A (who had deleted the conversation), all previous messages reappeared, not just messages after the deletion.</span>
               </div>
               <div class="log-row">
                 <span class="log-row__key log-row__key--cause">Root cause</span>
@@ -1229,7 +1603,61 @@
               </div>
               <div class="log-row">
                 <span class="log-row__key log-row__key--fix">Fix</span>
-                <span class="log-row__val">Corrected allowed origin in env (immediate fix). Identified architectural gap: dynamic per-tenant CORS validation via database-driven <code>allowedOrigins</code> lookup is the permanent fix &#8212; still pending.</span>
+                <span class="log-row__val">Corrected allowed origin in env (immediate fix). Identified architectural gap: dynamic per-tenant CORS validation via database-driven <code>allowedOrigins</code> lookup is the permanent fix, still pending.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="log-entry">
+            <p class="log-entry__title">tenant-filter-plugin-missing-findbyid-from-scoped-method-list</p>
+            <div class="log-rows">
+              <div class="log-row">
+                <span class="log-row__key log-row__key--symptom">Symptom</span>
+                <span class="log-row__val">No error, no report: caught during review of the multi-tenant rollout diffs, not by a failing test or a user.</span>
+              </div>
+              <div class="log-row">
+                <span class="log-row__key log-row__key--cause">Root cause</span>
+                <span class="log-row__val">The Mongoose tenant-filter plugin auto-injected <code>tenantId</code> scoping into most query methods, but <code>findById</code> wasn&#8217;t on the list. Any <code>Model.findById(...)</code> call anywhere in the codebase bypassed tenant isolation entirely, a real cross-tenant data leak live for about a week between the rollout and the fix.</span>
+              </div>
+              <div class="log-row">
+                <span class="log-row__key log-row__key--fix">Fix</span>
+                <span class="log-row__val">Added <code>findById</code> to the plugin&#8217;s auto-scoped method list. Same rollout also fixed an <code>AsyncLocalStorage</code> ordering bug where the tenant-context middleware called <code>next()</code> after its <code>.run()</code> callback had already returned, so downstream handlers executed with no tenant context active at all.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="log-entry">
+            <p class="log-entry__title">presence-manager-tenantid-bound-to-singleton-constructor</p>
+            <div class="log-rows">
+              <div class="log-row">
+                <span class="log-row__key log-row__key--symptom">Symptom</span>
+                <span class="log-row__val"><code>PresenceManager</code> took <code>tenantId</code> as a constructor parameter for one day, then it was reversed.</span>
+              </div>
+              <div class="log-row">
+                <span class="log-row__key log-row__key--cause">Root cause</span>
+                <span class="log-row__val"><code>PresenceManager</code> is instantiated once as a process-wide singleton in <code>server.ts</code>, not one instance per tenant. Binding <code>tenantId</code> at construction time was structurally incompatible with that pattern from the moment it was added.</span>
+              </div>
+              <div class="log-row">
+                <span class="log-row__key log-row__key--fix">Fix</span>
+                <span class="log-row__val">Tenant now passed as an explicit parameter on every method call (<code>processHeartbeat(userId, tenantId, ...)</code>), with Redis keys built per-call as <code>presence:${tenantId}:${userId}</code>. The reversal was incomplete, though: the class still declares <code>private tenantId</code>, never assigned, and two call sites in <code>processHeartbeat</code>&#8217;s &#8220;already online, status changed&#8221; branch still reference <code>this.tenantId</code> instead of the local parameter, a narrow, still-live bug limited to that one branch.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="log-entry">
+            <p class="log-entry__title">postmessage-init-chat-race-condition-on-iframe-mount</p>
+            <div class="log-rows">
+              <div class="log-row">
+                <span class="log-row__key log-row__key--symptom">Symptom</span>
+                <span class="log-row__val">Users would intermittently see &#8220;Authentication timeout&#8221; on the embedded chat: the auth handshake never completed.</span>
+              </div>
+              <div class="log-row">
+                <span class="log-row__key log-row__key--cause">Root cause</span>
+                <span class="log-row__val">Not CORS or cookies, despite that being the first assumption. The original flow had the parent send an <code>INIT_CHAT</code> message via <code>postMessage</code>, with the iframe exchanging it via a REST call. The iframe&#8217;s <code>postMessage</code> listener wasn&#8217;t guaranteed to be mounted before the parent sent the init message, a cross-frame mount-timing race, not a security restriction.</span>
+              </div>
+              <div class="log-row">
+                <span class="log-row__key log-row__key--fix">Fix</span>
+                <span class="log-row__val">Replaced the postMessage handoff entirely with the token-in-URL-query-param approach (arch-03): SSO token and signature authenticated over the Socket.IO handshake itself, so auth rides on an already-established connection instead of assuming listener readiness. <code>postMessage</code> is still used today for <code>CHAT_REAUTH</code> and presence events, just not the initial handoff.</span>
               </div>
             </div>
           </div>
@@ -1349,14 +1777,29 @@
 
         <div>
           <p class="retro__body">
-            Start with dynamic CORS validation &#8212; database-driven
+            Start with dynamic CORS validation: database-driven
             <code style="font-family: var(--font-mono); font-size: 0.75em; color: var(--color-accent-dim);">allowedOrigins</code>
-            per tenant &#8212; rather than a static environment variable. The env var was a
+            per tenant, rather than a static environment variable. The env var was a
             reasonable shortcut early on, but it became a blocker the first time a real
             tenant tried to connect from their own domain. Fixing it requires an ECS
             redeploy rather than a database update. For a system explicitly designed for
             multi-tenant embedding, the CORS policy should have been data-driven from
             the first deploy.
+          </p>
+          <p class="retro__body">
+            Two smaller gaps in the upload system are worth naming honestly rather
+            than glossing over. First, reconciling completed uploads back to
+            pending files matches on <code style="font-family: var(--font-mono); font-size: 0.75em; color: var(--color-accent-dim);">file.name === attachment.name &amp;&amp; file.size === attachment.size</code>
+            since two different files in the same batch with an identical name and
+            size (two screenshots both called <code style="font-family: var(--font-mono); font-size: 0.75em; color: var(--color-accent-dim);">image.png</code>
+            at the same resolution) could collide during that step. Each pending
+            file already carries a unique id; using that as the correlation key
+            instead would remove the edge case entirely. Second, attachment
+            deletion removes the main S3 file, then attempts thumbnail deletion in
+            a separate try&#x2F;catch that only logs on failure rather than throwing
+            a deliberate choice so a thumbnail-delete failure doesn&#8217;t
+            block the overall delete, but it means orphaned thumbnails can
+            accumulate in S3 with no automatic sweep behind it.
           </p>
         </div>
       </div>

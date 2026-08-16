@@ -1,0 +1,2073 @@
+<!doctype html>
+<!-- Hallmark · macrostructure: Catalogue · tone: technical-austere
+     theme: custom (dark / italic-serif / warm-amber) · design-system: design.md
+     note: sister page to asia-builders.html, shared component vocabulary, no screenshots (backend-heavy project) -->
+<html lang="en">
+  <head>
+    <script>
+      (function () {
+        var t = localStorage.getItem("theme");
+        if (t) document.documentElement.setAttribute("data-theme", t);
+      })();
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="HCC CRM Email Module: a bulk-email engineering case study by Sibt-e-Ali Baqar. Bull queue architecture, dual-provider (Gmail/SendGrid) sending, database-driven templates, and an honest account of the open gaps."
+    />
+    <title>HCC CRM Email Module: Case Study · Sibt-e-Ali Baqar</title>
+
+    <link rel="icon" href="../images/favicon.svg" type="image/svg+xml" />
+    <link
+      rel="icon"
+      href="../images/favicon-96x96.png"
+      sizes="96x96"
+      type="image/png"
+    />
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="../tokens.css" />
+    <link rel="stylesheet" href="../index.css" />
+
+    <style>
+      /* ── case study page: hcc ──────────────────────────────────────────
+       Macrostructure: Catalogue (sister to asia-builders.html)
+       Same component vocabulary: arch blocks, log entries, shipped grid.
+       No hero image / screenshot strip (backend-heavy, no UI to show).
+       Adds an "Open Gaps" section reusing the retro pattern, plus an
+       attribution aside near Architecture flagging non-authored code.
+    ─────────────────────────────────────────────────────────────────── */
+
+      @media (prefers-reduced-motion: reduce) {
+        .cs-back,
+        .cs-meta-item__link,
+        .cs-cta__link,
+        .footer__nav a {
+          transition: none;
+        }
+      }
+
+      /* ── hero ──────────────────────────────────────────────────────── */
+      .cs-hero {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        overflow: hidden;
+        padding-block: var(--space-3xl) var(--space-2xl);
+      }
+
+      .cs-back {
+        display: inline-block;
+        font-family: var(--font-mono);
+        font-size: var(--text-sm);
+        color: var(--color-ink-3);
+        text-decoration: none;
+        margin-bottom: var(--space-2xl);
+        transition: color var(--dur-short) var(--ease-out);
+        letter-spacing: 0.02em;
+      }
+      .cs-back:hover {
+        color: var(--color-ink-2);
+      }
+      .cs-back:focus-visible {
+        outline: 2px solid var(--color-focus);
+        outline-offset: 3px;
+        border-radius: 2px;
+      }
+
+      .cs-hero__label {
+        font-family: var(--font-mono);
+        font-size: var(--text-sm);
+        color: var(--color-accent);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: var(--space-sm);
+      }
+
+      .cs-hero__title {
+        font-family: var(--font-display);
+        font-size: var(--text-display);
+        font-weight: 400;
+        line-height: 0.95;
+        letter-spacing: -0.02em;
+        color: var(--color-ink);
+        margin-bottom: var(--space-lg);
+        overflow-wrap: anywhere;
+        min-width: 0;
+      }
+
+      .cs-hero__impact {
+        font-family: var(--font-body);
+        font-size: var(--text-md);
+        color: var(--color-ink-2);
+        line-height: 1.55;
+        max-width: 56ch;
+        margin-bottom: var(--space-2xl);
+      }
+
+      .cs-hero__meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-lg) var(--space-2xl);
+        padding-top: var(--space-lg);
+        border-top: var(--rule-hairline);
+      }
+
+      .cs-meta-item {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-3xs);
+      }
+
+      .cs-meta-item__key {
+        font-family: var(--font-mono);
+        font-size: var(--text-xs);
+        color: var(--color-ink-3);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .cs-meta-item__val {
+        font-family: var(--font-body);
+        font-size: var(--text-sm);
+        color: var(--color-ink-2);
+      }
+
+      .cs-hero__gh-link {
+        font-family: var(--font-mono);
+        font-size: var(--text-sm);
+        color: var(--color-accent);
+        text-decoration: none;
+        transition: color var(--dur-short) var(--ease-out);
+      }
+      .cs-hero__gh-link:hover {
+        color: var(--color-ink);
+      }
+      .cs-hero__gh-link:focus-visible {
+        outline: 2px solid var(--color-focus);
+        outline-offset: 3px;
+        border-radius: 2px;
+      }
+
+      /* ── content sections ──────────────────────────────────────────── */
+      .cs-s {
+        padding-block: var(--space-3xl);
+        border-top: var(--rule-hairline);
+      }
+
+      .cs-s__kicker {
+        font-family: var(--font-mono);
+        font-size: var(--text-xs);
+        color: var(--color-accent-dim);
+        letter-spacing: 0.06em;
+        margin-bottom: var(--space-sm);
+      }
+
+      .cs-s__heading {
+        font-family: var(--font-display);
+        font-size: var(--text-display-s);
+        font-weight: 400;
+        line-height: 1;
+        letter-spacing: -0.015em;
+        color: var(--color-ink);
+        margin-bottom: var(--space-xl);
+        overflow-wrap: anywhere;
+        min-width: 0;
+      }
+
+      .cs-s__body {
+        max-width: 68ch;
+      }
+
+      .cs-s__body p {
+        font-family: var(--font-body);
+        font-size: var(--text-base);
+        color: var(--color-ink-2);
+        line-height: 1.7;
+      }
+      .cs-s__body p + p {
+        margin-top: var(--space-md);
+      }
+
+      .cs-s__intro {
+        font-family: var(--font-body);
+        font-size: var(--text-base);
+        color: var(--color-ink-3);
+        margin-bottom: var(--space-xl);
+        font-style: italic;
+      }
+
+      /* ── requirements list ─────────────────────────────────────────── */
+      .req-list {
+        list-style: none;
+        counter-reset: req;
+      }
+
+      .req-item {
+        display: grid;
+        grid-template-columns: var(--space-xl) 1fr;
+        gap: var(--space-md);
+        padding-block: var(--space-lg);
+        border-top: 1px solid var(--color-rule);
+        counter-increment: req;
+        align-items: start;
+      }
+
+      .req-item::before {
+        content: "0" counter(req);
+        font-family: var(--font-mono);
+        font-size: var(--text-xs);
+        color: var(--color-ink-3);
+        padding-top: 3px;
+      }
+
+      .req-item__q {
+        font-family: var(--font-body);
+        font-size: var(--text-base);
+        color: var(--color-ink);
+        font-weight: 500;
+        margin-bottom: var(--space-xs);
+        line-height: 1.4;
+      }
+
+      .req-item__a {
+        font-family: var(--font-body);
+        font-size: var(--text-sm);
+        color: var(--color-ink-2);
+        line-height: 1.6;
+      }
+
+      .req-item__a code {
+        font-family: var(--font-mono);
+        font-size: 0.88em;
+        color: var(--color-accent);
+        background: var(--color-paper-2);
+        padding: 0.1em 0.35em;
+        border-radius: 2px;
+      }
+
+      /* ── architecture diagram ──────────────────────────────────────── */
+      .diagram-figure {
+        margin: 0 0 var(--space-xl);
+        background: var(--color-paper-2);
+        border: 1px solid var(--color-rule);
+        border-radius: var(--radius-card);
+        padding: var(--space-md);
+      }
+
+      .diagram-scroll {
+        overflow-x: auto;
+      }
+
+      .diagram-figure svg {
+        display: block;
+        width: 100%;
+        height: auto;
+        min-width: 900px;
+      }
+
+      .diagram-figure figcaption {
+        font-family: var(--font-mono);
+        font-size: var(--text-xs);
+        color: var(--color-ink-3);
+        line-height: 1.6;
+        margin-top: var(--space-md);
+        padding-top: var(--space-sm);
+        border-top: 1px solid var(--color-rule);
+        max-width: 80ch;
+      }
+
+      .diagram-figure figcaption code {
+        font-family: var(--font-mono);
+        font-size: 0.9em;
+        color: var(--color-accent);
+        background: var(--color-paper);
+        padding: 0.1em 0.35em;
+        border-radius: 2px;
+      }
+
+      .diagram-notes {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: var(--space-md);
+      }
+
+      .diagram-note {
+        border-left: 3px solid var(--color-danger);
+        background: color-mix(in oklch, var(--color-danger) 8%, transparent);
+        padding: var(--space-sm) var(--space-md);
+        border-radius: 0 var(--radius-card) var(--radius-card) 0;
+      }
+
+      .diagram-note.is-ok {
+        border-left-color: var(--color-terminal);
+        background: color-mix(in oklch, var(--color-terminal) 8%, transparent);
+      }
+
+      .diagram-note__label {
+        font-family: var(--font-mono);
+        font-size: var(--text-xs);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--color-danger);
+        margin-bottom: var(--space-3xs);
+      }
+      .diagram-note.is-ok .diagram-note__label {
+        color: var(--color-terminal);
+      }
+
+      .diagram-note__body {
+        font-family: var(--font-body);
+        font-size: var(--text-reading-sm);
+        color: var(--color-ink-2);
+        line-height: 1.55;
+        margin: 0;
+      }
+
+      .diagram-note__body code {
+        font-family: var(--font-mono);
+        font-size: 0.88em;
+        color: var(--color-accent);
+        background: var(--color-paper-2);
+        padding: 0.1em 0.3em;
+        border-radius: 2px;
+      }
+
+      .n-box {
+        fill: var(--color-paper);
+        stroke: var(--color-ink-2);
+        stroke-width: 1.5;
+      }
+      .n-box--accent {
+        fill: color-mix(in oklch, var(--color-accent) 14%, var(--color-paper));
+        stroke: var(--color-accent);
+        stroke-width: 2;
+      }
+      .n-box--danger {
+        fill: color-mix(in oklch, var(--color-danger) 10%, var(--color-paper));
+        stroke: var(--color-danger);
+        stroke-width: 1.5;
+        stroke-dasharray: 5 4;
+      }
+      .n-title {
+        font-family: var(--font-mono);
+        font-size: 13px;
+        fill: var(--color-ink);
+        font-weight: 600;
+      }
+      .n-sub {
+        font-family: var(--font-mono);
+        font-size: 10.5px;
+        fill: var(--color-ink-3);
+      }
+      .e-line {
+        stroke: var(--color-ink-2);
+        stroke-width: 1.4;
+        fill: none;
+      }
+      .e-line--danger {
+        stroke: var(--color-danger);
+      }
+      .e-label {
+        font-family: var(--font-mono);
+        font-size: 10.5px;
+        fill: var(--color-ink-2);
+      }
+      .e-label--danger {
+        fill: var(--color-danger);
+      }
+      .group-label {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: 0.06em;
+        fill: var(--color-ink-3);
+        text-transform: uppercase;
+      }
+
+      /* ── architecture decision blocks ──────────────────────────────── */
+      .arch-list {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-md);
+      }
+
+      .arch-block {
+        background: var(--color-paper-2);
+        border: 1px solid var(--color-rule);
+        border-radius: var(--radius-card);
+        overflow: hidden;
+      }
+
+      .arch-block__header {
+        display: flex;
+        gap: var(--space-md);
+        align-items: baseline;
+        padding: var(--space-sm) var(--space-lg);
+        border-bottom: 1px solid var(--color-rule);
+        background: var(--color-paper-3);
+      }
+
+      .arch-block__num {
+        font-family: var(--font-mono);
+        font-size: var(--text-xs);
+        color: var(--color-accent);
+        letter-spacing: 0.04em;
+        white-space: nowrap;
+      }
+
+      .arch-block__name {
+        font-family: var(--font-mono);
+        font-size: var(--text-sm);
+        color: var(--color-ink-2);
+        overflow-wrap: anywhere;
+      }
+
+      .arch-rows {
+        padding: var(--space-md) var(--space-lg);
+      }
+
+      .arch-row {
+        display: grid;
+        grid-template-columns: 90px 1fr;
+        gap: var(--space-sm) var(--space-lg);
+        padding-block: var(--space-xs);
+      }
+
+      .arch-row + .arch-row {
+        border-top: 1px solid var(--color-rule);
+      }
+
+      .arch-row__key {
+        font-family: var(--font-mono);
+        font-size: var(--text-xs);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding-top: 3px;
+        white-space: nowrap;
+      }
+
+      .arch-row__key--decision {
+        color: var(--color-terminal);
+      }
+      .arch-row__key--why {
+        color: var(--color-ink-3);
+      }
+      .arch-row__key--rejected {
+        color: var(--color-danger);
+      }
+
+      .arch-row__val {
+        font-family: var(--font-mono);
+        font-size: var(--text-sm);
+        color: var(--color-ink);
+        line-height: 1.55;
+        overflow-wrap: anywhere;
+      }
+
+      .arch-row__val code {
+        color: var(--color-accent);
+        background: var(--color-paper);
+        padding: 0.1em 0.3em;
+        border-radius: 2px;
+        font-size: 0.9em;
+      }
+
+      .arch-row__val.is-why {
+        color: var(--color-ink-2);
+      }
+      .arch-row__val.is-rejected {
+        color: var(--color-ink-3);
+        text-decoration-color: color-mix(
+          in oklch,
+          var(--color-danger) 40%,
+          transparent
+        );
+      }
+
+      /* ── problems / log entries ─────────────────────────────────────── */
+      .log-list {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .log-entry {
+        padding-block: var(--space-xl);
+        border-top: 1px solid var(--color-rule);
+      }
+
+      .log-entry__title {
+        font-family: var(--font-mono);
+        font-size: var(--text-base);
+        color: var(--color-ink);
+        margin-bottom: var(--space-md);
+        overflow-wrap: anywhere;
+      }
+
+      .log-entry__title::before {
+        content: "$ ";
+        color: var(--color-accent);
+      }
+
+      .log-entry__flag {
+        display: inline-block;
+        font-family: var(--font-mono);
+        font-size: var(--text-xs);
+        color: oklch(70% 0.17 42);
+        border: 1px solid
+          color-mix(in oklch, oklch(70% 0.17 42) 40%, transparent);
+        padding: 0.1em 0.5em;
+        border-radius: var(--radius-card);
+        margin-bottom: var(--space-md);
+        letter-spacing: 0.04em;
+      }
+
+      .log-rows {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-xs);
+      }
+
+      .log-row {
+        display: grid;
+        grid-template-columns: 110px 1fr;
+        gap: var(--space-sm);
+        align-items: start;
+      }
+
+      .log-row__key {
+        font-family: var(--font-mono);
+        font-size: var(--text-xs);
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        padding-top: 3px;
+      }
+      .log-row__key--symptom {
+        color: oklch(70% 0.17 42);
+      }
+      .log-row__key--cause {
+        color: var(--color-ink-3);
+      }
+      .log-row__key--fix {
+        color: var(--color-terminal);
+      }
+      .log-row__key--status {
+        color: oklch(70% 0.17 42);
+      }
+
+      .log-row__val {
+        font-family: var(--font-body);
+        font-size: var(--text-sm);
+        color: var(--color-ink-2);
+        line-height: 1.6;
+      }
+
+      .log-row__val code {
+        font-family: var(--font-mono);
+        font-size: 0.88em;
+        color: var(--color-accent);
+        background: var(--color-paper-2);
+        padding: 0.1em 0.35em;
+        border-radius: 2px;
+      }
+
+      /* ── what shipped: stack-tier grid ────────────────────────────── */
+      .shipped-groups {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-2xl);
+      }
+
+      .shipped-group__heading {
+        font-family: var(--font-mono);
+        font-size: var(--text-xs);
+        color: var(--color-accent-dim);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: var(--space-md);
+        padding-bottom: var(--space-xs);
+        border-bottom: 1px solid var(--color-rule);
+      }
+
+      .shipped-list {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: var(--space-md) var(--space-2xl);
+      }
+
+      .shipped-item {
+        padding-block: var(--space-sm);
+        border-top: 1px solid var(--color-rule);
+      }
+
+      .shipped-item__name {
+        font-family: var(--font-body);
+        font-size: var(--text-sm);
+        font-weight: 500;
+        color: var(--color-ink);
+        margin-bottom: var(--space-3xs);
+        line-height: 1.3;
+      }
+
+      .shipped-item__desc {
+        font-family: var(--font-body);
+        font-size: var(--text-sm);
+        color: var(--color-ink-3);
+        line-height: 1.55;
+      }
+
+      .shipped-item__desc code {
+        font-family: var(--font-mono);
+        font-size: 0.88em;
+        color: var(--color-accent-dim);
+      }
+
+      /* ── retrospective / open gaps ────────────────────────────────── */
+      .retro__body {
+        font-family: var(--font-display);
+        font-size: var(--text-lg);
+        font-weight: 400;
+        color: var(--color-ink-2);
+        line-height: 1.5;
+        max-width: 58ch;
+      }
+
+      .retro__body + .retro__body {
+        margin-top: var(--space-lg);
+      }
+
+      .gap-list {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-lg);
+      }
+
+      .gap-item {
+        padding-block: var(--space-lg);
+        border-top: 1px solid var(--color-rule);
+      }
+
+      .gap-item.is-priority {
+        border-left: 3px solid var(--color-danger);
+        padding-left: var(--space-lg);
+        background: color-mix(in oklch, var(--color-danger) 6%, transparent);
+        border-radius: 0 var(--radius-card) var(--radius-card) 0;
+      }
+
+      .gap-item__title {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: var(--space-sm);
+        font-family: var(--font-mono);
+        font-size: var(--text-sm);
+        color: var(--color-ink);
+        margin-bottom: var(--space-sm);
+      }
+
+      .gap-item__tag {
+        font-family: var(--font-mono);
+        font-size: var(--text-xs);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--color-danger);
+        border: 1px solid
+          color-mix(in oklch, var(--color-danger) 45%, transparent);
+        padding: 0.1em 0.5em;
+        border-radius: var(--radius-card);
+      }
+
+      .gap-item__desc {
+        font-family: var(--font-body);
+        font-size: var(--text-sm);
+        color: var(--color-ink-2);
+        line-height: 1.65;
+        max-width: 66ch;
+      }
+
+      .gap-item__desc code {
+        font-family: var(--font-mono);
+        font-size: 0.88em;
+        color: var(--color-accent);
+        background: var(--color-paper-2);
+        padding: 0.1em 0.35em;
+        border-radius: 2px;
+      }
+
+      /* ── CTA ───────────────────────────────────────────────────────── */
+      .cs-cta {
+        padding-block: var(--space-3xl);
+        border-top: var(--rule-hairline);
+      }
+
+      .cs-cta__statement {
+        font-family: var(--font-display);
+        font-size: var(--text-display-s);
+        font-weight: 400;
+        line-height: 1;
+        letter-spacing: -0.015em;
+        color: var(--color-ink);
+        margin-bottom: var(--space-xl);
+        overflow-wrap: anywhere;
+        min-width: 0;
+      }
+
+      .cs-cta__links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-md);
+        align-items: center;
+      }
+
+      .cs-cta__link {
+        font-family: var(--font-mono);
+        font-size: var(--text-sm);
+        color: var(--color-ink-2);
+        text-decoration: none;
+        border: 1px solid var(--color-rule);
+        padding: var(--space-xs) var(--space-md);
+        border-radius: var(--radius-card);
+        transition:
+          color var(--dur-short) var(--ease-out),
+          border-color var(--dur-short) var(--ease-out),
+          background-color var(--dur-short) var(--ease-out);
+      }
+      .cs-cta__link:hover {
+        color: var(--color-ink);
+        border-color: var(--color-ink-2);
+      }
+      .cs-cta__link:focus-visible {
+        outline: 2px solid var(--color-focus);
+        outline-offset: 3px;
+      }
+      .cs-cta__link.is-primary {
+        background: var(--color-accent);
+        color: var(--color-accent-ink);
+        border-color: var(--color-accent);
+        font-weight: 500;
+      }
+      .cs-cta__link.is-primary:hover {
+        background: var(--color-ink);
+        border-color: var(--color-ink);
+        color: var(--color-paper);
+      }
+
+      /* ── footer ────────────────────────────────────────────────────── */
+      .site-footer {
+        border-top: var(--rule-hairline);
+        padding-block: var(--space-xl);
+      }
+
+      .footer__line {
+        font-family: var(--font-mono);
+        font-size: var(--text-sm);
+        color: var(--color-ink-3);
+        margin-bottom: var(--space-sm);
+      }
+
+      .footer__nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-md);
+        align-items: center;
+      }
+
+      .footer__nav a {
+        font-family: var(--font-mono);
+        font-size: var(--text-sm);
+        color: var(--color-ink-3);
+        text-decoration: none;
+        transition: color var(--dur-short) var(--ease-out);
+      }
+      .footer__nav a:hover {
+        color: var(--color-ink-2);
+      }
+      .footer__nav a:focus-visible {
+        outline: 2px solid var(--color-focus);
+        outline-offset: 3px;
+        border-radius: 2px;
+      }
+
+      .footer__copy {
+        font-family: var(--font-mono);
+        font-size: var(--text-sm);
+        color: var(--color-ink-3);
+        margin-left: auto;
+      }
+
+      /* ── responsive ────────────────────────────────────────────────── */
+      @media (max-width: 768px) {
+        .shipped-list {
+          grid-template-columns: minmax(0, 1fr);
+        }
+
+        .arch-row {
+          grid-template-columns: 70px 1fr;
+        }
+
+        .log-row {
+          grid-template-columns: 90px 1fr;
+        }
+
+        .req-item {
+          grid-template-columns: var(--space-lg) 1fr;
+        }
+      }
+
+      @media (max-width: 414px) {
+        .cs-hero__meta {
+          gap: var(--space-md) var(--space-lg);
+        }
+
+        .arch-row {
+          grid-template-columns: 1fr;
+          gap: var(--space-3xs);
+        }
+
+        .arch-row__key {
+          padding-top: 0;
+        }
+
+        .log-row {
+          grid-template-columns: 1fr;
+          gap: var(--space-3xs);
+        }
+      }
+
+      @media (max-width: 375px) {
+        .cs-cta__links {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+    </style>
+
+    <link
+      rel="canonical"
+      href="https://sibteali-portfolio.vercel.app/projects/hcc"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Syed Sibt-e-Ali Baqar" />
+    <meta
+      property="og:title"
+      content="HCC CRM Email Module: Case Study · Sibt-e-Ali Baqar"
+    />
+    <meta
+      property="og:description"
+      content="HCC CRM Email Module: a bulk-email engineering case study by Sibt-e-Ali Baqar. Bull queue architecture, dual-provider (Gmail/SendGrid) sending, database-driven templates, and an honest account of the open gaps."
+    />
+    <meta
+      property="og:url"
+      content="https://sibteali-portfolio.vercel.app/projects/hcc"
+    />
+    <meta name="twitter:card" content="summary" />
+    <meta
+      name="twitter:title"
+      content="HCC CRM Email Module: Case Study · Sibt-e-Ali Baqar"
+    />
+    <meta
+      name="twitter:description"
+      content="HCC CRM Email Module: a bulk-email engineering case study by Sibt-e-Ali Baqar. Bull queue architecture, dual-provider (Gmail/SendGrid) sending, database-driven templates, and an honest account of the open gaps."
+    />
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <!-- ── nav ──────────────────────────────────────────────────────── -->
+    <header class="site-header">
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a class="nav-name" href="/">Sibt-e-Ali</a>
+        <div class="nav-right">
+          <a
+            class="nav-cta"
+            href="https://calendly.com/sibteali786/new-meeting"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Book a call</a
+          >
+          <button
+            class="theme-toggle"
+            aria-label="Toggle light and dark theme"
+            aria-pressed="false"
+          >
+            <span
+              class="theme-toggle__icon theme-toggle__icon--sun"
+              aria-hidden="true"
+            ></span>
+            <span
+              class="theme-toggle__icon theme-toggle__icon--moon"
+              aria-hidden="true"
+            ></span>
+          </button>
+          <button
+            class="nav-toggle"
+            aria-expanded="false"
+            aria-controls="nav-menu"
+            aria-label="Toggle navigation menu"
+          >
+            Menu
+          </button>
+        </div>
+      </nav>
+      <nav class="nav-menu" id="nav-menu" aria-label="Site pages">
+        <a href="/about.html">About</a>
+        <a href="/projects.html" aria-current="page">Projects</a>
+        <a href="/contact.html">Contact</a>
+        <a
+          href="/Sibteali-Baqar-Resume.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Résumé &#8599;</a
+        >
+      </nav>
+    </header>
+
+    <main id="main">
+      <!-- ── hero ─────────────────────────────────────────────────── -->
+      <section class="cs-hero" aria-labelledby="cs-title">
+        <div class="container">
+          <a class="cs-back" href="/projects.html">&#8592; Projects</a>
+
+          <p class="cs-hero__label" aria-hidden="true">Case Study</p>
+
+          <h1 class="cs-hero__title" id="cs-title">
+            HCC CRM<br />Email Module
+          </h1>
+
+          <p class="cs-hero__impact">
+            A bulk-email system for Hill Country Coders&#8217; internal CRM:
+            queued sends with attachments, database-driven templates, and a
+            dual-provider fallback so a broken Gmail OAuth token doesn&#8217;t
+            take down outbound email. Built on top of a CRM backend I also
+            shipped general features and bug fixes for.
+          </p>
+
+          <div class="cs-hero__meta">
+            <div class="cs-meta-item">
+              <span class="cs-meta-item__key">Employer</span>
+              <span class="cs-meta-item__val">Hill Country Coders</span>
+            </div>
+            <div class="cs-meta-item">
+              <span class="cs-meta-item__key">Role</span>
+              <span class="cs-meta-item__val"
+                >Backend &#x2F; Full-stack Engineer</span
+              >
+            </div>
+            <div class="cs-meta-item">
+              <span class="cs-meta-item__key">Stack</span>
+              <span class="cs-meta-item__val"
+                >Node.js &#183; Express &#183; MongoDB &#183; Bull &#x2F; Redis
+                &#183; Next.js</span
+              >
+            </div>
+            <div class="cs-meta-item">
+              <span class="cs-meta-item__key">Repos</span>
+              <span class="cs-meta-item__val"
+                >emailControllerAuth2 &#183; HCC-adam-backend &#183;
+                hcc-admin-v2</span
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── the problem ──────────────────────────────────────────── -->
+      <section class="cs-s" aria-labelledby="s-problem">
+        <div class="container">
+          <p class="cs-s__kicker">The Problem</p>
+          <h2 class="cs-s__heading" id="s-problem">
+            One email at a time<br />doesn&#8217;t scale.
+          </h2>
+          <div class="cs-s__body">
+            <p>
+              Hill Country Coders&#8217; internal CRM needed to send bulk email
+              to contact lists, outreach, notifications, campaign-style sends,
+              with attachments, reusable templates, and personalization per
+              recipient. The existing send path was synchronous, single-provider
+              (Gmail OAuth only), and had no mechanism for tracking a job of
+              500+ recipients as anything other than one big pass/fail.
+            </p>
+            <p>
+              None of that survives contact with reality: attachments need to
+              outlive a single HTTP request, templates change constantly and
+              shouldn&#8217;t require a deploy, and a single provider&#8217;s
+              OAuth token expiring shouldn&#8217;t mean outbound email stops
+              entirely. The system needed to be queued, provider-agnostic, and
+              data-driven, while staying simple enough to run on a modest VPS
+              alongside the rest of the CRM.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── requirements ─────────────────────────────────────────── -->
+      <section class="cs-s" aria-labelledby="s-reqs">
+        <div class="container">
+          <p class="cs-s__kicker">Requirements</p>
+          <h2 class="cs-s__heading" id="s-reqs">
+            What the queue<br />had to survive.
+          </h2>
+          <p class="cs-s__intro">
+            Four constraints that shaped the send pipeline before any code:
+          </p>
+
+          <ol class="req-list" aria-label="Requirements questions">
+            <li class="req-item">
+              <div>
+                <p class="req-item__q">
+                  How do attachments survive a job queue?
+                </p>
+                <p class="req-item__a">
+                  Bull jobs are serialized to Redis as JSON, and a raw file
+                  buffer can&#8217;t travel in the payload. Files needed to live
+                  somewhere addressable by reference, not by value.
+                </p>
+              </div>
+            </li>
+
+            <li class="req-item">
+              <div>
+                <p class="req-item__q">What happens when Gmail OAuth fails?</p>
+                <p class="req-item__a">
+                  The existing <code>sendEmail()</code> silently swallowed
+                  errors. A failed send, for any reason, including an expired
+                  refresh token, needed to surface, and ideally have a fallback
+                  path rather than just failing louder.
+                </p>
+              </div>
+            </li>
+
+            <li class="req-item">
+              <div>
+                <p class="req-item__q">
+                  Can templates change without a deploy?
+                </p>
+                <p class="req-item__a">
+                  Templates started as three hardcoded IDs mapped to static
+                  <code>.html</code> files. Business users needed to add and
+                  edit templates themselves: templates had to become data.
+                </p>
+              </div>
+            </li>
+
+            <li class="req-item">
+              <div>
+                <p class="req-item__q">
+                  How does the frontend know a job&#8217;s status?
+                </p>
+                <p class="req-item__a">
+                  An admin needed to see queued &#8594; processing &#8594;
+                  completed for a bulk send without the system needing a
+                  push-based transport for what is, in practice, an internal
+                  admin tool at modest scale.
+                </p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- ── architecture diagram ─────────────────────────────────── -->
+      <section class="cs-s" aria-labelledby="s-diagram">
+        <div class="container">
+          <p class="cs-s__kicker">Architecture Diagram</p>
+          <h2 class="cs-s__heading" id="s-diagram">
+            One send request,<br />five workers, two gaps.
+          </h2>
+
+          <figure class="diagram-figure">
+            <div class="diagram-scroll">
+              <svg
+                viewBox="0 0 1480 640"
+                role="img"
+                aria-label="Diagram of the bulk email pipeline: a client request is validated by the API, which writes any attachment to disk and enqueues a job in Redis via Bull. Five concurrent workers pull jobs and, for each recipient, re-read the attachment from disk and send through either Gmail OAuth or SendGrid. A failed job retries the entire batch rather than the failed recipient. The uploads folder is never cleaned up."
+              >
+                <defs>
+                  <marker
+                    id="hcc-arrow"
+                    viewBox="0 0 10 10"
+                    refX="8"
+                    refY="5"
+                    markerWidth="7"
+                    markerHeight="7"
+                    orient="auto-start-reverse"
+                  >
+                    <path
+                      d="M0,0 L10,5 L0,10 z"
+                      fill="var(--color-ink-2)"
+                    ></path>
+                  </marker>
+                  <marker
+                    id="hcc-arrow-danger"
+                    viewBox="0 0 10 10"
+                    refX="8"
+                    refY="5"
+                    markerWidth="7"
+                    markerHeight="7"
+                    orient="auto-start-reverse"
+                  >
+                    <path
+                      d="M0,0 L10,5 L0,10 z"
+                      fill="var(--color-danger)"
+                    ></path>
+                  </marker>
+                </defs>
+
+                <!-- Client -->
+                <rect
+                  class="n-box"
+                  x="20"
+                  y="260"
+                  width="130"
+                  height="56"
+                  rx="6"
+                ></rect>
+                <text class="n-title" x="85" y="284" text-anchor="middle">
+                  Admin UI
+                </text>
+                <text class="n-sub" x="85" y="300" text-anchor="middle">
+                  hcc-admin-v2
+                </text>
+
+                <!-- API -->
+                <rect
+                  class="n-box"
+                  x="280"
+                  y="260"
+                  width="150"
+                  height="56"
+                  rx="6"
+                ></rect>
+                <text class="n-title" x="355" y="284" text-anchor="middle">
+                  API
+                </text>
+                <text class="n-sub" x="355" y="300" text-anchor="middle">
+                  emailControllerAuth2
+                </text>
+
+                <!-- Client -> API -->
+                <line
+                  class="e-line"
+                  x1="150"
+                  y1="288"
+                  x2="274"
+                  y2="288"
+                  marker-end="url(#hcc-arrow)"
+                ></line>
+                <text class="e-label" x="212" y="278" text-anchor="middle">
+                  POST bulk-send
+                </text>
+
+                <!-- Disk store (danger) -->
+                <rect
+                  class="n-box n-box--danger"
+                  x="305"
+                  y="440"
+                  width="160"
+                  height="60"
+                  rx="6"
+                ></rect>
+                <text class="n-title" x="385" y="464" text-anchor="middle">
+                  uploads/
+                </text>
+                <text class="n-sub" x="385" y="480" text-anchor="middle">
+                  Multer diskStorage
+                </text>
+
+                <!-- API -> Disk -->
+                <line
+                  class="e-line"
+                  x1="360"
+                  y1="316"
+                  x2="375"
+                  y2="434"
+                  marker-end="url(#hcc-arrow)"
+                ></line>
+                <text class="e-label" x="205" y="370" text-anchor="middle">
+                  writes file,
+                </text>
+                <text class="e-label" x="205" y="384" text-anchor="middle">
+                  keeps path only
+                </text>
+
+                <!-- Queue (Redis/Bull) -->
+                <rect
+                  class="n-box"
+                  x="590"
+                  y="260"
+                  width="190"
+                  height="56"
+                  rx="6"
+                ></rect>
+                <text class="n-title" x="685" y="284" text-anchor="middle">
+                  Bull queue
+                </text>
+                <text class="n-sub" x="685" y="300" text-anchor="middle">
+                  Redis, job payload = JSON
+                </text>
+
+                <!-- API -> Queue -->
+                <line
+                  class="e-line"
+                  x1="430"
+                  y1="288"
+                  x2="584"
+                  y2="288"
+                  marker-end="url(#hcc-arrow)"
+                ></line>
+                <text class="e-label" x="507" y="278" text-anchor="middle">
+                  enqueues job
+                </text>
+                <text class="e-label" x="507" y="308" text-anchor="middle">
+                  path ref only
+                </text>
+
+                <!-- Worker pool -->
+                <rect
+                  class="n-box n-box--accent"
+                  x="850"
+                  y="210"
+                  width="210"
+                  height="170"
+                  rx="8"
+                ></rect>
+                <text class="group-label" x="955" y="232" text-anchor="middle">
+                  5 concurrent workers
+                </text>
+                <rect
+                  class="n-box"
+                  x="868"
+                  y="246"
+                  width="176"
+                  height="32"
+                  rx="4"
+                ></rect>
+                <text class="n-sub" x="956" y="266" text-anchor="middle">
+                  re-reads uploads/ by path
+                </text>
+                <rect
+                  class="n-box"
+                  x="868"
+                  y="286"
+                  width="176"
+                  height="32"
+                  rx="4"
+                ></rect>
+                <text class="n-sub" x="956" y="306" text-anchor="middle">
+                  once per recipient
+                </text>
+                <text class="n-title" x="956" y="346" text-anchor="middle">
+                  Worker
+                </text>
+
+                <!-- Queue -> Workers -->
+                <line
+                  class="e-line"
+                  x1="780"
+                  y1="288"
+                  x2="844"
+                  y2="288"
+                  marker-end="url(#hcc-arrow)"
+                ></line>
+
+                <!-- Disk -> Workers (re-read) -->
+                <path
+                  class="e-line"
+                  d="M 465 460 C 650 460, 700 390, 855 388"
+                  marker-end="url(#hcc-arrow)"
+                ></path>
+                <text class="e-label" x="550" y="430" text-anchor="middle">
+                  disk re-read, per send
+                </text>
+
+                <!-- Retry loop: Worker -> Queue, whole batch -->
+                <path
+                  class="e-line e-line--danger"
+                  d="M 940 204 C 940 110, 720 110, 690 254"
+                  marker-end="url(#hcc-arrow-danger)"
+                ></path>
+                <text
+                  class="e-label e-label--danger"
+                  x="815"
+                  y="98"
+                  text-anchor="middle"
+                >
+                  attempts: 3, retries entire batch
+                </text>
+                <text
+                  class="e-label e-label--danger"
+                  x="815"
+                  y="112"
+                  text-anchor="middle"
+                >
+                  not just the failed recipient
+                </text>
+
+                <!-- Provider branch -->
+                <rect
+                  class="n-box"
+                  x="1120"
+                  y="140"
+                  width="160"
+                  height="54"
+                  rx="6"
+                ></rect>
+                <text class="n-title" x="1200" y="163" text-anchor="middle">
+                  Gmail OAuth
+                </text>
+                <text class="n-sub" x="1200" y="178" text-anchor="middle">
+                  createGmailClient()
+                </text>
+
+                <rect
+                  class="n-box"
+                  x="1120"
+                  y="340"
+                  width="160"
+                  height="54"
+                  rx="6"
+                ></rect>
+                <text class="n-title" x="1200" y="363" text-anchor="middle">
+                  SendGrid
+                </text>
+                <text class="n-sub" x="1200" y="378" text-anchor="middle">
+                  50-batch throttle
+                </text>
+
+                <!-- Workers -> branches -->
+                <path
+                  class="e-line"
+                  d="M 1060 245 C 1085 215, 1095 190, 1114 175"
+                  marker-end="url(#hcc-arrow)"
+                ></path>
+                <text class="e-label" x="1050" y="200" text-anchor="middle">
+                  route: gmail
+                </text>
+
+                <path
+                  class="e-line"
+                  d="M 1060 345 C 1085 358, 1095 362, 1114 362"
+                  marker-end="url(#hcc-arrow)"
+                ></path>
+                <text class="e-label" x="1050" y="410" text-anchor="middle">
+                  route: sendgrid
+                </text>
+
+                <!-- Recipient -->
+                <rect
+                  class="n-box"
+                  x="1350"
+                  y="250"
+                  width="110"
+                  height="140"
+                  rx="8"
+                ></rect>
+                <text class="n-title" x="1405" y="313" text-anchor="middle">
+                  Recipient
+                </text>
+                <text class="n-title" x="1405" y="331" text-anchor="middle">
+                  inbox
+                </text>
+
+                <line
+                  class="e-line"
+                  x1="1280"
+                  y1="172"
+                  x2="1360"
+                  y2="255"
+                  marker-end="url(#hcc-arrow)"
+                ></line>
+                <line
+                  class="e-line"
+                  x1="1280"
+                  y1="362"
+                  x2="1360"
+                  y2="325"
+                  marker-end="url(#hcc-arrow)"
+                ></line>
+
+                <!-- Job status readout -->
+                <rect
+                  class="n-box n-box--danger"
+                  x="590"
+                  y="470"
+                  width="230"
+                  height="80"
+                  rx="6"
+                ></rect>
+                <text class="n-title" x="705" y="494" text-anchor="middle">
+                  job.status
+                </text>
+                <text class="n-sub" x="705" y="510" text-anchor="middle">
+                  queued · processing ·
+                </text>
+                <text class="n-sub" x="705" y="524" text-anchor="middle">
+                  completed · failed, no partial
+                </text>
+
+                <line
+                  class="e-line e-line--danger"
+                  x1="685"
+                  y1="316"
+                  x2="700"
+                  y2="464"
+                  marker-end="url(#hcc-arrow-danger)"
+                ></line>
+                <text
+                  class="e-label e-label--danger"
+                  x="760"
+                  y="430"
+                  text-anchor="middle"
+                >
+                  500 sent, 3 failed
+                </text>
+                <text
+                  class="e-label e-label--danger"
+                  x="772"
+                  y="444"
+                  text-anchor="middle"
+                >
+                  still reads "completed"
+                </text>
+              </svg>
+            </div>
+            <figcaption>
+              One admin action enqueues one Bull job. Five workers pull from the
+              same queue, and each re-opens the attachment from disk per
+              recipient rather than carrying it in the job payload, since a raw
+              buffer can&#8217;t survive Redis&#8217;s JSON serialization. Two
+              paths are drawn dashed: the retry loop, which re-sends the whole
+              batch on any failure, and <code>uploads/</code>, which nothing
+              ever cleans up.
+            </figcaption>
+          </figure>
+
+          <div class="diagram-notes">
+            <div class="diagram-note">
+              <p class="diagram-note__label">Gap &#183; disk leak</p>
+              <p class="diagram-note__body">
+                No <code>unlink</code> call exists anywhere. Every attachment
+                written to <code>uploads/</code> stays there after the job
+                completes or fails, so disk usage grows without bound.
+              </p>
+            </div>
+            <div class="diagram-note">
+              <p class="diagram-note__label">Gap &#183; batch-level retry</p>
+              <p class="diagram-note__body">
+                <code>attempts: 3</code> is scoped to the whole job, not the
+                recipient. A transient failure late in a 2,000-person send risks
+                re-sending to everyone who already got the email.
+              </p>
+            </div>
+            <div class="diagram-note is-ok">
+              <p class="diagram-note__label">Working as intended</p>
+              <p class="diagram-note__body">
+                File-path references keep Redis job payloads small regardless of
+                attachment size, and per-recipient failures are still caught and
+                logged individually, even though the top-level status field
+                can&#8217;t show it.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── architecture decisions ───────────────────────────────── -->
+      <section class="cs-s" aria-labelledby="s-arch">
+        <div class="container">
+          <p class="cs-s__kicker">Architecture Decisions</p>
+          <h2 class="cs-s__heading" id="s-arch">
+            Queue, disk,<br />and a fallback provider.
+          </h2>
+
+          <div class="arch-list" role="list">
+            <!-- 01 -->
+            <article
+              class="arch-block"
+              role="listitem"
+              aria-label="Architecture decision 1: disk-based attachment references in the Bull job payload"
+            >
+              <div class="arch-block__header">
+                <span class="arch-block__num">arch-01</span>
+                <span class="arch-block__name"
+                  >disk-based-attachment-references-not-buffers-in-job-payload</span
+                >
+              </div>
+              <div class="arch-rows">
+                <div class="arch-row">
+                  <span class="arch-row__key arch-row__key--decision"
+                    >Decision</span
+                  >
+                  <span class="arch-row__val">
+                    Multer configured with <code>diskStorage</code>, not
+                    <code>memoryStorage</code>. Files land in
+                    <code>uploads/</code> on the initial request; only
+                    <code>.path</code> and <code>.originalname</code> go into
+                    the Bull job payload. <code>gmailService.js</code> and
+                    <code>sendgridService.js</code>
+                    re-read from disk by path at send time, once per recipient.
+                  </span>
+                </div>
+                <div class="arch-row">
+                  <span class="arch-row__key arch-row__key--why">Why</span>
+                  <span class="arch-row__val is-why">
+                    Bull jobs are serialized to Redis as JSON, and a raw buffer
+                    can&#8217;t survive that. A file reference can.
+                  </span>
+                </div>
+                <div class="arch-row">
+                  <span class="arch-row__key arch-row__key--rejected"
+                    >Rejected</span
+                  >
+                  <span class="arch-row__val is-rejected">
+                    <code>memoryStorage</code> + base64-encoding into the job
+                    payload, which bloats Redis job size for any real attachment
+                    and still requires re-encoding per recipient anyway.
+                  </span>
+                </div>
+              </div>
+            </article>
+
+            <!-- 02 -->
+            <article
+              class="arch-block"
+              role="listitem"
+              aria-label="Architecture decision 2: templates as data, not code"
+            >
+              <div class="arch-block__header">
+                <span class="arch-block__num">arch-02</span>
+                <span class="arch-block__name"
+                  >templates-as-mongo-data-instead-of-hardcoded-html-files</span
+                >
+              </div>
+              <div class="arch-rows">
+                <div class="arch-row">
+                  <span class="arch-row__key arch-row__key--decision"
+                    >Decision</span
+                  >
+                  <span class="arch-row__val">
+                    A <code>Template</code> Mongo model, controller, routes, and
+                    seeding: templates became queryable, mutable data.
+                  </span>
+                </div>
+                <div class="arch-row">
+                  <span class="arch-row__key arch-row__key--why">Why</span>
+                  <span class="arch-row__val is-why">
+                    Any new template previously required a code change and a
+                    deploy. This is also the foundational refactor that later
+                    enabled merge-tag whitelist validation: whitelist validation
+                    needs templates to be data first.
+                  </span>
+                </div>
+                <div class="arch-row">
+                  <span class="arch-row__key arch-row__key--rejected"
+                    >Rejected</span
+                  >
+                  <span class="arch-row__val is-rejected">
+                    Continuing to add hardcoded template IDs and static
+                    <code>.html</code> files as the template count grew.
+                  </span>
+                </div>
+              </div>
+            </article>
+
+            <!-- 03 -->
+            <article
+              class="arch-block"
+              role="listitem"
+              aria-label="Architecture decision 3: dual-provider fallback, Gmail path untouched"
+            >
+              <div class="arch-block__header">
+                <span class="arch-block__num">arch-03</span>
+                <span class="arch-block__name"
+                  >sendgrid-fallback-path-instead-of-hardening-gmail-oauth</span
+                >
+              </div>
+              <div class="arch-rows">
+                <div class="arch-row">
+                  <span class="arch-row__key arch-row__key--decision"
+                    >Decision</span
+                  >
+                  <span class="arch-row__val">
+                    Changed <code>sendEmail()</code> to re-throw instead of
+                    swallowing errors, then added a service parameter letting
+                    callers route through SendGrid instead of Gmail OAuth. The
+                    Gmail path stayed as-is, as one option among two.
+                  </span>
+                </div>
+                <div class="arch-row">
+                  <span class="arch-row__key arch-row__key--why">Why</span>
+                  <span class="arch-row__val is-why">
+                    <code>createGmailClient()</code> and its token-refresh logic
+                    were fragile (no try&#x2F;catch around
+                    <code>getAccessToken()</code>, no locking around the
+                    token-update read-then-save). Rather than debug fragile auth
+                    code under time pressure, a second, more reliable provider
+                    became the practical fix.
+                  </span>
+                </div>
+                <div class="arch-row">
+                  <span class="arch-row__key arch-row__key--rejected"
+                    >Rejected</span
+                  >
+                  <span class="arch-row__val is-rejected">
+                    Hardening the Gmail OAuth refresh logic itself: correct in
+                    principle, but not the pragmatic path given ownership and
+                    deadline constraints.
+                  </span>
+                </div>
+              </div>
+            </article>
+
+            <!-- 04 -->
+            <article
+              class="arch-block"
+              role="listitem"
+              aria-label="Architecture decision 4: plain polling instead of WebSocket or SSE for job status"
+            >
+              <div class="arch-block__header">
+                <span class="arch-block__num">arch-04</span>
+                <span class="arch-block__name"
+                  >60s-polling-instead-of-websocket-sse-for-job-status</span
+                >
+              </div>
+              <div class="arch-rows">
+                <div class="arch-row">
+                  <span class="arch-row__key arch-row__key--decision"
+                    >Decision</span
+                  >
+                  <span class="arch-row__val">
+                    <code>setInterval</code> + <code>axios GET</code> every 60
+                    seconds, plus a manual refresh button. A
+                    <code>pollingActive</code> ref stops the interval on fetch
+                    error instead of continuing to hit a broken endpoint.
+                  </span>
+                </div>
+                <div class="arch-row">
+                  <span class="arch-row__key arch-row__key--why">Why</span>
+                  <span class="arch-row__val is-why">
+                    This is an internal admin tool at modest scale, not a
+                    consumer real-time product. Polling is simple, low-risk, and
+                    has no perf or stale-status bug history.
+                  </span>
+                </div>
+                <div class="arch-row">
+                  <span class="arch-row__key arch-row__key--rejected"
+                    >Rejected</span
+                  >
+                  <span class="arch-row__val is-rejected">
+                    WebSocket&#x2F;SSE push: more infrastructure than the actual
+                    need justified at this scale.
+                  </span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── problems hit ──────────────────────────────────────────── -->
+      <section class="cs-s" aria-labelledby="s-bugs">
+        <div class="container">
+          <p class="cs-s__kicker">Problems Hit</p>
+          <h2 class="cs-s__heading" id="s-bugs">
+            Two bugs<br />worth writing down.
+          </h2>
+
+          <div class="log-list">
+            <div class="log-entry">
+              <p class="log-entry__title">
+                selection-drawer-lag-useState-to-useRef-plus-virtualization
+              </p>
+              <div class="log-rows">
+                <div class="log-row">
+                  <span class="log-row__key log-row__key--symptom"
+                    >Symptom</span
+                  >
+                  <span class="log-row__val">
+                    Bulk-selection UI (contact list drawer) got sluggish as
+                    selection size grew, and every checkbox toggle felt laggy.
+                  </span>
+                </div>
+                <div class="log-row">
+                  <span class="log-row__key log-row__key--cause"
+                    >Root cause</span
+                  >
+                  <span class="log-row__val">
+                    <code>useState({})</code> for the selection map meant every
+                    toggle triggered a full object-spread copy (O(n) per toggle)
+                    plus a full re-render of the component tree. The real cost
+                    was React re-render overhead, not the underlying
+                    computation: a web worker would not have fixed this.
+                  </span>
+                </div>
+                <div class="log-row">
+                  <span class="log-row__key log-row__key--fix">Fix</span>
+                  <span class="log-row__val">
+                    Replaced <code>useState</code> with a mutable
+                    <code>useRef</code> for the selection map (no copy, no
+                    re-render on mutation), added a cheap version counter to
+                    trigger re-render only when needed, and added
+                    <code>react-window</code>&#8217;s
+                    <code>FixedSizeList</code> with
+                    <code>ResizeObserver</code>-driven sizing to virtualize the
+                    selected-members panel.
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="log-entry">
+              <p class="log-entry__title">
+                local-dev-workers-sharing-a-single-cloud-redis-with-prod
+              </p>
+              <div class="log-rows">
+                <div class="log-row">
+                  <span class="log-row__key log-row__key--symptom"
+                    >Symptom</span
+                  >
+                  <span class="log-row__val">
+                    Inherited <code>docker-compose</code> wired only to a single
+                    cloud Redis endpoint (Redis Labs) with hardcoded
+                    credentials, with no isolated local Redis for development.
+                  </span>
+                </div>
+                <div class="log-row">
+                  <span class="log-row__key log-row__key--cause"
+                    >Root cause</span
+                  >
+                  <span class="log-row__val">
+                    An unnamespaced <code>send-bulk-email</code> queue name and
+                    a single shared credential-bearing compose file meant local
+                    dev workers and production shared the same queue.
+                  </span>
+                </div>
+                <div class="log-row">
+                  <span class="log-row__key log-row__key--fix">Fix</span>
+                  <span class="log-row__val">
+                    Flagged this during onboarding and added
+                    <code>docker-compose.redis-local.yml</code>, giving local
+                    dev its own isolated Redis on a distinct port before it
+                    could cause a real collision with production jobs.
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── what shipped ──────────────────────────────────────────── -->
+      <section class="cs-s" aria-labelledby="s-shipped">
+        <div class="container">
+          <p class="cs-s__kicker">What Shipped</p>
+          <h2 class="cs-s__heading" id="s-shipped">
+            Queued, provider-agnostic,<br />and data-driven.
+          </h2>
+
+          <div class="shipped-groups">
+            <!-- Queue & Attachments -->
+            <div class="shipped-group">
+              <p class="shipped-group__heading">
+                Queue &amp; Attachments: Bull v4 &#x2F; Redis
+              </p>
+              <ul
+                class="shipped-list"
+                aria-label="Queue and attachment features"
+              >
+                <li class="shipped-item">
+                  <p class="shipped-item__name">Serialized job queue</p>
+                  <p class="shipped-item__desc">
+                    Bull v4 processes bulk sends across 5 concurrent workers,
+                    with <code>attempts: 3</code> job-level retry.
+                  </p>
+                </li>
+                <li class="shipped-item">
+                  <p class="shipped-item__name">Disk-based attachments</p>
+                  <p class="shipped-item__desc">
+                    Multer <code>diskStorage</code>, file references (not
+                    buffers) in the job payload, re-read per recipient at send
+                    time.
+                  </p>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Templates -->
+            <div class="shipped-group">
+              <p class="shipped-group__heading">Templates</p>
+              <ul class="shipped-list" aria-label="Template features">
+                <li class="shipped-item">
+                  <p class="shipped-item__name">Database-driven templates</p>
+                  <p class="shipped-item__desc">
+                    <code>Template</code> Mongo model, controller, routes,
+                    seeding: add or edit without a deploy.
+                  </p>
+                </li>
+                <li class="shipped-item">
+                  <p class="shipped-item__name">Merge-tag whitelist</p>
+                  <p class="shipped-item__desc">
+                    Fixed 7-tag vocabulary (<code>firstName</code>,
+                    <code>lastName</code>, <code>company</code>,
+                    <code>email</code>, <code>senderName</code>,
+                    <code>senderTitle</code>, <code>bookingLink</code>) enforced
+                    backend and mirrored client-side for immediate feedback.
+                  </p>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Sending -->
+            <div class="shipped-group">
+              <p class="shipped-group__heading">
+                Sending: Gmail &#x2F; SendGrid Dual Path
+              </p>
+              <ul class="shipped-list" aria-label="Sending features">
+                <li class="shipped-item">
+                  <p class="shipped-item__name">Provider fallback</p>
+                  <p class="shipped-item__desc">
+                    Service parameter routes a send through SendGrid or Gmail
+                    OAuth; errors re-thrown instead of swallowed, so callers
+                    record per-recipient failures.
+                  </p>
+                </li>
+                <li class="shipped-item">
+                  <p class="shipped-item__name">
+                    Per-recipient personalization
+                  </p>
+                  <p class="shipped-item__desc">
+                    Delivery logging and per-recipient template substitution
+                    layered around SendGrid&#8217;s existing batch throttle.
+                  </p>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Frontend -->
+            <div class="shipped-group">
+              <p class="shipped-group__heading">Frontend: hcc-admin-v2</p>
+              <ul class="shipped-list" aria-label="Frontend features">
+                <li class="shipped-item">
+                  <p class="shipped-item__name">Bulk-selection drawer</p>
+                  <p class="shipped-item__desc">
+                    <code>useRef</code>-backed selection map +
+                    <code>react-window</code> virtualization for large contact
+                    lists.
+                  </p>
+                </li>
+                <li class="shipped-item">
+                  <p class="shipped-item__name">Job status polling</p>
+                  <p class="shipped-item__desc">
+                    60s interval + manual refresh; stops polling on fetch error
+                    rather than spamming a broken endpoint.
+                  </p>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Infrastructure -->
+            <div class="shipped-group">
+              <p class="shipped-group__heading">Infrastructure</p>
+              <ul class="shipped-list" aria-label="Infrastructure features">
+                <li class="shipped-item">
+                  <p class="shipped-item__name">
+                    Local &#x2F; prod Redis separation
+                  </p>
+                  <p class="shipped-item__desc">
+                    Dedicated
+                    <code>docker-compose.redis-local.yml</code> isolates local
+                    dev queues from production.
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── open gaps ────────────────────────────────────────────── -->
+      <section class="cs-s" aria-labelledby="s-retro">
+        <div class="container">
+          <p class="cs-s__kicker">Open Gaps</p>
+          <h2 class="cs-s__heading" id="s-retro">
+            What&#8217;s honestly<br />still unresolved.
+          </h2>
+          <p class="cs-s__intro">
+            Things I&#8217;d fix next, in priority order.
+          </p>
+
+          <div class="gap-list" aria-label="Open gaps">
+            <div class="gap-item is-priority">
+              <p class="gap-item__title">
+                <span class="gap-item__tag">Highest priority</span>
+                IDOR: session-based ownership replaced with a client-supplied
+                param
+              </p>
+              <p class="gap-item__desc">
+                <code>requireAuth</code> middleware was deleted entirely.
+                Contact-list and bulk-job endpoints switched their ownership
+                check from <code>req.user.id</code> (session-derived) to
+                <code>req.params.userId</code> (caller-supplied), so any caller
+                who knows or guesses a valid Mongo <code>ObjectId</code>
+                can read or delete another user&#8217;s contact lists or
+                bulk-job status. This was an explicit, documented stopgap to
+                unblock frontend integration before Google OAuth session wiring
+                was finished, a defensible call under deadline pressure at the
+                time, but it was never closed out once that blocking condition
+                was resolved, and no later commit re-adds the session-based
+                check. This is the single highest-priority unresolved item on
+                this page: re-introduce
+                <code>req.user.id</code>-derived ownership checks, and if
+                <code>userId</code> is still needed as a param, validate it
+                against the authenticated session rather than trusting it.
+              </p>
+            </div>
+
+            <div class="gap-item">
+              <p class="gap-item__title">
+                Unmitigated XSS in template rendering
+              </p>
+              <p class="gap-item__desc">
+                <code>processTemplate()</code> is a plain regex
+                <code>.replace()</code> with no HTML-escaping of
+                recipient-controlled values (name, company, email) and no
+                double-substitution guard. A contact whose name field contains
+                <code>&lt;script&gt;</code> flows directly into outbound email
+                HTML. A full-history grep for xss&#x2F;sanitize&#x2F;escape
+                returns zero hits in either repo; the frontend template builder
+                also accepts raw pasted&#x2F;uploaded HTML with no sanitization.
+                Fix: HTML-escape recipient-controlled values before
+                substitution, and add DOMPurify or equivalent on the frontend
+                builder&#8217;s raw HTML input.
+              </p>
+            </div>
+
+            <div class="gap-item">
+              <p class="gap-item__title">No partial-job-state tracking</p>
+              <p class="gap-item__desc">
+                Job status is exactly <code>queued</code> &#x2F;
+                <code>processing</code> &#x2F; <code>completed</code> &#x2F;
+                <code>failed</code>: no <code>partial</code> state. A job with
+                500 successful sends and 3 failures still reports
+                <code>completed</code>. Per-recipient failures are caught and
+                logged individually, so the underlying data exists, but it just
+                isn&#8217;t surfaced in the top-level status field.
+              </p>
+            </div>
+
+            <div class="gap-item">
+              <p class="gap-item__title">
+                No per-recipient retry or idempotency
+              </p>
+              <p class="gap-item__desc">
+                Bull&#8217;s <code>attempts: 3</code> retries the entire
+                recipient batch, not individual failed recipients. A transient
+                failure late in a 2000-recipient job risks re-sending to
+                recipients who already succeeded, since there&#8217;s no dedupe
+                check on retry. The more standard Bull pattern here would be
+                per-recipient sub-jobs with independent retry.
+              </p>
+            </div>
+
+            <div class="gap-item">
+              <p class="gap-item__title">
+                Unaddressed SendGrid rate-limit bursts under concurrency
+              </p>
+              <p class="gap-item__desc">
+                With 5 concurrent Bull workers each processing 50-recipient
+                batches across simultaneous jobs, large campaigns can burst past
+                SendGrid&#8217;s API rate limits with zero automated recovery
+                with no 429-specific handling, no backoff-and-resume. The
+                existing throttle constants weren&#8217;t designed with
+                multi-job concurrency in mind. Fix: explicit 429 detection with
+                exponential backoff and job-level pause&#x2F;resume.
+              </p>
+            </div>
+
+            <div class="gap-item">
+              <p class="gap-item__title">
+                Attachment disk leak and filename-collision risk
+              </p>
+              <p class="gap-item__desc">
+                No <code>unlink</code>&#x2F;cleanup call exists anywhere: temp
+                files in <code>uploads/</code> are never deleted after a job
+                completes or fails, so disk usage grows unbounded. Separately,
+                Multer&#8217;s filename generator is
+                <code>Date.now() + ext</code>
+                with no UUID or per-request namespacing, which with 5 concurrent
+                workers has a theoretical collision risk under simultaneous
+                multi-file uploads in the same millisecond (inferred from the
+                code, no confirmed incident).
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── CTA ──────────────────────────────────────────────────── -->
+      <section class="cs-cta" aria-labelledby="s-cta">
+        <div class="container">
+          <h2 class="cs-cta__statement" id="s-cta">
+            Curious about the<br />identity &#x2F; OAuth layer?
+          </h2>
+          <p class="cs-s__body" style="margin-bottom: var(--space-xl)">
+            Keycloak&#x2F;Cognito dual-IdP work, JWT audience-validation, and
+            role&#x2F;group sync for this same platform are documented
+            separately since it&#8217;s a distinct, shared piece of
+            infrastructure rather than part of the email module or CRM backend
+            covered here.
+          </p>
+          <div class="cs-cta__links">
+            <a class="cs-cta__link is-primary" href="/contact.html"
+              >Get in touch</a
+            >
+            <a class="cs-cta__link" href="/projects.html">See all projects</a>
+            <a class="cs-cta__link" href="identity-infra.html"
+              >Identity &#x2F; OAuth infra &#8594;</a
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ── footer ───────────────────────────────────────────────── -->
+    <footer class="site-footer">
+      <div class="container">
+        <p class="footer__line">Building production software from Islamabad.</p>
+        <nav class="footer__nav" aria-label="Footer links">
+          <a href="mailto:sibteali786@gmail.com">Email</a>
+          <a
+            href="https://github.com/sibteali786"
+            target="_blank"
+            rel="noopener noreferrer"
+            >GitHub</a
+          >
+          <a
+            href="https://www.boot.dev/u/sibteali"
+            target="_blank"
+            rel="noopener noreferrer"
+            >boot.dev</a
+          >
+          <a
+            href="https://www.linkedin.com/in/syed-sibteali-baqar/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >LinkedIn</a
+          >
+          <span class="footer__copy">&#169; 2026</span>
+        </nav>
+      </div>
+    </footer>
+
+    <script src="../nav.js"></script>
+  </body>
+</html>

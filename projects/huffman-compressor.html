@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- Hallmark · macrostructure: Catalogue · tone: technical-austere
      theme: custom (dark / italic-serif / warm-amber) · design-system: design.md
-     note: coding challenge — terminal animation centrepiece, no background image,
+     note: coding challenge, terminal animation centrepiece, no background image,
            pipeline flow diagram, file tree + byte-map two-column, 2-row decision blocks
      pre-emit critique: P5 H5 E5 S5 R5 V5 -->
 <html lang="en">
@@ -9,8 +9,8 @@
   <script>(function(){var t=localStorage.getItem("theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Huffman Compressor — lossless file compression implementing Huffman coding from scratch in Go. A coding challenge case study by Sibt-e-Ali Baqar.">
-  <title>Huffman Compressor — Case Study · Sibt-e-Ali Baqar</title>
+  <meta name="description" content="Huffman Compressor: lossless file compression implementing Huffman coding from scratch in Go. A coding challenge case study by Sibt-e-Ali Baqar.">
+  <title>Huffman Compressor: Case Study · Sibt-e-Ali Baqar</title>
 
   <link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="../images/favicon-96x96.png" sizes="96x96" type="image/png">
@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="../index.css">
 
   <style>
-    /* ── case study — huffman-compressor ────────────────────────────────
+    /* ── case study: huffman-compressor ────────────────────────────────
        Catalogue: coding challenge variant.
        Centrepiece: JS typewriter terminal (no fake chrome).
        Distinctive: pipeline flow, file tree + byte-map two-column,
@@ -44,7 +44,7 @@
 
     html, body { overflow-x: clip; }
 
-    /* ── hero (text only — no background image) ─────────────────────── */
+    /* ── hero (text only, no background image) ─────────────────────── */
     .cs-hero {
       padding-block: var(--space-3xl) var(--space-2xl);
     }
@@ -239,7 +239,7 @@
       border-radius: 2px;
     }
 
-    /* ── what I built — two column ─────────────────────────────────── */
+    /* ── what I built: two column ─────────────────────────────────── */
     .built-cols {
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -696,12 +696,12 @@
   <link rel="canonical" href="https://sibteali-portfolio.vercel.app/projects/huffman-compressor">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Syed Sibt-e-Ali Baqar">
-  <meta property="og:title" content="Huffman Compressor — Case Study · Sibt-e-Ali Baqar">
-  <meta property="og:description" content="Huffman Compressor — lossless file compression implementing Huffman coding from scratch in Go. A coding challenge case study by Sibt-e-Ali Baqar.">
+  <meta property="og:title" content="Huffman Compressor: Case Study · Sibt-e-Ali Baqar">
+  <meta property="og:description" content="Huffman Compressor: lossless file compression implementing Huffman coding from scratch in Go. A coding challenge case study by Sibt-e-Ali Baqar.">
   <meta property="og:url" content="https://sibteali-portfolio.vercel.app/projects/huffman-compressor">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Huffman Compressor — Case Study · Sibt-e-Ali Baqar">
-  <meta name="twitter:description" content="Huffman Compressor — lossless file compression implementing Huffman coding from scratch in Go. A coding challenge case study by Sibt-e-Ali Baqar.">
+  <meta name="twitter:title" content="Huffman Compressor: Case Study · Sibt-e-Ali Baqar">
+  <meta name="twitter:description" content="Huffman Compressor: lossless file compression implementing Huffman coding from scratch in Go. A coding challenge case study by Sibt-e-Ali Baqar.">
 </head>
 
 <body>
@@ -796,16 +796,16 @@
           prefix-free codes that are guaranteed optimal for symbol-by-symbol encoding. I picked it
           from <a href="https://codingchallenges.fyi/challenges/challenge-huffman/" target="_blank" rel="noopener noreferrer">John Crickett&#8217;s Coding Challenges</a>
           because it&#8217;s a vertical slice through several CS fundamentals at once: greedy
-          algorithms, binary trees, priority queues, bit manipulation, and binary file I/O &#8212;
+          algorithms, binary trees, priority queues, bit manipulation, and binary file I/O,
           all in a single coherent project with a clear correctness criterion.
         </p>
         <p class="cs-s__body">
           That criterion is round-trip fidelity: compress a file, decompress it, and the bytes must
           match exactly. Any bug in bit ordering, padding, tree construction, or header encoding
-          fails this test with no ambiguity. Go is the right language for it &#8212; generics for
+          fails this test with no ambiguity. Go is the right language for it: generics for
           the priority queue,
           <code style="font-family:var(--font-mono);font-size:0.9em;color:var(--color-accent-dim)">io.Reader</code>/<code style="font-family:var(--font-mono);font-size:0.9em;color:var(--color-accent-dim)">io.Writer</code>
-          for streaming I/O, and the standard library for binary encoding &#8212; without reaching
+          for streaming I/O, and the standard library for binary encoding, without reaching
           for a compression library.
         </p>
       </div>
@@ -954,7 +954,7 @@
               <div class="arch-row">
                 <span class="arch-row__key arch-row__key--decision">Decision</span>
                 <span class="arch-row__val">
-                  <code>appendBit</code> stores codes LSB-first &#8212; bit 0 is the root branch,
+                  <code>appendBit</code> stores codes LSB-first: bit 0 is the root branch,
                   higher positions are deeper. <code>WriteBits</code> loops
                   <code>i = 0..length-1</code> to emit in append order.
                   <code>WriteBit</code> packs each bit MSB-first into the output byte.
@@ -966,7 +966,7 @@
                   LSB-first internal storage makes <code>appendBit</code> a simple OR + shift
                   with no reversal at append time. MSB-first transmission is the natural
                   bit-stream convention. The two meet at <code>WriteBits</code>. Pinning all
-                  three directions consistent required <code>TestBitOrderingExplicit</code> &#8212;
+                  three directions consistent required <code>TestBitOrderingExplicit</code>,
                   a test that asserts the exact expected byte value of a known bit pattern.
                 </span>
               </div>
@@ -991,7 +991,7 @@
               <div class="arch-row">
                 <span class="arch-row__key arch-row__key--why">Why</span>
                 <span class="arch-row__val is-why">
-                  A single-leaf tree has no paths &#8212; <code>GenerateCodes</code> DFS finds a
+                  A single-leaf tree has no paths: <code>GenerateCodes</code> DFS finds a
                   leaf at the root, stores a zero-length code, and <code>WriteBits</code> with
                   <code>length = 0</code> writes nothing. The dummy node is the minimal fix:
                   one extra leaf, one real path. <code>IsDummy()</code> guards the decode loop
@@ -1023,7 +1023,7 @@
                   Padding is unknown until encoding finishes, but the header must be written before
                   encoding begins. Buffering all output in memory to backfill it would destroy the
                   O(1) memory property. <code>Seek</code> costs one syscall and keeps memory
-                  constant regardless of file size. The abstraction leak is contained &#8212;
+                  constant regardless of file size. The abstraction leak is contained:
                   nothing else in the pipeline cares.
                 </span>
               </div>
@@ -1041,14 +1041,14 @@
                 <span class="arch-row__val">
                   <code>MinHeap[T]</code> and <code>PriorityQueue[T]</code> use Go generics
                   with <code>CompareFunc[T any]</code>. The heap compares by
-                  <code>PriorityItem.Priority int</code> set at <code>Enqueue</code> time &#8212;
+                  <code>PriorityItem.Priority int</code> set at <code>Enqueue</code> time;
                   it never calls methods on <code>T</code> directly.
                 </span>
               </div>
               <div class="arch-row">
                 <span class="arch-row__key arch-row__key--why">Why</span>
                 <span class="arch-row__val is-why">
-                  The constraint is <code>any</code> &#8212; no interface methods required on the
+                  The constraint is <code>any</code>: no interface methods required on the
                   stored value. The same heap implementation works as min- or max-heap by swapping
                   the comparator. For this project the comparator reads <code>node.frequency</code>,
                   but the heap doesn&#8217;t need to know that. A concrete
@@ -1080,7 +1080,7 @@
                 <span class="log-row__key log-row__key--symptom">Symptom</span>
                 <span class="log-row__val">
                   Decompression produced garbled output on every test file. Round-trip failed
-                  with no error &#8212; wrong bytes, no panic.
+                  with no error: wrong bytes, no panic.
                 </span>
               </div>
               <div class="log-row">
@@ -1096,7 +1096,7 @@
               <div class="log-row">
                 <span class="log-row__key log-row__key--fix">Fix</span>
                 <span class="log-row__val">
-                  Wrote <code>TestBitOrderingExplicit</code> &#8212; encodes a known bit pattern,
+                  Wrote <code>TestBitOrderingExplicit</code>: encodes a known bit pattern,
                   asserts the exact expected byte value. Pinning the expected byte forced each
                   direction to be correct rather than just internally consistent with each other.
                 </span>
@@ -1111,7 +1111,7 @@
                 <span class="log-row__key log-row__key--symptom">Symptom</span>
                 <span class="log-row__val">
                   Round-trip passed on most inputs but failed intermittently on inputs with
-                  tied character frequencies. No error &#8212; just wrong bytes.
+                  tied character frequencies. No error, just wrong bytes.
                 </span>
               </div>
               <div class="log-row">
@@ -1125,7 +1125,7 @@
               <div class="log-row">
                 <span class="log-row__key log-row__key--fix">Fix</span>
                 <span class="log-row__val">
-                  Sort characters by byte value before enqueuing &#8212; applied identically
+                  Sort characters by byte value before enqueuing, applied identically
                   in <code>BuildHuffmanTree</code> and <code>WriteHeader</code> (which also
                   sorts before writing frequency entries). Same sort, same input, same tree,
                   every run.
@@ -1242,11 +1242,11 @@
               </tr>
               <tr>
                 <td>Code generation + encoding</td>
-                <td>O(m) &#8212; one table lookup per input byte</td>
+                <td>O(m): one table lookup per input byte</td>
               </tr>
               <tr>
                 <td>Decoding</td>
-                <td>O(m &#183; log n) &#8212; one tree traversal per output byte</td>
+                <td>O(m &#183; log n): one tree traversal per output byte</td>
               </tr>
             </tbody>
           </table>
@@ -1266,7 +1266,7 @@
           The <code style="font-family:var(--font-mono);font-size:0.88em;color:var(--color-accent-dim)">NumChars uint8</code>
           field caps unique byte values at 255, enforced with a
           <code style="font-family:var(--font-mono);font-size:0.88em;color:var(--color-accent-dim)">len(freqTable) &gt; 255</code>
-          check. The root cause isn&#8217;t the check &#8212; it&#8217;s the field width.
+          check. The root cause isn&#8217;t the check; it&#8217;s the field width.
           Changing it to <code style="font-family:var(--font-mono);font-size:0.88em;color:var(--color-accent-dim)">uint16</code>
           would support all 256 possible byte values at a cost of one extra header byte.
           The deeper fix is updating
@@ -1314,7 +1314,7 @@
   <script src="../nav.js"></script>
 
   <script>
-    /* Terminal animation — runs once on load, no loop */
+    /* Terminal animation: runs once on load, no loop */
     (function () {
       var out    = document.getElementById('term-output');
       var cursor = document.getElementById('term-cursor');

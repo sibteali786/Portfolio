@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <!-- Hallmark · macrostructure: Catalogue · tone: personal-technical
      theme: custom (dark / italic-serif / warm-amber) · design-system: design.md
-     note: personal product case study — first-person, no client attribution
+     note: personal product case study, first-person, no client attribution
      pre-emit critique: P5 H5 E5 S5 R5 V5 -->
 <html lang="en">
 <head>
   <script>(function(){var t=localStorage.getItem("theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Wafa — a private PWA for shared commitments. A personal engineering case study by Sibt-e-Ali Baqar covering Supabase RLS, Web Push on iOS, and PKT timezone handling.">
-  <title>Wafa — Personal Project · Sibt-e-Ali Baqar</title>
+  <meta name="description" content="Wafa: a private PWA for shared commitments. A personal engineering case study by Sibt-e-Ali Baqar covering Supabase RLS, Web Push on iOS, and PKT timezone handling.">
+  <title>Wafa: Personal Project · Sibt-e-Ali Baqar</title>
 
   <link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="../images/favicon-96x96.png" sizes="96x96" type="image/png">
@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="../index.css">
 
   <style>
-    /* ── case study page — wafa ─────────────────────────────────────────
+    /* ── case study page: wafa ─────────────────────────────────────────
        Macrostructure: Catalogue (personal product variant)
        Distinct from client case studies: first-person voice, no client meta,
        status badge, phone-mockup strip, monospace stat row, in-progress section.
@@ -116,7 +116,7 @@
       min-width: 0;
     }
 
-    /* status badge — unique to this page */
+    /* status badge, unique to this page */
     .cs-hero__status {
       display: inline-block;
       font-family: var(--font-mono);
@@ -259,7 +259,7 @@
     }
 
     .phone-figure__frame {
-      background: oklch(96% 0.008 75);   /* warm off-white — matches brief */
+      background: oklch(96% 0.008 75);   /* warm off-white, matches brief */
       border-radius: 18px;
       padding: var(--space-xs);
       box-shadow:
@@ -461,7 +461,7 @@
       border-radius: 2px;
     }
 
-    /* ── what shipped — monospace stat row ─────────────────────────── */
+    /* ── what shipped: monospace stat row ─────────────────────────── */
     .shipped-section {
       padding-block: var(--space-3xl);
       border-top: var(--rule-hairline);
@@ -770,13 +770,13 @@
   <link rel="canonical" href="https://sibteali-portfolio.vercel.app/projects/wafa">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Syed Sibt-e-Ali Baqar">
-  <meta property="og:title" content="Wafa — Personal Project · Sibt-e-Ali Baqar">
-  <meta property="og:description" content="Wafa — a private PWA for shared commitments. A personal engineering case study by Sibt-e-Ali Baqar covering Supabase RLS, Web Push on iOS, and PKT timezone handling.">
+  <meta property="og:title" content="Wafa: Personal Project · Sibt-e-Ali Baqar">
+  <meta property="og:description" content="Wafa: a private PWA for shared commitments. A personal engineering case study by Sibt-e-Ali Baqar covering Supabase RLS, Web Push on iOS, and PKT timezone handling.">
   <meta property="og:url" content="https://sibteali-portfolio.vercel.app/projects/wafa">
   <meta property="og:image" content="https://sibteali-portfolio.vercel.app/images/wafa-1.jpeg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Wafa — Personal Project · Sibt-e-Ali Baqar">
-  <meta name="twitter:description" content="Wafa — a private PWA for shared commitments. A personal engineering case study by Sibt-e-Ali Baqar covering Supabase RLS, Web Push on iOS, and PKT timezone handling.">
+  <meta name="twitter:title" content="Wafa: Personal Project · Sibt-e-Ali Baqar">
+  <meta name="twitter:description" content="Wafa: a private PWA for shared commitments. A personal engineering case study by Sibt-e-Ali Baqar covering Supabase RLS, Web Push on iOS, and PKT timezone handling.">
   <meta name="twitter:image" content="https://sibteali-portfolio.vercel.app/images/wafa-1.jpeg">
 </head>
 
@@ -831,7 +831,7 @@
         <h1 class="cs-hero__title" id="cs-title">Wafa</h1>
 
         <p class="cs-hero__impact">
-          A private PWA for shared commitments between people you trust &#8212;
+          A private PWA for shared commitments between people you trust:
           installable, offline-capable, push-notifying.
         </p>
 
@@ -844,7 +844,7 @@
           </div>
           <div class="cs-meta-item">
             <span class="cs-meta-item__key">Role</span>
-            <span class="cs-meta-item__val">Solo &#8212; design &#43; engineering</span>
+            <span class="cs-meta-item__val">Solo, design &#43; engineering</span>
           </div>
           <div class="cs-meta-item">
             <span class="cs-meta-item__key">Stack</span>
@@ -869,12 +869,12 @@
         <p class="cs-s__body">
           Generic task managers don&#8217;t model mutual accountability between two specific
           people. Social apps lack privacy boundaries between distinct relationships. I wanted
-          a private space &#8212; per relationship, not per person &#8212; where commitments
+          a private space, per relationship, not per person, where commitments
           don&#8217;t get lost in chat threads.
         </p>
         <p class="cs-s__body">
           Wafa organises around <em>spaces</em>: one space per relationship (family, a friend,
-          a business partner). Inside a space, you create <em>promises</em> &#8212; each with
+          a business partner). Inside a space, you create <em>promises</em>, each with
           a title, description, due date, and time in PKT. Reminders fire via Web Push before
           the deadline. Files attach via Cloudflare R2. When you&#8217;re offline, the action
           queues in IndexedDB and syncs on reconnect.
@@ -891,7 +891,7 @@
         </h2>
         <p class="phone-strip__note">
           I sketched the full information architecture and screen flows before writing a line
-          of code. The screens below are from the running application &#8212; they match the
+          of code. The screens below are from the running application, they match the
           original wireframe layout closely enough that no structural rework was needed
           after the first commit.
         </p>
@@ -965,7 +965,7 @@
               <div class="arch-row">
                 <span class="arch-row__key arch-row__key--why">Why</span>
                 <span class="arch-row__val is-why">
-                  API-route guards are easy to miss &#8212; a new route added without
+                  API-route guards are easy to miss: a new route added without
                   the guard check silently exposes another user&#8217;s data. RLS at the
                   database layer is a hard floor: no query reaches rows the calling user
                   doesn&#8217;t own, regardless of how the API route is written. With
@@ -976,7 +976,7 @@
               <div class="arch-row">
                 <span class="arch-row__key arch-row__key--rejected">Rejected</span>
                 <span class="arch-row__val is-rejected">
-                  Middleware-only guards &#8212; too easy to forget on a new endpoint;
+                  Middleware-only guards: too easy to forget on a new endpoint;
                   a missed guard would be invisible until a cross-user query surfaced it.
                 </span>
               </div>
@@ -1005,13 +1005,13 @@
                   If the <code>space_invites</code> table is ever read by a third party
                   (misconfigured RLS, a backup leak), the stored hashes are useless without
                   the raw tokens. The raw token lives only in the URL shared between the
-                  inviting user and the recipient &#8212; a channel Supabase never sees.
+                  inviting user and the recipient, a channel Supabase never sees.
                 </span>
               </div>
               <div class="arch-row">
                 <span class="arch-row__key arch-row__key--rejected">Rejected</span>
                 <span class="arch-row__val is-rejected">
-                  Storing the raw token directly &#8212; any DB read leak would immediately
+                  Storing the raw token directly: any DB read leak would immediately
                   expose valid invite tokens.
                 </span>
               </div>
@@ -1031,7 +1031,7 @@
                   When a user picks a due time in PKT, the API converts it to UTC
                   (<code>utcHour = (hour - 5 + 24) % 24</code>) before writing
                   <code>next_run_at</code> to the database. Display converts back to PKT.
-                  Conversion happens in two explicit, tested utility functions &#8212;
+                  Conversion happens in two explicit, tested utility functions,
                   nowhere else.
                 </span>
               </div>
@@ -1047,7 +1047,7 @@
               <div class="arch-row">
                 <span class="arch-row__key arch-row__key--rejected">Rejected</span>
                 <span class="arch-row__val is-rejected">
-                  Storing PKT hours raw and converting at reminder-fire time &#8212;
+                  Storing PKT hours raw and converting at reminder-fire time:
                   I hit exactly this bug first. Reminders fired 5 hours late.
                 </span>
               </div>
@@ -1084,7 +1084,7 @@
                 <span class="log-row__val">
                   Supabase stores the session in <code>localStorage</code> by default.
                   iOS Safari aggressively purges <code>localStorage</code> for PWAs
-                  that haven&#8217;t been opened recently &#8212; the purge window is
+                  that haven&#8217;t been opened recently, and the purge window is
                   shorter than most users&#8217; usage pattern.
                 </span>
               </div>
@@ -1149,7 +1149,7 @@
                   The bottom sheet was rendered inside a scroll container. The scroll
                   container established a new stacking context. The backdrop
                   <code>div</code> sat visually behind the sheet but was positioned
-                  inside the wrong layer &#8212; pointer events hit the scroll container
+                  inside the wrong layer, so pointer events hit the scroll container
                   before reaching the backdrop handler.
                 </span>
               </div>
@@ -1299,7 +1299,7 @@
           <div class="in-progress-item" role="listitem">
             <span class="in-progress-item__tag">auth</span>
             <span class="in-progress-item__desc">
-              Magic-link login &#8212; currently using password-based auth;
+              Magic-link login: currently using password-based auth;
               magic link removes the password surface entirely.
             </span>
           </div>
@@ -1307,7 +1307,7 @@
           <div class="in-progress-item" role="listitem">
             <span class="in-progress-item__tag">pwa</span>
             <span class="in-progress-item__desc">
-              iOS splash screens &#8212; the installed PWA shows a blank white screen
+              iOS splash screens: the installed PWA shows a blank white screen
               on launch; proper splash assets needed per device resolution.
             </span>
           </div>
@@ -1316,7 +1316,7 @@
             <span class="in-progress-item__tag">session</span>
             <span class="in-progress-item__desc">
               <code style="font-family: var(--font-mono); font-size: 0.9em; color: var(--color-accent-dim);">visibilitychange</code> session
-              refresh &#8212; long-backgrounded tabs silently expire; need a
+              refresh: long-backgrounded tabs silently expire; need a
               token refresh on document becoming visible.
             </span>
           </div>
@@ -1324,7 +1324,7 @@
           <div class="in-progress-item" role="listitem">
             <span class="in-progress-item__tag">offline</span>
             <span class="in-progress-item__desc">
-              Offline sync conflict resolution &#8212; the IndexedDB queue replays
+              Offline sync conflict resolution: the IndexedDB queue replays
               actions on reconnect but doesn&#8217;t yet handle the case where the
               server state changed while offline.
             </span>
@@ -1333,7 +1333,7 @@
           <div class="in-progress-item" role="listitem">
             <span class="in-progress-item__tag">feature</span>
             <span class="in-progress-item__desc">
-              Suggestion lifecycle &#8212; one person can propose a commitment,
+              Suggestion lifecycle: one person can propose a commitment,
               the other can accept or counter. Designed; not yet implemented.
             </span>
           </div>
@@ -1353,9 +1353,9 @@
           Timezone handling should have been a first-class concern from migration 1.
           I should have defined a <code style="font-family: var(--font-mono); font-size: 0.88em; color: var(--color-accent-dim);">pktToUtc</code>
           and <code style="font-family: var(--font-mono); font-size: 0.88em; color: var(--color-accent-dim);">utcToPkt</code>
-          utility, written tests for both, and documented the invariant &#8212;
-          <em>all timestamps stored in UTC, all PKT display conversions go through the utility</em>
-          &#8212; before the first reminder fired. Instead I wrote the raw PKT hour into the database,
+          utility, written tests for both, and documented the invariant
+          (<em>all timestamps stored in UTC, all PKT display conversions go through the utility</em>)
+          before the first reminder fired. Instead I wrote the raw PKT hour into the database,
           hit the 5-hour drift bug in production, and spent time patching what a single
           deliberate decision at the schema stage would have prevented entirely.
         </p>
@@ -1366,7 +1366,7 @@
     <section class="cs-cta" aria-labelledby="s-cta">
       <div class="container">
         <h2 class="cs-cta__statement" id="s-cta">
-          If you have a problem<br>worth solving &#8212; let&#8217;s talk.
+          If you have a problem<br>worth solving, let&#8217;s talk.
         </h2>
         <div class="cs-cta__links">
           <a class="cs-cta__link is-primary" href="mailto:sibteali786@gmail.com">sibteali786@gmail.com</a>
