@@ -17,7 +17,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="../tokens.css">
   <link rel="stylesheet" href="../index.css">
@@ -464,9 +464,15 @@
   <!-- ── nav ──────────────────────────────────────────────────────── -->
   <header class="site-header">
     <nav class="site-nav" aria-label="Primary navigation">
-      <a class="nav-name" href="/">Sibt-e-Ali</a>
+      <a class="nav-brand" href="/">
+        <span class="nav-brand__mark" aria-hidden="true">SB</span>
+        <span class="nav-brand__text">
+          <span class="nav-brand__name">Sibt-e-Ali</span>
+          <span class="nav-brand__role">Software Engineer</span>
+        </span>
+      </a>
       <div class="nav-right">
-        <a class="nav-cta" href="https://calendly.com/sibteali786/new-meeting" target="_blank" rel="noopener noreferrer">Book a call</a>
+        <a class="nav-cta" href="https://calendly.com/sibteali786/new-meeting" target="_blank" rel="noopener noreferrer">Book a call<span class="nav-cta__arrow" aria-hidden="true">&#8594;</span></a>
         <button class="theme-toggle" aria-label="Toggle light and dark theme" aria-pressed="false">
           <span class="theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true"></span>
           <span class="theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true"></span>
@@ -476,7 +482,7 @@
           aria-expanded="false"
           aria-controls="nav-menu"
           aria-label="Toggle navigation menu"
-        >Menu</button>
+        ><span class="nav-toggle__bar" aria-hidden="true"></span><span class="nav-toggle__bar" aria-hidden="true"></span></button>
       </div>
     </nav>
     <nav class="nav-menu" id="nav-menu" aria-label="Site pages">

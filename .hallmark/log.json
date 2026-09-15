@@ -1,5 +1,86 @@
 [
   {
+    "date": "2026-09-16",
+    "macrostructure": "site-wide: animation-opportunity fixes + mobile nav bug fix",
+    "theme": "custom",
+    "theme_axes": "light-default / geometric-sans (Sora) / terracotta-on-mint",
+    "enrichment": "none",
+    "brief": "Sibt-e-Ali portfolio — two things. (1) Applied all 5 rows from the find-animation-opportunities report run last turn: .theme-toggle:active + .cs-cta__link:active press-scale (140ms, all 7 case studies), .stat/.edu-block/.award-item added to nav.js's reveal-pending scroll-reveal selector list, and arrow-nudge-on-hover (translateX(2px), 150ms) extended to .proj__link/.project-featured__link/.project-supporting__detail to match the nav CTA arrow added earlier. (2) User sent mobile screenshots calling the nav 'not professional grade' -- spotted a real bug in the menu-open screenshot: .nav-brand__name ('Sibt-e-Ali') was wrapping to two lines ('Sibt-e-\\nAli') only when the mobile menu was open. Root cause: .nav-toggle rendered literal text 'Menu'/'Close' via nav.js's toggle.textContent, and 'Close' (5 chars) is wider than 'Menu' (4 chars) -- enough to squeeze the flex row and force the wordmark to wrap at narrow widths. Fixed by converting .nav-toggle to a fixed-size (2rem circle, matching .theme-toggle) icon button -- two .nav-toggle__bar spans that morph hamburger to X via transform:rotate(), constant footprint regardless of state. nav.js no longer touches textContent, only aria-label/aria-expanded. Added white-space:nowrap to .nav-brand__name as a second line of defense. Also tightened the mobile nav-menu dropdown's link spacing (480px override was forcing gap:var(--space-lg)/32px, looked loose/unpolished in the screenshot; removed the override so it falls back to the tighter base gap). Batch-applied the nav-toggle markup change across all 13 pages via Python regex (3 different HTML formatting variants across files), verified via grep (nav-toggle__bar: 13/13, zero leftover '>Menu</button>').",
+    "scope": "index.css, projects.css, nav.js, all 13 HTML pages (nav-toggle markup only), 7 case-study <style> blocks (cs-cta__link), design.md"
+  },
+  {
+    "date": "2026-09-16",
+    "macrostructure": "site-wide nav redesign (N1 -> N5 floating pill, all 13 pages)",
+    "theme": "custom",
+    "theme_axes": "light-default / geometric-sans (Sora) / terracotta-on-mint",
+    "enrichment": "none",
+    "brief": "Sibt-e-Ali portfolio — user called the nav flat/dead compared to the Mihir Verma reference's lively floating pill nav. Redesigned index.css nav rules: .site-header is now an inset floating pill (position:sticky, margin-inline, --color-card/--radius-pill/--shadow-card) instead of a full-bleed hairline strip -- fixing the exact N1 anti-pattern hallmark's own anti-patterns.md names. Wordmark became a two-line brand lockup (.nav-brand__mark 'SB' initials tile + .nav-brand__name + .nav-brand__role 'Software Engineer', reused verbatim from the hero label rather than invented) -- checked for a real headshot photo first (found only a blank/transparent placeholder PNG, 879x126, unusable) so used an initials mark instead of fabricating an avatar. Nav links get a soft pill hover/active background instead of a bare colour change; CTA gained a '->' that nudges right on hover. Non-trivial part: .site-nav becomes display:contents at desktop (a pre-existing trick that merges .site-nav and the sibling .nav-menu into one flex row on .site-header) -- pill background can't live on an element that stops generating a box, so the visual chrome had to move to .site-header inside the desktop media query specifically, while staying on .site-nav for the mobile-collapsed state where .site-nav is still a real box. Also gave the mobile dropdown .nav-menu its own card surface (it used to just inherit .site-header's old flat background, which no longer exists). Batch-edited the HTML wordmark + CTA markup identically across all 13 pages (4 root + 9 project pages) via a Python regex pass, verified with grep counts (nav-brand: 13/13, nav-cta__arrow: 13/13, zero leftover .nav-name).",
+    "scope": "index.css, all 13 HTML pages (wordmark + CTA markup only), design.md"
+  },
+  {
+    "date": "2026-09-16",
+    "macrostructure": "Catalogue + Long Document + Letter (batch: 6 remaining case studies, about.html, contact.html)",
+    "theme": "custom",
+    "theme_axes": "light-default / geometric-sans (Sora) / terracotta-on-mint",
+    "enrichment": "none",
+    "brief": "Sibt-e-Ali portfolio — after approving asia-builders.html as the template, user asked to extend the band/wave/card/icon system to the other 6 case studies (whats-next-please, real-time-chat, huffman-compressor, wafa, hcc, identity-infra) plus about.html and contact.html. Batch-scripted the mechanical parts (arch-block card upgrade, .cs-cta__link radius-card->radius-pill fix, hairline-border strip, wave/band CSS insertion, per-project hero icon insertion, cs-band--alt alternation) across the 6 case studies via a Python regex pass. CAUGHT AND FIXED A SELF-INTRODUCED BUG during this: the hairline-strip regex matched greedily and ate the .cs-s/.cs-cta/.cs-screenshots selector names themselves, leaving bare invalid `{ padding-block: ... }` blocks (2-3 per file, 14 total across the 6 files) -- caught via brace-balance/grep verification before handing off, restored every selector by exact line number, then re-verified brace balance (all matched) and spot-checked every file's cta-radius fix, hero icon, and arch-block upgrade individually before considering it done. Also extended banding+waves to about.html (.aph/.experience/.edu-section) and contact.html (.contact-pg/.email-hero/.channels-section) -- deliberately did NOT convert their timeline-row/award-list/channel-list content into individual shadowed cards, since that would fight the Long Document / Letter macrostructure's reading rhythm and wasn't actually what was asked (banding + waves was the ask, not a card retrofit of every row).",
+    "scope": "projects/whats-next-please.html, projects/real-time-chat.html, projects/huffman-compressor.html, projects/wafa.html, projects/hcc.html, projects/identity-infra.html, about.css, contact.css, design.md"
+  },
+  {
+    "date": "2026-09-15",
+    "macrostructure": "Workbench (projects.html — featured-card gutter fix)",
+    "theme": "custom",
+    "theme_axes": "light-default / geometric-sans (Sora) / terracotta-on-mint",
+    "enrichment": "none",
+    "brief": "Sibt-e-Ali portfolio — user spotted the Asia Builders / WhatsNextPlease featured cards on projects.html sitting flush against the viewport edge with no side margin, unlike the supporting cards below them which had correct padding. Root cause: .featured-section's articles were never wrapped in .container (only .project-featured__inner had padding-inline, centering the CONTENT while the card's own background bled full-bleed to the viewport edge) -- that was fine for the old flat/borderless design but broke once .project-featured became a visible bg+radius+shadow card in the earlier consistency pass. Fixed by moving max-width/margin-inline/padding-inline from .project-featured__inner onto .featured-section itself (mirroring how .container works elsewhere), and updated both mobile breakpoints (768px, 414px) to match.",
+    "scope": "projects.css, .hallmark/log.json"
+  },
+  {
+    "date": "2026-09-15",
+    "macrostructure": "Catalogue (projects/asia-builders.html — template for extending the band/wave/card system to case studies)",
+    "theme": "custom",
+    "theme_axes": "light-default / geometric-sans (Sora) / terracotta-on-mint",
+    "enrichment": "none",
+    "brief": "Sibt-e-Ali portfolio — user asked how case studies would be updated; asked via AskUserQuestion whether to extend the wave/band/card system there or keep them flat per design.md's prior typography-only rule for content pages. User chose to extend it, one page first as a template. Implemented on asia-builders.html: .cs-s/.cs-screenshots/.cs-cta alternate --color-paper/--color-paper-alt via a hand-placed .cs-band--alt class (nth-of-type wasn't usable — .cs-hero and .cs-screenshots are also <section> siblings, would miscount), same shared wave-mask ::before as index.html, disabled under reduced-motion/<414px. .arch-block upgraded from flat paper-2+border to --color-card+--shadow-card. Added a small category icon (ERP/layers SVG, same hand-built set as the project cards) to the hero label. Also fixed a real bug found while doing this: .cs-cta__link used var(--radius-card) for a pill button, which was harmless at the old 4px radius but became a visibly wrong heavy rounded-rect after --radius-card was bumped to 14px for the card system in an earlier pass — switched to var(--radius-pill). Confirmed via audit that colors/fonts already fully propagate to all 9 case-study pages via tokens.css with no inline overrides except documented semantic exceptions (diff-red, log-highlight-amber), so no color/font work was needed, only structural. Stopped here per user's requested 'one page, then review' rollout order before touching the other 6 cs-*-templated pages (whats-next-please, real-time-chat, huffman-compressor, wafa, hcc, identity-infra) or the differently-templated zen.html/go-blueprint.html.",
+    "scope": "projects/asia-builders.html, design.md"
+  },
+  {
+    "date": "2026-09-15",
+    "macrostructure": "Showcase + Workbench (index.html + projects.html — card layout consistency pass)",
+    "theme": "custom",
+    "theme_axes": "light-default / geometric-sans (Sora) / terracotta-on-mint",
+    "enrichment": "none",
+    "brief": "Sibt-e-Ali portfolio — user compared project cards to a Mihir Verma reference site again, flagged three things: (1) impact strip's 3 uneven-width stat columns should be one dominant stat on top + two below; (2) project cards had inconsistent height/width because featured cards used a 16ch-rail grid split while supporting cards used a different left-rail-plus-stack layout, and (3) reference site uses per-section icon SVGs, and small/lighter projects should sit two-per-row instead of one long stacked card each. Restructured: .stat-row is now a full-width dominant stat + a .stat-row__secondary 2-col grid underneath. Every .proj / .project-featured / .project-supporting card was unified onto one shape (icon + Project-NN + category head row, then title/desc/pills, footer pinned to the bottom via margin-block-start:auto) so featured and supporting cards read as one family instead of two different layouts. Smaller projects now render in a 2-column CSS Grid (.work__grid on index.html, restructured .supporting-list on projects.html) with equal-height cards (grid row stretch + flex-column + bottom-pinned footer), instead of one long full-width card apiece. Added 8 hand-built inline SVG category icons (36px tile, single accent-coloured stroke, no external icon library, no emoji) — ERP/layers, task/kanban, chat/message-circle, systems/terminal, PWA/smartphone, git-branch for OSS, mail for the CRM module, shield for identity infra. Gave .project-featured cards on projects.html the same card surface (background/radius/shadow) the rest of the system already uses, replacing its old hairline-divider flow, for visual consistency between the two pages. Could not run a live web-inspiration search in this environment (no browsing tool available for open-ended discovery) — applied hallmark's own equal-height-grid-card and icon-head-row conventions directly instead of sourcing new external references; told the user this explicitly rather than fabricating a search.",
+    "scope": "index.html, index.css, projects.html, projects.css, design.md"
+  },
+  {
+    "date": "2026-09-15",
+    "macrostructure": "Showcase + Workbench (index.html + projects.html — project card content pattern)",
+    "theme": "custom",
+    "theme_axes": "light-default / geometric-sans (Sora) / terracotta-on-mint",
+    "enrichment": "none",
+    "brief": "Sibt-e-Ali portfolio — user compared project cards to the reference site's field set: Project No, Category, Title, Description, skill pills, and Source Code / Live Demo / Case Study links. Added Project-NN badge + category label + converted stack text into pill lists on every project card in index.html (.proj) and projects.html (.project-featured, .project-supporting). Real GitHub repo URLs looked up via the user's github.com/sibteali786 repositories listing (asia-builders-erp, whatsnextplease-monolith, Chat-App-Frontend, huffman-compressor, wafa) rather than fabricated links; HCC CRM Email Module and Identity Infrastructure have no public repo (client work) so their Source Code button was omitted rather than faked, keeping only the existing Read Case Study CTA. CTA logic: Source Code + View Live Demo (+ existing text case-study link) when a live deploy exists; Source Code + Read Case Study otherwise. Open Source section on both pages left untouched — different content shape (bug-fix write-ups on other people's repos), already has its own real links, doesn't fit the single-project-card mold.",
+    "scope": "index.html, index.css, projects.html, projects.css, design.md"
+  },
+  {
+    "date": "2026-09-15",
+    "macrostructure": "Showcase (index.html only — divider/depth amendment)",
+    "theme": "custom",
+    "theme_axes": "light-default / geometric-sans (Sora) / terracotta-on-mint",
+    "enrichment": "none",
+    "brief": "Sibt-e-Ali portfolio — user compared homepage screenshot to the reference site again: flagged hard straight section boundaries (wanted wave dividers), one flat background color sitewide (reference alternates mint/cream bands), and no card depth (stats + work items read as 'font pasted on a wall', reference uses shadowed cards). Added tokens: --color-paper-alt (cream, alternates with mint per section), --color-card + --shadow-card (color-mix ink-tinted, theme-aware), --radius-card 4px -> 14px. index.css: sections alternate --color-paper/--color-paper-alt, hairline top-rule section boundaries replaced by a shared CSS-only wave mask (::before, one shared SVG data-uri, background-color: inherit so it always paints the section's own tone), disabled under prefers-reduced-motion and <414px. .stat and .proj converted from flat/hairline to real card surfaces (background, radius, shadow, hover elevation shift). Scoped to index.html only pending user sign-off before extending to about/projects/contact.",
+    "scope": "tokens.css, index.css, design.md"
+  },
+  {
+    "date": "2026-09-15",
+    "macrostructure": "Showcase (unchanged — theme-only amendment)",
+    "theme": "custom",
+    "theme_axes": "light-default / geometric-sans (Sora) / terracotta-on-mint",
+    "enrichment": "none",
+    "brief": "Sibt-e-Ali portfolio — user liked the color scheme + larger, easier-to-read type of an audited reference site (mint/cream paper, terracotta accent, Sora-style rounded display face). Picked from a 6-option artifact picker (mint & terracotta variant), then amended design.md + tokens.css only: warm-amber -> mint/terracotta OKLCH (converted precisely from the reference hex values), Space Grotesk/IBM Plex Sans -> Sora/Inter, type scale raised ~8-10%. Follow-up same day: user compared screenshots and flagged too much dead space between sections vs. the reference — tightened --space-4xl 160px->96px, --space-3xl 112px->80px, --space-2xl 72px->56px (one token edit, propagates site-wide since every section reads the scale, not hardcoded values). Structure, motion, macrostructures untouched — token discipline meant only tokens.css + the shared Google Fonts <link> needed editing across all 11 pages.",
+    "scope": "tokens.css, design.md, Google Fonts <link> in all 5 root pages + all 7 projects/*.html"
+  },
+  {
     "date": "2026-08-07",
     "macrostructure": "Showcase (unchanged — audit + repair pass)",
     "theme": "custom",

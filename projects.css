@@ -41,24 +41,38 @@
 /* ═══════════════════════════════════════════════════════════════════
    FEATURED PROJECTS
 ═══════════════════════════════════════════════════════════════════ */
+/* the card now has visible bg/radius/shadow, so the section itself must
+   provide the side gutter — it used to be a full-bleed background with
+   only .project-featured__inner's padding centering the content, which
+   worked when there was no card edge to see. Now there is. */
 .featured-section {
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: var(--space-2xl);
   padding-block: var(--space-2xl) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
 }
 
 .project-featured {
   position: relative;
-  padding-block: var(--space-2xl);
-  border-bottom: var(--rule-hairline);
+  background-color: var(--color-card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  transition: box-shadow var(--dur-mid) var(--ease-out);
 }
-
+.project-featured:hover {
+  box-shadow:
+    0 2px 4px color-mix(in oklch, var(--color-ink) 8%, transparent),
+    0 18px 36px color-mix(in oklch, var(--color-ink) 16%, transparent);
+}
 /* Column order follows source order (no grid-template-areas reordering)
    so visual position always matches DOM/reading order for AT and keyboard
    users — the reversed variant swaps figure and content in the markup
    instead of just visually. */
 .project-featured__inner {
-  max-width: 1280px;
-  margin-inline: auto;
-  padding-inline: var(--space-2xl);
+  padding: var(--space-2xl);
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
   gap: var(--space-2xl);
@@ -95,9 +109,53 @@
 }
 
 /* content elements */
+.project-featured__meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-block-end: var(--space-sm);
+}
+
+.project-featured__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: var(--radius-input);
+  background-color: var(--color-paper-2);
+  color: var(--color-accent);
+}
+.project-featured__icon svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.project-featured__no {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-accent-ink);
+  background-color: var(--color-accent);
+  padding: 0.25em 0.7em;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+}
+
+.project-featured__category {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-ink-3);
+  letter-spacing: 0.02em;
+}
+
 .project-featured__label {
   display: flex;
-  gap: var(--space-lg);
+  gap: var(--space-2xs);
   flex-wrap: wrap;
   align-items: baseline;
   margin-block-end: var(--space-md);
@@ -106,14 +164,19 @@
 .project-featured__stack {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
-  color: var(--color-ink-3);
+  color: var(--color-ink-2);
   letter-spacing: 0.02em;
+  background-color: var(--color-paper-2);
+  border: var(--rule-hairline);
+  padding: 0.2em 0.6em;
+  border-radius: var(--radius-pill);
 }
 
 .project-featured__year {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   color: var(--color-accent-dim);
+  margin-inline-start: var(--space-sm);
 }
 
 .project-featured__title {
@@ -188,11 +251,26 @@
   font-size: var(--text-sm);
   color: var(--color-accent);
   text-decoration: none;
-  transition: color var(--dur-short) var(--ease-out);
+  transition:
+    color var(--dur-short) var(--ease-out),
+    transform 150ms var(--ease-out);
   white-space: nowrap;
 }
 .project-featured__link:hover { color: var(--color-ink); }
+@media (hover: hover) and (pointer: fine) {
+  .project-featured__link:hover {
+    transform: translateX(2px);
+  }
+}
 
+.project-featured__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.project-featured__source-link,
 .project-featured__detail-link {
   display: inline-flex;
   align-items: center;
@@ -204,15 +282,41 @@
   border: var(--rule-hairline);
   padding: var(--space-2xs) var(--space-md);
   border-radius: var(--radius-pill);
-  margin-inline-start: var(--space-lg);
   transition:
     border-color var(--dur-short) var(--ease-out),
     color var(--dur-short) var(--ease-out);
   white-space: nowrap;
 }
+.project-featured__source-link:hover,
 .project-featured__detail-link:hover {
   border-color: var(--color-accent);
   color: var(--color-accent);
+}
+
+/* primary CTA (live demo / case study) — filled terracotta pill,
+   same voice as .btn--primary on index.html */
+.project-featured__primary-link {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-accent-ink);
+  background-color: var(--color-accent);
+  text-decoration: none;
+  padding: var(--space-2xs) var(--space-md);
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+  transition: background-color var(--dur-short) var(--ease-out);
+}
+.project-featured__primary-link:hover {
+  background-color: var(--color-accent-dim);
+}
+
+/* the plain-text supplementary link (e.g. "Case study →" alongside a live
+   demo button) keeps its original quiet mono-link treatment */
+.project-featured__link {
+  margin-inline-start: var(--space-sm);
 }
 
 /* ═══════════════════════════════════════════════════════════════════
@@ -227,36 +331,75 @@
   padding-block-start: var(--space-2xl);
 }
 
+/* two cards per row; every .project-supporting is a flex column so the
+   actions row pins to the card bottom — cards sharing a grid row end up
+   equal height and their buttons line up, matching index.html's pattern. */
 .supporting-list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-lg);
 }
 
 .project-supporting {
-  display: grid;
-  grid-template-columns: 16ch 1fr;
-  gap: 0 var(--space-2xl);
-  padding-block: var(--space-xl);
-  border-top: var(--rule-hairline);
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-lg);
+  background-color: var(--color-card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  transition: box-shadow var(--dur-mid) var(--ease-out);
 }
-
-.project-supporting:first-child {
-  border-top: none;
-  padding-block-start: 0;
+.project-supporting:hover {
+  box-shadow:
+    0 2px 4px color-mix(in oklch, var(--color-ink) 8%, transparent),
+    0 18px 36px color-mix(in oklch, var(--color-ink) 16%, transparent);
 }
 
 .project-supporting__meta {
   display: flex;
-  flex-direction: column;
-  gap: var(--space-2xs);
-  padding-block-start: 5px; /* optical alignment */
+  align-items: flex-start;
+  gap: var(--space-md);
+  margin-block-end: var(--space-sm);
 }
 
-.project-supporting__stack {
+.project-supporting__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: var(--radius-input);
+  background-color: var(--color-paper-2);
+  color: var(--color-accent);
+}
+.project-supporting__icon svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.project-supporting__head-text {
+  min-width: 0;
+  flex: 1;
+}
+
+.project-supporting__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2xs);
+  margin-block-end: var(--space-lg);
+}
+
+.project-supporting__tags li {
+  display: inline-block;
   font-family: var(--font-mono);
   font-size: var(--text-xs);
-  color: var(--color-ink-3);
-  line-height: 1.5;
+  color: var(--color-ink-2);
+  background-color: var(--color-paper-2);
+  border: var(--rule-hairline);
+  padding: 0.2em 0.6em;
+  border-radius: var(--radius-pill);
+  width: fit-content;
 }
 
 .project-supporting__badge {
@@ -266,6 +409,33 @@
   letter-spacing: 0.01em;
 }
 
+.project-supporting__head {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-block-end: var(--space-3xs);
+}
+
+.project-supporting__no {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-accent-ink);
+  background-color: var(--color-accent);
+  padding: 0.2em 0.6em;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+}
+
+.project-supporting__category {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-ink-3);
+}
+
 .project-supporting__title {
   font-family: var(--font-display);
   font-weight: 700;
@@ -273,7 +443,6 @@
   color: var(--color-ink);
   line-height: 1.15;
   letter-spacing: -0.02em;
-  margin-block-end: var(--space-sm);
   overflow-wrap: anywhere;
   min-width: 0;
 }
@@ -282,8 +451,13 @@
   font-size: var(--text-base);
   color: var(--color-ink-2);
   line-height: 1.65;
-  max-width: 68ch;
   margin-block-end: var(--space-sm);
+}
+
+/* pins the actions row (and the badge/year, when it's the only thing left
+   above it) to the card bottom, same trick as index.html's .proj__footer */
+.project-supporting__footer {
+  margin-block-start: auto;
 }
 
 .project-supporting__note {
@@ -316,10 +490,64 @@
   color: var(--color-ink-3);
   text-decoration: none;
   margin-inline-start: var(--space-md);
-  transition: color var(--dur-short) var(--ease-out);
+  transition:
+    color var(--dur-short) var(--ease-out),
+    transform 150ms var(--ease-out);
   white-space: nowrap;
 }
 .project-supporting__detail:hover { color: var(--color-ink-2); }
+@media (hover: hover) and (pointer: fine) {
+  .project-supporting__detail:hover {
+    transform: translateX(2px);
+  }
+}
+
+.project-supporting__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-block-start: var(--space-sm);
+}
+
+.project-supporting__source-link {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-ink);
+  text-decoration: none;
+  border: var(--rule-hairline);
+  padding: var(--space-3xs) var(--space-sm);
+  border-radius: var(--radius-pill);
+  transition:
+    border-color var(--dur-short) var(--ease-out),
+    color var(--dur-short) var(--ease-out);
+  white-space: nowrap;
+}
+.project-supporting__source-link:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.project-supporting__primary-link {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-accent-ink);
+  background-color: var(--color-accent);
+  text-decoration: none;
+  padding: var(--space-3xs) var(--space-sm);
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+  transition: background-color var(--dur-short) var(--ease-out);
+}
+.project-supporting__primary-link:hover {
+  background-color: var(--color-accent-dim);
+}
 
 /* ═══════════════════════════════════════════════════════════════════
    OPEN SOURCE SECTION
@@ -463,21 +691,17 @@
    RESPONSIVE — 768px
 ═══════════════════════════════════════════════════════════════════ */
 @media (max-width: 768px) {
-  .project-featured__inner {
-    grid-template-columns: 1fr;
+  .featured-section {
     padding-inline: var(--space-lg);
   }
 
-  .project-supporting {
+  .project-featured__inner {
     grid-template-columns: 1fr;
-    gap: var(--space-sm) 0;
+    padding: var(--space-lg);
   }
 
-  .project-supporting__meta {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 0 var(--space-md);
-    padding-block-start: 0;
+  .supporting-list {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -493,8 +717,12 @@
     font-size: clamp(1.75rem, 7vw, 2.5rem);
   }
 
-  .project-featured__inner {
+  .featured-section {
     padding-inline: var(--space-md);
+  }
+
+  .project-featured__inner {
+    padding: var(--space-md);
   }
 }
 

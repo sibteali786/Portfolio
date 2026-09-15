@@ -14,7 +14,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="tokens.css">
   <link rel="stylesheet" href="index.css">
@@ -39,14 +39,20 @@
   <!-- ── nav ──────────────────────────────────────────────────────── -->
   <header class="site-header">
     <nav class="site-nav" aria-label="Primary navigation">
-      <a class="nav-name" href="/">Sibt-e-Ali</a>
+      <a class="nav-brand" href="/">
+        <span class="nav-brand__mark" aria-hidden="true">SB</span>
+        <span class="nav-brand__text">
+          <span class="nav-brand__name">Sibt-e-Ali</span>
+          <span class="nav-brand__role">Software Engineer</span>
+        </span>
+      </a>
       <div class="nav-right">
-        <a class="nav-cta" href="https://calendly.com/sibteali786/new-meeting" target="_blank" rel="noopener noreferrer">Book a call</a>
+        <a class="nav-cta" href="https://calendly.com/sibteali786/new-meeting" target="_blank" rel="noopener noreferrer">Book a call<span class="nav-cta__arrow" aria-hidden="true">&#8594;</span></a>
         <button class="theme-toggle" aria-label="Toggle light and dark theme" aria-pressed="false">
           <span class="theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true"></span>
           <span class="theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true"></span>
         </button>
-        <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation menu">Menu</button>
+        <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation menu"><span class="nav-toggle__bar" aria-hidden="true"></span><span class="nav-toggle__bar" aria-hidden="true"></span></button>
       </div>
     </nav>
     <nav class="nav-menu" id="nav-menu" aria-label="Site pages">
@@ -75,8 +81,19 @@
         <div class="project-featured__inner">
 
           <div class="project-featured__content">
+            <div class="project-featured__meta">
+              <span class="project-featured__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+              </span>
+              <span class="project-featured__no">Project 01</span>
+              <span class="project-featured__category">Full-Stack ERP &#183; Construction Ops</span>
+            </div>
             <div class="project-featured__label">
-              <span class="project-featured__stack">NestJS &#183; PostgreSQL &#183; Next.js 15 &#183; Cloudflare R2 &#183; Hostinger VPS</span>
+              <span class="project-featured__stack">NestJS</span>
+              <span class="project-featured__stack">PostgreSQL</span>
+              <span class="project-featured__stack">Next.js 15</span>
+              <span class="project-featured__stack">Cloudflare R2</span>
+              <span class="project-featured__stack">Hostinger VPS</span>
               <span class="project-featured__year">2024&#8211;present</span>
             </div>
             <h2 class="project-featured__title" id="pf-asia-title">Asia Builders<br>ERP</h2>
@@ -99,8 +116,11 @@
                 <p class="project-featured__arch-item">Soft deletes on all entities &#183; auto-generated transaction reference codes</p>
               </div>
             </details>
-            <a class="project-featured__link" href="https://accounts.asiabuilderz.com" target="_blank" rel="noopener noreferrer">asiabuilderz.com &#8599;</a>
-            <a class="project-featured__detail-link"  href="projects/asia-builders.html">Case study &#8594;</a>
+            <div class="project-featured__actions">
+              <a class="project-featured__source-link" href="https://github.com/sibteali786/asia-builders-erp" target="_blank" rel="noopener noreferrer">Source Code</a>
+              <a class="project-featured__primary-link" href="https://accounts.asiabuilderz.com" target="_blank" rel="noopener noreferrer">View Live Demo</a>
+              <a class="project-featured__link" href="projects/asia-builders.html">Case study &#8594;</a>
+            </div>
           </div>
 
           <figure class="project-featured__figure">
@@ -137,8 +157,18 @@
           </figure>
 
           <div class="project-featured__content">
+            <div class="project-featured__meta">
+              <span class="project-featured__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="7" height="16" rx="1"/><rect x="14" y="4" width="7" height="10" rx="1"/></svg>
+              </span>
+              <span class="project-featured__no">Project 02</span>
+              <span class="project-featured__category">Task Management Platform</span>
+            </div>
             <div class="project-featured__label">
-              <span class="project-featured__stack">Next.js &#183; TypeScript &#183; PostgreSQL &#183; AWS</span>
+              <span class="project-featured__stack">Next.js</span>
+              <span class="project-featured__stack">TypeScript</span>
+              <span class="project-featured__stack">PostgreSQL</span>
+              <span class="project-featured__stack">AWS</span>
               <span class="project-featured__year">2024</span>
             </div>
             <h2 class="project-featured__title" id="pf-wnp-title">WhatsNext<br>Please</h2>
@@ -158,8 +188,11 @@
                 <p class="project-featured__arch-item">Automated deployments and testing so releases stay reliable</p>
               </div>
             </details>
-            <a class="project-featured__link" href="https://app.whatsnextplease.com" target="_blank" rel="noopener noreferrer">whatsnextplease.com &#8599;</a>
-            <a class="project-featured__detail-link" href="projects/whats-next-please.html">Case study &#8594;</a>
+            <div class="project-featured__actions">
+              <a class="project-featured__source-link" href="https://github.com/sibteali786/whatsnextplease-monolith" target="_blank" rel="noopener noreferrer">Source Code</a>
+              <a class="project-featured__primary-link" href="https://app.whatsnextplease.com" target="_blank" rel="noopener noreferrer">View Live Demo</a>
+              <a class="project-featured__link" href="projects/whats-next-please.html">Case study &#8594;</a>
+            </div>
           </div>
 
         </div>
@@ -178,97 +211,170 @@
           <!-- Real-Time Chat -->
           <li class="project-supporting">
             <div class="project-supporting__meta">
-              <span class="project-supporting__stack">Node.js &#183; WebSockets &#183; React</span>
-              <span class="project-supporting__badge">2024</span>
+              <span class="project-supporting__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+              </span>
+              <div class="project-supporting__head-text">
+                <div class="project-supporting__head">
+                  <span class="project-supporting__no">Project 03</span>
+                  <span class="project-supporting__category">Real-Time Messaging</span>
+                  <span class="project-supporting__badge">2024</span>
+                </div>
+                <h3 class="project-supporting__title">Real-Time Chat</h3>
+              </div>
             </div>
-            <div class="project-supporting__content">
-              <h3 class="project-supporting__title">Real-Time Chat</h3>
-              <p class="project-supporting__desc">
-                Low-cost full-featured internal messaging platform built at Hill Country Coders
-                as a companion to WhatsNextPlease. Authentication, file sharing, rich text editor,
-                real-time delivery via WebSockets. Designed to replace ad-hoc communication
-                tools inside the company&#8217;s own platform.
-              </p>
-              <a class="project-supporting__detail" href="projects/real-time-chat.html">Detail &#8594;</a>
+            <p class="project-supporting__desc">
+              Low-cost full-featured internal messaging platform built at Hill Country Coders
+              as a companion to WhatsNextPlease. Authentication, file sharing, rich text editor,
+              real-time delivery via WebSockets.
+            </p>
+            <ul class="project-supporting__tags" aria-label="Tech stack">
+              <li>Node.js</li>
+              <li>WebSockets</li>
+              <li>React</li>
+            </ul>
+            <div class="project-supporting__footer">
+              <div class="project-supporting__actions">
+                <a class="project-supporting__source-link" href="https://github.com/sibteali786/Chat-App-Frontend" target="_blank" rel="noopener noreferrer">Source Code</a>
+                <a class="project-supporting__primary-link" href="projects/real-time-chat.html">Read Case Study</a>
+              </div>
             </div>
           </li>
 
           <!-- Huffman Compressor -->
           <li class="project-supporting">
             <div class="project-supporting__meta">
-              <span class="project-supporting__stack">Go</span>
-              <span class="project-supporting__badge">2024</span>
+              <span class="project-supporting__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+              </span>
+              <div class="project-supporting__head-text">
+                <div class="project-supporting__head">
+                  <span class="project-supporting__no">Project 04</span>
+                  <span class="project-supporting__category">Systems Programming</span>
+                  <span class="project-supporting__badge">2024</span>
+                </div>
+                <h3 class="project-supporting__title">Huffman Compressor</h3>
+              </div>
             </div>
-            <div class="project-supporting__content">
-              <h3 class="project-supporting__title">Huffman Compressor</h3>
-              <p class="project-supporting__desc">
-                Lossless file compression tool implementing Huffman coding from scratch.
-                Built to learn Go&#8217;s data structures and systems programming hands-on.
-                Features streaming I/O, a custom generic priority queue, and comprehensive
-                testing across encode/decode cycles.
-              </p>
-              <a class="project-supporting__detail" href="projects/huffman-compressor.html">Detail &#8594;</a>
+            <p class="project-supporting__desc">
+              Lossless file compression tool implementing Huffman coding from scratch.
+              Built to learn Go&#8217;s data structures and systems programming hands-on.
+              Streaming I/O, a custom generic priority queue, comprehensive tests.
+            </p>
+            <ul class="project-supporting__tags" aria-label="Tech stack">
+              <li>Go</li>
+            </ul>
+            <div class="project-supporting__footer">
+              <div class="project-supporting__actions">
+                <a class="project-supporting__source-link" href="https://github.com/sibteali786/huffman-compressor" target="_blank" rel="noopener noreferrer">Source Code</a>
+                <a class="project-supporting__primary-link" href="projects/huffman-compressor.html">Read Case Study</a>
+              </div>
             </div>
           </li>
 
           <!-- Wafa, in progress -->
           <li class="project-supporting">
             <div class="project-supporting__meta">
-              <span class="project-supporting__stack">Next.js &#183; Supabase &#183; Cloudflare R2</span>
-              <span class="project-supporting__badge">In progress</span>
+              <span class="project-supporting__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </span>
+              <div class="project-supporting__head-text">
+                <div class="project-supporting__head">
+                  <span class="project-supporting__no">Project 05</span>
+                  <span class="project-supporting__category">Personal PWA</span>
+                  <span class="project-supporting__badge">In progress</span>
+                </div>
+                <h3 class="project-supporting__title">Wafa</h3>
+              </div>
             </div>
-            <div class="project-supporting__content">
-              <h3 class="project-supporting__title">Wafa</h3>
-              <p class="project-supporting__desc">
-                Private PWA for tracking shared commitments between people: a promise journal
-                with reminders, file attachments, and resolution tracking. Shared spaces, push
-                notifications, and a Supabase Realtime backend.
-              </p>
-              <p class="project-supporting__note">
-                Engineering notes: iOS Safari localStorage purge &#8594; switched to cookie-based
-                Supabase sessions. PKT timezone bug firing reminders 5h early &#8594; store
-                <code class="project-supporting__note-code">utcHour = (hour - 5 + 24) % 24</code>.
-                Vercel Hobby cron only supports daily &#8594; moved to GitHub Actions on
-                <code class="project-supporting__note-code">*/5 * * * *</code>.
-              </p>
-              <a class="project-supporting__detail" href="projects/wafa.html">Detail &#8594;</a>
+            <p class="project-supporting__desc">
+              Private PWA for tracking shared commitments between people: a promise journal
+              with reminders, file attachments, resolution tracking, shared spaces, push
+              notifications, and a Supabase Realtime backend.
+            </p>
+            <p class="project-supporting__note">
+              Engineering notes: iOS Safari localStorage purge &#8594; switched to cookie-based
+              Supabase sessions. PKT timezone bug firing reminders 5h early &#8594; store
+              <code class="project-supporting__note-code">utcHour = (hour - 5 + 24) % 24</code>.
+            </p>
+            <ul class="project-supporting__tags" aria-label="Tech stack">
+              <li>Next.js</li>
+              <li>Supabase</li>
+              <li>Cloudflare R2</li>
+            </ul>
+            <div class="project-supporting__footer">
+              <div class="project-supporting__actions">
+                <a class="project-supporting__source-link" href="https://github.com/sibteali786/wafa" target="_blank" rel="noopener noreferrer">Source Code</a>
+                <a class="project-supporting__primary-link" href="projects/wafa.html">Read Case Study</a>
+              </div>
             </div>
           </li>
 
           <!-- HCC CRM Email Module -->
           <li class="project-supporting">
             <div class="project-supporting__meta">
-              <span class="project-supporting__stack">Node.js &#183; Express &#183; MongoDB &#183; Bull &#x2F; Redis</span>
-              <span class="project-supporting__badge">2024</span>
+              <span class="project-supporting__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
+              </span>
+              <div class="project-supporting__head-text">
+                <div class="project-supporting__head">
+                  <span class="project-supporting__no">Project 06</span>
+                  <span class="project-supporting__category">Backend Automation &#183; Client Work</span>
+                  <span class="project-supporting__badge">2024</span>
+                </div>
+                <h3 class="project-supporting__title">HCC CRM Email Module</h3>
+              </div>
             </div>
-            <div class="project-supporting__content">
-              <h3 class="project-supporting__title">HCC CRM Email Module</h3>
-              <p class="project-supporting__desc">
-                Bulk-email system for Hill Country Coders&#8217; internal CRM: a Bull&#x2F;Redis
-                queue with disk-based attachment handling, database-driven templates, and a
-                Gmail&#x2F;SendGrid dual-provider fallback. Also general backend&#x2F;frontend work
-                across the CRM. Documented honestly, including open security gaps still unresolved.
-              </p>
-              <a class="project-supporting__detail" href="projects/hcc.html">Detail &#8594;</a>
+            <p class="project-supporting__desc">
+              Bulk-email system for Hill Country Coders&#8217; internal CRM: a Bull&#x2F;Redis
+              queue with disk-based attachment handling, database-driven templates, and a
+              Gmail&#x2F;SendGrid dual-provider fallback. Documented honestly, including open
+              security gaps still unresolved.
+            </p>
+            <ul class="project-supporting__tags" aria-label="Tech stack">
+              <li>Node.js</li>
+              <li>Express</li>
+              <li>MongoDB</li>
+              <li>Bull/Redis</li>
+            </ul>
+            <div class="project-supporting__footer">
+              <div class="project-supporting__actions">
+                <a class="project-supporting__primary-link" href="projects/hcc.html">Read Case Study</a>
+              </div>
             </div>
           </li>
 
           <!-- Identity Infrastructure -->
           <li class="project-supporting">
             <div class="project-supporting__meta">
-              <span class="project-supporting__stack">Keycloak &#183; AWS Cognito &#183; OAuth2</span>
-              <span class="project-supporting__badge">2024</span>
+              <span class="project-supporting__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </span>
+              <div class="project-supporting__head-text">
+                <div class="project-supporting__head">
+                  <span class="project-supporting__no">Project 07</span>
+                  <span class="project-supporting__category">Identity &amp; Auth &#183; Client Work</span>
+                  <span class="project-supporting__badge">2024</span>
+                </div>
+                <h3 class="project-supporting__title">Identity Infrastructure</h3>
+              </div>
             </div>
-            <div class="project-supporting__content">
-              <h3 class="project-supporting__title">Identity Infrastructure</h3>
-              <p class="project-supporting__desc">
-                Shared dual-IdP OAuth infrastructure (Keycloak for local dev,
-                AWS Cognito for staging&#x2F;prod), consumed by both WhatsNextPlease
-                and the HCC CRM platform. A custom <code class="project-supporting__note-code">wnp_role</code>
-                attribute flows through both providers so downstream services see one
-                consistent role claim regardless of which IdP authenticated the user.
-              </p>
-              <a class="project-supporting__detail" href="projects/identity-infra.html">Detail &#8594;</a>
+            <p class="project-supporting__desc">
+              Shared dual-IdP OAuth infrastructure (Keycloak for local dev,
+              AWS Cognito for staging&#x2F;prod), consumed by both WhatsNextPlease
+              and the HCC CRM platform. A custom <code class="project-supporting__note-code">wnp_role</code>
+              attribute flows through both providers so downstream services see one
+              consistent role claim regardless of which IdP authenticated the user.
+            </p>
+            <ul class="project-supporting__tags" aria-label="Tech stack">
+              <li>Keycloak</li>
+              <li>AWS Cognito</li>
+              <li>OAuth2</li>
+            </ul>
+            <div class="project-supporting__footer">
+              <div class="project-supporting__actions">
+                <a class="project-supporting__primary-link" href="projects/identity-infra.html">Read Case Study</a>
+              </div>
             </div>
           </li>
 

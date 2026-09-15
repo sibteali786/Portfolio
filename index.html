@@ -28,7 +28,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
 
@@ -53,14 +53,20 @@
     <!-- ── nav ──────────────────────────────────────────────────────── -->
     <header class="site-header">
       <nav class="site-nav" aria-label="Primary navigation">
-        <a class="nav-name" href="/" aria-current="page">Sibt-e-Ali</a>
+        <a class="nav-brand" href="/" aria-current="page">
+          <span class="nav-brand__mark" aria-hidden="true">SB</span>
+          <span class="nav-brand__text">
+            <span class="nav-brand__name">Sibt-e-Ali</span>
+            <span class="nav-brand__role">Software Engineer</span>
+          </span>
+        </a>
         <div class="nav-right">
           <a
             class="nav-cta"
             href="https://calendly.com/sibteali786/new-meeting"
             target="_blank"
             rel="noopener noreferrer"
-            >Book a call</a
+            >Book a call<span class="nav-cta__arrow" aria-hidden="true">&#8594;</span></a
           >
           <button
             class="theme-toggle"
@@ -82,7 +88,7 @@
             aria-controls="nav-menu"
             aria-label="Toggle navigation menu"
           >
-            Menu
+            <span class="nav-toggle__bar" aria-hidden="true"></span><span class="nav-toggle__bar" aria-hidden="true"></span>
           </button>
         </div>
       </nav>
@@ -161,22 +167,24 @@
               </p>
             </article>
 
-            <article class="stat">
-              <span class="stat__num">5&times;</span>
-              <p class="stat__label">cost reduction</p>
-              <p class="stat__context">
-                Swoop Inc mobile dev: 3 apps shipped in 4
-                months,&nbsp;40% faster delivery
-              </p>
-            </article>
+            <div class="stat-row__secondary">
+              <article class="stat">
+                <span class="stat__num">5&times;</span>
+                <p class="stat__label">cost reduction</p>
+                <p class="stat__context">
+                  Swoop Inc mobile dev: 3 apps shipped in 4
+                  months,&nbsp;40% faster delivery
+                </p>
+              </article>
 
-            <article class="stat">
-              <span class="stat__num">30%</span>
-              <p class="stat__label">team efficiency gain</p>
-              <p class="stat__context">
-                Better tooling and processes &#183; Hill Country Coders
-              </p>
-            </article>
+              <article class="stat">
+                <span class="stat__num">30%</span>
+                <p class="stat__label">team efficiency gain</p>
+                <p class="stat__context">
+                  Better tooling and processes &#183; Hill Country Coders
+                </p>
+              </article>
+            </div>
           </div>
         </div>
       </section>
@@ -186,168 +194,273 @@
         <div class="container">
           <h2 class="section-label" id="work-heading">Work</h2>
 
-          <!-- full-width showcase blocks, one per project, generous rhythm -->
+          <!-- full-width featured blocks + a 2-up grid of lighter cards -->
           <div class="work__list">
             <!-- Asia Builders ERP, primary featured -->
             <article class="proj proj--featured">
-              <div class="proj__rule" aria-hidden="true"></div>
-              <div class="proj__side">
-                <span class="proj__role">Lead &#183; 2024&#8211;present</span>
-                <ul class="proj__tags" aria-label="Tech stack">
-                  <li>NestJS</li>
-                  <li>PostgreSQL</li>
-                  <li>Next.js 15</li>
-                  <li>Cloudflare R2</li>
-                </ul>
+              <div class="proj__head">
+                <span class="proj__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                </span>
+                <div class="proj__head-text">
+                  <div class="proj__meta">
+                    <span class="proj__no">Project 01</span>
+                    <span class="proj__category">Full-Stack ERP &#183; Construction Ops</span>
+                  </div>
+                  <h3 class="proj__title">Asia Builders ERP</h3>
+                </div>
               </div>
-              <div class="proj__content">
-                <h3 class="proj__title">Asia Builders ERP</h3>
-                <p class="proj__impact">
-                  The accountant was spending 40 hours a month in Excel. Now
-                  they have a full ERP: projects, transactions, vendors,
-                  documents, reports, and a role-based dashboard. Built for Asia
-                  Group of Companies.
+              <p class="proj__role">Lead &#183; 2024&#8211;present</p>
+              <p class="proj__impact">
+                The accountant was spending 40 hours a month in Excel. Now
+                they have a full ERP: projects, transactions, vendors,
+                documents, reports, and a role-based dashboard. Built for Asia
+                Group of Companies.
+              </p>
+              <div class="proj__arch-lead">
+                <p class="proj__arch-item">
+                  13 production tables &#183; 50+ REST endpoints &#183; 10
+                  feature modules &#183; 6 DB migrations
                 </p>
-                <div class="proj__arch-lead">
+                <p class="proj__arch-item">
+                  6 report types &#215; PDF + Excel: P&amp;L, Expense
+                  Breakdown, Vendor Payment, Govt Audit
+                </p>
+              </div>
+              <details class="proj__details">
+                <summary>More on how it&#8217;s built</summary>
+                <div class="proj__arch">
                   <p class="proj__arch-item">
-                    13 production tables &#183; 50+ REST endpoints &#183; 10
-                    feature modules &#183; 6 DB migrations
+                    Safe file handling so a failed save never leaves an
+                    orphaned document behind
                   </p>
                   <p class="proj__arch-item">
-                    6 report types &#215; PDF + Excel: P&amp;L, Expense
-                    Breakdown, Vendor Payment, Govt Audit
+                    Independent per-section dashboard queries, so one
+                    failure doesn&#8217;t blank the screen
+                  </p>
+                  <p class="proj__arch-item">
+                    3 roles (OWNER &#183; ACCOUNTANT &#183; REVIEWER) with
+                    proper access control
                   </p>
                 </div>
-                <details class="proj__details">
-                  <summary>More on how it&#8217;s built</summary>
-                  <div class="proj__arch">
-                    <p class="proj__arch-item">
-                      Safe file handling so a failed save never leaves an
-                      orphaned document behind
-                    </p>
-                    <p class="proj__arch-item">
-                      Independent per-section dashboard queries, so one
-                      failure doesn&#8217;t blank the screen
-                    </p>
-                    <p class="proj__arch-item">
-                      3 roles (OWNER &#183; ACCOUNTANT &#183; REVIEWER) with
-                      proper access control
-                    </p>
-                  </div>
-                </details>
+              </details>
+              <ul class="proj__tags" aria-label="Tech stack">
+                <li>NestJS</li>
+                <li>PostgreSQL</li>
+                <li>Next.js 15</li>
+                <li>Cloudflare R2</li>
+              </ul>
+              <div class="proj__footer">
+                <div class="proj__actions">
+                  <a
+                    class="btn btn--secondary proj__btn"
+                    href="https://github.com/sibteali786/asia-builders-erp"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Source Code</a
+                  >
+                  <a
+                    class="btn btn--primary proj__btn"
+                    href="https://accounts.asiabuilderz.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >View Live Demo</a
+                  >
+                </div>
                 <a class="proj__cta" href="projects/asia-builders.html"
                   >Read the case study &#8594;</a
-                >
-                <a
-                  class="proj__link"
-                  href="https://accounts.asiabuilderz.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >asiabuilderz.com &#8599;</a
                 >
               </div>
             </article>
 
             <!-- WhatsNextPlease, secondary featured -->
             <article class="proj proj--featured">
-              <div class="proj__rule" aria-hidden="true"></div>
-              <div class="proj__side">
-                <span class="proj__role"
-                  >Lead Engineer &#183; Hill Country Coders</span
-                >
-                <ul class="proj__tags" aria-label="Tech stack">
-                  <li>Next.js</li>
-                  <li>TypeScript</li>
-                  <li>PostgreSQL</li>
-                </ul>
+              <div class="proj__head">
+                <span class="proj__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="7" height="16" rx="1"/><rect x="14" y="4" width="7" height="10" rx="1"/></svg>
+                </span>
+                <div class="proj__head-text">
+                  <div class="proj__meta">
+                    <span class="proj__no">Project 02</span>
+                    <span class="proj__category">Task Management Platform</span>
+                  </div>
+                  <h3 class="proj__title">WhatsNextPlease</h3>
+                </div>
               </div>
-              <div class="proj__content">
-                <h3 class="proj__title">WhatsNextPlease</h3>
-                <p class="proj__impact">
-                  Multi-tenant task management platform that replaced
-                  Excel-based tracking and drove a 10&#8211;12% company-wide
-                  efficiency gain in under six months.
+              <p class="proj__role">Lead Engineer &#183; Hill Country Coders</p>
+              <p class="proj__impact">
+                Multi-tenant task management platform that replaced
+                Excel-based tracking and drove a 10&#8211;12% company-wide
+                efficiency gain in under six months.
+              </p>
+              <div class="proj__arch-lead">
+                <p class="proj__arch-item">
+                  Internal and external project tracking &#183; skill
+                  matching &#183; priority levels
                 </p>
-                <div class="proj__arch-lead">
-                  <p class="proj__arch-item">
-                    Internal and external project tracking &#183; skill
-                    matching &#183; priority levels
-                  </p>
-                  <p class="proj__arch-item">
-                    Email notifications &#183; separate data per client &#183;
-                    real-time companion chat
-                  </p>
+                <p class="proj__arch-item">
+                  Email notifications &#183; separate data per client &#183;
+                  real-time companion chat
+                </p>
+              </div>
+              <ul class="proj__tags" aria-label="Tech stack">
+                <li>Next.js</li>
+                <li>TypeScript</li>
+                <li>PostgreSQL</li>
+              </ul>
+              <div class="proj__footer">
+                <div class="proj__actions">
+                  <a
+                    class="btn btn--secondary proj__btn"
+                    href="https://github.com/sibteali786/whatsnextplease-monolith"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Source Code</a
+                  >
+                  <a
+                    class="btn btn--primary proj__btn"
+                    href="https://app.whatsnextplease.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >View Live Demo</a
+                  >
                 </div>
                 <a class="proj__cta" href="projects/whats-next-please.html"
                   >Read the case study &#8594;</a
                 >
-                <a
-                  class="proj__link"
-                  href="https://app.whatsnextplease.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >whatsnextplease.com &#8599;</a
-                >
               </div>
             </article>
 
-            <!-- supporting projects, same left-rail/content split, lighter weight -->
-            <article class="proj proj--supporting">
-              <div class="proj__rule" aria-hidden="true"></div>
-              <div class="proj__side">
-                <span class="proj__stack">Node.js, WebSockets, React</span>
-              </div>
-              <div class="proj__content">
-                <h3 class="proj__title">Real-Time Chat</h3>
+            <!-- smaller projects, two per row -->
+            <div class="work__grid">
+              <article class="proj proj--supporting">
+                <div class="proj__head">
+                  <span class="proj__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                  </span>
+                  <div class="proj__head-text">
+                    <div class="proj__meta">
+                      <span class="proj__no">Project 03</span>
+                      <span class="proj__category">Real-Time Messaging</span>
+                    </div>
+                    <h3 class="proj__title">Real-Time Chat</h3>
+                  </div>
+                </div>
                 <p class="proj__desc">
                   Low-cost full-featured internal messaging for Hill Country
                   Coders: file sharing, rich text editor, real-time delivery.
                   Companion to WhatsNextPlease.
                 </p>
-              </div>
-            </article>
+                <ul class="proj__tags" aria-label="Tech stack">
+                  <li>Node.js</li>
+                  <li>WebSockets</li>
+                  <li>React</li>
+                </ul>
+                <div class="proj__footer">
+                  <div class="proj__actions">
+                    <a
+                      class="btn btn--secondary proj__btn"
+                      href="https://github.com/sibteali786/Chat-App-Frontend"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >Source Code</a
+                    >
+                    <a class="btn btn--primary proj__btn" href="projects/real-time-chat.html"
+                      >Read Case Study</a
+                    >
+                  </div>
+                </div>
+              </article>
 
-            <article class="proj proj--supporting">
-              <div class="proj__rule" aria-hidden="true"></div>
-              <div class="proj__side">
-                <span class="proj__stack">Go</span>
-              </div>
-              <div class="proj__content">
-                <h3 class="proj__title">Huffman Compressor</h3>
+              <article class="proj proj--supporting">
+                <div class="proj__head">
+                  <span class="proj__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+                  </span>
+                  <div class="proj__head-text">
+                    <div class="proj__meta">
+                      <span class="proj__no">Project 04</span>
+                      <span class="proj__category">Systems Programming</span>
+                    </div>
+                    <h3 class="proj__title">Huffman Compressor</h3>
+                  </div>
+                </div>
                 <p class="proj__desc">
                   Lossless file compression implementing Huffman coding from
                   scratch: streaming I/O, a custom generic priority
                   queue, comprehensive tests. Built to learn Go&#8217;s data
                   structures hands-on.
                 </p>
-              </div>
-            </article>
+                <ul class="proj__tags" aria-label="Tech stack">
+                  <li>Go</li>
+                </ul>
+                <div class="proj__footer">
+                  <div class="proj__actions">
+                    <a
+                      class="btn btn--secondary proj__btn"
+                      href="https://github.com/sibteali786/huffman-compressor"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >Source Code</a
+                    >
+                    <a class="btn btn--primary proj__btn" href="projects/huffman-compressor.html"
+                      >Read Case Study</a
+                    >
+                  </div>
+                </div>
+              </article>
 
-            <article class="proj proj--supporting">
-              <div class="proj__rule" aria-hidden="true"></div>
-              <div class="proj__side">
-                <span class="proj__stack">Next.js &#183; Supabase</span>
-              </div>
-              <div class="proj__content">
-                <h3 class="proj__title">Wafa</h3>
+              <article class="proj proj--supporting">
+                <div class="proj__head">
+                  <span class="proj__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                  </span>
+                  <div class="proj__head-text">
+                    <div class="proj__meta">
+                      <span class="proj__no">Project 05</span>
+                      <span class="proj__category">Personal PWA &#183; In Progress</span>
+                    </div>
+                    <h3 class="proj__title">Wafa</h3>
+                  </div>
+                </div>
                 <p class="proj__desc">
                   Private PWA for tracking shared commitments: a promise
                   journal with reminders, attachments, push notifications, and
                   a Supabase Realtime backend. In progress.
                 </p>
-                <a class="proj__link" href="projects/wafa.html"
-                  >Detail &#8594;</a
-                >
-              </div>
-            </article>
+                <ul class="proj__tags" aria-label="Tech stack">
+                  <li>Next.js</li>
+                  <li>Supabase</li>
+                </ul>
+                <div class="proj__footer">
+                  <div class="proj__actions">
+                    <a
+                      class="btn btn--secondary proj__btn"
+                      href="https://github.com/sibteali786/wafa"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >Source Code</a
+                    >
+                    <a class="btn btn--primary proj__btn" href="projects/wafa.html"
+                      >Read Case Study</a
+                    >
+                  </div>
+                </div>
+              </article>
 
-            <article class="proj proj--supporting">
-              <div class="proj__rule" aria-hidden="true"></div>
-              <div class="proj__side">
-                <span class="proj__stack">Firefox &#183; Go toolchains</span>
-              </div>
-              <div class="proj__content">
-                <h3 class="proj__title">Open Source</h3>
+              <article class="proj proj--supporting">
+                <div class="proj__head">
+                  <span class="proj__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg>
+                  </span>
+                  <div class="proj__head-text">
+                    <div class="proj__meta">
+                      <span class="proj__no">Project 06</span>
+                      <span class="proj__category">Open Source Contributions</span>
+                    </div>
+                    <h3 class="proj__title">Open Source</h3>
+                  </div>
+                </div>
                 <p class="proj__desc">
                   Merged fixes in
                   <a
@@ -367,11 +480,17 @@
                   (&#9733;&nbsp;8.9k: bridged the PORT env var across
                   the Go/Vite boundary).
                 </p>
-                <a class="proj__link" href="projects.html#oss-heading"
-                  >Read both fixes with diffs &#8594;</a
-                >
-              </div>
-            </article>
+                <ul class="proj__tags" aria-label="Tech stack">
+                  <li>Firefox</li>
+                  <li>Go toolchains</li>
+                </ul>
+                <div class="proj__footer">
+                  <a class="proj__link proj__link--footer" href="projects.html#oss-heading"
+                    >Read both fixes with diffs &#8594;</a
+                  >
+                </div>
+              </article>
+            </div>
           </div>
         </div>
       </section>

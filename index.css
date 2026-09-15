@@ -83,40 +83,111 @@ ol {
 /* ═══════════════════════════════════════════════════════════════════
    NAV
 ═══════════════════════════════════════════════════════════════════ */
+/* floating pill nav — replaces the old full-bleed hairline bar. The pill
+   sits inset from the viewport edge with its own shadow; N1's flat strip
+   was the most-recognised AI nav fingerprint, this is N5 territory. */
 .site-header {
   position: sticky;
-  top: 0;
+  top: var(--space-sm);
   z-index: 20;
-  background-color: var(--color-paper);
-  border-bottom: var(--rule-hairline);
+  margin-inline: var(--space-md);
 }
 
 .site-nav {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
-  padding-block: var(--space-md);
+  align-items: center;
+  padding-block: var(--space-2xs);
+  padding-inline: var(--space-2xs) var(--space-2xs);
   max-width: 1280px;
   margin-inline: auto;
-  padding-inline: var(--space-2xl);
+  background-color: var(--color-card);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-card);
 }
 
-.nav-name {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: var(--text-md);
-  color: var(--color-ink);
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-3xs) var(--space-sm) var(--space-3xs) var(--space-3xs);
   text-decoration: none;
-  letter-spacing: -0.015em;
+  border-radius: var(--radius-pill);
 }
-.nav-name:focus-visible {
+.nav-brand:focus-visible {
   outline: 2px solid var(--color-focus);
   outline-offset: 3px;
-  border-radius: 2px;
+}
+
+.nav-brand__mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: var(--radius-input);
+  background-color: var(--color-paper-2);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-xs);
+  letter-spacing: 0.02em;
+  color: var(--color-accent);
+}
+
+.nav-brand__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.nav-brand__name {
+  position: relative;
+  display: inline-block;
+  width: fit-content;
+  white-space: nowrap;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-sm);
+  color: var(--color-ink);
+  letter-spacing: -0.01em;
+  transition: color var(--dur-short) var(--ease-out);
+}
+/* underline draws in from the left on hover — feedback that the wordmark
+   is a real link, not decoration; kept to the existing hover-color-shift
+   vocabulary (see .nav-menu a) rather than inventing a new motion idiom */
+.nav-brand__name::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1.5px;
+  background-color: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-short) var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .nav-brand:hover .nav-brand__name {
+    color: var(--color-accent);
+  }
+  .nav-brand:hover .nav-brand__name::after {
+    transform: scaleX(1);
+  }
+}
+
+.nav-brand__role {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-ink-3);
 }
 
 .nav-cta {
   position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
   overflow: hidden; /* clips the ::before fill to the pill shape */
   font-family: var(--font-body);
   font-size: var(--text-sm);
@@ -130,6 +201,12 @@ ol {
     color var(--dur-short) var(--ease-out),
     transform 140ms var(--ease-out);
   white-space: nowrap;
+}
+.nav-cta__arrow {
+  transition: transform var(--dur-short) var(--ease-out);
+}
+.nav-cta:hover .nav-cta__arrow {
+  transform: translateX(2px);
 }
 /* Color-fill hover — same clipped-overlay wipe as .btn--primary. */
 .nav-cta::before {
@@ -164,10 +241,15 @@ ol {
   background: none;
   cursor: pointer;
   border-radius: 50%;
-  transition: background-color var(--dur-short) var(--ease-out);
+  transition:
+    background-color var(--dur-short) var(--ease-out),
+    transform 140ms var(--ease-out);
 }
 .theme-toggle:hover {
   background-color: var(--color-paper-2);
+}
+.theme-toggle:active {
+  transform: scale(0.9);
 }
 
 /* icon shown = the mode a click switches TO */
@@ -237,20 +319,43 @@ ol {
 }
 
 /* menu toggle button */
+/* fixed-size icon button — was a "Menu"/"Close" text swap, which changed
+   width between states and squeezed .nav-brand into wrapping at narrow
+   widths (the name would break mid-word). A hamburger that morphs to an
+   X via transform never changes the button's footprint. */
 .nav-toggle {
-  font-family: var(--font-mono);
-  font-size: var(--text-sm);
-  color: var(--color-ink-3);
-  background: none;
-  border: none;
-  cursor: pointer;
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
   padding: 0;
-  line-height: inherit;
-  transition: color var(--dur-short) var(--ease-out);
-  white-space: nowrap;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background-color var(--dur-short) var(--ease-out);
 }
 .nav-toggle:hover {
-  color: var(--color-ink);
+  background-color: var(--color-paper-2);
+}
+.nav-toggle__bar {
+  display: block;
+  width: 1rem;
+  height: 1.5px;
+  background-color: var(--color-ink-2);
+  transition: transform var(--dur-short) var(--ease-out),
+    opacity var(--dur-short) var(--ease-out);
+}
+.nav-toggle[aria-expanded="true"] .nav-toggle__bar:first-child {
+  transform: translateY(3.25px) rotate(45deg);
+}
+.nav-toggle[aria-expanded="true"] .nav-toggle__bar:last-child {
+  transform: translateY(-3.25px) rotate(-45deg);
 }
 .nav-toggle:focus-visible {
   outline: 2px solid var(--color-focus);
@@ -270,15 +375,20 @@ ol {
    bounded content, capped at max-height: 20rem. */
 .nav-menu {
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-xl);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-xs);
   max-width: 1280px;
-  margin-inline: auto;
-  padding-inline: var(--space-2xl);
+  margin-inline: var(--space-md);
+  margin-block-start: var(--space-2xs);
+  padding-inline: var(--space-sm);
+  background-color: var(--color-card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
   overflow: hidden;
   max-height: 20rem;
   opacity: 1;
-  padding-block: var(--space-sm) var(--space-md);
+  padding-block: var(--space-sm);
   transform-origin: top;
   transition:
     max-height var(--dur-short) var(--ease-out),
@@ -302,14 +412,21 @@ ol {
   font-size: var(--text-sm);
   color: var(--color-ink-2);
   text-decoration: none;
-  transition: color var(--dur-short) var(--ease-out);
+  padding: var(--space-2xs) var(--space-md);
+  border-radius: var(--radius-pill);
+  transition:
+    color var(--dur-short) var(--ease-out),
+    background-color var(--dur-short) var(--ease-out);
   white-space: nowrap;
 }
 .nav-menu a:hover {
   color: var(--color-ink);
+  background-color: var(--color-paper-2);
 }
 .nav-menu a[aria-current="page"] {
-  color: var(--color-accent);
+  color: var(--color-ink);
+  background-color: var(--color-paper-2);
+  font-weight: 500;
 }
 
 /* ── desktop nav — N1a (hamburger-only) → N1b (links always visible) ──
@@ -321,13 +438,18 @@ ol {
     justify-content: space-between;
     max-width: 1280px;
     margin-inline: auto;
-    padding-inline: var(--space-2xl);
-    padding-block: var(--space-md);
+    padding-inline: var(--space-xs);
+    padding-block: var(--space-xs);
+    /* .site-nav becomes display:contents below, so it stops painting its
+       own pill — the visual chrome moves up here for the merged desktop row */
+    background-color: var(--color-card);
+    border-radius: var(--radius-pill);
+    box-shadow: var(--shadow-card);
   }
   .site-nav {
     display: contents;
   }
-  .nav-name {
+  .nav-brand {
     order: 1;
   }
   .nav-menu,
@@ -335,13 +457,19 @@ ol {
     order: 2;
     flex: 1;
     display: flex;
+    flex-direction: row;
     flex-wrap: nowrap;
     align-items: center;
     justify-content: center;
+    gap: var(--space-2xs);
     max-width: none;
-    margin-inline: var(--space-2xl);
+    margin-inline: var(--space-md);
+    margin-block-start: 0;
     padding-inline: 0;
     padding-block: 0;
+    background-color: transparent;
+    border-radius: 0;
+    box-shadow: none;
     overflow: visible;
     max-height: none;
     opacity: 1;
@@ -359,6 +487,7 @@ ol {
 ═══════════════════════════════════════════════════════════════════ */
 .hero {
   padding-block: var(--space-4xl) var(--space-3xl);
+  background-color: var(--color-paper);
 }
 
 .hero__grid {
@@ -366,6 +495,73 @@ ol {
   grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
   gap: var(--space-2xl);
   align-items: start;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   SECTION BANDING + WAVE DIVIDERS
+   Two alternating paper tones (mint / cream) instead of one flat
+   background; each section boundary is cut by a wave silhouette
+   instead of a hard edge, painted in the section's own colour and
+   overlapping the tail of the section before it. CSS-only, no markup
+   changes — the wave shape is a single shared mask.
+═══════════════════════════════════════════════════════════════════ */
+.impact,
+.stack-section,
+.contact-section {
+  background-color: var(--color-paper);
+}
+
+.work,
+.approach,
+.about-section,
+.site-footer {
+  background-color: var(--color-paper-alt);
+}
+
+.impact,
+.work,
+.approach,
+.stack-section,
+.about-section,
+.contact-section,
+.site-footer {
+  position: relative;
+}
+
+.impact::before,
+.work::before,
+.approach::before,
+.stack-section::before,
+.about-section::before,
+.contact-section::before,
+.site-footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 72px;
+  transform: translateY(-99%);
+  background-color: inherit;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,60 C150,110 350,10 600,60 C850,110 1050,10 1200,60 L1200,120 L0,120 Z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,60 C150,110 350,10 600,60 C850,110 1050,10 1200,60 L1200,120 L0,120 Z'/%3E%3C/svg%3E");
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce), (max-width: 413px) {
+  .impact::before,
+  .work::before,
+  .approach::before,
+  .stack-section::before,
+  .about-section::before,
+  .contact-section::before,
+  .site-footer::before {
+    display: none;
+  }
 }
 
 .hero__main,
@@ -525,22 +721,28 @@ ol {
   padding-block: var(--space-4xl);
 }
 
-.impact .container {
-  border-top: var(--rule-hairline);
-  padding-block-start: var(--space-2xl);
+.stat-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
 }
 
-.stat-row {
+.stat-row__secondary {
   display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
-  gap: 0 var(--space-2xl);
-  align-items: start;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-md);
 }
 
 .stat {
-  padding-block-start: var(--space-md);
-  border-top: 1px solid var(--color-accent-dim);
+  padding: var(--space-lg);
   min-width: 0;
+  background-color: var(--color-card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+
+.stat--dominant {
+  padding: var(--space-xl) var(--space-lg);
 }
 
 .stat__num {
@@ -581,7 +783,6 @@ ol {
 }
 
 .work .container {
-  border-top: var(--rule-hairline);
   padding-block-start: var(--space-2xl);
 }
 
@@ -596,35 +797,44 @@ ol {
   margin-block-end: var(--space-xl);
 }
 
-/* single-column showcase list — one full-width block per project,
-   generous vertical rhythm instead of the old dense asymmetric grid */
+/* featured blocks stack full-width; smaller projects sit in a 2-up grid.
+   every .proj is a flex column so the footer (pills' actions) pins to the
+   card bottom — cards in the same grid row end up equal height and their
+   buttons line up, instead of trailing wherever the copy happened to end. */
 .work__list {
   display: flex;
   flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.work__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-lg);
 }
 
 /* project items — reveal-on-scroll only applies once JS opts a card in,
    so the cards stay visible if JS fails or IntersectionObserver is unsupported */
 .proj {
   position: relative;
-  display: grid;
-  grid-template-columns: 16ch minmax(0, 1fr);
-  gap: 0 var(--space-2xl);
+  display: flex;
+  flex-direction: column;
   min-width: 0;
-  max-width: 64rem;
-  padding-block-end: var(--space-2xl);
+  padding: var(--space-xl);
+  background-color: var(--color-card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  transition: box-shadow var(--dur-mid) var(--ease-out);
 }
 
-.work__list .proj:not(:first-child) {
-  padding-block-start: var(--space-2xl);
+.proj:hover {
+  box-shadow:
+    0 2px 4px color-mix(in oklch, var(--color-ink) 8%, transparent),
+    0 18px 36px color-mix(in oklch, var(--color-ink) 16%, transparent);
 }
 
 .proj--supporting {
-  max-width: 56rem;
-  padding-block-end: var(--space-xl);
-}
-.proj--supporting:not(:first-child) {
-  padding-block-start: var(--space-xl);
+  padding: var(--space-lg);
 }
 .reveal-pending {
   opacity: 0;
@@ -639,23 +849,37 @@ ol {
 }
 
 .proj__rule {
-  grid-column: 1 / -1;
-  height: 1px;
-  background-color: var(--color-rule);
-  margin-block-end: var(--space-lg);
-  transition: background-color var(--dur-short) var(--ease-out);
+  display: none;
 }
 
-.proj:hover .proj__rule {
-  background-color: var(--color-accent-dim);
-}
-
-.proj__side {
+/* icon + number/category/title, one row — every card leads with this,
+   featured or supporting, so the family reads as one system */
+.proj__head {
   display: flex;
-  flex-direction: column;
-  gap: var(--space-sm);
+  align-items: flex-start;
+  gap: var(--space-md);
+  margin-block-end: var(--space-sm);
+}
+
+.proj__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: var(--radius-input);
+  background-color: var(--color-paper-2);
+  color: var(--color-accent);
+}
+.proj__icon svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.proj__head-text {
   min-width: 0;
-  padding-block-start: 5px; /* optical alignment with title cap-height */
+  flex: 1;
 }
 
 .proj__stack {
@@ -671,10 +895,39 @@ ol {
   font-size: var(--text-xs);
   color: var(--color-accent-dim);
   line-height: 1.5;
+  margin-block-end: var(--space-sm);
 }
 
 .proj__content {
   min-width: 0;
+}
+
+.proj__meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-block-end: var(--space-3xs);
+}
+
+.proj__no {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-accent-ink);
+  background-color: var(--color-accent);
+  padding: 0.25em 0.7em;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+}
+
+.proj__category {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-ink-3);
+  letter-spacing: 0.02em;
 }
 
 .proj__title {
@@ -682,7 +935,6 @@ ol {
   font-weight: 700;
   font-size: var(--text-xl);
   color: var(--color-ink);
-  margin-block-end: var(--space-sm);
   line-height: 1.15;
   letter-spacing: -0.02em;
   overflow-wrap: anywhere;
@@ -705,7 +957,7 @@ ol {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2xs);
-  margin-block-end: var(--space-md);
+  margin-block-end: var(--space-lg);
 }
 
 .proj__tags li {
@@ -716,6 +968,12 @@ ol {
   border: var(--rule-hairline);
   padding: 0.2em 0.6em;
   border-radius: var(--radius-pill);
+}
+
+/* pins the actions row to the card bottom regardless of how much copy
+   sits above it, so every card in a grid row lines its buttons up */
+.proj__footer {
+  margin-block-start: auto;
 }
 
 /* always-visible architecture highlights — the first proof points don't
@@ -772,7 +1030,7 @@ ol {
   font-size: var(--text-reading-sm);
   color: var(--color-ink-2);
   line-height: 1.6;
-  margin-block-start: var(--space-xs);
+  margin-block-end: var(--space-md);
 }
 
 .proj__link {
@@ -782,8 +1040,15 @@ ol {
   color: var(--color-accent);
   text-decoration: none;
   margin-block-start: var(--space-md);
-  transition: color var(--dur-short) var(--ease-out);
+  transition:
+    color var(--dur-short) var(--ease-out),
+    transform 150ms var(--ease-out);
   white-space: nowrap;
+}
+@media (hover: hover) and (pointer: fine) {
+  .proj__link:hover {
+    transform: translateX(2px);
+  }
 }
 .proj__link:hover {
   color: var(--color-ink);
@@ -791,6 +1056,24 @@ ol {
 .proj__link + .proj__link,
 .proj__link + .proj__cta {
   margin-inline-start: var(--space-sm);
+}
+
+.proj__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-block-start: var(--space-md);
+}
+
+.proj__btn {
+  padding: var(--space-2xs) var(--space-md);
+  font-size: var(--text-sm);
+}
+
+/* the text case-study link, when it follows a button row instead of
+   another .proj__link, keeps the same top gap as the buttons above it */
+.proj__actions + .proj__cta {
+  margin-block-start: var(--space-sm);
 }
 
 /* case-study CTA — a visible bordered button, not a buried mono link */
@@ -824,7 +1107,6 @@ ol {
 }
 
 .approach .container {
-  border-top: var(--rule-hairline);
   padding-block-start: var(--space-2xl);
 }
 
@@ -877,7 +1159,6 @@ ol {
 }
 
 .stack-section .container {
-  border-top: var(--rule-hairline);
   padding-block-start: var(--space-2xl);
 }
 
@@ -923,7 +1204,6 @@ ol {
 }
 
 .about-section .container {
-  border-top: var(--rule-hairline);
   padding-block-start: var(--space-2xl);
 }
 
@@ -1007,7 +1287,6 @@ ol {
 }
 
 .contact-section .container {
-  border-top: var(--rule-hairline);
   padding-block-start: var(--space-2xl);
 }
 
@@ -1052,7 +1331,6 @@ ol {
    FOOTER
 ═══════════════════════════════════════════════════════════════════ */
 .site-footer {
-  border-top: var(--rule-hairline);
   padding-block: var(--space-xl);
 }
 
@@ -1097,30 +1375,24 @@ ol {
 /* ═══════════════════════════════════════════════════════════════════
    RESPONSIVE — 1024px
 ═══════════════════════════════════════════════════════════════════ */
-@media (max-width: 1024px) {
-  .stat-row {
-    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, 1fr);
-    gap: 0 var(--space-xl);
-  }
-}
-
 /* ═══════════════════════════════════════════════════════════════════
    RESPONSIVE — 768px
 ═══════════════════════════════════════════════════════════════════ */
 @media (max-width: 480px) {
+  .nav-brand__role {
+    display: none;
+  }
   .nav-cta {
     font-size: var(--text-xs);
     padding: 0.4em var(--space-sm);
   }
   .nav-menu {
     padding-inline: var(--space-md);
-    gap: var(--space-lg);
   }
 }
 
 @media (max-width: 768px) {
-  .container,
-  .site-nav {
+  .container {
     padding-inline: var(--space-lg);
   }
 
@@ -1136,22 +1408,12 @@ ol {
     border-block-start: var(--rule-hairline);
   }
 
-  .stat-row {
+  .stat-row__secondary {
     grid-template-columns: 1fr;
-    gap: var(--space-xl) 0;
   }
 
-  .proj {
+  .work__grid {
     grid-template-columns: 1fr;
-    gap: var(--space-sm) 0;
-  }
-
-  .proj__side {
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0 var(--space-md);
-    padding-block-start: 0;
   }
 
   .approach__grid {
@@ -1174,9 +1436,12 @@ ol {
    RESPONSIVE — 414px
 ═══════════════════════════════════════════════════════════════════ */
 @media (max-width: 414px) {
-  .container,
-  .site-nav {
+  .container {
     padding-inline: var(--space-md);
+  }
+
+  .site-header {
+    margin-inline: var(--space-2xs);
   }
 
   .contact__statement {
@@ -1202,9 +1467,13 @@ ol {
 ═══════════════════════════════════════════════════════════════════ */
 @media (prefers-reduced-motion: reduce) {
   .nav-toggle,
+  .nav-toggle__bar,
   .nav-menu a,
   .nav-cta,
   .nav-cta::before,
+  .nav-brand__name,
+  .nav-brand__name::after,
+  .theme-toggle,
   .proj__rule,
   .proj__link,
   .proj__details summary,

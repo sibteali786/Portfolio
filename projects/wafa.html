@@ -17,7 +17,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="../tokens.css">
   <link rel="stylesheet" href="../index.css">
@@ -96,12 +96,20 @@
     }
 
     .cs-hero__label {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
       font-family: var(--font-mono);
       font-size: var(--text-xs);
       color: var(--color-accent-dim);
       letter-spacing: 0.1em;
       text-transform: uppercase;
       margin-bottom: var(--space-sm);
+    }
+    .cs-hero__icon {
+      width: 1.1em;
+      height: 1.1em;
+      flex-shrink: 0;
     }
 
     .cs-hero__title {
@@ -170,10 +178,49 @@
       line-height: 1.4;
     }
 
+
+    /* ── section banding + wave dividers ───────────────────────────────
+       alternating mint/cream bands, wave-mask boundary instead of a hard
+       hairline — same technique as index.html / asia-builders.html. */
+    .cs-screenshots,
+    .cs-s,
+    .cs-cta {
+      position: relative;
+      background-color: var(--color-paper);
+    }
+    .cs-band--alt {
+      background-color: var(--color-paper-alt);
+    }
+    .cs-screenshots::before,
+    .cs-s::before,
+    .cs-cta::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 72px;
+      transform: translateY(-99%);
+      background-color: inherit;
+      -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,60 C150,110 350,10 600,60 C850,110 1050,10 1200,60 L1200,120 L0,120 Z'/%3E%3C/svg%3E");
+      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,60 C150,110 350,10 600,60 C850,110 1050,10 1200,60 L1200,120 L0,120 Z'/%3E%3C/svg%3E");
+      -webkit-mask-size: 100% 100%;
+      mask-size: 100% 100%;
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      pointer-events: none;
+    }
+    @media (prefers-reduced-motion: reduce), (max-width: 413px) {
+      .cs-screenshots::before,
+      .cs-s::before,
+      .cs-cta::before {
+        display: none;
+      }
+    }
+
     /* ── section shell ─────────────────────────────────────────────── */
     .cs-s {
       padding-block: var(--space-3xl);
-      border-top: var(--rule-hairline);
     }
 
     .cs-s__kicker {
@@ -293,9 +340,9 @@
     }
 
     .arch-block {
-      background: var(--color-paper-2);
-      border: 1px solid var(--color-rule);
+      background: var(--color-card);
       border-radius: var(--radius-card);
+      box-shadow: var(--shadow-card);
       overflow: hidden;
     }
 
@@ -607,7 +654,6 @@
     /* ── CTA ───────────────────────────────────────────────────────── */
     .cs-cta {
       padding-block: var(--space-3xl);
-      border-top: var(--rule-hairline);
     }
 
     .cs-cta__statement {
@@ -636,15 +682,19 @@
       text-decoration: none;
       border: 1px solid var(--color-rule);
       padding: var(--space-xs) var(--space-md);
-      border-radius: var(--radius-card);
+      border-radius: var(--radius-pill);
       transition:
         color var(--dur-short) var(--ease-out),
         border-color var(--dur-short) var(--ease-out),
-        background-color var(--dur-short) var(--ease-out);
+        background-color var(--dur-short) var(--ease-out),
+        transform 140ms var(--ease-out);
     }
     .cs-cta__link:hover {
       color: var(--color-ink);
       border-color: var(--color-ink-2);
+    }
+    .cs-cta__link:active {
+      transform: scale(0.97);
     }
     .cs-cta__link:focus-visible {
       outline: 2px solid var(--color-focus);
@@ -787,9 +837,15 @@
   <!-- ── nav ──────────────────────────────────────────────────────── -->
   <header class="site-header">
     <nav class="site-nav" aria-label="Primary navigation">
-      <a class="nav-name" href="/">Sibt-e-Ali</a>
+      <a class="nav-brand" href="/">
+        <span class="nav-brand__mark" aria-hidden="true">SB</span>
+        <span class="nav-brand__text">
+          <span class="nav-brand__name">Sibt-e-Ali</span>
+          <span class="nav-brand__role">Software Engineer</span>
+        </span>
+      </a>
       <div class="nav-right">
-        <a class="nav-cta" href="https://calendly.com/sibteali786/new-meeting" target="_blank" rel="noopener noreferrer">Book a call</a>
+        <a class="nav-cta" href="https://calendly.com/sibteali786/new-meeting" target="_blank" rel="noopener noreferrer">Book a call<span class="nav-cta__arrow" aria-hidden="true">&#8594;</span></a>
         <button class="theme-toggle" aria-label="Toggle light and dark theme" aria-pressed="false">
           <span class="theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true"></span>
           <span class="theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true"></span>
@@ -799,7 +855,7 @@
           aria-expanded="false"
           aria-controls="nav-menu"
           aria-label="Toggle navigation menu"
-        >Menu</button>
+        ><span class="nav-toggle__bar" aria-hidden="true"></span><span class="nav-toggle__bar" aria-hidden="true"></span></button>
       </div>
     </nav>
     <nav class="nav-menu" id="nav-menu" hidden aria-label="Site pages">
@@ -826,7 +882,10 @@
       <div class="container cs-hero__content">
         <a class="cs-back" href="/projects.html">&#8592; Projects</a>
 
-        <p class="cs-hero__label" aria-hidden="true">Personal Project</p>
+        <p class="cs-hero__label" aria-hidden="true">
+          <svg class="cs-hero__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          Personal Project
+        </p>
 
         <h1 class="cs-hero__title" id="cs-title">Wafa</h1>
 
@@ -859,7 +918,7 @@
     </section>
 
     <!-- ── why it exists ─────────────────────────────────────────── -->
-    <section class="cs-s" aria-labelledby="s-why">
+    <section class="cs-s cs-band--alt" aria-labelledby="s-why">
       <div class="container">
         <p class="cs-s__kicker">Why It Exists</p>
         <h2 class="cs-s__heading" id="s-why">
@@ -1343,7 +1402,7 @@
     </section>
 
     <!-- ── retrospective ─────────────────────────────────────────── -->
-    <section class="cs-s" aria-labelledby="s-retro">
+    <section class="cs-s cs-band--alt" aria-labelledby="s-retro">
       <div class="container">
         <p class="cs-s__kicker">What I&#8217;d Do Differently</p>
         <h2 class="cs-s__heading" id="s-retro">

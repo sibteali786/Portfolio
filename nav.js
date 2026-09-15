@@ -38,7 +38,7 @@
 
   function setOpen(open) {
     toggle.setAttribute('aria-expanded', String(open));
-    toggle.textContent = open ? 'Close' : 'Menu';
+    toggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
     menu.classList.toggle('is-open', open);
   }
 
@@ -108,7 +108,8 @@
 
   var cards = document.querySelectorAll(
     '.proj--featured, .proj--supporting, .project-featured, .project-supporting, .oss-card, .exp-item,' +
-    ' .arch-block, .log-entry, .shipped-group, .req-item, .pipeline-step, .zen-loop'
+    ' .arch-block, .log-entry, .shipped-group, .req-item, .pipeline-step, .zen-loop,' +
+    ' .stat, .edu-block, .award-item'
   );
   if (cards.length && 'IntersectionObserver' in window && !reduceMotion) {
     cards.forEach(function (c) { c.classList.add('reveal-pending'); });

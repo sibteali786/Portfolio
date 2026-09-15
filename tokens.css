@@ -1,47 +1,63 @@
-/* Hallmark · macrostructure: Showcase (redesign, was Split-Editorial) · genre: editorial
- * theme: custom (vibe: "warm editorial authority, plain-spoken, one accent"
- *   · paper oklch(97% 0.008 85) light-default · accent oklch(52% 0.150 55) warm-amber)
+/* Hallmark · macrostructure: Showcase (unchanged) · genre: editorial
+ * theme: custom (vibe: "mint & terracotta, warm-friendly, larger reading type"
+ *   · paper oklch(96% 0.014 162) light-default · accent oklch(58% 0.135 33) terracotta)
  * tone: editorial · design-system: design.md · designed-as-app
- * pre-emit critique: P5 H4 E5 S5 R5 V4
- * redesign note: light is now the default palette (was dark-default); dark
- * moved to [data-theme="dark"], toggled via nav.js. See .hallmark/log.json.
+ * pre-emit critique: P5 H4 E5 S4 R5 V4
+ * redesign note: theme-only amendment — warm-amber → mint/terracotta,
+ * Space Grotesk/IBM Plex Sans → Sora/Inter, type scale raised ~8-10%.
+ * Section rhythm tightened (--space-4xl 160px -> 96px, --space-3xl 112px -> 80px,
+ * --space-2xl 72px -> 56px) — was too much dead air vs. the reference site.
+ * index.html only: added --color-paper-alt (alternating section bands),
+ * --color-card + --shadow-card (elevated surfaces), --radius-card 4px -> 14px,
+ * wave-mask ::before divider replacing hairline section seams — was too flat/
+ * "text pasted on a wall" vs. the reference site. Other pages not yet extended.
+ * index.html + projects.html: project cards gained Project-NN badge, category
+ * label, stack-as-pills, and Source Code / Live Demo / Case Study action rows
+ * (real GitHub repo links, not the profile root; client-work items with no
+ * public repo skip the Source Code button rather than fake one).
+ * Structure, macrostructures unchanged. See .hallmark/log.json.
  */
 
 :root {
   /* ── colour — light default ────────────────────────────────────── */
-  --color-paper:       oklch(97% 0.008  85);   /* warm paper white — not cool #fff */
-  --color-paper-2:     oklch(93% 0.010  80);
-  --color-paper-3:     oklch(88% 0.012  78);
-  --color-ink:         oklch(20% 0.012  60);
-  --color-ink-2:       oklch(40% 0.014  60);
-  --color-ink-3:       oklch(47% 0.012  60);
-  --color-rule:        oklch(85% 0.010  78);
-  --color-accent:      oklch(52% 0.150  55);   /* warm amber, tuned for contrast on light paper */
-  --color-accent-dim:  oklch(44% 0.120  55);
+  --color-paper:       oklch(96% 0.014 162);   /* warm mint paper — not cool #fff */
+  --color-paper-alt:   oklch(98% 0.006  85);   /* off-white cream — alternates with mint, section-to-section */
+  --color-paper-2:     oklch(92% 0.022 166);
+  --color-paper-3:     oklch(88% 0.028 172);
+  --color-card:        oklch(99% 0.004  85);   /* card surface — near-white, reads on both paper tones */
+  --shadow-card:
+    0 1px 2px color-mix(in oklch, var(--color-ink) 6%, transparent),
+    0 12px 28px color-mix(in oklch, var(--color-ink) 12%, transparent);
+  --color-ink:         oklch(23% 0.028 166);
+  --color-ink-2:       oklch(35% 0.036 168);
+  --color-ink-3:       oklch(45% 0.038 171);
+  --color-rule:        oklch(83% 0.028 176);
+  --color-accent:      oklch(58% 0.135  33);   /* terracotta, tuned for contrast on mint paper */
+  --color-accent-dim:  oklch(50% 0.115  33);
   --color-accent-ink:  oklch(98% 0.006  85);
-  --color-focus:       oklch(52% 0.150  55);
+  --color-focus:       oklch(58% 0.135  33);
   --color-terminal:    oklch(42% 0.140 145);   /* semantic success/fix green — case-study diffs & logs only */
   --color-danger:      oklch(55% 0.180  22);   /* semantic rejected/error red — case-study arch blocks & diffs only */
 
   /* ── typography ─────────────────────────────────────────────────── */
-  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Sora", ui-sans-serif, system-ui, sans-serif;
   --font-mono:    "JetBrains Mono", ui-monospace, "Cascadia Code", monospace;
-  --font-body:    "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-body:    "Inter", ui-sans-serif, system-ui, sans-serif;
 
-  /* ── type scale (major-third 1.25) ──────────────────────────────── */
-  --text-xs:        0.64rem;    /* ~10px — short labels/badges only, never prose */
-  --text-sm:        0.80rem;    /* ~13px */
-  --text-reading-sm: 0.875rem;  /* 14px — reading-safe floor for small prose (arch notes, context lines) */
-  --text-base:      1.00rem;    /* 16px  */
-  --text-md:        1.25rem;    /* 20px  */
-  --text-lg:        1.5625rem;  /* 25px  */
-  --text-xl:        1.9531rem;  /* 31px  */
-  --text-2xl:       2.4414rem;  /* 39px  */
-  --text-3xl:       3.0518rem;  /* 49px  */
-  --text-4xl:       3.8147rem;  /* 61px  */
-  --text-display-s: clamp(2.25rem, 4vw + 0.75rem, 3.75rem);
-  --text-display:   clamp(2.75rem, 5vw + 1rem,    5.25rem);
-  --text-stat:      clamp(3.5rem,  7vw + 0.5rem,  6.5rem);
+  /* ── type scale (major-third 1.25, raised ~8-10% for readability) ── */
+  --text-xs:        0.70rem;    /* ~11px — short labels/badges only, never prose */
+  --text-sm:        0.875rem;   /* ~14px */
+  --text-reading-sm: 0.9375rem; /* 15px — reading-safe floor for small prose (arch notes, context lines) */
+  --text-base:      1.0625rem;  /* 17px  */
+  --text-md:        1.35rem;    /* ~22px */
+  --text-lg:        1.6875rem;  /* ~27px */
+  --text-xl:        2.1094rem;  /* ~34px */
+  --text-2xl:       2.6367rem;  /* ~42px */
+  --text-3xl:       3.2959rem;  /* ~53px */
+  --text-4xl:       4.1199rem;  /* ~66px */
+  --text-display-s: clamp(2.5rem,  4.4vw + 0.8rem, 4.1rem);
+  --text-display:   clamp(3rem,    5.5vw + 1rem,   5.75rem);
+  --text-stat:      clamp(3.75rem, 7.5vw + 0.5rem, 7rem);
 
   /* ── spacing (4-pt scale) ────────────────────────────────────────── */
   --space-3xs: 0.25rem;   /*  4px */
@@ -51,9 +67,9 @@
   --space-md:  1.5rem;    /* 24px */
   --space-lg:  2rem;      /* 32px */
   --space-xl:  3rem;      /* 48px */
-  --space-2xl: 4.5rem;    /* 72px */
-  --space-3xl: 7rem;      /* 112px */
-  --space-4xl: 10rem;     /* 160px — generous section-to-section rhythm */
+  --space-2xl: 3.5rem;    /* 56px */
+  --space-3xl: 5rem;      /* 80px */
+  --space-4xl: 6rem;      /* 96px — section-to-section rhythm */
 
   /* ── motion ─────────────────────────────────────────────────────── */
   --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
@@ -63,7 +79,7 @@
   --dur-mid:     340ms;
 
   /* ── shape ───────────────────────────────────────────────────────── */
-  --radius-card:  4px;
+  --radius-card:  14px;
   --radius-pill:  999px;
   --radius-input: 3px;
 
@@ -75,34 +91,38 @@
    [data-theme="dark"] on <html>, set by nav.js. Falls back to system
    preference when no override is stored. ─────────────────────────── */
 :root[data-theme="dark"] {
-  --color-paper:       oklch(15% 0.010  55);   /* warm charcoal — not cool black */
-  --color-paper-2:     oklch(20% 0.012  58);
-  --color-paper-3:     oklch(26% 0.014  58);
-  --color-ink:         oklch(94% 0.006  65);
-  --color-ink-2:       oklch(62% 0.014  62);
-  --color-ink-3:       oklch(60% 0.012  60);
-  --color-rule:        oklch(28% 0.014  58);
-  --color-accent:      oklch(74% 0.140  55);   /* warm amber — brighter, needed for contrast on dark paper */
-  --color-accent-dim:  oklch(62% 0.110  55);
-  --color-accent-ink:  oklch(12% 0.010  55);
-  --color-focus:       oklch(74% 0.140  55);
+  --color-paper:       oklch(18% 0.024 168);   /* warm charcoal-green — not cool black */
+  --color-paper-alt:   oklch(15% 0.018 168);   /* darker charcoal — alternates with the paper above */
+  --color-card:        oklch(25% 0.030 168);   /* raised card surface in dark */
+  --color-paper-2:     oklch(23% 0.028 168);
+  --color-paper-3:     oklch(29% 0.032 168);
+  --color-ink:         oklch(93% 0.014 160);
+  --color-ink-2:       oklch(68% 0.020 164);
+  --color-ink-3:       oklch(60% 0.022 168);
+  --color-rule:        oklch(32% 0.030 168);
+  --color-accent:      oklch(72% 0.140  34);   /* terracotta — brighter, needed for contrast on dark paper */
+  --color-accent-dim:  oklch(60% 0.120  34);
+  --color-accent-ink:  oklch(14% 0.020 168);
+  --color-focus:       oklch(72% 0.140  34);
   --color-terminal:    oklch(58% 0.150 145);
   --color-danger:      oklch(65% 0.190  22);
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="dark"]):not([data-theme="light"]) {
-    --color-paper:       oklch(15% 0.010  55);
-    --color-paper-2:     oklch(20% 0.012  58);
-    --color-paper-3:     oklch(26% 0.014  58);
-    --color-ink:         oklch(94% 0.006  65);
-    --color-ink-2:       oklch(62% 0.014  62);
-    --color-ink-3:       oklch(60% 0.012  60);
-    --color-rule:        oklch(28% 0.014  58);
-    --color-accent:      oklch(74% 0.140  55);
-    --color-accent-dim:  oklch(62% 0.110  55);
-    --color-accent-ink:  oklch(12% 0.010  55);
-    --color-focus:       oklch(74% 0.140  55);
+    --color-paper:       oklch(18% 0.024 168);
+    --color-paper-alt:   oklch(15% 0.018 168);
+    --color-card:        oklch(25% 0.030 168);
+    --color-paper-2:     oklch(23% 0.028 168);
+    --color-paper-3:     oklch(29% 0.032 168);
+    --color-ink:         oklch(93% 0.014 160);
+    --color-ink-2:       oklch(68% 0.020 164);
+    --color-ink-3:       oklch(60% 0.022 168);
+    --color-rule:        oklch(32% 0.030 168);
+    --color-accent:      oklch(72% 0.140  34);
+    --color-accent-dim:  oklch(60% 0.120  34);
+    --color-accent-ink:  oklch(14% 0.020 168);
+    --color-focus:       oklch(72% 0.140  34);
     --color-terminal:    oklch(58% 0.150 145);
     --color-danger:      oklch(65% 0.190  22);
   }
