@@ -124,13 +124,12 @@
   flex-shrink: 0;
   width: 2.25rem;
   height: 2.25rem;
-  border-radius: var(--radius-input);
-  background-color: var(--color-paper-2);
   color: var(--color-accent);
 }
 .project-featured__icon svg {
-  width: 1.125rem;
-  height: 1.125rem;
+  stroke-width: 2.25;
+  width: 1.375rem;
+  height: 1.375rem;
 }
 
 .project-featured__no {
@@ -284,8 +283,13 @@
   border-radius: var(--radius-pill);
   transition:
     border-color var(--dur-short) var(--ease-out),
-    color var(--dur-short) var(--ease-out);
+    color var(--dur-short) var(--ease-out),
+    transform 140ms var(--ease-out);
   white-space: nowrap;
+}
+.project-featured__source-link:active,
+.project-featured__detail-link:active {
+  transform: scale(0.97);
 }
 .project-featured__source-link:hover,
 .project-featured__detail-link:hover {
@@ -307,10 +311,15 @@
   padding: var(--space-2xs) var(--space-md);
   border-radius: var(--radius-pill);
   white-space: nowrap;
-  transition: background-color var(--dur-short) var(--ease-out);
+  transition:
+    background-color var(--dur-short) var(--ease-out),
+    transform 140ms var(--ease-out);
 }
 .project-featured__primary-link:hover {
   background-color: var(--color-accent-dim);
+}
+.project-featured__primary-link:active {
+  transform: scale(0.97);
 }
 
 /* the plain-text supplementary link (e.g. "Case study →" alongside a live
@@ -369,13 +378,12 @@
   flex-shrink: 0;
   width: 2.25rem;
   height: 2.25rem;
-  border-radius: var(--radius-input);
-  background-color: var(--color-paper-2);
   color: var(--color-accent);
 }
 .project-supporting__icon svg {
-  width: 1.125rem;
-  height: 1.125rem;
+  stroke-width: 2.25;
+  width: 1.375rem;
+  height: 1.375rem;
 }
 
 .project-supporting__head-text {
@@ -523,8 +531,12 @@
   border-radius: var(--radius-pill);
   transition:
     border-color var(--dur-short) var(--ease-out),
-    color var(--dur-short) var(--ease-out);
+    color var(--dur-short) var(--ease-out),
+    transform 140ms var(--ease-out);
   white-space: nowrap;
+}
+.project-supporting__source-link:active {
+  transform: scale(0.97);
 }
 .project-supporting__source-link:hover {
   border-color: var(--color-accent);
@@ -543,10 +555,15 @@
   padding: var(--space-3xs) var(--space-sm);
   border-radius: var(--radius-pill);
   white-space: nowrap;
-  transition: background-color var(--dur-short) var(--ease-out);
+  transition:
+    background-color var(--dur-short) var(--ease-out),
+    transform 140ms var(--ease-out);
 }
 .project-supporting__primary-link:hover {
   background-color: var(--color-accent-dim);
+}
+.project-supporting__primary-link:active {
+  transform: scale(0.97);
 }
 
 /* ═══════════════════════════════════════════════════════════════════
@@ -737,7 +754,11 @@
   .project-supporting__link,
   .project-supporting__detail,
   .project-featured__img,
-  .oss-card__link {
+  .oss-card__link,
+  .project-featured__source-link,
+  .project-featured__primary-link,
+  .project-supporting__source-link,
+  .project-supporting__primary-link {
     transition: none;
   }
 

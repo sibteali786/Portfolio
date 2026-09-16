@@ -1,6 +1,96 @@
 [
   {
     "date": "2026-09-16",
+    "macrostructure": "site-wide: 'Book a call' primary CTA gets a signature hover",
+    "theme": "custom",
+    "theme_axes": "light-default / geometric-sans (Sora) / terracotta-on-mint",
+    "enrichment": "none",
+    "brief": "Sibt-e-Ali portfolio — user clarified the previous CTA-interactivity sweep should have focused specifically on the 'Book a call' button (.nav-cta in the sticky nav on all 13 pages, .btn--primary on the hero/contact-page/closing-CTA), not every button site-wide. Since it's the actual conversion CTA, gave it more than the plain press-scale every other button already has: hover now lifts translateY(-2px) and adds an accent-tinted glow. Used filter:drop-shadow instead of box-shadow deliberately -- both .btn and .nav-cta already set overflow:hidden to clip their ink-wipe-fill ::before pseudo-element, which would also silently clip a box-shadow glow at the pill's edge (would have shipped invisible); filter composites after the element's own clipping so it isn't cut off. :active combines the lift with the existing scale(0.97) press rather than snapping back down and losing the lift mid-click. Removed a duplicate/now-stale .nav-cta:active rule that the new combined one superseded. .btn--secondary and every other CTA on the site (Source Code buttons, case-study CTAs, etc.) intentionally keep the plain press-scale from the earlier sweep -- this richer treatment is reserved for the one button whose entire job is to be noticed.",
+    "scope": "index.css, design.md"
+  },
+  {
+    "date": "2026-09-16",
+    "macrostructure": "site-wide: CTA button press-feedback sweep",
+    "theme": "custom",
+    "theme_axes": "light-default / geometric-sans (Sora) / terracotta-on-mint",
+    "enrichment": "none",
+    "brief": "Sibt-e-Ali portfolio — user asked to make CTA buttons interactive site-wide via find-animation-opportunities. Swept every button-shaped CTA class across index.css, projects.css, and all 9 case-study <style> blocks against the gate: frequency=occasional (clicked a few times per session), purpose=Feedback (confirm the press registered), speed=140ms scale matching .btn:active's existing convention exactly (extending an approved pattern, not inventing a new one) -- passed cleanly. Found the pattern had NOT traveled everywhere .btn's CTA voice got reimplemented: .project-featured__source-link/.project-featured__primary-link/.project-supporting__source-link/.project-supporting__primary-link (projects.css) had hover only, no :active. Bigger find: two case-study pages (zen.html, go-blueprint.html) use their own CTA class (.zen-cta__link, .gob-cta__link respectively) instead of .cs-cta__link -- they were invisible to the earlier 7-page .cs-cta__link batch fix, so they STILL had both the missing :active state AND the border-radius:var(--radius-card) pill-button bug that was fixed everywhere else weeks ago. Fixed both classes the same way (radius-pill + :active scale). Deliberately left .proj__link/.project-featured__link/.channel-card__link/.video-card__link/.content-section__link alone -- these are text-with-arrow links, not button-shaped chips, and a press-scale on inline text reads oddly compared to a bordered/filled pill; that's a different, already-correct affordance tier, not a gap.",
+    "scope": "projects.css, projects/zen.html, projects/go-blueprint.html, design.md"
+  },
+  {
+    "date": "2026-09-16",
+    "macrostructure": "Showcase (index.html video-card hover-preview)",
+    "theme": "custom",
+    "theme_axes": "light-default / geometric-sans (Sora) / terracotta-on-mint",
+    "enrichment": "none",
+    "brief": "Sibt-e-Ali portfolio — user asked to make the video cards feel lively/interactive, floated the idea of playing a bit of the video on hover, asked to gate it through find-animation-opportunities. Gate: occasional frequency (browsing once), purpose named as explanation/delight (YouTube's own homepage does the same pattern), speed and function fine as long as it's built carefully -- the two real risks are wasted network requests from a passing cursor and orphaned playback/loads after mouseleave. Implemented in nav.js: a genuine 450ms hover-intent delay before lazily creating a muted (mute=1), controls-free (controls=0) YouTube iframe embed absolutely positioned over the static thumbnail (fades in via a .is-playing class + CSS opacity transition, avoiding a flash of empty iframe while it loads); mouseleave removes the iframe from the DOM entirely rather than just hiding it, so nothing keeps playing or downloading off-screen. Skipped outright (not degraded) for touch devices ((hover: hover) and (pointer: fine) check) and prefers-reduced-motion, since autoplaying video is exactly what that preference exists to suppress -- no 'gentler' version made sense here. .video-card__preview has pointer-events:none so clicks still pass through to the real <a> link underneath rather than hitting the embed's own surface. Added .video-card__preview to index.css's reduced-motion transition-none list.",
+    "scope": "index.html, index.css, nav.js, design.md"
+  },
+  {
+    "date": "2026-09-16",
+    "macrostructure": "Showcase + Letter (video-card row layout fix + article-link affordance)",
+    "theme": "custom",
+    "theme_axes": "light-default / geometric-sans (Sora) / terracotta-on-mint",
+    "enrichment": "none",
+    "brief": "Sibt-e-Ali portfolio — two asks. (1) User said forcing 3 video cards per row cropped the thumbnails and didn't read as real cards ('static content as before'); wanted 1 per row like YouTube's own list view. Rebuilt .video-grid as a flex column (was CSS grid, 3-col) and .video-card as a horizontal row (thumbnail ~320px/42% left, title+desc+watch-link right), with real card chrome (bg/radius/shadow/hover-lift) matching .proj/.stack-card. Caught a real bug in the process: the thumbnail was forced to aspect-ratio:16/9 with object-fit:cover, but YouTube's hqdefault.jpg is natively 4:3 -- that combination was cropping real thumbnail content off the top/bottom. Fixed to aspect-ratio:4/3 (hqdefault's real ratio) so the full thumbnail shows uncropped, per the user's explicit ask. Stacks to thumbnail-on-top under 768px. (2) User asked (via find-animation-opportunities + hallmark) to make article-title links more visually distinct since they currently read as plain text. Gate: occasional frequency (scan once), purpose = state-indication (legibility fix, not decoration), 150-200ms, transform/color only -- passed. Added a leading '>' chevron (mono, --color-accent-dim, always visible so the affordance is legible before hover too) plus an underline that draws in via scaleX(0->1) and nudges the chevron translateX(2px) on hover, to .channel-card__posts a (Substack/Medium/YouTube lists on contact.html).",
+    "scope": "index.html, index.css, contact.css, design.md"
+  },
+  {
+    "date": "2026-09-16",
+    "macrostructure": "Showcase (index.html — new Teaching/content section with real video thumbnails)",
+    "theme": "custom",
+    "theme_axes": "light-default / geometric-sans (Sora) / terracotta-on-mint",
+    "enrichment": "video thumbnails (Tier: real asset, not generated)",
+    "brief": "Sibt-e-Ali portfolio — user wanted the YouTube/Instagram content also visible on index.html (not just contact.html), plus asked if thumbnails + titles + descriptions could be fetched for a few videos. Fetched real data three ways: oEmbed (youtube.com/oembed?url=...) confirmed title + gave the canonical thumbnail_url; the watch page's embedded player JSON gave the real shortDescription for each of the 3 featured System Design videos (condensed to one sentence per card rather than pasted verbatim); thumbnail images hotlink i.ytimg.com/vi/<id>/hqdefault.jpg, YouTube's standard public thumbnail endpoint. Built a new .content-section between About and the closing Contact CTA: 3 .video-card items (real thumbnail in a plain rounded frame + hover play-icon overlay -- a content affordance, not re-drawn player chrome), a footer linking to the full playlist and to Instagram (link-only, same no-scrapable-content reasoning as the contact.html Instagram card). Added .content-section to the site's paper/paper-alt alternating-band + wave-divider system (paper, so it contrasts against About's cream band). New component (.video-card), not a .stack-card reuse, since it needs a real image slot the Skills/Channels cards don't have; everything else (grid responsive breakpoints, scroll-reveal registration, reduced-motion registration) follows the same conventions as every other card grid on the site.",
+    "scope": "index.html, index.css, nav.js, design.md"
+  },
+  {
+    "date": "2026-09-16",
+    "macrostructure": "Letter (contact.html channel-grid extended: YouTube + Instagram)",
+    "theme": "custom",
+    "theme_axes": "light-default / geometric-sans (Sora) / terracotta-on-mint",
+    "enrichment": "none",
+    "brief": "Sibt-e-Ali portfolio — user posts backend/system-design tutorials on YouTube (channel @acodingmaniac, but only wanted the System Design playlist surfaced since it's the educational one) and reels on Instagram (@sibt_e_ali_baqar), asked how to show these using hallmark's judgment. Decision: extend the existing contact.html channel-grid (built last session for Substack/Medium) rather than inventing a new index.html section -- it's the proven, already-consistent pattern (same .stack-card component, same real-content-in-a-list treatment) and Contact is already the site's 'all channels' hub. Fetching the video data was non-trivial: YouTube's /@acodingmaniac/playlists page HTML embeds playlist metadata as lockupViewModel JSON (found the System Design playlist there, list=PLBXsGWRvtpFE, 8 videos), then the playlist's own page embeds each video's real title the same way -- paired 8 video IDs positionally with 8 titles (order matched playlist display order). No RSS equivalent exists for a single YouTube playlist the way Medium/Substack have feeds. Added a YouTube card (3 real video titles + links + 'watch full playlist' link) and an Instagram card (link-only -- Instagram's profile HTML is behind an auth wall with no reliably scrapable real post data, so no reel titles were fabricated or guessed). Added both to contact.html's footer nav too, matching the Medium precedent from last session.",
+    "scope": "contact.html, design.md"
+  },
+  {
+    "date": "2026-09-16",
+    "macrostructure": "site-wide: icon treatment (drop the tile background)",
+    "theme": "custom",
+    "theme_axes": "light-default / geometric-sans (Sora) / terracotta-on-mint",
+    "enrichment": "none",
+    "brief": "Sibt-e-Ali portfolio — user pointed at a screenshot of the WhatsNextPlease project icon (square paper-2 tile with a small icon inside) and said it looks worse than a bare bold-stroke icon, asked to remove the background everywhere icons are used and bolden the stroke. Removed background-color/border-radius from .proj__icon (index.css), .project-featured__icon and .project-supporting__icon (projects.css), .stack-card__icon (index.css, shared by the Skills grid and the new Contact channel cards), and .cs-hero__icon (all 7 case-study <style> blocks). Bumped icon size up slightly on each (the tile's own size no longer needs to accommodate padding) and set stroke-width: 2.25 via CSS (overrides the inline SVG's stroke-width=\"1.75\" attribute without editing every one of the ~20+ inline <svg> elements individually -- CSS stroke-width on an SVG element wins over the presentation attribute). .stack-card:hover's icon animation changed from a background-color invert (paper-2 -> accent fill) to a plain color shift to --color-ink, since there's no tile fill left to invert -- kept the existing scale(1.12) rotate(-6deg) transform unchanged.",
+    "scope": "index.css, projects.css, all 7 case-study <style> blocks, design.md"
+  },
+  {
+    "date": "2026-09-16",
+    "macrostructure": "Letter (contact.html channels section rebuilt as card grid)",
+    "theme": "custom",
+    "theme_axes": "light-default / geometric-sans (Sora) / terracotta-on-mint",
+    "enrichment": "none",
+    "brief": "Sibt-e-Ali portfolio — user said contact.html's 'All channels' section (plain dl label/value rows) looked pale next to the Skills card grid, asked for a card per social/contact link with real icons, and to fetch real content from Medium/Substack where possible. No Medium link existed anywhere on the site -- asked the user for the handle via AskUserQuestion, got @sibteali786. Fetched real recent post titles from both platforms via their public RSS feeds (medium.com/feed/@sibteali786, syedsibtealibaqar.substack.com/feed) after both platforms' HTML profile pages returned 403 to a plain fetch -- titles/links are real and current as of 2026-09-16, not invented. Built 9 cards (Email, Phone, GitHub, boot.dev, LinkedIn, X, Substack, Medium, Location), directly reusing .stack-card/.stack-card__head/.stack-card__icon/.stack-card__title/.stack-card__desc from index.css rather than inventing a parallel component -- same hover-lift + icon-invert animation as the Skills grid for free. Added .channel-card__link (arrow-nudge, same recipe as .proj__link) and .channel-card__posts (a short real post list) as the only new, page-specific pieces. Hand-built 9 Lucide-style line icons (mail, phone, github, terminal for boot.dev, linkedin, x, rss for Substack, pencil for Medium, map-pin for location) -- simplified generic glyphs, not traced brand logos. Also added the missing Medium link to contact.html's footer nav (other pages' footers not touched -- out of scope for this ask).",
+    "scope": "contact.html, contact.css, design.md"
+  },
+  {
+    "date": "2026-09-16",
+    "macrostructure": "Showcase (index.html .stack-card hover animation)",
+    "theme": "custom",
+    "theme_axes": "light-default / geometric-sans (Sora) / terracotta-on-mint",
+    "enrichment": "none",
+    "brief": "Sibt-e-Ali portfolio — user said the new stack-card skills grid felt static/dead, asked to make it lively via find-animation-opportunities. Gate check: card hover on a portfolio skills section is occasional-frequency (once per scan, not a repeated UI control), so a slightly richer treatment than a bare color change is justified -- purpose is state-indication + feedback (this is a real interactive surface, not a static list), speed stayed inside --dur-mid (340ms) which the site's other card hovers already use, transform+color only. Implemented: .stack-card:hover lifts translateY(-4px) with the same deepened box-shadow recipe .proj:hover already uses (kept consistent rather than inventing a new shadow value); .stack-card__icon inverts from --color-paper-2/--color-accent to filled --color-accent/--color-accent-ink plus scale(1.08) rotate(-6deg) -- the one slightly-expressive touch, justified by the occasional-frequency tier; pill borders pick up a faint --color-accent-dim tint on card hover for cohesion. Gated to (hover: hover) and (pointer: fine) so it doesn't stick on touch devices, and added .stack-card/.stack-card__icon/.stack-card__pills li to the shared prefers-reduced-motion block. Entrance stagger was already covered from the prior stack-card-grid build (added to nav.js's reveal-pending list that session), so this pass was hover-only.",
+    "scope": "index.css, design.md"
+  },
+  {
+    "date": "2026-09-16",
+    "macrostructure": "Showcase (index.html Stack section rebuilt as card grid)",
+    "theme": "custom",
+    "theme_axes": "light-default / geometric-sans (Sora) / terracotta-on-mint",
+    "enrichment": "none",
+    "brief": "Sibt-e-Ali portfolio — user compared their Stack section (a plain dl of LABEL: value rows under a single word 'Stack' heading) to the reference site's 'Things I Work With' card grid and said theirs 'feels empty'. Rebuilt: section-label 'Stack' + new .stack-section__heading ('Things I Work With.') + intro paragraph, then a grid of .stack-card articles (icon tile, category title, one-line real description, tool pills) replacing the dt/dd rows. Kept all 6 real categories (Languages, Backend, Frontend, Infra, Testing, Tooling) rather than trimming to the reference's 4 just to match its column count -- grid is 3-col desktop, 2-col at 768px, 1-col at 414px. Pills pinned to card bottom via the same margin-block-start:auto footer trick used on .proj/.project-supporting, so cards with shorter descriptions still align their pill rows. Added .stack-card to nav.js's scroll-reveal list. Descriptions are original one-line capability summaries per category (not copied from the reference), same spirit as its generic descriptors but not the same words or invented specifics.",
+    "scope": "index.html, index.css, nav.js, design.md"
+  },
+  {
+    "date": "2026-09-16",
     "macrostructure": "site-wide: animation-opportunity fixes + mobile nav bug fix",
     "theme": "custom",
     "theme_axes": "light-default / geometric-sans (Sora) / terracotta-on-mint",

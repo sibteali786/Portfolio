@@ -146,57 +146,104 @@
   padding-block-start: var(--space-2xl);
 }
 
-.channel-list {
-  display: flex;
-  flex-direction: column;
-  max-width: 640px;
-}
-
-.channel-row {
+/* channel cards reuse .stack-card / .stack-card__head / .stack-card__icon /
+   .stack-card__title / .stack-card__desc from index.css (same hover-lift +
+   icon-invert animation, same visual language as the Skills grid) — only
+   the link/post-list parts below are specific to this page. */
+.channel-grid {
   display: grid;
-  grid-template-columns: 10ch 1fr;
-  gap: var(--space-md);
-  padding-block: var(--space-sm);
-  border-top: var(--rule-hairline);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-lg);
+  align-items: start;
 }
 
-.channel-row:first-child {
-  border-top: none;
-  padding-block-start: 0;
-}
-
-.channel-key {
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  font-weight: 500;
-  letter-spacing: 0.10em;
-  text-transform: uppercase;
-  color: var(--color-ink-3);
-  padding-block-start: 2px;
-}
-
-.channel-val {
+.channel-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3xs);
   font-family: var(--font-mono);
   font-size: var(--text-sm);
-  color: var(--color-ink-2);
-  line-height: 1.5;
-}
-
-.channel-val a {
-  color: inherit;
+  color: var(--color-accent);
   text-decoration: none;
-  background-image: linear-gradient(var(--color-accent), var(--color-accent));
-  background-size: 0% 1px;
-  background-position: 0 100%;
-  background-repeat: no-repeat;
-  transition:
-    color var(--dur-short) var(--ease-out),
-    background-size var(--dur-short) var(--ease-out);
+  margin-block-start: auto;
+  padding-block-start: var(--space-sm);
+  transition: color var(--dur-short) var(--ease-out);
+}
+.channel-card__link span {
+  transition: transform 150ms var(--ease-out);
+}
+.channel-card__link:hover {
+  color: var(--color-ink);
+}
+@media (hover: hover) and (pointer: fine) {
+  .channel-card__link:hover span {
+    transform: translateX(2px);
+  }
 }
 
-.channel-val a:hover {
+.channel-card__posts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-block-end: var(--space-sm);
+}
+.channel-card__posts li {
+  padding-block-start: var(--space-sm);
+  border-top: var(--rule-hairline);
+}
+.channel-card__posts li:first-child {
+  padding-block-start: 0;
+  border-top: none;
+}
+/* article-title links previously read as plain sentence-case text with
+   nothing marking them as clickable at rest. A leading chevron (always
+   visible, low-key mono accent) plus an underline that draws in on hover
+   makes the affordance obvious without turning the whole list into buttons. */
+.channel-card__posts a {
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--space-2xs);
+  font-size: var(--text-reading-sm);
   color: var(--color-ink);
-  background-size: 100% 1px;
+  text-decoration: none;
+  line-height: 1.4;
+  transition: color var(--dur-short) var(--ease-out);
+}
+.channel-card__posts a::before {
+  content: "\203A";
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  color: var(--color-accent-dim);
+  transition:
+    transform 150ms var(--ease-out),
+    color var(--dur-short) var(--ease-out);
+}
+.channel-card__posts a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background-color: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-short) var(--ease-out);
+}
+.channel-card__posts a:hover {
+  color: var(--color-accent);
+}
+.channel-card__posts a:hover::before {
+  color: var(--color-accent);
+}
+@media (hover: hover) and (pointer: fine) {
+  .channel-card__posts a:hover::before {
+    transform: translateX(2px);
+  }
+  .channel-card__posts a:hover::after {
+    transform: scaleX(1);
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════════════
@@ -212,8 +259,8 @@
     font-size: var(--text-display-s);
   }
 
-  .channel-list {
-    max-width: 100%;
+  .channel-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -229,8 +276,8 @@
     font-size: clamp(1.25rem, 5vw, 2rem);
   }
 
-  .channel-row {
-    grid-template-columns: 8ch 1fr;
+  .channel-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -239,7 +286,11 @@
 ═══════════════════════════════════════════════════════════════════ */
 @media (prefers-reduced-motion: reduce) {
   .eh__link,
-  .channel-val a {
+  .channel-card__link,
+  .channel-card__link span,
+  .channel-card__posts a,
+  .channel-card__posts a::before,
+  .channel-card__posts a::after {
     transition: none;
   }
 

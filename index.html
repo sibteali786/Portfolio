@@ -538,47 +538,109 @@
       <!-- ── stack ─────────────────────────────────────────────────── -->
       <section class="stack-section" aria-labelledby="stack-heading">
         <div class="container">
-          <h2 class="section-label" id="stack-heading">Stack</h2>
+          <h2 class="section-label">Stack</h2>
+          <h3 class="stack-section__heading" id="stack-heading">Things I Work With.</h3>
+          <p class="stack-section__intro">
+            The languages, frameworks, and tools I actually reach for day to
+            day &#8212; not a list of everything I&#8217;ve ever touched.
+          </p>
 
-          <dl class="stack-grid">
-            <div class="stack-row">
-              <dt class="stack-cat">Lang</dt>
-              <dd class="stack-items">
-                TypeScript &#183; Go &#183; Python &#183; JavaScript
-              </dd>
-            </div>
-            <div class="stack-row">
-              <dt class="stack-cat">Backend</dt>
-              <dd class="stack-items">
-                NestJS &#183; Node.js &#183; PostgreSQL &#183; MySQL &#183;
-                MongoDB
-              </dd>
-            </div>
-            <div class="stack-row">
-              <dt class="stack-cat">Frontend</dt>
-              <dd class="stack-items">
-                React &#183; Next.js 15 &#183; Tailwind
-              </dd>
-            </div>
-            <div class="stack-row">
-              <dt class="stack-cat">Infra</dt>
-              <dd class="stack-items">
-                AWS &#183; AWS CDK &#183; Cloudflare R2 &#183; Hostinger VPS
-              </dd>
-            </div>
-            <div class="stack-row">
-              <dt class="stack-cat">Testing</dt>
-              <dd class="stack-items">
-                Jest &#183; Vitest &#183; React Testing Library
-              </dd>
-            </div>
-            <div class="stack-row">
-              <dt class="stack-cat">Tooling</dt>
-              <dd class="stack-items">
-                Figma &#183; Claude Code &#183; Cursor &#183; GitHub Actions
-              </dd>
-            </div>
-          </dl>
+          <div class="stack-grid">
+            <article class="stack-card">
+              <div class="stack-card__head">
+                <span class="stack-card__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                </span>
+                <h4 class="stack-card__title">Languages</h4>
+              </div>
+              <p class="stack-card__desc">Core languages I write day to day, across backend and tooling.</p>
+              <ul class="stack-card__pills">
+                <li>TypeScript</li>
+                <li>Go</li>
+                <li>Python</li>
+                <li>JavaScript</li>
+              </ul>
+            </article>
+
+            <article class="stack-card">
+              <div class="stack-card__head">
+                <span class="stack-card__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+                </span>
+                <h4 class="stack-card__title">Backend</h4>
+              </div>
+              <p class="stack-card__desc">APIs, services, and the databases behind them, running in production.</p>
+              <ul class="stack-card__pills">
+                <li>NestJS</li>
+                <li>Node.js</li>
+                <li>PostgreSQL</li>
+                <li>MySQL</li>
+                <li>MongoDB</li>
+              </ul>
+            </article>
+
+            <article class="stack-card">
+              <div class="stack-card__head">
+                <span class="stack-card__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="2" y1="9" x2="22" y2="9"/></svg>
+                </span>
+                <h4 class="stack-card__title">Frontend</h4>
+              </div>
+              <p class="stack-card__desc">Interfaces built with React and Next.js, styled with Tailwind.</p>
+              <ul class="stack-card__pills">
+                <li>React</li>
+                <li>Next.js 15</li>
+                <li>Tailwind</li>
+              </ul>
+            </article>
+
+            <article class="stack-card">
+              <div class="stack-card__head">
+                <span class="stack-card__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h.79a4.5 4.5 0 1 1 0 9Z"/></svg>
+                </span>
+                <h4 class="stack-card__title">Infra</h4>
+              </div>
+              <p class="stack-card__desc">Deployment, storage, and infrastructure for real traffic.</p>
+              <ul class="stack-card__pills">
+                <li>AWS</li>
+                <li>AWS CDK</li>
+                <li>Cloudflare R2</li>
+                <li>Hostinger VPS</li>
+              </ul>
+            </article>
+
+            <article class="stack-card">
+              <div class="stack-card__head">
+                <span class="stack-card__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                </span>
+                <h4 class="stack-card__title">Testing</h4>
+              </div>
+              <p class="stack-card__desc">Automated tests that catch regressions before users do.</p>
+              <ul class="stack-card__pills">
+                <li>Jest</li>
+                <li>Vitest</li>
+                <li>React Testing Library</li>
+              </ul>
+            </article>
+
+            <article class="stack-card">
+              <div class="stack-card__head">
+                <span class="stack-card__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                </span>
+                <h4 class="stack-card__title">Tooling</h4>
+              </div>
+              <p class="stack-card__desc">Design, editors, and CI that keep the day-to-day moving.</p>
+              <ul class="stack-card__pills">
+                <li>Figma</li>
+                <li>Claude Code</li>
+                <li>Cursor</li>
+                <li>GitHub Actions</li>
+              </ul>
+            </article>
+          </div>
         </div>
       </section>
 
@@ -681,6 +743,74 @@
                 />
               </a>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── teaching / content ───────────────────────────────────── -->
+      <section class="content-section" aria-labelledby="content-heading">
+        <div class="container">
+          <h2 class="section-label">Teaching</h2>
+          <h3 class="content-section__heading" id="content-heading">Also Teaching Backend &amp; System Design.</h3>
+          <p class="content-section__intro">
+            I break down real database and backend problems on YouTube &#8212;
+            no slides, just the actual query plans and benchmarks. From the
+            System Design playlist:
+          </p>
+
+          <div class="video-grid">
+            <article class="video-card">
+              <a class="video-card__figure" data-video-id="59GOw2VD9sI" href="https://www.youtube.com/watch?v=59GOw2VD9sI&amp;list=PLBXsGWRvtpFE" target="_blank" rel="noopener noreferrer" aria-hidden="true" tabindex="-1">
+                <img src="https://i.ytimg.com/vi/59GOw2VD9sI/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
+                <span class="video-card__play" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                </span>
+              </a>
+              <div class="video-card__body">
+                <h4 class="video-card__title">
+                  <a href="https://www.youtube.com/watch?v=59GOw2VD9sI&amp;list=PLBXsGWRvtpFE" target="_blank" rel="noopener noreferrer">Partitioning a 10 Million Row Postgres Table</a>
+                </h4>
+                <p class="video-card__desc">How databases handle tables with billions of rows without falling over, and where partitioning can actually hurt you.</p>
+                <a class="video-card__link" href="https://www.youtube.com/watch?v=59GOw2VD9sI&amp;list=PLBXsGWRvtpFE" target="_blank" rel="noopener noreferrer">Watch on YouTube<span aria-hidden="true">&#8599;</span></a>
+              </div>
+            </article>
+
+            <article class="video-card">
+              <a class="video-card__figure" data-video-id="vQpmSmhydI8" href="https://www.youtube.com/watch?v=vQpmSmhydI8&amp;list=PLBXsGWRvtpFE" target="_blank" rel="noopener noreferrer" aria-hidden="true" tabindex="-1">
+                <img src="https://i.ytimg.com/vi/vQpmSmhydI8/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
+                <span class="video-card__play" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                </span>
+              </a>
+              <div class="video-card__body">
+                <h4 class="video-card__title">
+                  <a href="https://www.youtube.com/watch?v=vQpmSmhydI8&amp;list=PLBXsGWRvtpFE" target="_blank" rel="noopener noreferrer">Why Postgres Ignores Your Index</a>
+                </h4>
+                <p class="video-card__desc">A real 50-million-row case study of an index Postgres refuses to use, and why the query planner is right to skip it.</p>
+                <a class="video-card__link" href="https://www.youtube.com/watch?v=vQpmSmhydI8&amp;list=PLBXsGWRvtpFE" target="_blank" rel="noopener noreferrer">Watch on YouTube<span aria-hidden="true">&#8599;</span></a>
+              </div>
+            </article>
+
+            <article class="video-card">
+              <a class="video-card__figure" data-video-id="gJyAaQccm2Q" href="https://www.youtube.com/watch?v=gJyAaQccm2Q&amp;list=PLBXsGWRvtpFE" target="_blank" rel="noopener noreferrer" aria-hidden="true" tabindex="-1">
+                <img src="https://i.ytimg.com/vi/gJyAaQccm2Q/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
+                <span class="video-card__play" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                </span>
+              </a>
+              <div class="video-card__body">
+                <h4 class="video-card__title">
+                  <a href="https://www.youtube.com/watch?v=gJyAaQccm2Q&amp;list=PLBXsGWRvtpFE" target="_blank" rel="noopener noreferrer">B-Trees vs LSM Trees</a>
+                </h4>
+                <p class="video-card__desc">The two core indexing structures every backend engineer should know, and how each one finds a row in milliseconds.</p>
+                <a class="video-card__link" href="https://www.youtube.com/watch?v=gJyAaQccm2Q&amp;list=PLBXsGWRvtpFE" target="_blank" rel="noopener noreferrer">Watch on YouTube<span aria-hidden="true">&#8599;</span></a>
+              </div>
+            </article>
+          </div>
+
+          <div class="content-section__footer">
+            <a class="content-section__link" href="https://www.youtube.com/playlist?list=PLBXsGWRvtpFE" target="_blank" rel="noopener noreferrer">Watch the full playlist<span aria-hidden="true">&#8599;</span></a>
+            <a class="content-section__link" href="https://www.instagram.com/sibt_e_ali_baqar/" target="_blank" rel="noopener noreferrer">Shorter clips on Instagram<span aria-hidden="true">&#8599;</span></a>
           </div>
         </div>
       </section>

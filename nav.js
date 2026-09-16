@@ -109,7 +109,7 @@
   var cards = document.querySelectorAll(
     '.proj--featured, .proj--supporting, .project-featured, .project-supporting, .oss-card, .exp-item,' +
     ' .arch-block, .log-entry, .shipped-group, .req-item, .pipeline-step, .zen-loop,' +
-    ' .stat, .edu-block, .award-item'
+    ' .stat, .edu-block, .award-item, .stack-card, .video-card'
   );
   if (cards.length && 'IntersectionObserver' in window && !reduceMotion) {
     cards.forEach(function (c) { c.classList.add('reveal-pending'); });
@@ -152,4 +152,52 @@
       statObserver.observe(stat);
     }
   }
+})();
+
+/* ── muted hover-preview on the Teaching video cards ─────────────────
+   Lazy-loads a muted, controls-free YouTube embed only after a genuine
+   hover-intent delay (a passing cursor doesn't trigger a network request),
+   and tears it back down on mouseleave so nothing keeps playing/loading
+   off-screen. Skipped entirely on touch (no true hover) and under
+   prefers-reduced-motion (autoplaying video content is exactly what that
+   preference exists to avoid). */
+(function () {
+  var canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!canHover || reduceMotion) return;
+
+  var HOVER_INTENT_MS = 450;
+
+  document.querySelectorAll('.video-card__figure[data-video-id]').forEach(function (fig) {
+    var timer = null;
+    var iframe = null;
+
+    fig.addEventListener('mouseenter', function () {
+      timer = setTimeout(function () {
+        var id = fig.getAttribute('data-video-id');
+        iframe = document.createElement('iframe');
+        iframe.className = 'video-card__preview';
+        iframe.src =
+          'https://www.youtube.com/embed/' + id +
+          '?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&playsinline=1';
+        iframe.setAttribute('allow', 'autoplay; encrypted-media');
+        iframe.setAttribute('title', 'Video preview');
+        iframe.setAttribute('tabindex', '-1');
+        iframe.setAttribute('aria-hidden', 'true');
+        fig.appendChild(iframe);
+        requestAnimationFrame(function () {
+          fig.classList.add('is-playing');
+        });
+      }, HOVER_INTENT_MS);
+    });
+
+    fig.addEventListener('mouseleave', function () {
+      clearTimeout(timer);
+      fig.classList.remove('is-playing');
+      if (iframe) {
+        iframe.remove();
+        iframe = null;
+      }
+    });
+  });
 })();
